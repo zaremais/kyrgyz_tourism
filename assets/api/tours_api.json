@@ -1,0 +1,71 @@
+[
+    {
+        "authorId": 1,
+        "departureDate": "2025-05-105",
+        "tourDuration": 3,
+        "id": 1,
+        "title": "Ара Кол",
+        "price": 2000.0,
+        "image": "assets/images/tour1.png",
+        "placesLeft": 3,
+        "rating": 4.6,
+        "age": 12,
+        "location": "Площадь победы",
+        "category": "Легкий",
+        "groupPeople": 5,
+        "guide": {
+            "name": "Иван",
+            "rating": 5.0,
+            "experience": 3,
+            "reviews": 32,
+            "imageGuide": "assets/images/ellipse1.png",
+            "description": "Профессиональный гид, который проводит экскурсии по Кыргызстану. Любит свою работу и считает, что это лучшее занятие в мире! "
+        }
+    },
+    {
+        "authorId": 2,
+        "departureDate": "2025-05-10",
+        "tourDuration": 4,
+        "id": 2,
+        "title": "Жети Огуз",
+        "price": 3000.0,
+        "image": "assets/images/tour2.png",
+        "placesLeft": 4,
+        "rating": 4.8,
+        "age": 12,
+        "location": "Площадь победы",
+        "category": "Легкий",
+        "groupPeople": 5,
+        "guide": {
+            "name": "Екатерина",
+            "rating": 5.0,
+            "experience": 5,
+            "reviews": 39,
+            "imageGuide": "assets/images/ellipse2.png",
+            "description": "Профессиональный гид, который проводит экскурсии по Кыргызстану. Любит свою работу и считает, что это лучшее занятие в мире! "
+        }
+    },
+    {
+        "authorId": 3,
+        "departureDate": "2025-05-10",
+        "tourDuration": 5,
+        "id": 3,
+        "title": "Каньон Сказка",
+        "price": 5000.0,
+        "image": "assets/images/tour3.png",
+        "placesLeft": 5,
+        "rating": 5.0,
+        "age": 12,
+        "location": "Площадь победы",
+        "category": "Легкий",
+        "groupPeople": 5,
+        "guide": {
+            "name": "Егор",
+            "rating": 5.0,
+            "experience": 7,
+            "reviews": 55,
+            "imageGuide": "assets/images/ellipse3.png",
+            "description": "Профессиональный гид, который проводит экскурсии по Кыргызстану. Любит свою работу и считает, что это лучшее занятие в мире! "
+        }
+    }
+]
