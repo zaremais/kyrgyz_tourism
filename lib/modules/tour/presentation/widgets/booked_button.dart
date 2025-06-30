@@ -1,22 +1,25 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_sizes.dart';
 import 'package:kyrgyz_tourism/modules/tour/domain/entities/tour_entity.dart';
 
-class BookButton extends StatelessWidget {
+class BookedButton extends StatelessWidget {
+  final void Function() onPressed;
+  final String text;
   final TourEntity tour;
 
-  const BookButton({super.key, required this.tour});
+  const BookedButton({
+    super.key,
+    required this.tour,
+    required this.onPressed,
+    required this.text,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
-        context.router.push(TourDetailsRoute(tour: tour));
-      },
+      onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.white.withValues(alpha: 0.8),
+        backgroundColor: Colors.white.withValues(alpha: 0.5),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomRight: Radius.circular(AppSizes.borderRadiusMedium),
@@ -26,7 +29,7 @@ class BookButton extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          "Забронировать",
+          text,
           style: TextStyle(
             fontSize: AppSizes.mediumFontSize,
             fontWeight: FontWeight.w600,

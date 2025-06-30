@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
+import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_sizes.dart';
 import 'package:kyrgyz_tourism/core/config/themes/theme.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
@@ -27,20 +29,22 @@ class _ListTourWidgetState extends State<ListTourWidget> {
     return BlocProvider.value(
       value: _favouriteTourCubit,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+        padding: const EdgeInsets.symmetric(horizontal: 49),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
               child: Stack(
                 children: [
-                  // FadeInImage.assetNetwork(
-                  //   placeholder: 'assets/images/placeholder.jpg',
-                  //   image: widget.tour.image,
-                  //   fit: BoxFit.cover,
-                  // ),
-
-                  Image.network(widget.tour.image, fit: BoxFit.cover),
+                  ClipRRect(
+                    borderRadius: BorderRadiusGeometry.circular(15),
+                    child: Image.network(
+                      widget.tour.image,
+                      fit: BoxFit.cover,
+                      width: 308,
+                      height: 308,
+                    ),
+                  ),
                   Positioned(
                     top: 12,
                     left: 12,
@@ -80,8 +84,16 @@ class _ListTourWidgetState extends State<ListTourWidget> {
                     ),
                   ),
                   Positioned.fill(
-                    top: 308,
-                    child: BookButton(tour: widget.tour),
+                    top: 250,
+                    child: BookedButton(
+                      tour: widget.tour,
+                      onPressed: () {
+                        context.router.replace(
+                          TourDetailsRoute(tour: widget.tour),
+                        );
+                      },
+                      text: 'Забронировать',
+                    ),
                   ),
                 ],
               ),
@@ -90,12 +102,16 @@ class _ListTourWidgetState extends State<ListTourWidget> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(widget.tour.title, style: FontStyles.bodyInfo),
+                Expanded(
+                  child: Text(widget.tour.title, style: FontStyles.bodyInfo),
+                ),
                 Row(
                   children: [
                     Text(
                       widget.tour.rating.toString(),
                       style: FontStyles.bodyLarge,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                     ),
                     Image.asset('assets/images/star.png', width: 24),
                   ],

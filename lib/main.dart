@@ -5,8 +5,6 @@ import 'package:get_it/get_it.dart';
 import 'package:kyrgyz_tourism/core/bloc/theme/theme_cubit.dart';
 // import 'package:kyrgyz_tourism/core/api/firebase_api.dart';
 import 'package:kyrgyz_tourism/core/config/route/route.dart';
-import 'package:kyrgyz_tourism/core/config/themes/dark_theme.dart';
-import 'package:kyrgyz_tourism/core/config/themes/light_theme.dart';
 import 'package:kyrgyz_tourism/core/di/service_locator.dart';
 import 'package:kyrgyz_tourism/firebase_options.dart';
 import 'package:kyrgyz_tourism/modules/home/presentation/providers/theme_provider.dart';

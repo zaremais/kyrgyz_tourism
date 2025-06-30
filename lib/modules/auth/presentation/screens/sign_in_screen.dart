@@ -194,7 +194,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                   ),
                                 ),
                                 onPressed: () {
-                                  context.router.push(HomeRoute());
+                                  context.router.replace(SignUpRoute());
                                 },
                                 child: const Text(
                                   'Регистрация',

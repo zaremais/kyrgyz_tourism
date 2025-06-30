@@ -49,18 +49,18 @@ class _TourDetailsScreenState extends State<TourDetailsScreen> {
               ),
             ),
             const SizedBox(height: AppSizes.paddingSmall),
-            TourCalendar(onDateSelected: (date) {}),
+            TourCalendar(),
+
             SizedBox(height: AppSizes.paddingLarge),
-            CustomButtonWidget(
-              text: "Забронировать",
-              backgroundColor: AppColors.buttonGuide,
-              onPressed: () {
-                context.router.push(IsBookedRoute());
-              },
-            ),
 
-            const SizedBox(height: AppSizes.paddingBottom),
-
+            // CustomButtonWidget(
+            //   text: "Забронировать",
+            //   backgroundColor: AppColors.buttonGuide,
+            //   onPressed: () {
+            //     context.router.push(IsBookedRoute());
+            //   },
+            // ),
+            // const SizedBox(height: AppSizes.paddingBottom),
             Padding(
               padding: EdgeInsets.all(AppSizes.paddingLarge),
               child: Column(

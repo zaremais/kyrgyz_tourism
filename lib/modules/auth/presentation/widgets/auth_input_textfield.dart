@@ -50,6 +50,7 @@ class AuthInputTextfield extends StatelessWidget {
         controller: controller,
         obscureText: obscureText,
         decoration: InputDecoration(
+          suffixIcon: suffixIcon,
           prefixText: prefixText,
           labelText: labelText,
           border: OutlineInputBorder(

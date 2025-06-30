@@ -240,6 +240,7 @@ class RegisterSuccessRoute extends PageRouteInfo<RegisterSuccessRouteArgs> {
     Key? key,
     required String email,
     required String password,
+    required String nickaname,
     List<PageRouteInfo>? children,
   }) : super(
          RegisterSuccessRoute.name,
@@ -247,6 +248,7 @@ class RegisterSuccessRoute extends PageRouteInfo<RegisterSuccessRouteArgs> {
            key: key,
            email: email,
            password: password,
+           nickaname: nickaname,
          ),
          initialChildren: children,
        );
@@ -261,6 +263,7 @@ class RegisterSuccessRoute extends PageRouteInfo<RegisterSuccessRouteArgs> {
         key: args.key,
         email: args.email,
         password: args.password,
+        nickaname: args.nickaname,
       );
     },
   );
@@ -271,6 +274,7 @@ class RegisterSuccessRouteArgs {
     this.key,
     required this.email,
     required this.password,
+    required this.nickaname,
   });
 
   final Key? key;
@@ -279,9 +283,11 @@ class RegisterSuccessRouteArgs {
 
   final String password;
 
+  final String nickaname;
+
   @override
   String toString() {
-    return 'RegisterSuccessRouteArgs{key: $key, email: $email, password: $password}';
+    return 'RegisterSuccessRouteArgs{key: $key, email: $email, password: $password, nickaname: $nickaname}';
   }
 
   @override
@@ -290,11 +296,13 @@ class RegisterSuccessRouteArgs {
     if (other is! RegisterSuccessRouteArgs) return false;
     return key == other.key &&
         email == other.email &&
-        password == other.password;
+        password == other.password &&
+        nickaname == other.nickaname;
   }
 
   @override
-  int get hashCode => key.hashCode ^ email.hashCode ^ password.hashCode;
+  int get hashCode =>
+      key.hashCode ^ email.hashCode ^ password.hashCode ^ nickaname.hashCode;
 }
 
 /// generated route for

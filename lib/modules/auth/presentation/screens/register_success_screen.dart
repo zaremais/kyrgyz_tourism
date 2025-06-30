@@ -12,10 +12,12 @@ import 'package:kyrgyz_tourism/modules/auth/presentation/cubit/sign_in_cubit.dar
 class RegisterSuccessScreen extends StatelessWidget {
   final String email;
   final String password;
+  final String nickaname;
   RegisterSuccessScreen({
     super.key,
     required this.email,
     required this.password,
+    required this.nickaname,
   });
 
   final _signinCubit = di<SignInCubit>();

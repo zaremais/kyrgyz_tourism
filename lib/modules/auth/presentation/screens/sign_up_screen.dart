@@ -50,8 +50,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 if (state.status == StateStatus.success) {
                   final email = _emailController.text.trim();
                   final password = _passwordController.text.trim();
+                  final nickname = _nicknameController.text.trim();
                   context.router.replace(
-                    RegisterSuccessRoute(email: email, password: password),
+                    RegisterSuccessRoute(
+                      email: email,
+                      password: password,
+                      nickaname: nickname,
+                    ),
                   );
                 }
 
