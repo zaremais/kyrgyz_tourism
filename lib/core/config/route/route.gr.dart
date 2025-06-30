@@ -11,6 +11,22 @@
 part of 'route.dart';
 
 /// generated route for
+/// [AppScreen]
+class AppRoute extends PageRouteInfo<void> {
+  const AppRoute({List<PageRouteInfo>? children})
+    : super(AppRoute.name, initialChildren: children);
+
+  static const String name = 'AppRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const AppScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [AuthScreen]
 class AuthRoute extends PageRouteInfo<void> {
   const AuthRoute({List<PageRouteInfo>? children})
@@ -43,6 +59,54 @@ class CategoryRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [ChatScreen]
+class ChatRoute extends PageRouteInfo<void> {
+  const ChatRoute({List<PageRouteInfo>? children})
+    : super(ChatRoute.name, initialChildren: children);
+
+  static const String name = 'ChatRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ChatScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [ChatSupportScreen]
+class ChatSupportRoute extends PageRouteInfo<void> {
+  const ChatSupportRoute({List<PageRouteInfo>? children})
+    : super(ChatSupportRoute.name, initialChildren: children);
+
+  static const String name = 'ChatSupportRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ChatSupportScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [GuideScreen]
+class GuideRoute extends PageRouteInfo<void> {
+  const GuideRoute({List<PageRouteInfo>? children})
+    : super(GuideRoute.name, initialChildren: children);
+
+  static const String name = 'GuideRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const GuideScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [HomeScreen]
 class HomeRoute extends PageRouteInfo<void> {
   const HomeRoute({List<PageRouteInfo>? children})
@@ -54,6 +118,22 @@ class HomeRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const HomeScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [IndividualToursScreen]
+class IndividualToursRoute extends PageRouteInfo<void> {
+  const IndividualToursRoute({List<PageRouteInfo>? children})
+    : super(IndividualToursRoute.name, initialChildren: children);
+
+  static const String name = 'IndividualToursRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const IndividualToursScreen();
     },
   );
 }
@@ -75,49 +155,17 @@ class IsBookedRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [LoginScreen]
-class LoginRoute extends PageRouteInfo<void> {
-  const LoginRoute({List<PageRouteInfo>? children})
-    : super(LoginRoute.name, initialChildren: children);
+/// [MainTabScreen]
+class MainTabRoute extends PageRouteInfo<void> {
+  const MainTabRoute({List<PageRouteInfo>? children})
+    : super(MainTabRoute.name, initialChildren: children);
 
-  static const String name = 'LoginRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const LoginScreen();
-    },
-  );
-}
-
-/// generated route for
-/// [MainScreen]
-class MainRoute extends PageRouteInfo<void> {
-  const MainRoute({List<PageRouteInfo>? children})
-    : super(MainRoute.name, initialChildren: children);
-
-  static const String name = 'MainRoute';
+  static const String name = 'MainTabRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const MainScreen();
-    },
-  );
-}
-
-/// generated route for
-/// [MessageScreen]
-class MessageRoute extends PageRouteInfo<void> {
-  const MessageRoute({List<PageRouteInfo>? children})
-    : super(MessageRoute.name, initialChildren: children);
-
-  static const String name = 'MessageRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const MessageScreen();
+      return const MainTabScreen();
     },
   );
 }
@@ -157,6 +205,16 @@ class NotificationRouteArgs {
   String toString() {
     return 'NotificationRouteArgs{key: $key, message: $message}';
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! NotificationRouteArgs) return false;
+    return key == other.key && message == other.message;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ message.hashCode;
 }
 
 /// generated route for
@@ -176,19 +234,181 @@ class ProfileRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [RegisterScreen]
-class RegisterRoute extends PageRouteInfo<void> {
-  const RegisterRoute({List<PageRouteInfo>? children})
-    : super(RegisterRoute.name, initialChildren: children);
+/// [RegisterSuccessScreen]
+class RegisterSuccessRoute extends PageRouteInfo<RegisterSuccessRouteArgs> {
+  RegisterSuccessRoute({
+    Key? key,
+    required String email,
+    required String password,
+    List<PageRouteInfo>? children,
+  }) : super(
+         RegisterSuccessRoute.name,
+         args: RegisterSuccessRouteArgs(
+           key: key,
+           email: email,
+           password: password,
+         ),
+         initialChildren: children,
+       );
 
-  static const String name = 'RegisterRoute';
+  static const String name = 'RegisterSuccessRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const RegisterScreen();
+      final args = data.argsAs<RegisterSuccessRouteArgs>();
+      return RegisterSuccessScreen(
+        key: args.key,
+        email: args.email,
+        password: args.password,
+      );
     },
   );
+}
+
+class RegisterSuccessRouteArgs {
+  const RegisterSuccessRouteArgs({
+    this.key,
+    required this.email,
+    required this.password,
+  });
+
+  final Key? key;
+
+  final String email;
+
+  final String password;
+
+  @override
+  String toString() {
+    return 'RegisterSuccessRouteArgs{key: $key, email: $email, password: $password}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! RegisterSuccessRouteArgs) return false;
+    return key == other.key &&
+        email == other.email &&
+        password == other.password;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ email.hashCode ^ password.hashCode;
+}
+
+/// generated route for
+/// [SettingsScreen]
+class SettingsRoute extends PageRouteInfo<void> {
+  const SettingsRoute({List<PageRouteInfo>? children})
+    : super(SettingsRoute.name, initialChildren: children);
+
+  static const String name = 'SettingsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SettingsScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [SignInScreen]
+class SignInRoute extends PageRouteInfo<SignInRouteArgs> {
+  SignInRoute({
+    Key? key,
+    void Function()? onPressed,
+    List<PageRouteInfo>? children,
+  }) : super(
+         SignInRoute.name,
+         args: SignInRouteArgs(key: key, onPressed: onPressed),
+         initialChildren: children,
+       );
+
+  static const String name = 'SignInRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<SignInRouteArgs>(
+        orElse: () => const SignInRouteArgs(),
+      );
+      return SignInScreen(key: args.key, onPressed: args.onPressed);
+    },
+  );
+}
+
+class SignInRouteArgs {
+  const SignInRouteArgs({this.key, this.onPressed});
+
+  final Key? key;
+
+  final void Function()? onPressed;
+
+  @override
+  String toString() {
+    return 'SignInRouteArgs{key: $key, onPressed: $onPressed}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! SignInRouteArgs) return false;
+    return key == other.key;
+  }
+
+  @override
+  int get hashCode => key.hashCode;
+}
+
+/// generated route for
+/// [SignUpScreen]
+class SignUpRoute extends PageRouteInfo<SignUpRouteArgs> {
+  SignUpRoute({
+    Key? key,
+    void Function()? onPressed,
+    List<PageRouteInfo>? children,
+  }) : super(
+         SignUpRoute.name,
+         args: SignUpRouteArgs(key: key, onPressed: onPressed),
+         initialChildren: children,
+       );
+
+  static const String name = 'SignUpRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<SignUpRouteArgs>(
+        orElse: () => const SignUpRouteArgs(),
+      );
+      return SignUpScreen(key: args.key, onPressed: args.onPressed);
+    },
+  );
+}
+
+class SignUpRouteArgs {
+  const SignUpRouteArgs({this.key, this.onPressed});
+
+  final Key? key;
+
+  final void Function()? onPressed;
+
+  @override
+  String toString() {
+    return 'SignUpRouteArgs{key: $key, onPressed: $onPressed}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! SignUpRouteArgs) return false;
+    return key == other.key;
+  }
+
+  @override
+  int get hashCode => key.hashCode;
 }
 
 /// generated route for
@@ -258,6 +478,16 @@ class TourDetailsRouteArgs {
   String toString() {
     return 'TourDetailsRouteArgs{key: $key, tour: $tour}';
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! TourDetailsRouteArgs) return false;
+    return key == other.key && tour == other.tour;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ tour.hashCode;
 }
 
 /// generated route for
@@ -311,4 +541,14 @@ class UsersRouteArgs {
   String toString() {
     return 'UsersRouteArgs{key: $key, user: $user}';
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! UsersRouteArgs) return false;
+    return key == other.key && user == other.user;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ user.hashCode;
 }

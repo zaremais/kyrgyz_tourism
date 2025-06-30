@@ -27,7 +27,7 @@ class _ToursScreenState extends State<ToursScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: CustomAppBar(showImage: false, height: 80),
+        appBar: CustomAppBar(showImage: false, height: 80, onPressed: () {}),
 
         drawer: Drawer(child: Column(children: [CustomDrawer()])),
 
@@ -59,8 +59,6 @@ class _ToursScreenState extends State<ToursScreen> {
                   ],
                 ),
               ),
-              ToursListSection(),
-              ToursListSection(),
               ToursListSection(),
 
               SizedBox(height: AppSizes.paddingLarge),

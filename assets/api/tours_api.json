@@ -1,6 +1,5 @@
 [
     {
-        "authorId": 1,
         "departureDate": "2025-05-105",
         "tourDuration": 3,
         "id": 1,
@@ -23,7 +22,6 @@
         }
     },
     {
-        "authorId": 2,
         "departureDate": "2025-05-10",
         "tourDuration": 4,
         "id": 2,
@@ -46,7 +44,6 @@
         }
     },
     {
-        "authorId": 3,
         "departureDate": "2025-05-10",
         "tourDuration": 5,
         "id": 3,

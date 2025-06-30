@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
@@ -55,7 +56,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                 width: 14,
                 height: 14,
               ),
-              label: 'Сообщение',
+              label: 'Чат',
             ),
             BottomNavigationBarItem(
               icon: Image.asset(

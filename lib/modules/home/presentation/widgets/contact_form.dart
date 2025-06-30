@@ -66,19 +66,19 @@ class _ContactFormWidgetState extends State<ContactForm> {
           AuthInputTextfield(
             hintText: "Фамилия и Имя",
             controller: nameController,
-            isPassword: false,
+            obscureText: false,
           ),
           const SizedBox(height: AppSizes.paddingSmall),
           AuthInputTextfield(
+            obscureText: false,
             hintText: "Номер телефона",
             controller: phoneController,
-            isPassword: false,
           ),
           const SizedBox(height: AppSizes.paddingSmall),
           AuthInputTextfield(
+            obscureText: false,
             hintText: "Эл.почта",
             controller: emailController,
-            isPassword: false,
           ),
           const SizedBox(height: AppSizes.paddingSmall),
           ContactButton(

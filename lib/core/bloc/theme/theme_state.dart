@@ -2,7 +2,7 @@
 
 part of 'theme_cubit.dart';
 
-@injectable
+// @injectable
 class ThemeState extends Equatable {
   const ThemeState(this.brightness);
   final Brightness brightness;

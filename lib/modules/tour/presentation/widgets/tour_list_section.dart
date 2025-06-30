@@ -29,6 +29,7 @@ class _ToursListSectionState extends State<ToursListSection> {
       value: _tourCubit,
       child: BlocBuilder<TourCubit, BaseState<List<TourEntity>>>(
         builder: (context, state) {
+          print('STATE: ${state.status}, TOURS: ${state.model?.length}');
           switch (state.status) {
             case StateStatus.success:
               final tours = state.model ?? [];
@@ -45,6 +46,7 @@ class _ToursListSectionState extends State<ToursListSection> {
                 shrinkWrap: true,
                 itemCount: tours.length,
                 itemBuilder: (context, index) {
+                  print('BUILD TOUR ITEM: ${tours[index].title}');
                   return ListTourWidget(tour: tours[index]);
                 },
               );

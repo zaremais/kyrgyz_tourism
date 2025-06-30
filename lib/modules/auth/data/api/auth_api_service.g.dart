@@ -9,9 +9,8 @@ part of 'auth_api_service.dart';
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
 
 class _AuthApiService implements AuthApiService {
-  // ignore: unused_element_parameter
   _AuthApiService(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'assets/api/tours_api.json';
+    baseUrl ??= 'http://34.18.76.114/v1/';
   }
 
   final Dio _dio;
@@ -21,7 +20,7 @@ class _AuthApiService implements AuthApiService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<void> login(UserModel request) async {
+  Future<void> signup(SignUpModel request) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -31,7 +30,7 @@ class _AuthApiService implements AuthApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/login',
+            'api/sign-up',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -41,7 +40,7 @@ class _AuthApiService implements AuthApiService {
   }
 
   @override
-  Future<void> register(UserModel request) async {
+  Future<void> signin(SignInModel request) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -51,7 +50,7 @@ class _AuthApiService implements AuthApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/register',
+            '/api/sign-in',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -61,7 +60,26 @@ class _AuthApiService implements AuthApiService {
   }
 
   @override
-  Future<void> getUser() async {
+  Future<void> sendMessage() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<void>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/api/otp',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    await _dio.fetch<void>(_options);
+  }
+
+  @override
+  Future<void> verifyOtp() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -70,7 +88,7 @@ class _AuthApiService implements AuthApiService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/users',
+            '/api/verify',
             queryParameters: queryParameters,
             data: _data,
           )

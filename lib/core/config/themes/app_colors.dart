@@ -6,6 +6,8 @@ class AppColors {
   static const Color primaryColor = Color(0xFF40D885);
   static const Color secondary = Color(0xFF03DAC6);
   static const Color otpColor = Color(0xFF4DB6AC);
+  static const Color chatMessage = Color(0xFF2CA261);
+  static const Color forgotText = Color(0xFF18A0FB);
   static const Color background = Color(0xffffffff);
   static const Color text = Color(0xFF000000);
   static const Color white = Color(0xFFFFFFFF);

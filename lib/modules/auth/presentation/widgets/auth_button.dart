@@ -18,12 +18,13 @@ class AuthButton extends StatelessWidget {
             AppSizes.paddingTextfildWidth,
             AppSizes.paddingBottom,
           ),
-          backgroundColor: AppColors.buttonForm,
+          backgroundColor: AppColors.white,
           padding: EdgeInsets.symmetric(
             vertical: AppSizes.paddingMedium,
             horizontal: AppSizes.paddingLarge,
           ),
           shape: RoundedRectangleBorder(
+            side: BorderSide(color: AppColors.buttonForm),
             borderRadius: BorderRadius.circular(AppSizes.borderRadiusTen),
           ),
         ),

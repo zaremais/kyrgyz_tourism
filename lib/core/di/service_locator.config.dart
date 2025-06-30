@@ -9,21 +9,29 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:ui' as _i264;
-
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
 import '../../modules/auth/data/repositories/auth_repository.dart' as _i135;
 import '../../modules/auth/domain/repositories/auth_domain_repository.dart'
     as _i534;
-import '../../modules/auth/domain/usecases/get_current_user_use_case.dart'
-    as _i1066;
-import '../../modules/auth/domain/usecases/get_toke_use_case.dart' as _i848;
-import '../../modules/auth/domain/usecases/login_use_case.dart' as _i872;
-import '../../modules/auth/domain/usecases/logout_use_case.dart' as _i804;
-import '../../modules/auth/domain/usecases/register_use_case.dart' as _i173;
+import '../../modules/auth/domain/usecases/is_logged_in_use_case.dart' as _i437;
+import '../../modules/auth/domain/usecases/send_phone_use_case.dart' as _i4;
+import '../../modules/auth/domain/usecases/sign_in_use_case.dart' as _i770;
+import '../../modules/auth/domain/usecases/signup_use_case.dart' as _i320;
+import '../../modules/auth/domain/usecases/verify_otp_use_case.dart' as _i629;
 import '../../modules/auth/presentation/cubit/auth_cubit.dart' as _i821;
+import '../../modules/auth/presentation/cubit/register_success_cubit.dart'
+    as _i52;
+import '../../modules/auth/presentation/cubit/sign_in_cubit.dart' as _i726;
+import '../../modules/auth/presentation/cubit/sign_up_cubit.dart' as _i112;
+import '../../modules/auth/presentation/cubit/telegram_auth_cubit.dart'
+    as _i466;
+import '../../modules/guides/data/repositories/guide_repository.dart' as _i174;
+import '../../modules/guides/domain/repositories/guide_domain_repository.dart'
+    as _i766;
+import '../../modules/guides/domain/usecases/get_guide_use_case.dart' as _i112;
+import '../../modules/guides/presentation/cubit/guide_cubit.dart' as _i675;
 import '../../modules/profile/data/repositories/profile_repository.dart'
     as _i898;
 import '../../modules/profile/domain/repositories/profile_domain_repository.dart'
@@ -69,24 +77,27 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i667.DioClient>(() => _i667.DioClient());
     gh.factory<_i810.ThemeCubit>(() => _i810.ThemeCubit());
     gh.factory<_i98.CalendarCubit>(() => _i98.CalendarCubit());
+    gh.factory<_i52.RegisterSuccessCubit>(() => _i52.RegisterSuccessCubit());
     gh.lazySingleton<_i89.ProfileDomainRepository>(
       () => _i898.ProfileRepository(dio: gh<_i667.DioClient>()),
+    );
+    gh.lazySingleton<_i695.TourDomainRepository>(
+      () => _i778.TourDataRepository(dio: gh<_i667.DioClient>()),
+    );
+    gh.lazySingleton<_i766.GuideDomainRepository>(
+      () => _i174.GuideRepository(dio: gh<_i667.DioClient>()),
     );
     gh.lazySingleton<_i729.UsersDomainRepository>(
       () => _i942.UsersRepository(dio: gh<_i667.DioClient>()),
     );
-    gh.factory<_i810.ThemeState>(
-      () => _i810.ThemeState(gh<_i264.Brightness>()),
-    );
     gh.lazySingleton<_i534.AuthDomainRepository>(
       () => _i135.AuthRepository(dio: gh<_i667.DioClient>()),
     );
-    gh.factory<_i173.RegisterParams>(
-      () =>
-          _i173.RegisterParams(telegramPhone: gh<String>(), code: gh<String>()),
-    );
     gh.lazySingleton<_i644.FavoriteToursDomainRepository>(
       () => _i124.FavoriteToursRepository(),
+    );
+    gh.factory<_i558.GetToursUseCase>(
+      () => _i558.GetToursUseCase(repository: gh<_i695.TourDomainRepository>()),
     );
     gh.factory<_i277.GetUserUseCase>(
       () => _i277.GetUserUseCase(repository: gh<_i729.UsersDomainRepository>()),
@@ -101,32 +112,43 @@ extension GetItInjectableX on _i174.GetIt {
         repository: gh<_i89.ProfileDomainRepository>(),
       ),
     );
-    gh.factory<_i804.LogoutUseCase>(
-      () => _i804.LogoutUseCase(repository: gh<_i534.AuthDomainRepository>()),
+    gh.factory<_i770.SignInUsecase>(
+      () => _i770.SignInUsecase(repository: gh<_i534.AuthDomainRepository>()),
     );
-    gh.factory<_i1066.GetCurrentUserUseCase>(
-      () => _i1066.GetCurrentUserUseCase(
-        repository: gh<_i534.AuthDomainRepository>(),
-      ),
+    gh.factory<_i320.SignupUseCase>(
+      () => _i320.SignupUseCase(repository: gh<_i534.AuthDomainRepository>()),
     );
-    gh.factory<_i173.RegisterUseCase>(
-      () => _i173.RegisterUseCase(repository: gh<_i534.AuthDomainRepository>()),
+    gh.factory<_i4.SendPhoneUseCase>(
+      () => _i4.SendPhoneUseCase(repository: gh<_i534.AuthDomainRepository>()),
     );
-    gh.factory<_i872.LoginUsecase>(
-      () => _i872.LoginUsecase(repository: gh<_i534.AuthDomainRepository>()),
+    gh.factory<_i437.IsLoggedInUseCase>(
+      () =>
+          _i437.IsLoggedInUseCase(repository: gh<_i534.AuthDomainRepository>()),
     );
-    gh.factory<_i848.GetTokenUserUseCase>(
-      () => _i848.GetTokenUserUseCase(
-        repository: gh<_i534.AuthDomainRepository>(),
-      ),
+    gh.factory<_i629.VerifyOtpUseCase>(
+      () =>
+          _i629.VerifyOtpUseCase(repository: gh<_i534.AuthDomainRepository>()),
     );
-    gh.lazySingleton<_i695.TourDomainRepository>(
-      () => _i778.TourDataRepository(gh<_i667.DioClient>()),
+    gh.factory<_i112.SignUpCubit>(
+      () => _i112.SignUpCubit(signupUseCase: gh<_i320.SignupUseCase>()),
+    );
+    gh.factory<_i396.TourCubit>(
+      () => _i396.TourCubit(getTourUsecase: gh<_i558.GetToursUseCase>()),
+    );
+    gh.factory<_i112.GetGuideUseCase>(
+      () =>
+          _i112.GetGuideUseCase(repository: gh<_i766.GuideDomainRepository>()),
     );
     gh.factory<_i514.ProfileCubit>(
       () => _i514.ProfileCubit(
         getProfileUseCase: gh<_i127.GetProfileUseCase>(),
         updateProfileUseCase: gh<_i446.UpdateProfileUseCase>(),
+      ),
+    );
+    gh.factory<_i466.TelegramAuthCubit>(
+      () => _i466.TelegramAuthCubit(
+        sendOtpUseCase: gh<_i4.SendPhoneUseCase>(),
+        otpVerifyUseCase: gh<_i629.VerifyOtpUseCase>(),
       ),
     );
     gh.factory<_i291.UsersCubit>(
@@ -147,16 +169,14 @@ extension GetItInjectableX on _i174.GetIt {
         repository: gh<_i644.FavoriteToursDomainRepository>(),
       ),
     );
-    gh.factory<_i558.GetToursUseCase>(
-      () => _i558.GetToursUseCase(repository: gh<_i695.TourDomainRepository>()),
+    gh.factory<_i726.SignInCubit>(
+      () => _i726.SignInCubit(signInUsecase: gh<_i770.SignInUsecase>()),
     );
     gh.factory<_i821.AuthCubit>(
-      () => _i821.AuthCubit(
-        loginUsecase: gh<_i872.LoginUsecase>(),
-        registerUseCase: gh<_i173.RegisterUseCase>(),
-        logoutUseCase: gh<_i804.LogoutUseCase>(),
-        getCurrentUserUseCase: gh<_i1066.GetCurrentUserUseCase>(),
-      ),
+      () => _i821.AuthCubit(isLoggedInUseCase: gh<_i437.IsLoggedInUseCase>()),
+    );
+    gh.factory<_i675.GuideCubit>(
+      () => _i675.GuideCubit(getGuideUseCase: gh<_i112.GetGuideUseCase>()),
     );
     gh.factory<_i889.FavoriteTourCubit>(
       () => _i889.FavoriteTourCubit(
@@ -164,9 +184,6 @@ extension GetItInjectableX on _i174.GetIt {
         deleteFavoriteTourUseCase: gh<_i773.DeleteFavoriteTourUseCase>(),
         getFavoriteToursUseCase: gh<_i63.GetFavoriteToursUseCase>(),
       ),
-    );
-    gh.factory<_i396.TourCubit>(
-      () => _i396.TourCubit(getTourUsecase: gh<_i558.GetToursUseCase>()),
     );
     return this;
   }

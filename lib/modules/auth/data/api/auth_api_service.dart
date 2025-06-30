@@ -1,19 +1,32 @@
 import 'package:dio/dio.dart';
 import 'package:kyrgyz_tourism/core/constants/api_urls.dart';
-import 'package:kyrgyz_tourism/modules/auth/data/models/user_model.dart';
+import 'package:kyrgyz_tourism/modules/auth/data/models/sign_in_model.dart';
+import 'package:kyrgyz_tourism/modules/auth/data/models/sign_up_model.dart';
 import 'package:retrofit/retrofit.dart';
 part 'auth_api_service.g.dart';
 
-@RestApi(baseUrl: ApiUrls.baseURL)
+@RestApi(baseUrl: ApiUrls.baseUrl)
 abstract class AuthApiService {
   factory AuthApiService(Dio dio, {String baseUrl}) = _AuthApiService;
 
-  @POST('/login')
-  Future<void> login(@Body() UserModel request);
+  factory AuthApiService.create({String? botToken}) {
+    final dio = Dio();
+    if (botToken != null) {
+      return AuthApiService(dio, baseUrl: botToken);
+    }
+    return AuthApiService(dio);
+  }
+  @POST('api/sign-up')
+  Future<void> signup(@Body() SignUpModel request);
 
-  @POST('/register')
-  Future<void> register(@Body() UserModel request);
+  @POST('/api/sign-in')
+  Future<void> signin(@Body() SignInModel request);
 
-  @GET('/users')
-  Future<void> getUser();
+  @POST('/api/otp')
+  Future<void> sendMessage(
+    // @Body() TelegramModel request
+  );
+
+  @GET('/api/verify')
+  Future<void> verifyOtp();
 }

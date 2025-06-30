@@ -1,15 +1,15 @@
 class UserEntity {
   final int id;
   final String email;
-  final String login;
+  final String userName;
   final String phone;
-  final String token;
+  final String code;
 
   UserEntity({
     required this.id,
     required this.email,
-    required this.login,
+    required this.userName,
     required this.phone,
-    required this.token,
+    required this.code,
   });
 }

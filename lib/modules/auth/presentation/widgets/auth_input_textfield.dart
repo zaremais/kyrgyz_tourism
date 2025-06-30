@@ -3,29 +3,35 @@ import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_sizes.dart';
 
 class AuthInputTextfield extends StatelessWidget {
-  final bool isPassword;
-  final String hintText;
+  final String? hintText;
   final TextEditingController controller;
   final String? Function(String?)? validator;
   final String? label;
-  final bool? obscureText;
+  final bool obscureText;
   final Widget? suffixIcon;
+  final String? prefixText;
+  final String? labelText;
+  final void Function(String)? onChanged;
+  final FocusNode? focusNode;
 
   const AuthInputTextfield({
     super.key,
-    required this.isPassword,
-    required this.hintText,
+    this.focusNode,
+    this.hintText,
     required this.controller,
     this.validator,
     this.label,
-    this.obscureText,
+    required this.obscureText,
     this.suffixIcon,
+    this.prefixText,
+    this.labelText,
+    this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 360,
+      width: 370,
       height: 50,
       decoration: BoxDecoration(
         color: AppColors.backgroundtextfield,
@@ -39,11 +45,13 @@ class AuthInputTextfield extends StatelessWidget {
         ],
       ),
       child: TextFormField(
+        onChanged: onChanged,
         validator: validator,
         controller: controller,
-        obscureText: isPassword,
+        obscureText: obscureText,
         decoration: InputDecoration(
-          suffixIcon: suffixIcon,
+          prefixText: prefixText,
+          labelText: labelText,
           border: OutlineInputBorder(
             borderSide: BorderSide.none,
             borderRadius: BorderRadius.circular(AppSizes.borderRadiusForm),

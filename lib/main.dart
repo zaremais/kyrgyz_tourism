@@ -9,17 +9,27 @@ import 'package:kyrgyz_tourism/core/config/themes/dark_theme.dart';
 import 'package:kyrgyz_tourism/core/config/themes/light_theme.dart';
 import 'package:kyrgyz_tourism/core/di/service_locator.dart';
 import 'package:kyrgyz_tourism/firebase_options.dart';
+import 'package:kyrgyz_tourism/modules/home/presentation/providers/theme_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final di = GetIt.instance;
 final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.clear();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   // await FirebaseApi().initNotifications();
   configureDependencies(di);
 
-  runApp(KyrgyzTourism());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ThemeProvider(),
+      child: KyrgyzTourism(),
+    ),
+  );
 }
 
 class KyrgyzTourism extends StatefulWidget {
@@ -38,7 +48,7 @@ class _KyrgyzTourismState extends State<KyrgyzTourism> {
       child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, state) {
           return MaterialApp.router(
-            theme: state.isDark ? darkTheme : lightTheme,
+            theme: Provider.of<ThemeProvider>(context).themeData,
             debugShowCheckedModeBanner: false,
             routerConfig: _appRouter.config(),
           );

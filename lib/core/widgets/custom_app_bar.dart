@@ -10,6 +10,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.imageAppBar,
     required this.height,
     required this.showImage,
+    required Null Function() onPressed,
   });
 
   @override

@@ -5,10 +5,10 @@ part 'tour_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class TourModel extends TourEntity {
-  @JsonKey(fromJson: GuideModel.fromJson, toJson: guideToJson)
-  final GuideModel guide;
+  // @JsonKey(fromJson: GuideModel.fromJson, toJson: guideToJson)
+  // ignore: overridden_fields
+  // final GuideModel guide;
   TourModel({
-    required super.authorId,
     required super.departureDate,
     required super.tourDuration,
     required super.id,
@@ -21,28 +21,29 @@ class TourModel extends TourEntity {
     required super.image,
     required super.placesLeft,
     required super.rating,
-    required this.guide,
-  }) : super(guide: guide);
+    // required this.guide,
+  });
+  // : super(guide: guide);
 
   factory TourModel.fromJson(Map<String, dynamic> json) =>
       _$TourModelFromJson(json);
   Map<String, dynamic> toJson() => _$TourModelToJson(this);
 }
 
-@JsonSerializable()
-class GuideModel extends GuideEntity {
-  GuideModel({
-    required super.name,
-    required super.description,
-    required super.rating,
-    required super.reviews,
-    required super.experience,
-    required super.imageGuide,
-  });
+// @JsonSerializable()
+// class GuideModel extends GuideEntity {
+//   GuideModel({
+//     required super.name,
+//     required super.description,
+//     required super.rating,
+//     required super.reviews,
+//     required super.experience,
+//     required super.imageGuide,
+//   });
 
-  factory GuideModel.fromJson(Map<String, dynamic> json) =>
-      _$GuideModelFromJson(json);
-  Map<String, dynamic> toJson() => _$GuideModelToJson(this);
-}
+//   factory GuideModel.fromJson(Map<String, dynamic> json) =>
+//       _$GuideModelFromJson(json);
+//   Map<String, dynamic> toJson() => _$GuideModelToJson(this);
+// }
 
-Map<String, dynamic> guideToJson(GuideModel guide) => guide.toJson();
+// Map<String, dynamic> guideToJson(GuideModel guide) => guide.toJson();

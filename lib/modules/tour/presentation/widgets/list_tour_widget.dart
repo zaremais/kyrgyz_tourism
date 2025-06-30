@@ -34,7 +34,13 @@ class _ListTourWidgetState extends State<ListTourWidget> {
             Center(
               child: Stack(
                 children: [
-                  Image.asset(widget.tour.image, fit: BoxFit.cover),
+                  // FadeInImage.assetNetwork(
+                  //   placeholder: 'assets/images/placeholder.jpg',
+                  //   image: widget.tour.image,
+                  //   fit: BoxFit.cover,
+                  // ),
+
+                  Image.network(widget.tour.image, fit: BoxFit.cover),
                   Positioned(
                     top: 12,
                     left: 12,
