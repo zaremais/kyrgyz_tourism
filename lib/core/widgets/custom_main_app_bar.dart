@@ -35,7 +35,7 @@ class CustomMainAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.8),
+              color: Colors.white.withValues(alpha: 0.5),
               boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 15)],
 
               borderRadius: BorderRadius.circular(12),

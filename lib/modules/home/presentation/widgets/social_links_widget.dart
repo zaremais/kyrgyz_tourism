@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_sizes.dart';
 
 class SotialLinksWidget extends StatelessWidget {
@@ -6,6 +7,7 @@ class SotialLinksWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final darkTheme = Theme.of(context).brightness == Brightness.dark;
     return Padding(
       padding: const EdgeInsets.all(36.0),
       child: Column(
@@ -64,7 +66,11 @@ class SotialLinksWidget extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset('assets/images/location.png', width: 35),
+                  Image.asset(
+                    'assets/images/location.png',
+                    width: 35,
+                    color: darkTheme ? Colors.white : AppColors.text,
+                  ),
                   const SizedBox(width: 10),
                   const Text(
                     'ул. Тыныстанова \nБЦ "Бизнес Центр"\n3 -й этаж, офис 5',

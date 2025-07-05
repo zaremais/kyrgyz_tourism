@@ -31,16 +31,24 @@ class GuideCard extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Rating:${guide.experience}'),
+                        Text('Experience:${guide.experience}'),
                         Text('Reviews: ${guide.reviews}'),
                         Row(
                           children: [
-                            Text('Рейтинг: ${guide.rating}'),
-                            const SizedBox(width: 24),
-                            const Icon(
-                              Icons.star,
-                              color: Colors.amber,
-                              size: 24,
+                            ...List.generate(5, (index) {
+                              return Icon(
+                                Icons.star,
+                                size: 16,
+                                color:
+                                    index < guide.rating.floor()
+                                        ? Colors.amber
+                                        : Colors.grey[300],
+                              );
+                            }),
+                            SizedBox(width: 8),
+                            Text(
+                              'Рейтинг: ${guide.rating}',
+                              style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),

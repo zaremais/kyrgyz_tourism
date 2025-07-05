@@ -40,6 +40,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final darkTheme = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       body: BlocProvider.value(
         value: _signinCubit,
@@ -58,13 +59,13 @@ class _SignInScreenState extends State<SignInScreen> {
               child: Container(
                 width: 450,
                 height: 500,
-                margin: EdgeInsets.all(4),
+                margin: EdgeInsets.symmetric(horizontal: 24),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: Colors.black12),
+                  border: Border.all(color: Colors.grey),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Form(
                     key: _formKey,
                     child: Column(
@@ -196,12 +197,13 @@ class _SignInScreenState extends State<SignInScreen> {
                                 onPressed: () {
                                   context.router.replace(SignUpRoute());
                                 },
-                                child: const Text(
+                                child: Text(
                                   'Регистрация',
                                   style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.w500,
-                                    color: Colors.black,
+                                    color:
+                                        darkTheme ? Colors.white : Colors.black,
                                   ),
                                 ),
                               ),

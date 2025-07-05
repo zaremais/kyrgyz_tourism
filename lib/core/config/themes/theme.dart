@@ -1,20 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
-
-final themeData = ThemeData(
-  dividerTheme: DividerThemeData(color: Colors.grey.withValues(alpha: 0.1)),
-  useMaterial3: true,
-  primaryColor: AppColors.primaryColor,
-  scaffoldBackgroundColor: AppColors.text,
-  colorScheme: ColorScheme.fromSeed(
-    brightness: Brightness.light,
-    seedColor: AppColors.primaryColor,
-  ),
-  textTheme: TextTheme(
-    titleMedium: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-    headlineLarge: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-  ),
-);
 
 class FontStyles {
   static const double _formTextSize = 32.0;

@@ -22,7 +22,6 @@ class _MainTabScreenState extends State<MainTabScreen> {
   @override
   void initState() {
     super.initState();
-    // _authCubit = di<AuthCubit>();
     _authCubit.appStarted();
   }
 
@@ -30,31 +29,27 @@ class _MainTabScreenState extends State<MainTabScreen> {
   Widget build(BuildContext context) {
     return BlocProvider.value(
       value: _authCubit,
-      child: BlocListener<AuthCubit, BaseState<bool>>(
-        listener: (context, state) {
+      child: AutoTabsRouter(
+        routes: [HomeRoute(), CategoryRoute(), ChatRoute(), ProfileRoute()],
+        builder: (context, child) {
           final tabsRouter = AutoTabsRouter.of(context);
-          if (state.status == StateStatus.success) {
-            tabsRouter.setActiveIndex(0);
-            // context.router.replace(HomeRoute());
-          }
-          if (state.status == StateStatus.error) {
-            // context.router.replace(ProfileRoute());
-            tabsRouter.setActiveIndex(3);
-          }
-        },
-        child: AutoTabsRouter(
-          routes: [HomeRoute(), CategoryRoute(), ChatRoute(), ProfileRoute()],
-          builder: (context, child) {
-            final tabsRouter = AutoTabsRouter.of(context);
-            return Scaffold(
+          return BlocListener<AuthCubit, BaseState<bool>>(
+            listener: (context, state) {
+              if (state.status == StateStatus.success) {
+                tabsRouter.setActiveIndex(0);
+              } else if (state.status == StateStatus.error) {
+                tabsRouter.setActiveIndex(3);
+              }
+            },
+            child: Scaffold(
               body: child,
               bottomNavigationBar: CustomBottomNavigationBar(
                 tabsRouter: tabsRouter,
                 onTap: tabsRouter.setActiveIndex,
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }

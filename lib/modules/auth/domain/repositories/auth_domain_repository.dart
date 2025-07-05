@@ -9,6 +9,6 @@ abstract class AuthDomainRepository {
   Future<SignInEntity> signin(SignInParams params);
   Future<SignUpEntity> signup(SignUpParams params);
   Future<bool> isLoggedIn();
-  Future<void> sendPhoneNumber(SendOtpParams params);
+  Future<void> sendOtp(SendOtpParams params);
   Future<void> verifyOtp(VerifyOtpParams params);
 }

@@ -17,26 +17,34 @@ class GuideScreen extends StatefulWidget {
 class _GuideScreenState extends State<GuideScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        shape: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey.shade300),
-          borderRadius: BorderRadius.circular(5),
+    final darkTheme = Theme.of(context).brightness == Brightness.dark;
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          shape: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: darkTheme ? AppColors.text : Colors.grey.shade300,
+            ),
+            borderRadius: BorderRadius.circular(5),
+          ),
+          toolbarHeight: 40,
+          // backgroundColor: darkTheme ? AppColors.text : AppColors.white,
+          leading: IconButton(
+            onPressed: () {
+              context.router.push(HomeRoute());
+            },
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: darkTheme ? AppColors.white : AppColors.text,
+            ),
+          ),
+          actions: [LanguageSwitchWidget()],
         ),
-        toolbarHeight: 40,
-        backgroundColor: AppColors.background,
-        leading: IconButton(
-          onPressed: () {
-            context.router.push(HomeRoute());
-          },
-          icon: Icon(Icons.arrow_back_ios, color: Colors.black),
-        ),
-        actions: [LanguageSwitchWidget()],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [SizedBox(height: AppSizes.paddingLarge), GuideSection()],
+        body: SingleChildScrollView(
+          child: Column(
+            children: [SizedBox(height: AppSizes.paddingLarge), GuideSection()],
+          ),
         ),
       ),
     );

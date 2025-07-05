@@ -1,0 +1,18 @@
+{
+  "hello": "Привет!",
+  "goodbay": "Пока!",
+  "tours": "Туры",
+  "alltours": "Все туры",
+  "besttour": "Лучшие туры",
+  "individualtours": "Индивидуальные туры",
+  "companies": "О компании",
+  "featuredTours": "Избранные туры",
+  "contacts": "Контакты",
+  "guides": "Гиды",
+  "currentDialogues": "Текущие диалоги",
+  "completedDialogues": "Завершенные диалоги",
+  "startNewDialogue": "Начать новый диалог",
+  "allTours": "Все туры",
+  "bestTours": "Лучшие туры",
+  "supportChat": "Чат поддержки"
+}

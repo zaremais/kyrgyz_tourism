@@ -1,21 +1,21 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:injectable/injectable.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
 
-@injectable
-class CalendarCubit extends Cubit<CalendarState> {
-  CalendarCubit() : super(CalendarState(DateTime.now()));
+// import 'package:injectable/injectable.dart';
 
-  void selectDate(DateTime date) {
-    emit(CalendarState(date));
-  }
-}
+// @injectable
+// class CalendarCubit extends Cubit<CalendarState> {
+//   CalendarCubit() : super(CalendarState(DateTime.now()));
 
-class CalendarState extends Equatable {
-  final DateTime selectedDate;
+//   void selectDate(DateTime date) {
+//     emit(CalendarState(date));
+//   }
+// }
 
-  const CalendarState(this.selectedDate);
+// class CalendarState extends Equatable {
+//   final DateTime selectedDate;
 
-  @override
-  List<Object?> get props => [selectedDate];
-}
+//   const CalendarState(this.selectedDate);
+
+//   @override
+//   List<Object?> get props => [selectedDate];
+// }

@@ -17,15 +17,22 @@ abstract class AuthApiService {
     }
     return AuthApiService(dio);
   }
-  @POST('api/sign-up')
-  Future<void> signup(@Body() SignUpModel request);
+  @POST('/v1/api/sign-up')
+  Future<void> signup();
 
-  @POST('/api/sign-in')
-  Future<void> signin(@Body() SignInModel request);
+  @POST('/v1/api/sign-in')
+  Future<void> signin();
 
-  @POST('/api/otp')
-  Future<void> sendMessage(@Body() TelegramModel request);
+  // @POST('/v1/api/otp')
+  // Future<ChatModel> sendMessage(
+  //   // @Body() TelegramModel request
+  // );
 
-  @GET('/api/verify')
+  @POST('/v1/api/otp/link')
+  Future<void> sendOtp(
+    // @Body() TelegramModel request
+  );
+
+  @POST('/v1/api/verify')
   Future<void> verifyOtp();
 }

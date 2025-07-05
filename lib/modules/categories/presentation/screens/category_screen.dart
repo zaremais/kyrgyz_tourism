@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/widgets/custom_app_bar.dart';
 import 'package:kyrgyz_tourism/core/widgets/custom_section_button.dart';
+import 'package:kyrgyz_tourism/generated/l10n.dart';
 
 @RoutePage()
 class CategoryScreen extends StatelessWidget {
@@ -12,25 +13,28 @@ class CategoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: CustomAppBar(height: 40, showImage: false, onPressed: () {}),
+        appBar: CustomAppBar(height: 70, onPressed: () {}),
         body: Center(
           child: Column(
             children: [
               SizedBox(height: 54),
-              CustomSectionButton(text: 'О компании', onTap: () {}),
+              CustomSectionButton(text: S.of(context).companies, onTap: () {}),
               SizedBox(height: 14),
               CustomSectionButton(
-                text: 'Туры',
+                text: S.of(context).tours,
                 onTap: () {
                   context.router.push(ToursRoute());
                 },
               ),
               SizedBox(height: 14),
-              CustomSectionButton(text: 'Избранные туры', onTap: () {}),
+              CustomSectionButton(
+                text: S.of(context).individualtours,
+                onTap: () {},
+              ),
               SizedBox(height: 14),
-              CustomSectionButton(text: 'Контакты', onTap: () {}),
+              CustomSectionButton(text: S.of(context).contacts, onTap: () {}),
               SizedBox(height: 14),
-              CustomSectionButton(text: 'Гиды', onTap: () {}),
+              CustomSectionButton(text: S.of(context).guides, onTap: () {}),
             ],
           ),
         ),

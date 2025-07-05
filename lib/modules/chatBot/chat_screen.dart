@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/widgets/custom_app_bar.dart';
 import 'package:kyrgyz_tourism/core/widgets/custom_section_button.dart';
+import 'package:kyrgyz_tourism/generated/l10n.dart';
 
 @RoutePage()
 class ChatScreen extends StatelessWidget {
@@ -13,27 +14,35 @@ class ChatScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: CustomAppBar(
-          height: 35,
+          height: 70,
           onPressed: () {
             context.router.replace(ChatSupportRoute());
           },
-          showImage: false,
         ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CustomSectionButton(onTap: () {}, text: 'Текущие диалоги'),
+              CustomSectionButton(
+                onTap: () {},
+                text: S.of(context).currentDialogues,
+              ),
               SizedBox(height: 14),
-              CustomSectionButton(onTap: () {}, text: 'Завершенные диалоги'),
+              CustomSectionButton(
+                onTap: () {},
+                text: S.of(context).completedDialogues,
+              ),
               SizedBox(height: 14),
-              CustomSectionButton(onTap: () {}, text: 'Начать новый диалог'),
+              CustomSectionButton(
+                onTap: () {},
+                text: S.of(context).startNewDialogue,
+              ),
               SizedBox(height: 14),
               CustomSectionButton(
                 onTap: () {
                   context.router.replace(ChatSupportRoute());
                 },
-                text: 'Чат поддержки',
+                text: S.of(context).supportChat,
               ),
             ],
           ),

@@ -12,31 +12,35 @@ class CustomAuthTextfield extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final darkTheme = Theme.of(context).brightness == Brightness.dark;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 13),
       child: Container(
         width: 360,
         height: 50,
         decoration: BoxDecoration(
+          color: darkTheme ? Colors.grey.shade900 : AppColors.background,
+          border: Border.all(color: Colors.grey.shade100),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.shade500,
-              spreadRadius: -1,
+              spreadRadius: 1,
               offset: Offset(-1, -1),
-              blurRadius: 5,
+              blurRadius: 1,
+              color: Colors.grey.shade300,
             ),
           ],
           borderRadius: BorderRadius.circular(10),
-          color: AppColors.backgroundtextfield,
         ),
         child: TextField(
           onTap: onTap,
           decoration: InputDecoration(
             border: OutlineInputBorder(
               borderSide: BorderSide.none,
+
               borderRadius: BorderRadius.circular(10),
             ),
             hintText: hintText,
+            hintStyle: TextStyle(color: Colors.grey),
           ),
         ),
       ),

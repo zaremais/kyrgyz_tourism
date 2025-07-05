@@ -14,6 +14,9 @@ import 'package:kyrgyz_tourism/modules/home/presentation/widgets/card_reviews.da
 import 'package:kyrgyz_tourism/modules/home/presentation/widgets/contact_form.dart';
 import 'package:kyrgyz_tourism/modules/home/presentation/widgets/double_button.dart';
 import 'package:kyrgyz_tourism/modules/home/presentation/widgets/social_links_widget.dart';
+import 'package:kyrgyz_tourism/modules/reviews/presentation/widgets/all_reviews.dart';
+import 'package:kyrgyz_tourism/modules/reviews/presentation/widgets/reviews._button.dart';
+import 'package:kyrgyz_tourism/modules/reviews/presentation/widgets/reviews_card.dart';
 import 'package:kyrgyz_tourism/modules/tour/presentation/widgets/tour_list_section.dart';
 
 @RoutePage()
@@ -56,10 +59,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
               SizedBox(height: AppSizes.paddingButton),
-              CardReviews(),
+              ReviewsButton(),
               SizedBox(height: AppSizes.paddingLarge),
               SizedBox(height: AppSizes.paddingButton),
-              AllReviews(reviews: reviews),
+              AllReviews(),
               SizedBox(height: AppSizes.paddingLarge),
               ContactForm(),
               SizedBox(height: AppSizes.paddingButton),

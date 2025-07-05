@@ -74,7 +74,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: CustomAppBar(showImage: false, height: 80, onPressed: () {}),
+        appBar: CustomAppBar(height: 80, onPressed: () {}),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(16),
           child: BlocProvider.value(

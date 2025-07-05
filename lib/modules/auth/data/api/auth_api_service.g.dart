@@ -10,7 +10,7 @@ part of 'auth_api_service.dart';
 
 class _AuthApiService implements AuthApiService {
   _AuthApiService(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'http://34.18.76.114/v1/';
+    baseUrl ??= 'http://34.18.76.114';
   }
 
   final Dio _dio;
@@ -20,17 +20,16 @@ class _AuthApiService implements AuthApiService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<void> signup(SignUpModel request) async {
+  Future<void> signup() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request.toJson());
+    const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<void>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'api/sign-up',
+            '/v1/api/sign-up',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -40,17 +39,16 @@ class _AuthApiService implements AuthApiService {
   }
 
   @override
-  Future<void> signin(SignInModel request) async {
+  Future<void> signin() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request.toJson());
+    const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<void>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/api/sign-in',
+            '/v1/api/sign-in',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -60,17 +58,16 @@ class _AuthApiService implements AuthApiService {
   }
 
   @override
-  Future<void> sendMessage(TelegramModel request) async {
+  Future<void> sendOtp() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request.toJson());
+    const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<void>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/api/otp',
+            '/v1/api/otp/link',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -86,10 +83,10 @@ class _AuthApiService implements AuthApiService {
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<void>(
-      Options(method: 'GET', headers: _headers, extra: _extra)
+      Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/api/verify',
+            '/v1/api/verify',
             queryParameters: queryParameters,
             data: _data,
           )

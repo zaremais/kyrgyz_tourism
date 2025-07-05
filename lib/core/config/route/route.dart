@@ -16,6 +16,7 @@ import 'package:kyrgyz_tourism/modules/home/presentation/screens/main_tab_screen
 import 'package:kyrgyz_tourism/modules/home/presentation/screens/notification_screen.dart';
 import 'package:kyrgyz_tourism/modules/home/presentation/screens/settings_screen.dart';
 import 'package:kyrgyz_tourism/modules/profile/presentation/screens/profile_screen.dart';
+import 'package:kyrgyz_tourism/modules/reviews/presentation/screens/reviews_screen.dart';
 import 'package:kyrgyz_tourism/modules/tour/domain/entities/tour_entity.dart';
 import 'package:kyrgyz_tourism/modules/tour/presentation/screens/individual_tours_screen.dart';
 import 'package:kyrgyz_tourism/modules/tour/presentation/screens/is_booked_screen.dart';
@@ -45,7 +46,7 @@ class AppRouter extends RootStackRouter {
     ),
 
     AutoRoute(page: TelegramRoute.page),
-    // AutoRoute(page: TelegramChatRoute.page),
+    AutoRoute(page: ReviewsRoute.page),
     AutoRoute(page: AppRoute.page),
     AutoRoute(page: SignInRoute.page),
     AutoRoute(page: RegisterSuccessRoute.page),

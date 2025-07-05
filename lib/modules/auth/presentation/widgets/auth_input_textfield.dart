@@ -11,7 +11,7 @@ class AuthInputTextfield extends StatelessWidget {
   final Widget? suffixIcon;
   final String? prefixText;
   final String? labelText;
-  final void Function(String)? onChanged;
+  final void Function()? onTap;
   final FocusNode? focusNode;
 
   const AuthInputTextfield({
@@ -25,7 +25,7 @@ class AuthInputTextfield extends StatelessWidget {
     this.suffixIcon,
     this.prefixText,
     this.labelText,
-    this.onChanged,
+    this.onTap,
   });
 
   @override
@@ -34,18 +34,18 @@ class AuthInputTextfield extends StatelessWidget {
       width: 370,
       height: 50,
       decoration: BoxDecoration(
-        color: AppColors.backgroundtextfield,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.black12,
+            color: Colors.grey.shade300,
             blurRadius: 5,
-            offset: Offset(-3, -3),
+            offset: Offset(-1, -1),
+            spreadRadius: -2,
           ),
         ],
       ),
       child: TextFormField(
-        onChanged: onChanged,
+        onTap: onTap,
         validator: validator,
         controller: controller,
         obscureText: obscureText,
@@ -54,7 +54,6 @@ class AuthInputTextfield extends StatelessWidget {
           prefixText: prefixText,
           labelText: labelText,
           border: OutlineInputBorder(
-            borderSide: BorderSide.none,
             borderRadius: BorderRadius.circular(AppSizes.borderRadiusForm),
           ),
           hintText: hintText,
@@ -63,10 +62,9 @@ class AuthInputTextfield extends StatelessWidget {
             fontSize: AppSizes.paddingMedium,
           ),
           filled: true,
-          fillColor: AppColors.whiteSmoke,
+
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(AppSizes.borderRadiusForm),
-            borderSide: BorderSide(color: Colors.grey.shade400),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(AppSizes.borderRadiusForm),

@@ -68,15 +68,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
               },
               child: Center(
                 child: Container(
-                  width: 450,
-                  constraints: const BoxConstraints(maxHeight: 600),
-                  margin: const EdgeInsets.all(16),
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 100,
+                  ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(color: Colors.black12),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 45),
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

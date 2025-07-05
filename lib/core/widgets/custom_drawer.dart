@@ -1,6 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kyrgyz_tourism/core/bloc/theme/theme_cubit.dart';
+import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_sizes.dart';
 import 'package:kyrgyz_tourism/core/widgets/language_switch_widget.dart';
 
@@ -9,22 +9,9 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDarkTheme = context.watch<ThemeCubit>().state.isDark;
-    final List<String> drawerItems = [
-      'О компании',
-      'Туры',
-      'Контакты',
-      'Гиды',
-      'Вход',
-    ];
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        SwitchListTile(
-          value: isDarkTheme,
-          onChanged: (value) => setThemeBrightness(context, value),
-        ),
         SizedBox(height: 30),
         Center(
           child: IconButton(
@@ -33,26 +20,90 @@ class CustomDrawer extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 100),
-        ...drawerItems.map((title) => _buildListTile(context, title)),
+        _buildListTile(context),
         const SizedBox(height: 100),
         SizedBox(height: 50),
         const LanguageSwitchWidget(),
       ],
     );
   }
+}
 
-  void setThemeBrightness(BuildContext context, bool value) {
-    context.read<ThemeCubit>().setThemeBrightness(
-      value ? Brightness.dark : Brightness.light,
-    );
-  }
-
-  Widget _buildListTile(BuildContext context, String title) {
-    return ListTile(
-      title: Center(
-        child: Text(title, style: TextStyle(fontSize: AppSizes.logoFontSize)),
+Widget _buildListTile(BuildContext context) {
+  return Column(
+    children: [
+      ListTile(
+        title: Center(
+          child: Text(
+            'О компании',
+            style: TextStyle(fontSize: AppSizes.logoFontSize),
+          ),
+        ),
+        onTap: () {
+          context.router.push(HomeRoute());
+          Navigator.pop(context);
+        },
       ),
-      onTap: () => Navigator.pop(context),
-    );
-  }
+      ListTile(
+        title: Center(
+          child: Text(
+            'Туры',
+            style: TextStyle(fontSize: AppSizes.logoFontSize),
+          ),
+        ),
+        onTap: () {
+          context.router.push(ToursRoute());
+          Navigator.pop(context);
+        },
+      ),
+      ListTile(
+        title: Center(
+          child: Text(
+            'Контакты',
+            style: TextStyle(fontSize: AppSizes.logoFontSize),
+          ),
+        ),
+        onTap: () {
+          context.router.push(SettingsRoute());
+          Navigator.pop(context);
+        },
+      ),
+      ListTile(
+        title: Center(
+          child: Text(
+            'Гиды',
+            style: TextStyle(fontSize: AppSizes.logoFontSize),
+          ),
+        ),
+        onTap: () {
+          context.router.push(GuideRoute());
+          Navigator.pop(context);
+        },
+      ),
+      ListTile(
+        title: Center(
+          child: Text(
+            'Вход',
+            style: TextStyle(fontSize: AppSizes.logoFontSize),
+          ),
+        ),
+        onTap: () {
+          context.router.push(AuthRoute());
+          Navigator.pop(context);
+        },
+      ),
+      ListTile(
+        title: Center(
+          child: Text(
+            'Settings',
+            style: TextStyle(fontSize: AppSizes.logoFontSize),
+          ),
+        ),
+        onTap: () {
+          context.router.push(SettingsRoute());
+          Navigator.pop(context);
+        },
+      ),
+    ],
+  );
 }

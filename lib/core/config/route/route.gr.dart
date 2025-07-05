@@ -306,6 +306,22 @@ class RegisterSuccessRouteArgs {
 }
 
 /// generated route for
+/// [ReviewsScreen]
+class ReviewsRoute extends PageRouteInfo<void> {
+  const ReviewsRoute({List<PageRouteInfo>? children})
+    : super(ReviewsRoute.name, initialChildren: children);
+
+  static const String name = 'ReviewsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ReviewsScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [SettingsScreen]
 class SettingsRoute extends PageRouteInfo<void> {
   const SettingsRoute({List<PageRouteInfo>? children})

@@ -32,6 +32,8 @@ import '../../modules/guides/domain/repositories/guide_domain_repository.dart'
     as _i766;
 import '../../modules/guides/domain/usecases/get_guide_use_case.dart' as _i112;
 import '../../modules/guides/presentation/cubit/guide_cubit.dart' as _i675;
+import '../../modules/home/presentation/cubit/bloc/language_cubit.dart'
+    as _i108;
 import '../../modules/profile/data/repositories/profile_repository.dart'
     as _i898;
 import '../../modules/profile/domain/repositories/profile_domain_repository.dart'
@@ -41,6 +43,13 @@ import '../../modules/profile/domain/usecases/get_profile_use_case.dart'
 import '../../modules/profile/domain/usecases/update_profile_use_case.dart'
     as _i446;
 import '../../modules/profile/presentation/cubit/profile_cubit.dart' as _i514;
+import '../../modules/reviews/data/repositories/reviews_repository.dart'
+    as _i1056;
+import '../../modules/reviews/domain/repositories/reviews_domain_repository.dart'
+    as _i903;
+import '../../modules/reviews/domain/usecases/get_reviews_use_case.dart'
+    as _i369;
+import '../../modules/reviews/presentation/cubit/reviews_cubit.dart' as _i568;
 import '../../modules/tour/data/repositories/favorite_tour_repository.dart'
     as _i124;
 import '../../modules/tour/data/repositories/tour_repository.dart' as _i778;
@@ -55,7 +64,6 @@ import '../../modules/tour/domain/usecases/delete_favorite_tour_use_case.dart'
 import '../../modules/tour/domain/usecases/get_favorite_tour_use_case.dart'
     as _i63;
 import '../../modules/tour/domain/usecases/get_tours_use_case.dart' as _i558;
-import '../../modules/tour/presentation/cubit/calendar_cubit.dart' as _i98;
 import '../../modules/tour/presentation/cubit/favorite_tour_cubit.dart'
     as _i889;
 import '../../modules/tour/presentation/cubit/tour_cubit.dart' as _i396;
@@ -64,7 +72,6 @@ import '../../modules/users/domain/repositories/users_domain_repository.dart'
     as _i729;
 import '../../modules/users/domain/usecases/get_user_use_case.dart' as _i277;
 import '../../modules/users/presentation/cubit/users_cubit.dart' as _i291;
-import '../bloc/theme/theme_cubit.dart' as _i810;
 import '../network/dio_client.dart' as _i667;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -75,9 +82,11 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.factory<_i667.DioClient>(() => _i667.DioClient());
-    gh.factory<_i810.ThemeCubit>(() => _i810.ThemeCubit());
-    gh.factory<_i98.CalendarCubit>(() => _i98.CalendarCubit());
     gh.factory<_i52.RegisterSuccessCubit>(() => _i52.RegisterSuccessCubit());
+    gh.factory<_i108.ToggleLanguageEvent>(() => _i108.ToggleLanguageEvent());
+    gh.lazySingleton<_i903.ReviewsDomainRepository>(
+      () => _i1056.ReviewsRepository(dio: gh<_i667.DioClient>()),
+    );
     gh.lazySingleton<_i89.ProfileDomainRepository>(
       () => _i898.ProfileRepository(dio: gh<_i667.DioClient>()),
     );
@@ -98,6 +107,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i558.GetToursUseCase>(
       () => _i558.GetToursUseCase(repository: gh<_i695.TourDomainRepository>()),
+    );
+    gh.factory<_i369.GetReviewsUseCase>(
+      () => _i369.GetReviewsUseCase(
+        repository: gh<_i903.ReviewsDomainRepository>(),
+      ),
     );
     gh.factory<_i277.GetUserUseCase>(
       () => _i277.GetUserUseCase(repository: gh<_i729.UsersDomainRepository>()),
@@ -150,6 +164,10 @@ extension GetItInjectableX on _i174.GetIt {
         sendOtpUseCase: gh<_i4.SendPhoneUseCase>(),
         otpVerifyUseCase: gh<_i629.VerifyOtpUseCase>(),
       ),
+    );
+    gh.factory<_i568.ReviewsCubit>(
+      () =>
+          _i568.ReviewsCubit(getReviewsUseCase: gh<_i369.GetReviewsUseCase>()),
     );
     gh.factory<_i291.UsersCubit>(
       () => _i291.UsersCubit(getUserUseCase: gh<_i277.GetUserUseCase>()),

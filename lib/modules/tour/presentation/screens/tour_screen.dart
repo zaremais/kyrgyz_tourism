@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/core/config/themes/theme.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
-import 'package:kyrgyz_tourism/modules/home/presentation/providers/language_switch_notifier.dart';
 import 'package:kyrgyz_tourism/core/widgets/custom_app_bar.dart';
 import 'package:kyrgyz_tourism/core/widgets/custom_drawer.dart';
+import 'package:kyrgyz_tourism/generated/l10n.dart';
 
 import 'package:kyrgyz_tourism/modules/tour/presentation/widgets/tour_list_section.dart';
 
@@ -20,14 +20,14 @@ class ToursScreen extends StatefulWidget {
 }
 
 class _ToursScreenState extends State<ToursScreen> {
-  final languageNotifier = LanguageSwitchNotifier();
+  // final languageNotifier = LanguageSwitchNotifier();
   final ValueNotifier<TourFilter> selectedType = ValueNotifier(TourFilter.best);
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: CustomAppBar(showImage: false, height: 80, onPressed: () {}),
+        appBar: CustomAppBar(height: 80, onPressed: () {}),
 
         drawer: Drawer(child: Column(children: [CustomDrawer()])),
 
@@ -44,7 +44,7 @@ class _ToursScreenState extends State<ToursScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Туры",
+                      S.of(context).tours,
                       style: TextStyle(
                         fontSize: AppSizes.bigFontSize,
                         fontWeight: FontWeight.w600,
@@ -53,9 +53,9 @@ class _ToursScreenState extends State<ToursScreen> {
                       ),
                     ),
                     SizedBox(height: AppSizes.paddingHorizontal),
-                    Text("Все туры", style: FontStyles.bodyInfo),
+                    Text(S.of(context).alltours, style: FontStyles.bodyInfo),
                     SizedBox(height: AppSizes.paddingHorizontal),
-                    Text("Лучшие туры", style: FontStyles.bodyMedium),
+                    Text(S.of(context).besttour, style: FontStyles.bodyMedium),
                   ],
                 ),
               ),

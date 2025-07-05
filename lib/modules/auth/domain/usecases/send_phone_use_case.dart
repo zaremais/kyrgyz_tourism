@@ -12,7 +12,7 @@ class SendPhoneUseCase extends BaseUsecase<void, SendOtpParams> {
 
   @override
   Future<void> execute({required SendOtpParams params}) async {
-    return _repository.sendPhoneNumber(params);
+    return _repository.sendOtp(params);
   }
 }
 

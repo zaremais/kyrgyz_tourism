@@ -1,13 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:kyrgyz_tourism/core/config/route/route.dart';
-import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_sizes.dart';
-import 'package:kyrgyz_tourism/core/widgets/custom_button_widget.dart';
+import 'package:kyrgyz_tourism/generated/l10n.dart';
 import 'package:kyrgyz_tourism/modules/home/data/models/review_model.dart';
 import 'package:kyrgyz_tourism/modules/home/presentation/widgets/all_reviews.dart';
 import 'package:kyrgyz_tourism/modules/home/presentation/widgets/card_reviews.dart';
 import 'package:kyrgyz_tourism/modules/home/presentation/widgets/social_links_widget.dart';
+import 'package:kyrgyz_tourism/modules/reviews/presentation/widgets/all_reviews.dart';
+import 'package:kyrgyz_tourism/modules/reviews/presentation/widgets/reviews_card.dart';
 import 'package:kyrgyz_tourism/modules/tour/presentation/widgets/list_tour_widget.dart';
 import 'package:kyrgyz_tourism/modules/tour/domain/entities/tour_entity.dart';
 import 'package:kyrgyz_tourism/modules/tour/presentation/widgets/tour_calendar.dart';
@@ -35,7 +35,11 @@ class _TourDetailsScreenState extends State<TourDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(elevation: 0, title: Text("Туры"), centerTitle: false),
+      appBar: AppBar(
+        elevation: 0,
+        title: Text(S.of(context).tours),
+        centerTitle: false,
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -81,9 +85,9 @@ class _TourDetailsScreenState extends State<TourDetailsScreen> {
             _buildTourDetails(widget.tour, context),
             const SizedBox(height: AppSizes.paddingBig),
 
-            CardReviews(),
+            // ReviewsCard(reviews: widget.,),
             const SizedBox(height: AppSizes.paddingBig),
-            AllReviews(reviews: reviews),
+            AllReviews(),
             SizedBox(height: AppSizes.paddingButtonHeight),
             Divider(),
             SotialLinksWidget(),

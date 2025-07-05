@@ -6,6 +6,7 @@ import 'package:kyrgyz_tourism/core/constants/api_urls.dart';
 import 'package:kyrgyz_tourism/core/network/dio_client.dart';
 import 'package:kyrgyz_tourism/modules/auth/data/models/sign_in_model.dart';
 import 'package:kyrgyz_tourism/modules/auth/data/models/sign_up_model.dart';
+import 'package:kyrgyz_tourism/modules/auth/data/models/telegram_model.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/repositories/auth_domain_repository.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/usecases/send_phone_use_case.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/usecases/sign_in_use_case.dart';
@@ -24,8 +25,9 @@ class AuthRepository extends AuthDomainRepository {
     try {
       final result = await _dio.post(
         ApiUrls.signin,
-        // "http://34.18.76.114/v1/api/sign-in",
-        data: {"identifier": "admin", "password": "admin"},
+
+        data: params.toJson(),
+        // {"identifier": "admin", "password": "admin"},
         options: Options(
           headers: {'accept': '*/*', 'Content-Type': 'application/json'},
           validateStatus: (_) => true,
@@ -41,7 +43,15 @@ class AuthRepository extends AuthDomainRepository {
         final response = SignInModel.fromJson(data);
 
         final prefs = await SharedPreferences.getInstance();
-        await prefs.setString('token', response.accessToken as String);
+
+        await prefs.setString('token', response.accessToken ?? '');
+        await prefs.setString('refreshToken', response.refreshToken ?? '');
+
+        log(' New Access Token: ${response.accessToken}');
+        log(' New Refresh Token: ${response.refreshToken}');
+
+        log('Saved Access Token: ${prefs.getString('token')}');
+        log('Saved Refresh Token: ${prefs.getString('refreshToken')}');
 
         return response;
       } else {
@@ -88,10 +98,10 @@ class AuthRepository extends AuthDomainRepository {
   }
 
   @override
-  Future<void> sendPhoneNumber(SendOtpParams params) async {
+  Future<void> sendOtp(SendOtpParams params) async {
     try {
       final result = await _dio.post(
-        "http://34.18.76.114/v1/api/otp/link",
+        ApiUrls.sendPhone,
         data: params.toJson(),
         options: Options(
           headers: {'accept': '*/*', 'Content-Type': 'application/json'},
@@ -115,38 +125,36 @@ class AuthRepository extends AuthDomainRepository {
   }
 
   @override
-  Future<void> verifyOtp(VerifyOtpParams params) async {
+  Future<TelegramModel> verifyOtp(VerifyOtpParams params) async {
     try {
-      final result = await _dio.post(
-        "http://34.18.76.114/v1/api/otp/verify",
+      final response = await _dio.post(
+        ApiUrls.verifyOtp,
         data: params.toJson(),
-        options: Options(
-          headers: {'accept': '*/*', 'Content-Type': 'application/json'},
-          validateStatus: (_) => true,
-        ),
+        options: Options(headers: {'Content-Type': 'application/json'}),
       );
 
-      log('Verify OTP status: ${result.statusCode}');
-      log('Verify OTP response: ${result.data}');
-
-      if (result.statusCode == 200) {
-        final data =
-            result.data is String ? jsonDecode(result.data) : result.data;
-
-        final accessToken = data['accessToken'];
-        if (accessToken != null) {
-          final prefs = await SharedPreferences.getInstance();
-          await prefs.setString('token', accessToken);
-        }
-
-        return;
+      if (response.statusCode == 200) {
+        log('Verify OTP success: ${response.data}');
+        return TelegramModel.fromJson(response.data);
       } else {
-        final data =
-            result.data is String ? jsonDecode(result.data) : result.data;
-        throw Exception('Ошибка подтверждения OTP: ${data.toString()}');
+        log('Verify OTP error: ${response.statusCode} - ${response.data}');
+        throw Exception(
+          'Ошибка подтверждения OTP: ${response.data?['message'] ?? response.statusCode}',
+        );
       }
     } catch (e) {
-      throw Exception('Ошибка: ${e.toString()}');
+      log('Network error: $e');
+      throw Exception('Ошибка сети: ${e.toString()}');
     }
+  }
+
+  Future<void> verifyOtpGet({
+    required String phoneNumber,
+    required String otpCode,
+  }) async {
+    await _dio.get(
+      ApiUrls.verifyOtp,
+      queryParameters: {'phoneNumber': phoneNumber, 'code': otpCode},
+    );
   }
 }

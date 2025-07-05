@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:kyrgyz_tourism/core/config/route/route.dart';
-import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/core/widgets/custom_auth_textfield.dart';
 
 @RoutePage()
@@ -10,6 +9,7 @@ class AuthScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final darkTheme = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -20,6 +20,7 @@ class AuthScreen extends StatelessWidget {
               width: 450,
               height: 535,
               decoration: BoxDecoration(
+                color: darkTheme ? Colors.black87 : Colors.white,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.shade200,
@@ -28,7 +29,7 @@ class AuthScreen extends StatelessWidget {
                     blurRadius: 1,
                   ),
                 ],
-                color: AppColors.backgroundtextfield,
+                // color: AppColors.backgroundtextfield,
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: Colors.black12),
               ),

@@ -1,38 +1,61 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
-import 'package:logger/logger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoggerInterceptor extends Interceptor {
-  Logger logger = Logger(
-    printer: PrettyPrinter(methodCount: 0, colors: true, printEmojis: true),
-  );
+  final Dio _refreshDio = Dio(BaseOptions(baseUrl: 'http://34.18.76.114'));
 
   @override
-  void onError(DioException err, ErrorInterceptorHandler handler) {
-    final options = err.requestOptions;
-    final requestPath = '${options.baseUrl}${options.path}';
-    logger.e('${options.method} request ==> $requestPath'); //Error log
-    logger.d(
-      'Error type: ${err.error} \n '
-      'Error message: ${err.message}',
-    ); //Debug log
-    handler.next(err); //Continue with the Error
+  void onRequest(
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+
+    log('${options.method} request ==> ${options.uri}');
+
+    options.headers.addAll({
+      'Accept': 'application/json',
+      'Content-Type': 'application/json; charset=UTF-8',
+      if (token != null) 'Authorization': 'Bearer $token',
+    });
+
+    handler.next(options);
   }
 
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    final requestPath = '${options.baseUrl}${options.path}';
-    logger.i('${options.method} request ==> $requestPath'); //Info log
-    handler.next(options); // continue with the Request
-  }
+  void onError(DioException error, ErrorInterceptorHandler handler) async {
+    if (error.response?.statusCode == 403) {
+      try {
+        final prefs = await SharedPreferences.getInstance();
+        final refreshToken = prefs.getString('refreshToken');
 
-  @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) {
-    logger.d(
-      'STATUSCODE: ${response.statusCode} \n '
-      'STATUSMESSAGE: ${response.statusMessage} \n'
-      'HEADERS: ${response.headers} \n'
-      'Data: ${response.data}',
-    ); // Debug log
-    handler.next(response); // continue with the Response
+        if (refreshToken != null) {
+          final response = await _refreshDio.post(
+            '/v1/api/refresh',
+            data: {'refreshToken': refreshToken},
+          );
+
+          if (response.statusCode == 200) {
+            final newToken = response.data['accessToken'];
+            await prefs.setString('token', newToken);
+
+            final opts = error.requestOptions;
+            opts.headers['Authorization'] = 'Bearer $newToken';
+            final retry = await _refreshDio.fetch(opts);
+            return handler.resolve(retry);
+          }
+        }
+      } catch (e) {
+        log('Token refresh failed: $e');
+      }
+
+      // await prefs.remove('token');
+      // await prefs.remove('refreshToken');
+    }
+
+    handler.next(error);
   }
 }
