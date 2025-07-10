@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/core/widgets/custom_button_widget.dart';
+import 'package:kyrgyz_tourism/generated/l10n.dart';
 
 class ReviewsButton extends StatelessWidget {
   const ReviewsButton({super.key});
@@ -14,20 +15,22 @@ class ReviewsButton extends StatelessWidget {
       height: 115,
 
       child: Card(
-        elevation: 5,
+        color: AppColors.backgroundtextfield,
+
+        elevation: 3,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Column(
           children: [
             SizedBox(height: 10),
             Center(
               child: Text(
-                "Отзывы",
+                S.of(context).reviews,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
               ),
             ),
             SizedBox(height: 10),
             CustomButtonWidget(
-              text: "Оставить свой отзыв",
+              text: S.of(context).Leaveyourfeedback,
               onPressed: () {
                 context.router.replace(ReviewsRoute());
               },

@@ -29,7 +29,7 @@ class AuthScreen extends StatelessWidget {
                     blurRadius: 1,
                   ),
                 ],
-                // color: AppColors.backgroundtextfield,
+
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: Colors.black12),
               ),

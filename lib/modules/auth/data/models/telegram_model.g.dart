@@ -8,16 +8,24 @@ part of 'telegram_model.dart';
 
 TelegramModel _$TelegramModelFromJson(Map<String, dynamic> json) =>
     TelegramModel(
-      phoneNumber: json['phoneNumber'] as String,
-      otpCode: json['otpCode'] as String,
-      chatId: json['chatId'] as String,
+      rawPassword: json['rawPassword'] as String,
+      username: json['username'] as String,
+      refreshToken: json['refreshToken'] as String,
+      accessToken: json['accessToken'] as String,
       isVerified: json['isVerified'] as bool,
+      phoneNumber: json['phoneNumber'] as String,
+      otp: json['otp'] as String,
+      chatId: (json['chatId'] as num).toInt(),
     );
 
 Map<String, dynamic> _$TelegramModelToJson(TelegramModel instance) =>
     <String, dynamic>{
-      'phoneNumber': instance.phoneNumber,
-      'otpCode': instance.otpCode,
-      'chatId': instance.chatId,
+      'rawPassword': instance.rawPassword,
+      'username': instance.username,
+      'refreshToken': instance.refreshToken,
+      'accessToken': instance.accessToken,
       'isVerified': instance.isVerified,
+      'phoneNumber': instance.phoneNumber,
+      'otp': instance.otp,
+      'chatId': instance.chatId,
     };

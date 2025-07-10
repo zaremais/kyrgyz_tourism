@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:injectable/injectable.dart';
 import 'package:kyrgyz_tourism/core/network/dio_client.dart';
 import 'package:kyrgyz_tourism/modules/tour/data/models/tour_model.dart';

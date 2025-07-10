@@ -16,10 +16,10 @@ import '../../modules/auth/data/repositories/auth_repository.dart' as _i135;
 import '../../modules/auth/domain/repositories/auth_domain_repository.dart'
     as _i534;
 import '../../modules/auth/domain/usecases/is_logged_in_use_case.dart' as _i437;
+import '../../modules/auth/domain/usecases/otp_confirm_use_case.dart' as _i619;
 import '../../modules/auth/domain/usecases/send_phone_use_case.dart' as _i4;
 import '../../modules/auth/domain/usecases/sign_in_use_case.dart' as _i770;
 import '../../modules/auth/domain/usecases/signup_use_case.dart' as _i320;
-import '../../modules/auth/domain/usecases/verify_otp_use_case.dart' as _i629;
 import '../../modules/auth/presentation/cubit/auth_cubit.dart' as _i821;
 import '../../modules/auth/presentation/cubit/register_success_cubit.dart'
     as _i52;
@@ -34,6 +34,8 @@ import '../../modules/guides/domain/usecases/get_guide_use_case.dart' as _i112;
 import '../../modules/guides/presentation/cubit/guide_cubit.dart' as _i675;
 import '../../modules/home/presentation/cubit/bloc/language_cubit.dart'
     as _i108;
+import '../../modules/home/presentation/providers/locale_provider.dart'
+    as _i1017;
 import '../../modules/profile/data/repositories/profile_repository.dart'
     as _i898;
 import '../../modules/profile/domain/repositories/profile_domain_repository.dart'
@@ -82,8 +84,9 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.factory<_i667.DioClient>(() => _i667.DioClient());
-    gh.factory<_i52.RegisterSuccessCubit>(() => _i52.RegisterSuccessCubit());
     gh.factory<_i108.ToggleLanguageEvent>(() => _i108.ToggleLanguageEvent());
+    gh.factory<_i1017.LocaleProvider>(() => _i1017.LocaleProvider());
+    gh.factory<_i52.RegisterSuccessCubit>(() => _i52.RegisterSuccessCubit());
     gh.lazySingleton<_i903.ReviewsDomainRepository>(
       () => _i1056.ReviewsRepository(dio: gh<_i667.DioClient>()),
     );
@@ -139,9 +142,9 @@ extension GetItInjectableX on _i174.GetIt {
       () =>
           _i437.IsLoggedInUseCase(repository: gh<_i534.AuthDomainRepository>()),
     );
-    gh.factory<_i629.VerifyOtpUseCase>(
+    gh.factory<_i619.OtpConfirmUseCase>(
       () =>
-          _i629.VerifyOtpUseCase(repository: gh<_i534.AuthDomainRepository>()),
+          _i619.OtpConfirmUseCase(repository: gh<_i534.AuthDomainRepository>()),
     );
     gh.factory<_i112.SignUpCubit>(
       () => _i112.SignUpCubit(signupUseCase: gh<_i320.SignupUseCase>()),
@@ -157,12 +160,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i514.ProfileCubit(
         getProfileUseCase: gh<_i127.GetProfileUseCase>(),
         updateProfileUseCase: gh<_i446.UpdateProfileUseCase>(),
-      ),
-    );
-    gh.factory<_i466.TelegramAuthCubit>(
-      () => _i466.TelegramAuthCubit(
-        sendOtpUseCase: gh<_i4.SendPhoneUseCase>(),
-        otpVerifyUseCase: gh<_i629.VerifyOtpUseCase>(),
       ),
     );
     gh.factory<_i568.ReviewsCubit>(
@@ -189,6 +186,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i726.SignInCubit>(
       () => _i726.SignInCubit(signInUsecase: gh<_i770.SignInUsecase>()),
+    );
+    gh.factory<_i466.TelegramAuthCubit>(
+      () => _i466.TelegramAuthCubit(
+        sendOtpUseCase: gh<_i4.SendPhoneUseCase>(),
+        otpVerifyUseCase: gh<_i619.OtpConfirmUseCase>(),
+      ),
     );
     gh.factory<_i821.AuthCubit>(
       () => _i821.AuthCubit(isLoggedInUseCase: gh<_i437.IsLoggedInUseCase>()),

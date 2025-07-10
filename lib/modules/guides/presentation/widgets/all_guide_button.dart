@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_sizes.dart';
+import 'package:kyrgyz_tourism/generated/l10n.dart';
 
 class AllGuideButton extends StatelessWidget {
   final void Function() onPressed;
@@ -10,8 +11,8 @@ class AllGuideButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: SizedBox(
-        width: 320,
-        height: 50,
+        width: 265,
+        height: 35,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.buttonGuide,
@@ -24,7 +25,7 @@ class AllGuideButton extends StatelessWidget {
 
           onPressed: onPressed,
           child: Text(
-            'Все гиды',
+            S.of(context).allguides,
             style: const TextStyle(
               color: Colors.white,
               fontSize: 14,

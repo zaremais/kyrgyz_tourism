@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
+import 'package:kyrgyz_tourism/generated/l10n.dart';
 import 'package:kyrgyz_tourism/main.dart';
 import 'package:kyrgyz_tourism/modules/reviews/domain/entities/reviews_entity.dart';
 import 'package:kyrgyz_tourism/modules/reviews/presentation/cubit/reviews_cubit.dart';
@@ -27,13 +28,14 @@ class _ReviewsSectionState extends State<ReviewsSection> {
             return Center(child: CircularProgressIndicator());
           }
           if (state.status == StateStatus.error) {
-            return Center(child: Text('Ошибка: ${state.error}'));
+            return Center(child: Text(S.of(context).stateerror));
           }
           if (state.status == StateStatus.success) {
             final reviews = state.model ?? [];
 
-            return Container(
-              padding: EdgeInsets.all(16),
+            return SizedBox(
+              // margin: EdgeInsets.symmetric(vertical: 24),
+              // padding: EdgeInsets.all(16),
               child: ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,

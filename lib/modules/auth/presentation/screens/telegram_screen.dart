@@ -9,6 +9,7 @@ import 'package:kyrgyz_tourism/core/config/themes/theme.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
 import 'package:kyrgyz_tourism/main.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/entities/telegram_entity.dart';
+import 'package:kyrgyz_tourism/modules/auth/domain/usecases/otp_confirm_use_case.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/usecases/send_phone_use_case.dart';
 import 'package:kyrgyz_tourism/modules/auth/presentation/cubit/telegram_auth_cubit.dart';
 import 'package:kyrgyz_tourism/modules/auth/presentation/widgets/auth_input_textfield.dart';
@@ -24,7 +25,8 @@ class TelegramScreen extends StatefulWidget {
 class _TelegramScreenState extends State<TelegramScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _phoneController = TextEditingController();
-  final TextEditingController _codeController = TextEditingController();
+  final TextEditingController _chatController = TextEditingController();
+  final TextEditingController _otpController = TextEditingController();
   final _otpFocusNode = FocusNode();
 
   final _telegramAuthCubit = di<TelegramAuthCubit>();
@@ -32,22 +34,23 @@ class _TelegramScreenState extends State<TelegramScreen> {
   @override
   void dispose() {
     _phoneController.dispose();
-    _codeController.dispose();
+    _chatController.dispose();
     _otpFocusNode.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final darkTheme = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
-      backgroundColor: AppColors.whiteSmoke,
       body: Center(
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 10),
           height: AppSizes.paddingFormHeight,
           padding: const EdgeInsets.all(AppSizes.paddingHorizontal),
           decoration: BoxDecoration(
-            color: AppColors.background,
+            color: darkTheme ? Colors.black : Colors.white,
+            border: Border.all(color: darkTheme ? Colors.white : Colors.black),
             borderRadius: BorderRadius.circular(AppSizes.borderRadiusLarge),
             boxShadow: [
               BoxShadow(
@@ -126,7 +129,7 @@ class _TelegramScreenState extends State<TelegramScreen> {
               Expanded(
                 child: AuthInputTextfield(
                   hintText: 'Введите ОТР-код',
-                  controller: _codeController,
+                  controller: _chatController,
                   focusNode: _otpFocusNode,
                   obscureText: false,
                   validator: (value) {
@@ -145,7 +148,9 @@ class _TelegramScreenState extends State<TelegramScreen> {
                           if (_phoneController.text.isNotEmpty) {
                             _telegramAuthCubit.sendPhoneNumber(
                               _phoneController.text,
+
                               params: SendOtpParams(
+                                chatId: 9007199254740991,
                                 phoneNumber: _phoneController.text,
                               ),
                             );
@@ -153,7 +158,6 @@ class _TelegramScreenState extends State<TelegramScreen> {
                         }
                         : null,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.backgroundtextfield,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
@@ -173,16 +177,22 @@ class _TelegramScreenState extends State<TelegramScreen> {
           ),
           const SizedBox(height: AppSizes.paddingTextfildHeight),
 
-          Row(
-            children: [
-              Text('Отправить код повторно?', style: FontStyles.subtitleTitle),
-              const SizedBox(width: 8),
-              if (_telegramAuthCubit.secondsRemaining > 0)
+          Expanded(
+            child: Row(
+              children: [
                 Text(
-                  '00:${state.secondsRemaining!.toString().padLeft(2, '0')}',
-                  style: FontStyles.subtitleTitle.copyWith(color: Colors.blue),
+                  'Отправить код повторно?',
+                  style: FontStyles.subtitleTitle,
                 ),
-            ],
+                const SizedBox(width: 8),
+
+                if (_telegramAuthCubit.secondsRemaining > 0)
+                  Text(
+                    '00:${state.secondsRemaining!.toString().padLeft(2, '0')} ',
+                    style: TextStyle(),
+                  ),
+              ],
+            ),
           ),
           const SizedBox(height: AppSizes.paddingTextfildHeight),
 
@@ -199,24 +209,20 @@ class _TelegramScreenState extends State<TelegramScreen> {
               ),
               onPressed: () async {
                 context.router.replace(ChatRoute());
-                // if (_formKey.currentState!.validate()) {
-                //   await _telegramAuthCubit.verifyOtp(
-                //     _codeController.text,
-                //     _phoneController.text,
-                //     params: VerifyOtpParams(
-                //       otpCode: _codeController.text,
-                //       phoneNumber: _phoneController.text,
-                //     ),
-                //   );
-                // }
+                if (_formKey.currentState!.validate()) {
+                  await _telegramAuthCubit.verifyOtp(
+                    _chatController.text,
+                    _phoneController.text,
+                    params: OtpConfirmParams(
+                      otpCode: _otpController.text,
+                      phoneNumber: _phoneController.text,
+                    ),
+                  );
+                }
               },
               child: Text(
                 "Войти",
-                style: TextStyle(
-                  color: AppColors.text,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
               ),
             ),
           ),

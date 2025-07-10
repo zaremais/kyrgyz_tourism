@@ -6,18 +6,18 @@ import 'package:kyrgyz_tourism/core/base/base_state.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/entities/telegram_entity.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/usecases/send_phone_use_case.dart';
-import 'package:kyrgyz_tourism/modules/auth/domain/usecases/verify_otp_use_case.dart';
+import 'package:kyrgyz_tourism/modules/auth/domain/usecases/otp_confirm_use_case.dart';
 
 @injectable
 class TelegramAuthCubit extends Cubit<BaseState<TelegramEntity>> {
   final SendPhoneUseCase _sendOtpUseCase;
-  final VerifyOtpUseCase _otpVerifyUseCase;
+  final OtpConfirmUseCase _otpVerifyUseCase;
   Timer? _timer;
-  int _secondsRemaining = 0;
+  final int _secondsRemaining = 0;
 
   TelegramAuthCubit({
     required SendPhoneUseCase sendOtpUseCase,
-    required VerifyOtpUseCase otpVerifyUseCase,
+    required OtpConfirmUseCase otpVerifyUseCase,
   }) : _sendOtpUseCase = sendOtpUseCase,
        _otpVerifyUseCase = otpVerifyUseCase,
        super(BaseState(status: StateStatus.init));
@@ -26,8 +26,8 @@ class TelegramAuthCubit extends Cubit<BaseState<TelegramEntity>> {
 
   Future<void> verifyOtp(
     String phoneNamber,
-    String otpCode, {
-    required VerifyOtpParams params,
+    String otp, {
+    required OtpConfirmParams params,
   }) async {
     emit(BaseState(status: StateStatus.loading));
     try {
@@ -39,8 +39,15 @@ class TelegramAuthCubit extends Cubit<BaseState<TelegramEntity>> {
           model: TelegramEntity(
             isVerified: true,
             phoneNumber: phoneNamber,
-            otpCode: otpCode,
-            chatId: '',
+            otp: '7620',
+            chatId: 9007199254740991,
+            rawPassword: '',
+            username: 'user_scadov',
+            refreshToken:
+                'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwicm9sZSI6WyJST0xFX1VTRVIiXSwibmlja25hbWUiOiJ1c2VyX3NjYWRvdiIsImlzcyI6InRvdXItYXBwIiwiZXhwIjoxNzUzMjg2OTQyLCJpYXQiOjE3NTE5OTA5NDIsImVtYWlsIjpudWxsfQ.DrueIZ-B4fBp5WaiBOfSVP9GLhVqIWpfYUeZADDMZog',
+
+            accessToken:
+                'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwicm9sZSI6WyJST0xFX1VTRVIiXSwibmlja25hbWUiOiJ1c2VyX3NjYWRvdiIsImlzcyI6InRvdXItYXBwIiwiZXhwIjoxNzUxOTk0NTQyLCJpYXQiOjE3NTE5OTA5NDIsImVtYWlsIjpudWxsfQ.m-lwxHKTQYdS-IX4Mc2Q7OO-Nj_Lte4vuEHvouTL1Uo',
           ),
         ),
       );
@@ -56,7 +63,7 @@ class TelegramAuthCubit extends Cubit<BaseState<TelegramEntity>> {
     emit(BaseState(status: StateStatus.loading));
     try {
       await _sendOtpUseCase.execute(params: params);
-      _startTimer();
+      // _startTimer();
 
       emit(
         BaseState(
@@ -67,28 +74,5 @@ class TelegramAuthCubit extends Cubit<BaseState<TelegramEntity>> {
     } catch (e) {
       emit(BaseState(status: StateStatus.error, error: e.toString()));
     }
-  }
-
-  void _startTimer() {
-    _secondsRemaining = 60;
-    _timer?.cancel();
-    _timer = Timer.periodic(const Duration(seconds: 1), (_) {
-      _secondsRemaining--;
-      emit(
-        BaseState(
-          status: StateStatus.success,
-          secondsRemaining: _secondsRemaining,
-        ),
-      );
-      if (_secondsRemaining <= 0) {
-        _timer?.cancel();
-      }
-    });
-  }
-
-  @override
-  Future<void> close() {
-    _timer?.cancel();
-    return super.close();
   }
 }

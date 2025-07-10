@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
+import 'package:kyrgyz_tourism/generated/l10n.dart';
 import 'package:kyrgyz_tourism/modules/auth/presentation/widgets/auth_input_textfield.dart';
 import 'package:kyrgyz_tourism/modules/home/presentation/widgets/contact_button.dart';
 
@@ -41,16 +42,16 @@ class _ContactFormWidgetState extends State<ContactForm> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Text(
-            "Необходимо связаться с Вами?",
+          Text(
+            S.of(context).needtocontactyou,
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w600,
               color: Colors.white,
             ),
           ),
-          const Text(
-            "Оставьте свои контакты",
+          Text(
+            S.of(context).leaveyourcontacts,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
@@ -64,25 +65,25 @@ class _ContactFormWidgetState extends State<ContactForm> {
           ),
 
           AuthInputTextfield(
-            hintText: "Фамилия и Имя",
+            hintText: S.of(context).surnameandname,
             controller: nameController,
             obscureText: false,
           ),
           const SizedBox(height: AppSizes.paddingSmall),
           AuthInputTextfield(
             obscureText: false,
-            hintText: "Номер телефона",
+            hintText: S.of(context).phonenumber,
             controller: phoneController,
           ),
           const SizedBox(height: AppSizes.paddingSmall),
           AuthInputTextfield(
             obscureText: false,
-            hintText: "Эл.почта",
+            hintText: S.of(context).email,
             controller: emailController,
           ),
           const SizedBox(height: AppSizes.paddingSmall),
           ContactButton(
-            text: "Комментарий: Свяжитесь со мной",
+            text: S.of(context).contactme,
             backgroundColor: Colors.grey.shade300,
             color: AppColors.grey,
           ),
@@ -93,7 +94,7 @@ class _ContactFormWidgetState extends State<ContactForm> {
             painter: DashedLinePainter(),
           ),
           ContactButton(
-            text: "Оставить заявку",
+            text: S.of(context).leaverequest,
             color: Colors.white,
             backgroundColor: AppColors.buttonTour,
           ),

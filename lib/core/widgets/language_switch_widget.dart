@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kyrgyz_tourism/modules/home/presentation/cubit/bloc/language_cubit.dart';
+import 'package:kyrgyz_tourism/modules/home/presentation/providers/locale_provider.dart';
 import 'package:provider/provider.dart';
 
 class LanguageSwitchWidget extends StatelessWidget {
@@ -7,17 +7,20 @@ class LanguageSwitchWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isRu = context.select(
-      (LanguageBloc bloc) => bloc.state.languageCode == 'ru',
-    );
+    final darkTheme = Theme.of(context).brightness == Brightness.dark;
+    final locale = context.watch<LocaleProvider>().locale;
+    final isRu = locale.languageCode == 'ru';
 
     return GestureDetector(
-      onTap: () => context.read<LanguageBloc>().add(ToggleLanguageEvent()),
+      onTap: () {
+        final newLocale = isRu ? const Locale('en') : const Locale('ru');
+        context.read<LocaleProvider>().setLocale(newLocale);
+      },
       child: Container(
         width: 74,
         height: 30,
         decoration: BoxDecoration(
-          color: Colors.grey[200],
+          color: darkTheme ? Colors.grey[900] : Colors.grey.shade300,
           borderRadius: BorderRadius.circular(15),
         ),
         child: Stack(
@@ -28,14 +31,14 @@ class LanguageSwitchWidget extends StatelessWidget {
               child: Container(
                 width: 30,
                 height: 30,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
+                decoration: BoxDecoration(
+                  color: darkTheme ? Colors.black : Colors.white,
                   shape: BoxShape.circle,
                 ),
                 child: Center(
                   child: Text(
                     isRu ? 'RU' : 'EN',
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
               ),

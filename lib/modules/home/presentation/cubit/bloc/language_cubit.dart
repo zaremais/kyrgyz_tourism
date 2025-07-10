@@ -19,6 +19,7 @@ class LanguageBloc extends Bloc<LanguageEvent, Locale> {
   Future<void> _loadSavedLanguage() async {
     final prefs = await SharedPreferences.getInstance();
     final langCode = prefs.getString('language') ?? 'ru';
+    // ignore: invalid_use_of_visible_for_testing_member
     emit(Locale(langCode));
   }
 

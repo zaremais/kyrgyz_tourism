@@ -20,7 +20,6 @@ class ToursScreen extends StatefulWidget {
 }
 
 class _ToursScreenState extends State<ToursScreen> {
-  // final languageNotifier = LanguageSwitchNotifier();
   final ValueNotifier<TourFilter> selectedType = ValueNotifier(TourFilter.best);
 
   @override

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_sizes.dart';
+import 'package:kyrgyz_tourism/generated/l10n.dart';
 
 class AllTourButton extends StatefulWidget {
   const AllTourButton({super.key});
@@ -35,7 +36,7 @@ class _AllTourButtonState extends State<AllTourButton> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Смотреть все туры",
+                S.of(context).seealltours,
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 14,

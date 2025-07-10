@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_sizes.dart';
 import 'package:kyrgyz_tourism/core/widgets/language_switch_widget.dart';
+import 'package:kyrgyz_tourism/generated/l10n.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -23,7 +24,7 @@ class CustomDrawer extends StatelessWidget {
         _buildListTile(context),
         const SizedBox(height: 100),
         SizedBox(height: 50),
-        const LanguageSwitchWidget(),
+        Center(child: const LanguageSwitchWidget()),
       ],
     );
   }
@@ -35,7 +36,7 @@ Widget _buildListTile(BuildContext context) {
       ListTile(
         title: Center(
           child: Text(
-            'О компании',
+            S.of(context).aboutcompany,
             style: TextStyle(fontSize: AppSizes.logoFontSize),
           ),
         ),
@@ -47,7 +48,7 @@ Widget _buildListTile(BuildContext context) {
       ListTile(
         title: Center(
           child: Text(
-            'Туры',
+            S.of(context).tours,
             style: TextStyle(fontSize: AppSizes.logoFontSize),
           ),
         ),
@@ -59,7 +60,7 @@ Widget _buildListTile(BuildContext context) {
       ListTile(
         title: Center(
           child: Text(
-            'Контакты',
+            S.of(context).contacts,
             style: TextStyle(fontSize: AppSizes.logoFontSize),
           ),
         ),
@@ -71,7 +72,7 @@ Widget _buildListTile(BuildContext context) {
       ListTile(
         title: Center(
           child: Text(
-            'Гиды',
+            S.of(context).guides,
             style: TextStyle(fontSize: AppSizes.logoFontSize),
           ),
         ),
@@ -83,7 +84,7 @@ Widget _buildListTile(BuildContext context) {
       ListTile(
         title: Center(
           child: Text(
-            'Вход',
+            S.of(context).login,
             style: TextStyle(fontSize: AppSizes.logoFontSize),
           ),
         ),
@@ -95,7 +96,7 @@ Widget _buildListTile(BuildContext context) {
       ListTile(
         title: Center(
           child: Text(
-            'Settings',
+            S.of(context).settings,
             style: TextStyle(fontSize: AppSizes.logoFontSize),
           ),
         ),

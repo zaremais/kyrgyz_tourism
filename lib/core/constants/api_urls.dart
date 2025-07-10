@@ -11,5 +11,4 @@ class ApiUrls {
   static const String getTours = '/v1/api/tours';
   static const String getReviews = '/v1/api/reviews';
   static const String guides = '/v1/api/guides';
-  static const isDarkThemeSelectedKey = 'dark_theme_selected';
 }

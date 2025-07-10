@@ -1,11 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
 import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_sizes.dart';
 import 'package:kyrgyz_tourism/core/config/themes/theme.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
+import 'package:kyrgyz_tourism/core/utils/data_formatter.dart';
+import 'package:kyrgyz_tourism/generated/l10n.dart';
 import 'package:kyrgyz_tourism/main.dart';
 import 'package:kyrgyz_tourism/modules/tour/presentation/widgets/booked_button.dart';
 import 'package:kyrgyz_tourism/modules/tour/data/sqflite/schema.dart';
@@ -29,7 +32,7 @@ class _ListTourWidgetState extends State<ListTourWidget> {
     return BlocProvider.value(
       value: _favouriteTourCubit,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 49),
+        padding: const EdgeInsets.symmetric(horizontal: 34),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -41,8 +44,8 @@ class _ListTourWidgetState extends State<ListTourWidget> {
                     child: Image.network(
                       widget.tour.image,
                       fit: BoxFit.cover,
-                      width: 308,
-                      height: 308,
+                      width: 330,
+                      height: 330,
                     ),
                   ),
                   Positioned(
@@ -92,7 +95,7 @@ class _ListTourWidgetState extends State<ListTourWidget> {
                           TourDetailsRoute(tour: widget.tour),
                         );
                       },
-                      text: 'Забронировать',
+                      text: S.of(context).booked,
                     ),
                   ),
                 ],
@@ -103,13 +106,19 @@ class _ListTourWidgetState extends State<ListTourWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
-                  child: Text(widget.tour.title, style: FontStyles.bodyInfo),
+                  child: Text(
+                    widget.tour.title,
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                  ),
                 ),
                 Row(
                   children: [
                     Text(
                       widget.tour.rating.toString(),
-                      style: FontStyles.bodyLarge,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                     ),
@@ -118,10 +127,24 @@ class _ListTourWidgetState extends State<ListTourWidget> {
                 ),
               ],
             ),
-            Text('${widget.tour.tourDuration} дня'),
-            Text('${widget.tour.price.toStringAsFixed(2)} сом'),
-            Text('Дата выезда: ${widget.tour.departureDate}'),
-            Text('Осталось мест: ${widget.tour.placesLeft}'),
+            Text(
+              '${widget.tour.tourDuration} дня',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+            ),
+            Text(
+              '${widget.tour.price.toStringAsFixed(2)} сом',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+            ),
+
+            Text(
+              'Дата выезда: ${DateFormatter.iso(DateTime.now())}',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+            ),
+
+            Text(
+              'Осталось мест: ${widget.tour.placesLeft}',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+            ),
             const SizedBox(height: AppSizes.paddingHorizontal),
           ],
         ),

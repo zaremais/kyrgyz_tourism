@@ -11,7 +11,7 @@ import 'package:kyrgyz_tourism/modules/auth/domain/repositories/auth_domain_repo
 import 'package:kyrgyz_tourism/modules/auth/domain/usecases/send_phone_use_case.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/usecases/sign_in_use_case.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/usecases/signup_use_case.dart';
-import 'package:kyrgyz_tourism/modules/auth/domain/usecases/verify_otp_use_case.dart';
+import 'package:kyrgyz_tourism/modules/auth/domain/usecases/otp_confirm_use_case.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 @LazySingleton(as: AuthDomainRepository)
@@ -125,7 +125,7 @@ class AuthRepository extends AuthDomainRepository {
   }
 
   @override
-  Future<TelegramModel> verifyOtp(VerifyOtpParams params) async {
+  Future<TelegramModel> verifyOtp(OtpConfirmParams params) async {
     try {
       final response = await _dio.post(
         ApiUrls.verifyOtp,
@@ -148,7 +148,7 @@ class AuthRepository extends AuthDomainRepository {
     }
   }
 
-  Future<void> verifyOtpGet({
+  Future<void> OtpGet({
     required String phoneNumber,
     required String otpCode,
   }) async {

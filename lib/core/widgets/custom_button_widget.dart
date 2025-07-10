@@ -17,8 +17,8 @@ class CustomButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: SizedBox(
-        width: AppSizes.paddingButtonWidth,
-        height: AppSizes.paddingButtonHeight,
+        width: 265,
+        height: 35,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: backgroundColor,

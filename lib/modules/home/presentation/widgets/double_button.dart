@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_sizes.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
+import 'package:kyrgyz_tourism/generated/l10n.dart';
 
 class DoubleButton extends StatelessWidget {
   final ValueNotifier<TourFilter> selectedType;
@@ -16,7 +17,7 @@ class DoubleButton extends StatelessWidget {
       valueListenable: selectedType,
       builder: (context, value, _) {
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
           child: Row(
             children: [
               Expanded(
@@ -24,6 +25,7 @@ class DoubleButton extends StatelessWidget {
                   onPressed: () => selectedType.value = TourFilter.best,
 
                   style: TextButton.styleFrom(
+                    side: BorderSide(color: AppColors.primaryColor),
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(
@@ -35,14 +37,16 @@ class DoubleButton extends StatelessWidget {
 
                     backgroundColor:
                         value == TourFilter.best
-                            ? AppColors.buttonGuide
+                            ? AppColors.primaryColor
                             : (isDarkTheme
                                 ? Colors.grey.shade900
                                 : Colors.white),
                   ),
                   child: Text(
-                    "Лучшие туры",
+                    S.of(context).bestTours,
                     style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
                       color:
                           value == TourFilter.best
                               ? Colors.white
@@ -55,6 +59,7 @@ class DoubleButton extends StatelessWidget {
                 child: TextButton(
                   onPressed: () => selectedType.value = TourFilter.oneDay,
                   style: TextButton.styleFrom(
+                    side: BorderSide(color: AppColors.primaryColor),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
                         bottomRight: Radius.circular(
@@ -71,8 +76,10 @@ class DoubleButton extends StatelessWidget {
                                 : Colors.white),
                   ),
                   child: Text(
-                    "Однодневные туры",
+                    S.of(context).oneTours,
                     style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
                       color:
                           value == TourFilter.oneDay
                               ? Colors.white

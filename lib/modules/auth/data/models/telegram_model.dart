@@ -7,10 +7,14 @@ part 'telegram_model.g.dart';
 @JsonSerializable()
 class TelegramModel extends TelegramEntity {
   TelegramModel({
-    required super.phoneNumber,
-    required super.otpCode,
-    required super.chatId,
+    required super.rawPassword,
+    required super.username,
+    required super.refreshToken,
+    required super.accessToken,
     required super.isVerified,
+    required super.phoneNumber,
+    required super.otp,
+    required super.chatId,
   });
 
   factory TelegramModel.fromJson(JSON json) => _$TelegramModelFromJson(json);

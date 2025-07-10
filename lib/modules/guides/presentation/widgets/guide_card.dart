@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/modules/guides/domain/entities/guide_entity.dart';
 
 class GuideCard extends StatelessWidget {
@@ -8,61 +9,70 @@ class GuideCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Image.network(guide.image, width: 122),
-                SizedBox(width: 20),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      guide.name,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 18,
-                      ),
+    return Padding(
+      padding: const EdgeInsets.all(12),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(30),
+                child: Image.network(guide.image, width: 60),
+              ),
+              SizedBox(width: 40),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    guide.name,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18,
                     ),
-
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Experience:${guide.experience}'),
-                        Text('Reviews: ${guide.reviews}'),
-                        Row(
-                          children: [
-                            ...List.generate(5, (index) {
-                              return Icon(
-                                Icons.star,
-                                size: 16,
-                                color:
-                                    index < guide.rating.floor()
-                                        ? Colors.amber
-                                        : Colors.grey[300],
-                              );
-                            }),
-                            SizedBox(width: 8),
-                            Text(
-                              'Рейтинг: ${guide.rating}',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ],
+                  ),
+                  SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Text(
+                        '${guide.rating}',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
                         ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                      ),
+                      SizedBox(width: 8),
+                      Row(
+                        children: [
+                          ...List.generate(5, (index) {
+                            return Icon(
+                              Icons.star,
+                              size: 24,
+                              color:
+                                  index < guide.rating.floor()
+                                      ? AppColors.star
+                                      : Colors.grey[300],
+                            );
+                          }),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Text(
+                    '${guide.reviews} Отзыва',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                  ),
+                  Text(
+                    '${guide.experience} года опыта',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
+            ],
+          ),
 
-            const SizedBox(height: 8),
-            Text(guide.description),
-          ],
-        ),
+          const SizedBox(height: 8),
+          Text(guide.description),
+        ],
       ),
     );
   }

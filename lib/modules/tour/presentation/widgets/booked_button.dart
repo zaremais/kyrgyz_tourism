@@ -31,7 +31,7 @@ class BookedButton extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-            fontSize: AppSizes.mediumFontSize,
+            fontSize: 16,
             fontWeight: FontWeight.w600,
             color: Colors.black,
           ),

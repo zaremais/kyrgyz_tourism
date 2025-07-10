@@ -1,8 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:kyrgyz_tourism/core/constants/api_urls.dart';
-import 'package:kyrgyz_tourism/modules/auth/data/models/sign_in_model.dart';
-import 'package:kyrgyz_tourism/modules/auth/data/models/sign_up_model.dart';
-import 'package:kyrgyz_tourism/modules/auth/data/models/telegram_model.dart';
 import 'package:retrofit/retrofit.dart';
 part 'auth_api_service.g.dart';
 

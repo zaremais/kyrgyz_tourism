@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
+import 'package:kyrgyz_tourism/generated/l10n.dart';
 import 'package:kyrgyz_tourism/main.dart';
 import 'package:kyrgyz_tourism/modules/guides/domain/entities/guide_entity.dart';
 import 'package:kyrgyz_tourism/modules/guides/presentation/cubit/guide_cubit.dart';
@@ -27,7 +28,7 @@ class _GuideSectionState extends State<GuideSection> {
             return Center(child: CircularProgressIndicator());
           }
           if (state.status == StateStatus.error) {
-            return Center(child: Text('Ошибка: ${state.error}'));
+            return Center(child: Text(S.of(context).stateerror));
           }
           if (state.status == StateStatus.success) {
             final guides = state.model ?? [];

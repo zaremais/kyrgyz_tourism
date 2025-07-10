@@ -17,9 +17,10 @@ class SendPhoneUseCase extends BaseUsecase<void, SendOtpParams> {
 }
 
 class SendOtpParams {
+  final int chatId;
   final String phoneNumber;
 
-  SendOtpParams({required this.phoneNumber});
+  SendOtpParams({required this.chatId, required this.phoneNumber});
 
   JSON toJson() => {"phoneNumber": phoneNumber};
 }

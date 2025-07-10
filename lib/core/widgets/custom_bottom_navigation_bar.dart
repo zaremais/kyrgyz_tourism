@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
+import 'package:kyrgyz_tourism/generated/l10n.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
   final TabsRouter tabsRouter;
@@ -37,7 +38,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                 width: 14,
                 height: 14,
               ),
-              label: 'Главная',
+              label: S.of(context).home,
             ),
             BottomNavigationBarItem(
               icon: Image.asset(
@@ -46,7 +47,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                 width: 14,
                 height: 14,
               ),
-              label: 'Категория',
+              label: S.of(context).categories,
             ),
             BottomNavigationBarItem(icon: SizedBox(), label: ''),
             BottomNavigationBarItem(
@@ -56,7 +57,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                 width: 14,
                 height: 14,
               ),
-              label: 'Чат',
+              label: S.of(context).chat,
             ),
             BottomNavigationBarItem(
               icon: Image.asset(
@@ -65,7 +66,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                 height: 14,
                 color: isDark ? Colors.white : Colors.black,
               ),
-              label: 'Профиль',
+              label: S.of(context).profile,
             ),
           ],
         ),
