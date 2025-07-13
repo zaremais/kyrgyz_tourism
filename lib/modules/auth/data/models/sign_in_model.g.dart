@@ -11,6 +11,7 @@ SignInModel _$SignInModelFromJson(Map<String, dynamic> json) => SignInModel(
   json['refreshToken'],
   json['identifier'] as String?,
   json['password'] as String?,
+  json['message'] as String?,
 );
 
 Map<String, dynamic> _$SignInModelToJson(SignInModel instance) =>
@@ -19,4 +20,5 @@ Map<String, dynamic> _$SignInModelToJson(SignInModel instance) =>
       'refreshToken': instance.refreshToken,
       'identifier': instance.identifier,
       'password': instance.password,
+      'message': instance.message,
     };

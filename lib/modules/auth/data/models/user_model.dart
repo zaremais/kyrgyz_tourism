@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:kyrgyz_tourism/core/constants/typedefs.dart';
 import '../../domain/entities/user_entity.dart';
 
 part 'user_model.g.dart';
@@ -6,14 +7,15 @@ part 'user_model.g.dart';
 @JsonSerializable()
 class UserModel extends UserEntity {
   UserModel({
-    required super.id,
-    required super.email,
-    required super.userName,
-    required super.phone,
-    required super.code,
+    super.id,
+    super.email,
+    super.userName,
+    super.phone,
+    super.code,
+    super.password,
+    super.message,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) =>
-      _$UserModelFromJson(json);
-  Map<String, dynamic> toJson() => _$UserModelToJson(this);
+  factory UserModel.fromJson(JSON json) => _$UserModelFromJson(json);
+  JSON toJson() => _$UserModelToJson(this);
 }

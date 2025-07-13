@@ -75,5 +75,7 @@
   "guidedescription": "  Описание гида",
   "profileupdated": "Профиль обновлен",
   "savechanges": "Сохранить изменения",
-  "cancel": "Отмена"
+  "cancel": "Отмена",
+  "generalinfo": "Общая информация",
+  "authortours": "Туры автора"
 }

@@ -13,13 +13,13 @@ class SignInCubit extends Cubit<BaseState<SignInEntity>> {
     : _signInUsecase = signInUsecase,
       super(BaseState(status: StateStatus.init));
 
-  Future<void> signin({required params}) async {
+  Future<void> signin({required SignInParams params}) async {
     emit(BaseState(status: StateStatus.loading));
     try {
       final user = await _signInUsecase.execute(params: params);
       emit(BaseState(status: StateStatus.success, model: user));
     } catch (e) {
-      emit(BaseState(status: StateStatus.error, error: e.toString()));
+      emit(BaseState(status: StateStatus.error, errorMessage: e.toString()));
     }
   }
 }

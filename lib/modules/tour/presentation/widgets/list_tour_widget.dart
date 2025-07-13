@@ -1,17 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
 import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_sizes.dart';
-import 'package:kyrgyz_tourism/core/config/themes/theme.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
 import 'package:kyrgyz_tourism/core/utils/data_formatter.dart';
 import 'package:kyrgyz_tourism/generated/l10n.dart';
 import 'package:kyrgyz_tourism/main.dart';
-import 'package:kyrgyz_tourism/modules/tour/presentation/widgets/booked_button.dart';
 import 'package:kyrgyz_tourism/modules/tour/data/sqflite/schema.dart';
+import 'package:kyrgyz_tourism/modules/tour/presentation/widgets/booked_button.dart';
 import 'package:kyrgyz_tourism/modules/tour/domain/entities/tour_entity.dart';
 import 'package:kyrgyz_tourism/modules/tour/presentation/cubit/favorite_tour_cubit.dart';
 
@@ -42,7 +40,7 @@ class _ListTourWidgetState extends State<ListTourWidget> {
                   ClipRRect(
                     borderRadius: BorderRadiusGeometry.circular(15),
                     child: Image.network(
-                      widget.tour.image,
+                      widget.tour.image.toString(),
                       fit: BoxFit.cover,
                       width: 330,
                       height: 330,
@@ -66,12 +64,12 @@ class _ListTourWidgetState extends State<ListTourWidget> {
 
                         final isFavorite = context
                             .read<FavoriteTourCubit>()
-                            .isFavorite(widget.tour.id);
+                            .isFavorite(widget.tour.id ?? 0);
 
                         return InkWell(
                           onTap: () {
                             final favorite = FavoriteTourModel(
-                              tourId: widget.tour.id,
+                              tourId: widget.tour.id ?? 0,
                             );
 
                             context.read<FavoriteTourCubit>().toggleFavorite(
@@ -107,7 +105,7 @@ class _ListTourWidgetState extends State<ListTourWidget> {
               children: [
                 Expanded(
                   child: Text(
-                    widget.tour.title,
+                    widget.tour.title.toString(),
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                   ),
                 ),
@@ -132,7 +130,7 @@ class _ListTourWidgetState extends State<ListTourWidget> {
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
             Text(
-              '${widget.tour.price.toStringAsFixed(2)} сом',
+              '${widget.tour.price} сом',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
 
@@ -145,7 +143,7 @@ class _ListTourWidgetState extends State<ListTourWidget> {
               'Осталось мест: ${widget.tour.placesLeft}',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
-            const SizedBox(height: AppSizes.paddingHorizontal),
+            const SizedBox(height: AppSizes.paddingLarge),
           ],
         ),
       ),

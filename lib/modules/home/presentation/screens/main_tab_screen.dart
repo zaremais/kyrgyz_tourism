@@ -10,7 +10,8 @@ import 'package:kyrgyz_tourism/modules/auth/presentation/cubit/auth_cubit.dart';
 
 @RoutePage()
 class MainTabScreen extends StatefulWidget {
-  const MainTabScreen({super.key});
+  final int initialIndex;
+  const MainTabScreen({super.key, this.initialIndex = 0});
 
   @override
   State<MainTabScreen> createState() => _MainTabScreenState();
@@ -18,12 +19,6 @@ class MainTabScreen extends StatefulWidget {
 
 class _MainTabScreenState extends State<MainTabScreen> {
   final _authCubit = di<AuthCubit>()..appStarted();
-
-  @override
-  void initState() {
-    super.initState();
-    _authCubit.appStarted();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +31,7 @@ class _MainTabScreenState extends State<MainTabScreen> {
           return BlocListener<AuthCubit, BaseState<bool>>(
             listener: (context, state) {
               if (state.status == StateStatus.success) {
-                tabsRouter.setActiveIndex(0);
+                tabsRouter.setActiveIndex(widget.initialIndex);
               } else if (state.status == StateStatus.error) {
                 tabsRouter.setActiveIndex(3);
               }

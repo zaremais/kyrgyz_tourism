@@ -4,10 +4,10 @@ import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 class CustomAuthTextfield extends StatelessWidget {
   const CustomAuthTextfield({
     super.key,
-    required this.hintText,
+    required this.hint,
     required this.onTap,
   });
-  final String hintText;
+  final String hint;
   final void Function() onTap;
 
   @override
@@ -16,10 +16,11 @@ class CustomAuthTextfield extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 13),
       child: Container(
-        width: 360,
+        // width: 360,
         height: 50,
         decoration: BoxDecoration(
-          color: darkTheme ? Colors.grey.shade900 : AppColors.background,
+          color:
+              darkTheme ? Colors.grey.shade900 : AppColors.backgroundtextfield,
           border: Border.all(color: Colors.grey.shade100),
           boxShadow: [
             BoxShadow(
@@ -39,8 +40,16 @@ class CustomAuthTextfield extends StatelessWidget {
 
               borderRadius: BorderRadius.circular(10),
             ),
-            hintText: hintText,
-            hintStyle: TextStyle(color: Colors.grey),
+            // hintText: hintText,
+            hint: Padding(
+              padding: const EdgeInsets.only(top: 15),
+              child: Center(child: Text(hint)),
+            ),
+            hintStyle: TextStyle(
+              color: Colors.black,
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
       ),

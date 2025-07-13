@@ -1,49 +1,55 @@
 class TourEntity {
-  final String departureDate;
-  final int tourDuration;
-  final int id;
-  final String? location;
+  final int? id;
+  final int? authorId;
+  final String? title;
+  final String? description;
+  final int? price;
+  final int? duration;
+  final int? tourDuration;
+  final double? rating;
+  final int? placesLeft;
+  final String? meetingPoint;
+  final bool? guideIncluded;
+  final bool? withAccommodation;
+  final bool? withFood;
+  final int? maxGroupSize;
+  final String? difficulty;
+  final String? region;
+  final String? image;
+  final List<String>? departureDates;
   final String? category;
   final int? groupPeople;
-  final int? age;
-  final String title;
-  final double price;
-  final String image;
-  final int placesLeft;
-  final double rating;
-  // final GuideEntity? guide;
+  final int? ageLimit;
+  final bool? oneDay;
+  final bool? longTerm;
+  final bool? smallGroup;
+  final bool? bigGroup;
 
   TourEntity({
-    required this.departureDate,
-    required this.tourDuration,
-    required this.id,
-    required this.location,
-    required this.category,
-    required this.groupPeople,
-    required this.age,
-    required this.title,
-    required this.price,
-    required this.image,
-    required this.placesLeft,
-    required this.rating,
-    // required this.guide,
+    this.id,
+    this.authorId,
+    this.title,
+    this.description,
+    this.price,
+    this.tourDuration,
+    this.duration,
+    this.meetingPoint,
+    this.guideIncluded,
+    this.withAccommodation,
+    this.withFood,
+    this.maxGroupSize,
+    this.difficulty,
+    this.rating,
+    this.placesLeft,
+    this.region,
+    this.image,
+    this.departureDates,
+    this.category,
+    this.groupPeople,
+    this.ageLimit,
+    this.oneDay,
+    this.longTerm,
+    this.smallGroup,
+    this.bigGroup,
   });
 }
-
-// class GuideEntity {
-//   final String? name;
-//   final double? rating;
-//   final int? reviews;
-//   final String? description;
-//   final int? experience;
-//   final String? imageGuide;
-
-//   GuideEntity({
-//     required this.name,
-//     required this.rating,
-//     required this.reviews,
-//     required this.description,
-//     required this.experience,
-//     required this.imageGuide,
-//   });
-// }

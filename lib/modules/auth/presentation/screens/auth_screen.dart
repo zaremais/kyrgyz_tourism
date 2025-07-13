@@ -58,7 +58,7 @@ class AuthScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 80),
                   CustomAuthTextfield(
-                    hintText: 'Вход через Телеграм',
+                    hint: 'Вход через Телеграм',
                     onTap: () {
                       context.router.push(TelegramRoute());
                     },
@@ -68,7 +68,7 @@ class AuthScreen extends StatelessWidget {
                     onTap: () {
                       context.router.push(SignInRoute());
                     },
-                    hintText: 'Вход через почту',
+                    hint: 'Вход через почту',
                   ),
 
                   SizedBox(height: 14),
@@ -76,7 +76,7 @@ class AuthScreen extends StatelessWidget {
                     onTap: () {
                       context.router.push(SignUpRoute());
                     },
-                    hintText: 'Пройти регистрацию',
+                    hint: 'Пройти регистрацию',
                   ),
                 ],
               ),

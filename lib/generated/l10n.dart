@@ -643,6 +643,26 @@ class S {
   String get cancel {
     return Intl.message('Cancel', name: 'cancel', desc: '', args: []);
   }
+
+  /// `General information`
+  String get generalinfo {
+    return Intl.message(
+      'General information',
+      name: 'generalinfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Author's tours`
+  String get authortours {
+    return Intl.message(
+      'Author\'s tours',
+      name: 'authortours',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

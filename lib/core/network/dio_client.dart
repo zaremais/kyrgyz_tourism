@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:kyrgyz_tourism/core/network/interceptors.dart';
 import 'package:injectable/injectable.dart';
 
@@ -15,7 +16,18 @@ class DioClient {
           receiveTimeout: const Duration(seconds: 10),
         ),
       ) {
-    _dio.interceptors.addAll([LoggerInterceptor()]);
+    _dio.interceptors.addAll([
+      LogInterceptor(
+        request: true,
+        requestBody: true,
+        responseBody: true,
+        responseHeader: false,
+        error: true,
+        logPrint: (obj) => debugPrint(obj.toString()),
+      ),
+
+      AuthInterceptor(),
+    ]);
   }
 
   Future<Response> get(

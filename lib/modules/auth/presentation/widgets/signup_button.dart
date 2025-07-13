@@ -51,13 +51,14 @@ class SignupButton extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w500,
-                  color: Colors.black,
+                  // color: Colors.black,
                 ),
               ),
     );
   }
 
   Widget _initial(BuildContext context) {
+    final darkTheme = Theme.of(context).brightness == Brightness.dark;
     return OutlinedButton(
       style: OutlinedButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -71,7 +72,7 @@ class SignupButton extends StatelessWidget {
         style: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.w500,
-          // color: Colors.black,
+          color: darkTheme ? Colors.white : Colors.black,
         ),
       ),
     );

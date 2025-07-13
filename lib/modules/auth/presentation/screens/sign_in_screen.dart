@@ -56,162 +56,181 @@ class _SignInScreenState extends State<SignInScreen> {
           },
           child: Center(
             child: SingleChildScrollView(
-              child: Container(
-                width: 450,
-                height: 500,
-                margin: EdgeInsets.symmetric(horizontal: 24),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: Colors.grey),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                context.router.replace(AuthRoute());
-                              },
-                              icon: const Icon(Icons.close, color: Colors.grey),
-                            ),
-                          ],
-                        ),
-                        Text(
-                          'Вход',
-                          style: TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        SizedBox(height: 40),
-                        AuthInputTextfield(
-                          hintText: 'Введите почту или логин',
-                          controller: _emailController,
-                          obscureText: false,
-                          validator: (value) {
-                            if (value == null || value.trim().isEmpty) {
-                              return 'Почта обязательна';
-                            }
-                            // final emailRegex = RegExp(
-                            //   r'^[\w\.-]+@[\w\.-]+\.\w+$',
-                            // );
-                            // if (!emailRegex.hasMatch(value)) {
-                            //   return 'Введите корректную почту';
-                            // }
-
-                            return null;
-                          },
-                        ),
-                        SizedBox(height: 16),
-                        AuthInputTextfield(
-                          hintText: 'Введите пароль',
-                          controller: _passwordController,
-                          obscureText: _obscurePassword,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Пароль обязателен';
-                            }
-                            return null;
-                          },
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              _obscurePassword
-                                  ? Icons.visibility_off_outlined
-                                  : Icons.visibility,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                _obscurePassword = !_obscurePassword;
-                              });
-                            },
-                          ),
-                        ),
-                        SizedBox(height: 14),
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: _rememberMe,
-                              onChanged:
-                                  (value) => setState(
-                                    () => _rememberMe = value ?? false,
-                                  ),
-                            ),
-                            const Text('Запомнить меня'),
-                          ],
-                        ),
-
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: TextButton(
-                            onPressed: () {},
-                            child: const Text(
-                              'Забыли пароль?',
-                              style: TextStyle(color: AppColors.forgotText),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 40),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: SizedBox(
-                                width: 170,
-                                height: 50,
-                                child: SigninButton(
-                                  title: 'Войти',
-
-                                  onPressed: () {
-                                    if (_formKey.currentState!.validate()) {
-                                      _signinCubit.signin(
-                                        params: SignInParams(
-                                          identifier: _emailController.text,
-                                          password: _passwordController.text,
-                                        ),
-                                      );
-                                    }
-                                  },
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 16),
-                            Expanded(
-                              child: OutlinedButton(
-                                style: OutlinedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  side: const BorderSide(
-                                    color: AppColors.buttonForm,
-                                  ),
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 12,
-                                  ),
-                                ),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(maxHeight: 500),
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: Theme.of(context).dividerColor),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 45),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(height: 40),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              IconButton(
                                 onPressed: () {
-                                  context.router.replace(SignUpRoute());
+                                  context.router.pop();
                                 },
-                                child: Text(
-                                  'Регистрация',
+                                icon: Icon(
+                                  Icons.arrow_back_ios,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              Text(
+                                'Вход через почту',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  context.router.replace(AuthRoute());
+                                },
+                                icon: const Icon(
+                                  Icons.close,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          SizedBox(height: 30),
+                          AuthInputTextfield(
+                            hintText: 'Введите почту или логин',
+                            controller: _emailController,
+                            obscureText: false,
+                            // validator: validateEmail,
+                          ),
+                          SizedBox(height: 16),
+                          AuthInputTextfield(
+                            hintText: 'Введите пароль',
+                            controller: _passwordController,
+                            obscureText: _obscurePassword,
+                            // validator: validatePassword,
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                _obscurePassword
+                                    ? Icons.visibility_off_outlined
+                                    : Icons.visibility,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _obscurePassword = !_obscurePassword;
+                                });
+                              },
+                            ),
+                          ),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    _rememberMe = !_rememberMe;
+                                  });
+                                },
+                                child: Row(
+                                  children: [
+                                    Checkbox(
+                                      value: _rememberMe,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          _rememberMe = value ?? false;
+                                        });
+                                      },
+                                    ),
+                                    const Text('Запомнить меня'),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  context.router.replace(ForgotPasswordRoute());
+                                },
+                                child: const Text(
+                                  'Забыли пароль?',
                                   style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500,
-                                    color:
-                                        darkTheme ? Colors.white : Colors.black,
+                                    fontSize: 14,
+                                    color: AppColors.forgotText,
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 30),
-                      ],
+                            ],
+                          ),
+                          SizedBox(height: 20),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: SizedBox(
+                                  width: 170,
+                                  height: 50,
+                                  child: SigninButton(
+                                    title: 'Войти',
+
+                                    onPressed: () {
+                                      if (_formKey.currentState!.validate()) {
+                                        _signinCubit.signin(
+                                          params: SignInParams(
+                                            identifier: _emailController.text,
+                                            password: _passwordController.text,
+                                          ),
+                                        );
+                                      }
+                                    },
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 16),
+                              Expanded(
+                                child: OutlinedButton(
+                                  style: OutlinedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    side: const BorderSide(
+                                      color: AppColors.buttonForm,
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 12,
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    context.router.replace(SignUpRoute());
+                                  },
+                                  child: Text(
+                                    'Регистрация',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500,
+                                      color:
+                                          darkTheme
+                                              ? Colors.white
+                                              : Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 40),
+                        ],
+                      ),
                     ),
                   ),
                 ),

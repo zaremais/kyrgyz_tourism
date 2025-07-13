@@ -3,9 +3,14 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:kyrgyz_tourism/app/app.dart';
 import 'package:kyrgyz_tourism/modules/auth/presentation/screens/auth_screen.dart';
+import 'package:kyrgyz_tourism/modules/auth/presentation/screens/forgot_password_screen.dart';
 import 'package:kyrgyz_tourism/modules/auth/presentation/screens/register_success_screen.dart';
+import 'package:kyrgyz_tourism/modules/auth/presentation/screens/reset_password_screen.dart';
 import 'package:kyrgyz_tourism/modules/auth/presentation/screens/sign_in_screen.dart';
 import 'package:kyrgyz_tourism/modules/auth/presentation/screens/sign_up_screen.dart';
+import 'package:kyrgyz_tourism/modules/auth/presentation/screens/telegram_auth_step_screen.dart';
+import 'package:kyrgyz_tourism/modules/auth/presentation/screens/telegram_chat_bot_screen.dart';
+import 'package:kyrgyz_tourism/modules/auth/presentation/screens/telegram_phone_screen.dart';
 import 'package:kyrgyz_tourism/modules/auth/presentation/screens/telegram_screen.dart';
 import 'package:kyrgyz_tourism/modules/categories/presentation/screens/category_screen.dart';
 import 'package:kyrgyz_tourism/modules/chatBot/chat_screen.dart';
@@ -22,8 +27,6 @@ import 'package:kyrgyz_tourism/modules/tour/presentation/screens/individual_tour
 import 'package:kyrgyz_tourism/modules/tour/presentation/screens/is_booked_screen.dart';
 import 'package:kyrgyz_tourism/modules/tour/presentation/screens/tour_details_screen.dart';
 import 'package:kyrgyz_tourism/modules/tour/presentation/screens/tour_screen.dart';
-import 'package:kyrgyz_tourism/modules/users/domain/entities/entity.dart';
-import 'package:kyrgyz_tourism/modules/users/presentation/screens/users_screen.dart';
 import 'package:kyrgyz_tourism/splash_screen.dart';
 
 part 'route.gr.dart';
@@ -38,10 +41,10 @@ class AppRouter extends RootStackRouter {
     AutoRoute(
       page: MainTabRoute.page,
       children: [
-        AutoRoute(page: HomeRoute.page, maintainState: true),
-        AutoRoute(page: CategoryRoute.page, maintainState: true),
-        AutoRoute(page: ChatRoute.page, maintainState: true),
-        AutoRoute(page: ProfileRoute.page, maintainState: true),
+        AutoRoute(page: HomeRoute.page),
+        AutoRoute(page: CategoryRoute.page),
+        AutoRoute(page: ChatRoute.page),
+        AutoRoute(page: ProfileRoute.page),
       ],
     ),
 
@@ -58,5 +61,10 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: SettingsRoute.page),
     AutoRoute(page: GuideRoute.page),
     AutoRoute(page: IndividualToursRoute.page),
+    AutoRoute(page: TelegramChatBotRoute.page),
+    AutoRoute(page: TelegramPhoneRoute.page),
+    AutoRoute(page: ResetPasswordRoute.page),
+    AutoRoute(page: ForgotPasswordRoute.page),
+    // AutoRoute(page: TelegramAuthStepScreen.page),
   ];
 }

@@ -20,11 +20,6 @@ abstract class AuthApiService {
   @POST('/v1/api/sign-in')
   Future<void> signin();
 
-  // @POST('/v1/api/otp')
-  // Future<ChatModel> sendMessage(
-  //   // @Body() TelegramModel request
-  // );
-
   @POST('/v1/api/otp/link')
   Future<void> sendOtp(
     // @Body() TelegramModel request

@@ -32,6 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "allTours": MessageLookupByLibrary.simpleMessage("All tours"),
     "allguides": MessageLookupByLibrary.simpleMessage("All guides"),
     "alltours": MessageLookupByLibrary.simpleMessage("All tours"),
+    "authortours": MessageLookupByLibrary.simpleMessage("Author\'s tours"),
     "bestTours": MessageLookupByLibrary.simpleMessage("Best tour"),
     "besttour": MessageLookupByLibrary.simpleMessage("Best tour"),
     "blacklist": MessageLookupByLibrary.simpleMessage("Black list"),
@@ -61,6 +62,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Enter first and lastname",
     ),
     "fullname": MessageLookupByLibrary.simpleMessage("Full name"),
+    "generalinfo": MessageLookupByLibrary.simpleMessage("General information"),
     "gettingstarted": MessageLookupByLibrary.simpleMessage("Gettings started"),
     "guidedescription": MessageLookupByLibrary.simpleMessage(
       "Guides description",

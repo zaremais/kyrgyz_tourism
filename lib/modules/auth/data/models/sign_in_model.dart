@@ -11,6 +11,7 @@ class SignInModel extends SignInEntity {
     super.refreshToken,
     super.identifier,
     super.password,
+    super.message,
   );
 
   factory SignInModel.fromJson(JSON json) => _$SignInModelFromJson(json);

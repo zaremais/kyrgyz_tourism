@@ -27,7 +27,7 @@ class _AllReviewsState extends State<AllReviews> {
             return CircularProgressIndicator();
           }
           if (state.status == StateStatus.error) {
-            return Center(child: Text('Ошибка: ${state.error}'));
+            return Center(child: Text('Ошибка: ${state.errorMessage}'));
           }
           if (state.status == StateStatus.success) {
             final reviews = state.model ?? [];

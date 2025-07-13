@@ -3,13 +3,13 @@ import 'package:injectable/injectable.dart';
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/entities/sign_up_entity.dart';
-import 'package:kyrgyz_tourism/modules/auth/domain/usecases/signup_use_case.dart';
+import 'package:kyrgyz_tourism/modules/auth/domain/usecases/sign_up_use_case.dart';
 
 @injectable
 class SignUpCubit extends Cubit<BaseState<SignUpEntity>> {
   final SignupUseCase _signupUseCase;
 
-  SignUpCubit({required SignupUseCase signupUseCase})
+  SignUpCubit(SignupUseCase signupUseCase)
     : _signupUseCase = signupUseCase,
       super(BaseState(status: StateStatus.init));
 
@@ -19,7 +19,7 @@ class SignUpCubit extends Cubit<BaseState<SignUpEntity>> {
       final user = await _signupUseCase.execute(params: params);
       emit(BaseState(status: StateStatus.success, model: user));
     } catch (e) {
-      emit(BaseState(status: StateStatus.error, error: e.toString()));
+      emit(BaseState(status: StateStatus.error, errorMessage: e.toString()));
     }
   }
 }

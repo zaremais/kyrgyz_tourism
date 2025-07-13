@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_sizes.dart';
-import 'package:kyrgyz_tourism/core/config/themes/theme.dart';
 
 class AuthButton extends StatelessWidget {
   final String text;
@@ -18,7 +17,7 @@ class AuthButton extends StatelessWidget {
             AppSizes.paddingTextfildWidth,
             AppSizes.paddingBottom,
           ),
-          backgroundColor: AppColors.white,
+
           padding: EdgeInsets.symmetric(
             vertical: AppSizes.paddingMedium,
             horizontal: AppSizes.paddingLarge,
@@ -31,7 +30,11 @@ class AuthButton extends StatelessWidget {
 
         child: Text(
           text,
-          style: FontStyles.bodyInfo.copyWith(color: AppColors.text),
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+            color: Colors.black,
+          ),
         ),
       ),
     );

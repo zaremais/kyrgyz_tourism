@@ -72,5 +72,7 @@
   "guidedescription": "Guides description",
   "profileupdated": "Profile updated",
   "savechanges": "Save changes",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "generalinfo": "General information",
+  "authortours": "Author's tours"
 }

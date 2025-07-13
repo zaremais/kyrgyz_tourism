@@ -22,7 +22,7 @@ class ReviewsCubit extends Cubit<BaseState<List<ReviewsEntity>>> {
       emit(
         BaseState(
           status: StateStatus.error,
-          error: e is Exception ? e.toString() : 'Неизвусьнаф ошибка',
+          errorMessage: e is Exception ? e.toString() : 'Неизвестная ошибка',
         ),
       );
     }

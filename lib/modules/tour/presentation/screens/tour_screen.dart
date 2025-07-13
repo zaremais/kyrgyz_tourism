@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/core/config/themes/theme.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
@@ -54,7 +55,15 @@ class _ToursScreenState extends State<ToursScreen> {
                     SizedBox(height: AppSizes.paddingHorizontal),
                     Text(S.of(context).alltours, style: FontStyles.bodyInfo),
                     SizedBox(height: AppSizes.paddingHorizontal),
-                    Text(S.of(context).besttour, style: FontStyles.bodyMedium),
+                    GestureDetector(
+                      onTap: () {
+                        context.router.replace(IndividualToursRoute());
+                      },
+                      child: Text(
+                        S.of(context).besttour,
+                        style: FontStyles.bodyMedium,
+                      ),
+                    ),
                   ],
                 ),
               ),

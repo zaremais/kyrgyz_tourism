@@ -7,6 +7,7 @@ class CustomTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
   final VoidCallback? onTap;
+  final IconData? icon;
 
   const CustomTextFormField({
     super.key,
@@ -16,6 +17,7 @@ class CustomTextFormField extends StatelessWidget {
     this.validator,
     this.onTap,
     this.keyboardType,
+    this.icon,
   });
 
   @override

@@ -21,11 +21,6 @@ class ThemeProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // set themeData(ThemeData themeData) {
-  //   _themeData = themeData;
-  //   notifyListeners();
-  // }
-
   Future<void> toogleTheme() async {
     final prefs = await SharedPreferences.getInstance();
     if (_themeData == lightMode) {

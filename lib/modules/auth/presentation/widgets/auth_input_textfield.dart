@@ -31,16 +31,14 @@ class AuthInputTextfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 370,
-      height: 50,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.shade300,
-            blurRadius: 5,
+            blurRadius: 1,
             offset: Offset(-1, -1),
-            spreadRadius: -2,
+            spreadRadius: -17,
           ),
         ],
       ),
@@ -63,14 +61,10 @@ class AuthInputTextfield extends StatelessWidget {
           ),
           filled: true,
 
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(AppSizes.borderRadiusForm),
-          ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(AppSizes.borderRadiusForm),
             borderSide: BorderSide(color: Colors.black12),
           ),
-
           label: RichText(
             text: TextSpan(
               text: hintText,

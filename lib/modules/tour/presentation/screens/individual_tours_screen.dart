@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/widgets/custom_app_bar.dart';
-import 'package:kyrgyz_tourism/generated/l10n.dart';
+import 'package:kyrgyz_tourism/modules/tour/presentation/widgets/individual_tour_list_section.dart';
 
 @RoutePage()
 class IndividualToursScreen extends StatelessWidget {
@@ -19,11 +19,8 @@ class IndividualToursScreen extends StatelessWidget {
           },
           // showImage: false,
         ),
-        body: Center(
-          child: Text(
-            S.of(context).individualtours,
-            style: TextStyle(fontSize: 32),
-          ),
+        body: SingleChildScrollView(
+          child: Column(children: [IndividualTourListSection()]),
         ),
       ),
     );

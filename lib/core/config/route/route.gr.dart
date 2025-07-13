@@ -91,6 +91,22 @@ class ChatSupportRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [ForgotPasswordScreen]
+class ForgotPasswordRoute extends PageRouteInfo<void> {
+  const ForgotPasswordRoute({List<PageRouteInfo>? children})
+    : super(ForgotPasswordRoute.name, initialChildren: children);
+
+  static const String name = 'ForgotPasswordRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ForgotPasswordScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [GuideScreen]
 class GuideRoute extends PageRouteInfo<void> {
   const GuideRoute({List<PageRouteInfo>? children})
@@ -156,18 +172,48 @@ class IsBookedRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [MainTabScreen]
-class MainTabRoute extends PageRouteInfo<void> {
-  const MainTabRoute({List<PageRouteInfo>? children})
-    : super(MainTabRoute.name, initialChildren: children);
+class MainTabRoute extends PageRouteInfo<MainTabRouteArgs> {
+  MainTabRoute({Key? key, int initialIndex = 0, List<PageRouteInfo>? children})
+    : super(
+        MainTabRoute.name,
+        args: MainTabRouteArgs(key: key, initialIndex: initialIndex),
+        initialChildren: children,
+      );
 
   static const String name = 'MainTabRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const MainTabScreen();
+      final args = data.argsAs<MainTabRouteArgs>(
+        orElse: () => const MainTabRouteArgs(),
+      );
+      return MainTabScreen(key: args.key, initialIndex: args.initialIndex);
     },
   );
+}
+
+class MainTabRouteArgs {
+  const MainTabRouteArgs({this.key, this.initialIndex = 0});
+
+  final Key? key;
+
+  final int initialIndex;
+
+  @override
+  String toString() {
+    return 'MainTabRouteArgs{key: $key, initialIndex: $initialIndex}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! MainTabRouteArgs) return false;
+    return key == other.key && initialIndex == other.initialIndex;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ initialIndex.hashCode;
 }
 
 /// generated route for
@@ -303,6 +349,22 @@ class RegisterSuccessRouteArgs {
   @override
   int get hashCode =>
       key.hashCode ^ email.hashCode ^ password.hashCode ^ nickaname.hashCode;
+}
+
+/// generated route for
+/// [ResetPasswordScreen]
+class ResetPasswordRoute extends PageRouteInfo<void> {
+  const ResetPasswordRoute({List<PageRouteInfo>? children})
+    : super(ResetPasswordRoute.name, initialChildren: children);
+
+  static const String name = 'ResetPasswordRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ResetPasswordScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -452,6 +514,82 @@ class SplashRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [TelegramAuthStepScreen]
+class TelegramAuthStepRoute extends PageRouteInfo<void> {
+  const TelegramAuthStepRoute({List<PageRouteInfo>? children})
+    : super(TelegramAuthStepRoute.name, initialChildren: children);
+
+  static const String name = 'TelegramAuthStepRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const TelegramAuthStepScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [TelegramChatBotScreen]
+class TelegramChatBotRoute extends PageRouteInfo<void> {
+  const TelegramChatBotRoute({List<PageRouteInfo>? children})
+    : super(TelegramChatBotRoute.name, initialChildren: children);
+
+  static const String name = 'TelegramChatBotRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const TelegramChatBotScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [TelegramPhoneScreen]
+class TelegramPhoneRoute extends PageRouteInfo<TelegramPhoneRouteArgs> {
+  TelegramPhoneRoute({Key? key, List<PageRouteInfo>? children})
+    : super(
+        TelegramPhoneRoute.name,
+        args: TelegramPhoneRouteArgs(key: key),
+        initialChildren: children,
+      );
+
+  static const String name = 'TelegramPhoneRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<TelegramPhoneRouteArgs>(
+        orElse: () => const TelegramPhoneRouteArgs(),
+      );
+      return TelegramPhoneScreen(key: args.key);
+    },
+  );
+}
+
+class TelegramPhoneRouteArgs {
+  const TelegramPhoneRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'TelegramPhoneRouteArgs{key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! TelegramPhoneRouteArgs) return false;
+    return key == other.key;
+  }
+
+  @override
+  int get hashCode => key.hashCode;
+}
+
+/// generated route for
 /// [TelegramScreen]
 class TelegramRoute extends PageRouteInfo<void> {
   const TelegramRoute({List<PageRouteInfo>? children})
@@ -528,51 +666,4 @@ class ToursRoute extends PageRouteInfo<void> {
       return const ToursScreen();
     },
   );
-}
-
-/// generated route for
-/// [UsersScreen]
-class UsersRoute extends PageRouteInfo<UsersRouteArgs> {
-  UsersRoute({
-    Key? key,
-    required UsersEntity user,
-    List<PageRouteInfo>? children,
-  }) : super(
-         UsersRoute.name,
-         args: UsersRouteArgs(key: key, user: user),
-         initialChildren: children,
-       );
-
-  static const String name = 'UsersRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      final args = data.argsAs<UsersRouteArgs>();
-      return UsersScreen(key: args.key, user: args.user);
-    },
-  );
-}
-
-class UsersRouteArgs {
-  const UsersRouteArgs({this.key, required this.user});
-
-  final Key? key;
-
-  final UsersEntity user;
-
-  @override
-  String toString() {
-    return 'UsersRouteArgs{key: $key, user: $user}';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    if (other is! UsersRouteArgs) return false;
-    return key == other.key && user == other.user;
-  }
-
-  @override
-  int get hashCode => key.hashCode ^ user.hashCode;
 }

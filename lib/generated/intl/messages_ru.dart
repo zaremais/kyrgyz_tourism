@@ -34,6 +34,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "allTours": MessageLookupByLibrary.simpleMessage("Все туры"),
     "allguides": MessageLookupByLibrary.simpleMessage("Все гиды"),
     "alltours": MessageLookupByLibrary.simpleMessage("Все туры"),
+    "authortours": MessageLookupByLibrary.simpleMessage("Туры автора"),
     "bestTours": MessageLookupByLibrary.simpleMessage("Лучшие туры"),
     "besttour": MessageLookupByLibrary.simpleMessage("Лучшие туры"),
     "blacklist": MessageLookupByLibrary.simpleMessage("Черный список"),
@@ -65,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Введите вашу имя и фамилию",
     ),
     "fullname": MessageLookupByLibrary.simpleMessage("ФИО"),
+    "generalinfo": MessageLookupByLibrary.simpleMessage("Общая информация"),
     "gettingstarted": MessageLookupByLibrary.simpleMessage("Начало работы"),
     "guidedescription": MessageLookupByLibrary.simpleMessage("  Описание гида"),
     "guideexperience": MessageLookupByLibrary.simpleMessage(

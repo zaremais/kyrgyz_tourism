@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/core/config/themes/theme.dart';
+import 'package:kyrgyz_tourism/core/constants/validator.dart';
 import 'package:kyrgyz_tourism/core/widgets/custom_app_bar.dart';
 import 'package:kyrgyz_tourism/core/widgets/custom_button_widget.dart';
 import 'package:kyrgyz_tourism/core/widgets/custom_drop_down_button.dart';
@@ -114,9 +115,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Text(S.of(context).users, style: FontStyles.bodyText),
           SizedBox(height: 20),
           Text(S.of(context).blacklist, style: FontStyles.bodyText),
-          const SizedBox(height: 16),
-          CustomDropDownButton(),
+          const SizedBox(height: 24),
 
+          CustomDropDownButton(),
+          const SizedBox(height: 24),
+          Text(
+            S.of(context).generalinfo,
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          ),
+          const SizedBox(height: 24),
+          Text(
+            S.of(context).authortours,
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+          ),
+          const SizedBox(height: 30),
+          CustomDropDownButton(),
           CustomTextFormField(
             hintText: S.of(context).firstandlastname,
             label: S.of(context).fullname,
@@ -162,8 +175,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             label: '@nickeName',
             controller: _nickNameController,
             validator: (v) {
-              if (v?.trim().isEmpty ?? true)
+              if (v?.trim().isEmpty ?? true) {
                 return S.of(context).enternickename;
+              }
               if (!v!.startsWith('@')) return S.of(context).nicknamestart;
               return null;
             },
@@ -184,15 +198,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             label: S.of(context).email,
             hintText: 'example@mail.com',
             controller: _emailController,
-            validator: (v) {
-              if (v?.trim().isEmpty ?? true) return S.of(context).enteremail;
-              final emailRegExp = RegExp(
-                r'^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$',
-              );
-              if (!emailRegExp.hasMatch(v!))
-                return S.of(context).Incorrectemail;
-              return null;
-            },
+            validator: validateEmail,
           ),
           CustomTextFormField(
             hintText: '+996(000) 12-34-56',

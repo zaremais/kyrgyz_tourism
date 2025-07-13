@@ -19,7 +19,7 @@ class GuideCubit extends Cubit<BaseState<List<GuideEntity>>> {
       final guides = await _getGuideUseCase.execute(params: null);
       emit(BaseState(status: StateStatus.success, model: guides));
     } catch (e) {
-      emit(BaseState(status: StateStatus.error, error: e.toString()));
+      emit(BaseState(status: StateStatus.error, errorMessage: e.toString()));
     }
   }
 }
