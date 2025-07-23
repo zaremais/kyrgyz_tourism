@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
-import 'package:kyrgyz_tourism/core/widgets/custom_auth_textfield.dart';
-import 'package:kyrgyz_tourism/core/widgets/custom_text_formfield.dart';
 import 'package:kyrgyz_tourism/main.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/entities/reset_password_result.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/usecases/reset_password_use_case.dart';

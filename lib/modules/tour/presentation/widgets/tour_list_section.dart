@@ -8,7 +8,7 @@ import 'package:kyrgyz_tourism/modules/tour/presentation/cubit/tour_cubit.dart';
 import 'package:kyrgyz_tourism/modules/tour/presentation/widgets/list_tour_widget.dart';
 
 class ToursListSection extends StatefulWidget {
-  const ToursListSection({super.key});
+  const ToursListSection({super.key, required List<TourEntity> tours});
 
   @override
   State<ToursListSection> createState() => _ToursListSectionState();
@@ -44,7 +44,9 @@ class _ToursListSectionState extends State<ToursListSection> {
               shrinkWrap: true,
               itemCount: tours.length,
               itemBuilder: (context, index) {
-                return ListTourWidget(tour: tours[index]);
+                final tour = tours[index];
+
+                return ListTourWidget(tour: tour);
               },
             );
           }

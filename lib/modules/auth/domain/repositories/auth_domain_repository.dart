@@ -9,11 +9,11 @@ import 'package:kyrgyz_tourism/modules/auth/domain/usecases/sign_up_use_case.dar
 import 'package:kyrgyz_tourism/modules/auth/domain/usecases/confirm_otp_use_case.dart';
 
 abstract class AuthDomainRepository {
-  Future<SignInEntity> signin(SignInParams params);
+  Future<SignInEntity> login(SignInParams params);
   Future<SignUpEntity> signup(SignUpParams params);
   Future<bool> isLoggedIn();
   Future<TelegramEntity> sendOtp(SendOtpParams params);
-  Future<TelegramEntity> confirmOtp({required ConfirmOtpParams params});
+  Future<TelegramEntity> confirmOtp(ConfirmOtpParams params);
   Future<ResetPasswordResult> resetPassword(ResetPasswordParams params);
-  Future<TelegramEntity> getOtpLink();
+  Future<String> getTelegramBotLink();
 }

@@ -1,6 +1,6 @@
 class SignInEntity {
   final String? accessToken;
-  final dynamic refreshToken;
+  final String? refreshToken;
   final String? identifier;
   final String? password;
   final String? message;

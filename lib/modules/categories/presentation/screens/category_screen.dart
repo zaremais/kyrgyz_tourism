@@ -6,9 +6,14 @@ import 'package:kyrgyz_tourism/core/widgets/custom_section_button.dart';
 import 'package:kyrgyz_tourism/generated/l10n.dart';
 
 @RoutePage()
-class CategoryScreen extends StatelessWidget {
+class CategoryScreen extends StatefulWidget {
   const CategoryScreen({super.key});
 
+  @override
+  State<CategoryScreen> createState() => _CategoryScreenState();
+}
+
+class _CategoryScreenState extends State<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -23,18 +28,25 @@ class CategoryScreen extends StatelessWidget {
               CustomSectionButton(
                 text: S.of(context).tours,
                 onTap: () {
-                  context.router.push(ToursRoute());
+                  context.router.navigate(ToursRoute());
                 },
               ),
               SizedBox(height: 14),
               CustomSectionButton(
                 text: S.of(context).individualtours,
-                onTap: () {},
+                onTap: () {
+                  context.router.navigate(IndividualToursRoute());
+                },
               ),
               SizedBox(height: 14),
               CustomSectionButton(text: S.of(context).contacts, onTap: () {}),
               SizedBox(height: 14),
-              CustomSectionButton(text: S.of(context).guides, onTap: () {}),
+              CustomSectionButton(
+                text: S.of(context).guides,
+                onTap: () {
+                  context.router.push(GuideRoute());
+                },
+              ),
             ],
           ),
         ),

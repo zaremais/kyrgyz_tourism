@@ -6,7 +6,7 @@ part of 'reviews_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ReviewsModel _$ReviewsModelFromJson(Map<String, dynamic> json) => ReviewsModel(
+ReviewsModel _$ReviewsModelFromJson(Map json) => ReviewsModel(
   id: (json['id'] as num).toInt(),
   name: json['name'] as String,
   rating: (json['rating'] as num).toDouble(),

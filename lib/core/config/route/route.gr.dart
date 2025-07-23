@@ -280,6 +280,68 @@ class ProfileRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [RegionSelectionScreen]
+class RegionSelectionRoute extends PageRouteInfo<RegionSelectionRouteArgs> {
+  RegionSelectionRoute({
+    Key? key,
+    required String? selectedRegion,
+    required dynamic Function(String) onRegionSelected,
+    List<PageRouteInfo>? children,
+  }) : super(
+         RegionSelectionRoute.name,
+         args: RegionSelectionRouteArgs(
+           key: key,
+           selectedRegion: selectedRegion,
+           onRegionSelected: onRegionSelected,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'RegionSelectionRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<RegionSelectionRouteArgs>();
+      return RegionSelectionScreen(
+        key: args.key,
+        selectedRegion: args.selectedRegion,
+        onRegionSelected: args.onRegionSelected,
+      );
+    },
+  );
+}
+
+class RegionSelectionRouteArgs {
+  const RegionSelectionRouteArgs({
+    this.key,
+    required this.selectedRegion,
+    required this.onRegionSelected,
+  });
+
+  final Key? key;
+
+  final String? selectedRegion;
+
+  final dynamic Function(String) onRegionSelected;
+
+  @override
+  String toString() {
+    return 'RegionSelectionRouteArgs{key: $key, selectedRegion: $selectedRegion, onRegionSelected: $onRegionSelected}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! RegionSelectionRouteArgs) return false;
+    return key == other.key && selectedRegion == other.selectedRegion;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ selectedRegion.hashCode;
+}
+
+/// generated route for
 /// [RegisterSuccessScreen]
 class RegisterSuccessRoute extends PageRouteInfo<RegisterSuccessRouteArgs> {
   RegisterSuccessRoute({

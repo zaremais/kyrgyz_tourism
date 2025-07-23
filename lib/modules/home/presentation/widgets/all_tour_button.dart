@@ -30,7 +30,7 @@ class _AllTourButtonState extends State<AllTourButton> {
           ),
 
           onPressed: () {
-            context.router.push(ToursRoute());
+            context.router.navigate(ToursRoute());
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

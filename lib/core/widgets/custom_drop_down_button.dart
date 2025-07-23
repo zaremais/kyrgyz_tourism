@@ -16,7 +16,7 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Container(height: 2, width: 250, color: Colors.grey),
+        // Container(height: 2, width: 250, color: Colors.grey),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: DropdownButton(

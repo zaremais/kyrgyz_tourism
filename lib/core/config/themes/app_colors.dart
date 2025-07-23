@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
+  AppColors._();
+
   static const Color backgroundtextfield = Color(0xffF7F8FA);
   static const Color textTextfield = Color(0xff00004D);
   static const Color primaryColor = Color(0xFF40D885);

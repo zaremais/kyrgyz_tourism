@@ -5,7 +5,7 @@ import 'package:kyrgyz_tourism/modules/auth/domain/entities/telegram_entity.dart
 import 'package:kyrgyz_tourism/modules/auth/domain/repositories/auth_domain_repository.dart';
 
 @injectable
-class SendOtpUseCase extends BaseUsecase<void, SendOtpParams> {
+class SendOtpUseCase extends BaseUsecase<TelegramEntity, SendOtpParams> {
   final AuthDomainRepository _repository;
 
   SendOtpUseCase({required AuthDomainRepository repository})

@@ -76,7 +76,6 @@ import '../../modules/tour/presentation/cubit/favorite_tour_cubit.dart'
     as _i889;
 import '../../modules/tour/presentation/cubit/tour_cubit.dart' as _i396;
 import '../network/dio_client.dart' as _i667;
-import '../network/storage_secure_storage/storage_secure_service.dart' as _i857;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -89,7 +88,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i108.ToggleLanguageEvent>(() => _i108.ToggleLanguageEvent());
     gh.factory<_i1017.LocaleProvider>(() => _i1017.LocaleProvider());
     gh.factory<_i52.RegisterSuccessCubit>(() => _i52.RegisterSuccessCubit());
-    gh.factory<_i857.SecureStorage>(() => _i857.SecureStorage());
     gh.lazySingleton<_i903.ReviewsDomainRepository>(
       () => _i1056.ReviewsRepository(dio: gh<_i667.DioClient>()),
     );
@@ -103,21 +101,18 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i778.TourRepository(dio: gh<_i667.DioClient>()),
     );
     gh.lazySingleton<_i534.AuthDomainRepository>(
-      () => _i135.AuthRepository(
-        dio: gh<_i667.DioClient>(),
-        storage: gh<_i857.SecureStorage>(),
-      ),
+      () => _i135.AuthRepository(dio: gh<_i667.DioClient>()),
     );
     gh.lazySingleton<_i644.FavoriteToursDomainRepository>(
       () => _i124.FavoriteToursRepository(),
-    );
-    gh.factory<_i558.GetToursUseCase>(
-      () => _i558.GetToursUseCase(repository: gh<_i695.TourDomainRepository>()),
     );
     gh.factory<_i620.GetIndividualTourUseCase>(
       () => _i620.GetIndividualTourUseCase(
         repository: gh<_i695.TourDomainRepository>(),
       ),
+    );
+    gh.factory<_i558.GetToursUseCase>(
+      () => _i558.GetToursUseCase(repository: gh<_i695.TourDomainRepository>()),
     );
     gh.factory<_i369.GetReviewsUseCase>(
       () => _i369.GetReviewsUseCase(
@@ -137,24 +132,24 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i770.SignInUsecase>(
       () => _i770.SignInUsecase(repository: gh<_i534.AuthDomainRepository>()),
     );
-    gh.factory<_i437.IsLoggedInUseCase>(
-      () =>
-          _i437.IsLoggedInUseCase(repository: gh<_i534.AuthDomainRepository>()),
-    );
-    gh.factory<_i227.ResetPasswordUseCase>(
-      () => _i227.ResetPasswordUseCase(
-        repository: gh<_i534.AuthDomainRepository>(),
-      ),
-    );
     gh.factory<_i764.SendOtpUseCase>(
       () => _i764.SendOtpUseCase(repository: gh<_i534.AuthDomainRepository>()),
     );
     gh.factory<_i112.SignupUseCase>(
       () => _i112.SignupUseCase(repository: gh<_i534.AuthDomainRepository>()),
     );
+    gh.factory<_i227.ResetPasswordUseCase>(
+      () => _i227.ResetPasswordUseCase(
+        repository: gh<_i534.AuthDomainRepository>(),
+      ),
+    );
     gh.factory<_i437.ConfirmOtpUseCase>(
       () =>
           _i437.ConfirmOtpUseCase(repository: gh<_i534.AuthDomainRepository>()),
+    );
+    gh.factory<_i437.IsLoggedInUseCase>(
+      () =>
+          _i437.IsLoggedInUseCase(repository: gh<_i534.AuthDomainRepository>()),
     );
     gh.factory<_i396.TourCubit>(
       () => _i396.TourCubit(

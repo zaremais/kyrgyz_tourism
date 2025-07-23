@@ -5,7 +5,7 @@ import 'package:kyrgyz_tourism/modules/auth/domain/entities/telegram_entity.dart
 import 'package:kyrgyz_tourism/modules/auth/domain/repositories/auth_domain_repository.dart';
 
 @injectable
-class ConfirmOtpUseCase extends BaseUsecase<void, ConfirmOtpParams> {
+class ConfirmOtpUseCase extends BaseUsecase<TelegramEntity, ConfirmOtpParams> {
   final AuthDomainRepository _repository;
 
   ConfirmOtpUseCase({required AuthDomainRepository repository})
@@ -13,7 +13,7 @@ class ConfirmOtpUseCase extends BaseUsecase<void, ConfirmOtpParams> {
 
   @override
   Future<TelegramEntity> execute({required ConfirmOtpParams params}) async {
-    return _repository.confirmOtp(params: params);
+    return _repository.confirmOtp(params);
   }
 }
 

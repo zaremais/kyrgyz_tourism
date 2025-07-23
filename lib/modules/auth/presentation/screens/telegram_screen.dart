@@ -158,7 +158,10 @@ class _TelegramScreenState extends State<TelegramScreen> {
                                   padding: EdgeInsets.symmetric(vertical: 16),
                                   child: Text(
                                     'Получить код',
-                                    style: TextStyle(fontSize: 13),
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      color: Colors.black45,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -230,6 +233,7 @@ class _TelegramScreenState extends State<TelegramScreen> {
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w500,
+                                color: Colors.black,
                               ),
                             ),
                           ),

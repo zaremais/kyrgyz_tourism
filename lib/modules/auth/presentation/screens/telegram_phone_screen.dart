@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kyrgyz_tourism/core/config/route/route.dart';
+import 'package:kyrgyz_tourism/core/enums/state_status.dart';
 import 'package:kyrgyz_tourism/modules/auth/presentation/widgets/auth_button.dart';
 
 @RoutePage()
@@ -156,8 +157,6 @@ class PhoneInputCubit extends Cubit<PhoneInputState> {
     }
   }
 }
-
-enum TelegramStatus { initial, loading, success, failure }
 
 class TelegramActivationState {
   final TelegramStatus status;

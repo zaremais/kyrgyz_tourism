@@ -53,7 +53,7 @@ Widget _buildListTile(BuildContext context) {
           ),
         ),
         onTap: () {
-          context.router.push(ToursRoute());
+          context.router.navigate(ToursRoute());
           Navigator.pop(context);
         },
       ),

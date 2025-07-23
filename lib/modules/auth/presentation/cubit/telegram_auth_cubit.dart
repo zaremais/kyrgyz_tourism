@@ -63,7 +63,7 @@ class TelegramAuthCubit extends Cubit<BaseState<TelegramEntity>> {
 
     try {
       final result = await _confirmOtpUseCase.execute(params: params);
-      await SecureStorage().saveAccessToken(result.accessToken.toString());
+      // await SecureStorage().saveAccessToken(result.accessToken.toString());
       emit(
         BaseState(
           status: StateStatus.success,
@@ -77,7 +77,7 @@ class TelegramAuthCubit extends Cubit<BaseState<TelegramEntity>> {
   }
 
   void _startTimer() {
-    _secondsRemaining = 60;
+    _secondsRemaining = 0;
     _timer?.cancel();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       _secondsRemaining--;

@@ -6,7 +6,7 @@ part of 'guide_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-GuideModel _$GuideModelFromJson(Map<String, dynamic> json) => GuideModel(
+GuideModel _$GuideModelFromJson(Map json) => GuideModel(
   id: (json['id'] as num).toInt(),
   name: json['name'] as String,
   image: json['image'] as String,

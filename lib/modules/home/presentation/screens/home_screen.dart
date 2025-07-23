@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(height: AppSizes.paddingMedium),
               DoubleButton(selectedType: selectedType),
               SizedBox(height: AppSizes.borderRadiusMedium),
-              ToursListSection(),
+              ToursListSection(tours: []),
               AllTourButton(),
               SizedBox(height: 44),
               GuideSection(),

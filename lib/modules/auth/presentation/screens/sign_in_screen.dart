@@ -47,7 +47,7 @@ class _SignInScreenState extends State<SignInScreen> {
         child: BlocListener<SignInCubit, BaseState<SignInEntity>>(
           listener: (context, state) {
             if (state.status == StateStatus.success) {
-              context.router.replace(HomeRoute());
+              context.router.replace(MainTabRoute());
             }
 
             if (state.status == StateStatus.error) {

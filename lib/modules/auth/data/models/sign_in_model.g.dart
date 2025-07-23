@@ -6,9 +6,9 @@ part of 'sign_in_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SignInModel _$SignInModelFromJson(Map<String, dynamic> json) => SignInModel(
+SignInModel _$SignInModelFromJson(Map json) => SignInModel(
   json['accessToken'] as String?,
-  json['refreshToken'],
+  json['refreshToken'] as String?,
   json['identifier'] as String?,
   json['password'] as String?,
   json['message'] as String?,

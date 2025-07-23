@@ -2,11 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_sizes.dart';
 import 'package:kyrgyz_tourism/generated/l10n.dart';
-import 'package:kyrgyz_tourism/modules/home/data/models/review_model.dart';
 import 'package:kyrgyz_tourism/modules/home/presentation/widgets/social_links_widget.dart';
-import 'package:kyrgyz_tourism/modules/reviews/domain/entities/reviews_entity.dart';
 import 'package:kyrgyz_tourism/modules/reviews/presentation/widgets/all_reviews.dart';
-import 'package:kyrgyz_tourism/modules/reviews/presentation/widgets/reviews_card.dart';
 import 'package:kyrgyz_tourism/modules/tour/presentation/widgets/list_tour_widget.dart';
 import 'package:kyrgyz_tourism/modules/tour/domain/entities/tour_entity.dart';
 import 'package:kyrgyz_tourism/modules/tour/presentation/widgets/tour_calendar.dart';
@@ -104,39 +101,39 @@ Widget _buildTourDetails(TourEntity tour, BuildContext context) {
       TourDetailTile(
         iconPath: 'assets/icon/location.png',
         title: 'Точка сбора',
-        subtitle: tour.region ?? "",
+        subtitle: tour.region,
         color: isDark ? Colors.white : Colors.black,
       ),
       TourDetailTile(
         iconPath: 'assets/icon/calendar.png',
         title: 'Длительность',
-        subtitle: tour.duration.toString(),
+        subtitle: tour.tourDuration.toString(),
         color: isDark ? Colors.white : Colors.black,
       ),
-      TourDetailTile(
-        iconPath: 'assets/icon/hiking.png',
-        title: 'Сложность',
-        subtitle: tour.difficulty ?? '',
-        color: isDark ? Colors.white : Colors.black,
-      ),
+      // TourDetailTile(
+      //   iconPath: 'assets/icon/hiking.png',
+      //   title: 'Сложность',
+      //   subtitle: tour.difficulty ?? '',
+      //   color: isDark ? Colors.white : Colors.black,
+      // ),
       TourDetailTile(
         iconPath: 'assets/icon/price.png',
         title: 'Стоимость',
         subtitle: tour.price.toString(),
         color: isDark ? Colors.white : Colors.black,
       ),
-      TourDetailTile(
-        iconPath: 'assets/icon/human.png',
-        title: 'Возраст от',
-        subtitle: tour.ageLimit.toString(),
-        color: isDark ? Colors.white : Colors.black,
-      ),
-      TourDetailTile(
-        iconPath: 'assets/icon/group.png',
-        title: 'Группа',
-        subtitle: tour.maxGroupSize.toString(),
-        color: isDark ? Colors.white : Colors.black,
-      ),
+      // TourDetailTile(
+      //   iconPath: 'assets/icon/human.png',
+      //   title: 'Возраст от',
+      //   subtitle: tour.minAge.toString(),
+      //   color: isDark ? Colors.white : Colors.black,
+      // ),
+      // TourDetailTile(
+      //   iconPath: 'assets/icon/group.png',
+      //   title: 'Группа',
+      //   subtitle: tour.maxGroupSize.toString(),
+      //   color: isDark ? Colors.white : Colors.black,
+      // ),
     ],
   );
 }

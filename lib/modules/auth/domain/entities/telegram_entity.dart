@@ -1,23 +1,19 @@
 class TelegramEntity {
-  final String? rawPassword;
   final String username;
-  final String? refreshToken;
-  final String? accessToken;
-  final bool? isVerified;
   final String phoneNumber;
+  final String rawPassword;
+  final String refreshToken;
+  final String accessToken;
   final String otp;
-  final int? chatId;
-  final String? url;
+  final int chatId;
 
   TelegramEntity({
-    this.rawPassword,
     required this.username,
-    this.refreshToken,
-    this.accessToken,
-    this.isVerified,
     required this.phoneNumber,
+    required this.rawPassword,
+    required this.refreshToken,
+    required this.accessToken,
     required this.otp,
-    this.chatId,
-    this.url,
+    required this.chatId,
   });
 }
