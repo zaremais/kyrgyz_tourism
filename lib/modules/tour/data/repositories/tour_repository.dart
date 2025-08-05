@@ -6,7 +6,6 @@ import 'package:kyrgyz_tourism/core/network/dio_client.dart';
 import 'package:kyrgyz_tourism/modules/tour/data/models/tour_model.dart';
 import 'package:kyrgyz_tourism/modules/tour/domain/entities/filter_tour_entity.dart';
 import 'package:kyrgyz_tourism/modules/tour/domain/repositories/tour_domain_repository.dart';
-import 'package:kyrgyz_tourism/modules/tour/domain/usecases/get_tours_use_case.dart';
 
 @LazySingleton(as: TourDomainRepository)
 class TourRepository extends TourDomainRepository {
@@ -15,25 +14,20 @@ class TourRepository extends TourDomainRepository {
   TourRepository({required DioClient dio}) : _dio = dio;
 
   @override
-  Future<List<TourModel>> getTours({GetToursParams? params}) async {
+  Future<List<TourModel>> getTours(
+    int page,
+    int size, {
+    required String sort,
+  }) async {
     try {
-      final queryParams = params?.toJson() ?? {};
       final response = await _dio.get(
         ApiUrls.getTours,
-        queryParameters: queryParams,
+        queryParameters: {'page': page, 'size': size, 'sort': sort},
       );
 
       if (response.statusCode == 200) {
-        final toursData = response.data as List<dynamic>;
-        return toursData.map((e) => TourModel.fromJson(e)).toList();
-        // final result = <TourModel>[];
-        // for (final item in toursData) {
-        //   try {
-        //     result.add(TourModel.fromJson(item));
-        //   } catch (e) {
-        //     log('Ошибка парсинга тура: $e');
-        //     log('Неверный объект: $item');
-        //   }
+        final data = response.data as List<dynamic>;
+        return data.map((e) => TourModel.fromJson(e)).toList();
       } else {
         throw Exception('Ошибка загрузки туров: ${response.statusCode}');
       }
@@ -69,19 +63,20 @@ class TourRepository extends TourDomainRepository {
       throw Exception('Ошибка при получении туров: $e');
     }
   }
-
-  @override
-  Future<List<FilterTourEntity>> filterTours() {
-    // TODO: implement filterTours
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<String> uploadImage(File params) {
-    // TODO: implement uploadImage
-    throw UnimplementedError();
-  }
 }
+
+//   @override
+//   Future<List<FilterTourEntity>> filterTours() {
+//     // TODO: implement filterTours
+//     throw UnimplementedError();
+//   }
+
+//   @override
+//   Future<String> uploadImage(File params) {
+//     // TODO: implement uploadImage
+//     throw UnimplementedError();
+//   }
+// }
 // class TourRepository extends TourDomainRepository {
 //   final DioClient _dio;
 

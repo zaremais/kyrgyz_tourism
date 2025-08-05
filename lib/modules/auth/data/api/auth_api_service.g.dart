@@ -39,7 +39,7 @@ class _AuthApiService implements AuthApiService {
   }
 
   @override
-  Future<void> signin() async {
+  Future<void> signIn() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -58,25 +58,25 @@ class _AuthApiService implements AuthApiService {
   }
 
   @override
-  Future<TelegramModel> sendOtp() async {
+  Future<TelegramOtpModel> sendOtp() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<TelegramModel>(
+    final _options = _setStreamType<TelegramOtpModel>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/v1/api/otp/link',
+            '/v1/api/otp/register',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late TelegramModel _value;
+    late TelegramOtpModel _value;
     try {
-      _value = TelegramModel.fromJson(_result.data!);
+      _value = TelegramOtpModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -85,13 +85,13 @@ class _AuthApiService implements AuthApiService {
   }
 
   @override
-  Future<void> verifyOtp() async {
+  Future<void> verifyCode() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<void>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
+      Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
             '/v1/api/verify',
@@ -101,6 +101,44 @@ class _AuthApiService implements AuthApiService {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     await _dio.fetch<void>(_options);
+  }
+
+  @override
+  Future<List<TourModel>> getTours({
+    required int page,
+    required int size,
+    String sort = "averageRating,desc",
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'size': size,
+      r'sort': sort,
+    };
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<List<TourModel>>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/v1/api/tours',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<List<dynamic>>(_options);
+    late List<TourModel> _value;
+    try {
+      _value =
+          _result.data!
+              .map((dynamic i) => TourModel.fromJson(i as Map<String, dynamic>))
+              .toList();
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

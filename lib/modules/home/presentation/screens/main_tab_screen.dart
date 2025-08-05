@@ -32,8 +32,8 @@ class _MainTabScreenState extends State<MainTabScreen> {
             listener: (context, state) {
               if (state.status == StateStatus.success) {
                 tabsRouter.setActiveIndex(widget.initialIndex);
-              } else if (state.status == StateStatus.error) {
-                tabsRouter.setActiveIndex(3);
+              } else if (state.status == StateStatus.failure) {
+                tabsRouter.setActiveIndex(1);
               }
             },
             child: Scaffold(

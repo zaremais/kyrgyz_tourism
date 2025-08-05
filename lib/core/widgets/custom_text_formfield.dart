@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CustomTextFormField extends StatelessWidget {
   final String label;
   final String hintText;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
   final VoidCallback? onTap;
@@ -13,7 +13,7 @@ class CustomTextFormField extends StatelessWidget {
     super.key,
     required this.hintText,
     required this.label,
-    required this.controller,
+    this.controller,
     this.validator,
     this.onTap,
     this.keyboardType,

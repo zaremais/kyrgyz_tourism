@@ -23,9 +23,9 @@ class _SplashScreenState extends State<SplashScreen> {
       final isLoggedIn = _authCubit.state.model != null;
 
       if (isLoggedIn) {
-        context.replaceRoute(const HomeRoute());
+        context.replaceRoute(const AppRoute());
       } else {
-        // context.replaceRoute(const SignInRoute());
+        context.replaceRoute(AuthRoute());
       }
     });
   }

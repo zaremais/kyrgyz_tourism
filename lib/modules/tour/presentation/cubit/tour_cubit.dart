@@ -8,32 +8,26 @@ import '../../domain/entities/tour_entity.dart';
 
 @injectable
 class TourCubit extends Cubit<BaseState<List<TourEntity>>> {
-  final GetToursUseCase _getTourUsecase;
+  final GetToursUseCase _getToursUseCase;
   final GetIndividualTourUseCase _getIndividualTourUseCase;
-  // final FilterTourUseCase _filterTourUseCase;
-  // final UploadImageUseCase _uploadImageUseCase;
 
   TourCubit({
-    required GetToursUseCase getTourUsecase,
-    required GetIndividualTourUseCase getIndividualUsecase,
-    // required FilterTourUseCase filterToursUseCase,
-    // required UploadImageUseCase uploadImageUseCase,
-  }) : _getTourUsecase = getTourUsecase,
-       _getIndividualTourUseCase = getIndividualUsecase,
-
-       //  _filterTourUseCase = filterToursUseCase,
-       //  _uploadImageUseCase = uploadImageUseCase,
+    required GetToursUseCase getToursUseCase,
+    required GetIndividualTourUseCase getIndividualTourUseCase,
+  }) : _getToursUseCase = getToursUseCase,
+       _getIndividualTourUseCase = getIndividualTourUseCase,
        super(BaseState(status: StateStatus.init));
 
   Future<void> getTours() async {
     emit(BaseState(status: StateStatus.loading));
+
     try {
-      final result = await _getTourUsecase.execute(
-        params: GetToursParams(page: 1, size: 10, sort: 'averageRating.desc'),
+      final result = await _getToursUseCase.execute(
+        params: GetToursParams(page: 1, size: 10, sort: 'averageRating,desc'),
       );
       emit(BaseState(status: StateStatus.success, model: result));
     } catch (e) {
-      emit(BaseState(status: StateStatus.error, model: []));
+      emit(BaseState(status: StateStatus.failure, errorMessage: e.toString()));
     }
   }
 
@@ -53,7 +47,7 @@ class TourCubit extends Cubit<BaseState<List<TourEntity>>> {
       final tours = await _getIndividualTourUseCase.execute(params: null);
       emit(BaseState(status: StateStatus.success, model: tours));
     } catch (e) {
-      emit(BaseState(status: StateStatus.error, errorMessage: e.toString()));
+      emit(BaseState(status: StateStatus.failure, errorMessage: e.toString()));
     }
   }
 

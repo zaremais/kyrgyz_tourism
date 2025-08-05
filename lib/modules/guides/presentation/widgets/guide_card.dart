@@ -17,14 +17,17 @@ class GuideCard extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(30),
-                child: Image.network(guide.image, width: 60),
+                child:
+                    guide.image != null
+                        ? Image.network(guide.image!, width: 60)
+                        : Icon(Icons.person),
               ),
               SizedBox(width: 40),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    guide.name,
+                    guide.name ?? 'Без имени',
                     style: const TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 18,
@@ -62,7 +65,7 @@ class GuideCard extends StatelessWidget {
                     style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                   ),
                   Text(
-                    '${guide.experience} года опыта',
+                    '${guide.experience} лет опыта',
                     style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                   ),
                 ],

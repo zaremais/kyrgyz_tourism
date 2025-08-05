@@ -12,25 +12,47 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
-import '../../modules/auth/data/repositories/auth_repository.dart' as _i135;
-import '../../modules/auth/domain/repositories/auth_domain_repository.dart'
-    as _i534;
-import '../../modules/auth/domain/usecases/confirm_otp_use_case.dart' as _i437;
+import '../../modules/auth/data/repositories/auth_sign_in_repository.dart'
+    as _i75;
+import '../../modules/auth/data/repositories/auth_sign_up_repository.dart'
+    as _i215;
+import '../../modules/auth/data/repositories/auth_telegram_repository.dart'
+    as _i1016;
+import '../../modules/auth/domain/repositories/auth_domain_password_repository.dart'
+    as _i476;
+import '../../modules/auth/domain/repositories/auth_domain_sign_in_repository.dart'
+    as _i236;
+import '../../modules/auth/domain/repositories/auth_domain_sign_up_repository.dart'
+    as _i1002;
+import '../../modules/auth/domain/repositories/auth_domain_telegram_repository.dart'
+    as _i959;
+import '../../modules/auth/domain/usecases/check_nickname_use_case.dart'
+    as _i574;
+import '../../modules/auth/domain/usecases/get_otp_link_use_case.dart' as _i749;
 import '../../modules/auth/domain/usecases/is_logged_in_use_case.dart' as _i437;
+import '../../modules/auth/domain/usecases/refresh_token_use_case.dart'
+    as _i300;
 import '../../modules/auth/domain/usecases/reset_password_use_case.dart'
     as _i227;
 import '../../modules/auth/domain/usecases/send_otp_use_case.dart' as _i764;
 import '../../modules/auth/domain/usecases/sign_in_use_case.dart' as _i770;
 import '../../modules/auth/domain/usecases/sign_up_use_case.dart' as _i112;
+import '../../modules/auth/domain/usecases/telegram_confirm_use_case.dart'
+    as _i815;
+import '../../modules/auth/domain/usecases/verify_code_use_case.dart' as _i209;
 import '../../modules/auth/presentation/cubit/auth_cubit.dart' as _i821;
+import '../../modules/auth/presentation/cubit/check_nickname_cubit.dart'
+    as _i134;
 import '../../modules/auth/presentation/cubit/register_success_cubit.dart'
     as _i52;
 import '../../modules/auth/presentation/cubit/reset_password_cubit.dart'
     as _i897;
 import '../../modules/auth/presentation/cubit/sign_in_cubit.dart' as _i726;
 import '../../modules/auth/presentation/cubit/sign_up_cubit.dart' as _i112;
-import '../../modules/auth/presentation/cubit/telegram_auth_cubit.dart'
-    as _i466;
+import '../../modules/auth/presentation/cubit/telegram_confirm_cubit.dart'
+    as _i371;
+import '../../modules/auth/presentation/cubit/telegram_otp_cubit.dart' as _i32;
+import '../../modules/auth/presentation/cubit/verify_code_cubit.dart' as _i1007;
 import '../../modules/guides/data/repositories/guide_repository.dart' as _i174;
 import '../../modules/guides/domain/repositories/guide_domain_repository.dart'
     as _i766;
@@ -40,6 +62,19 @@ import '../../modules/home/presentation/cubit/bloc/language_cubit.dart'
     as _i108;
 import '../../modules/home/presentation/providers/locale_provider.dart'
     as _i1017;
+import '../../modules/payment/data/repositories/payment_repository.dart'
+    as _i689;
+import '../../modules/payment/domain/repositories/payment_domain_repository.dart'
+    as _i341;
+import '../../modules/payment/domain/usecases/applay_promocode_use_case.dart'
+    as _i893;
+import '../../modules/payment/domain/usecases/confirm_booked_use_case.dart'
+    as _i232;
+import '../../modules/payment/domain/usecases/get_payment_info_use_case.dart'
+    as _i38;
+import '../../modules/payment/presentation/cubit/confirm_booked_cubit.dart'
+    as _i104;
+import '../../modules/payment/presentation/cubit/payment_cubit.dart' as _i923;
 import '../../modules/profile/data/repositories/profile_repository.dart'
     as _i898;
 import '../../modules/profile/domain/repositories/profile_domain_repository.dart'
@@ -76,6 +111,7 @@ import '../../modules/tour/presentation/cubit/favorite_tour_cubit.dart'
     as _i889;
 import '../../modules/tour/presentation/cubit/tour_cubit.dart' as _i396;
 import '../network/dio_client.dart' as _i667;
+import '../network/storage_secure_storage/token_storage_service.dart' as _i227;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -84,6 +120,7 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    gh.factory<_i227.TokenStorageService>(() => _i227.TokenStorageService());
     gh.factory<_i667.DioClient>(() => _i667.DioClient());
     gh.factory<_i108.ToggleLanguageEvent>(() => _i108.ToggleLanguageEvent());
     gh.factory<_i1017.LocaleProvider>(() => _i1017.LocaleProvider());
@@ -91,20 +128,47 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i903.ReviewsDomainRepository>(
       () => _i1056.ReviewsRepository(dio: gh<_i667.DioClient>()),
     );
+    gh.lazySingleton<_i341.PaymentDomainRepository>(
+      () => _i689.PaymentRepository(dio: gh<_i667.DioClient>()),
+    );
+    gh.lazySingleton<_i959.AuthDomainTelegramRepository>(
+      () => _i1016.AuthTelegramRepository(dio: gh<_i667.DioClient>()),
+    );
     gh.lazySingleton<_i89.ProfileDomainRepository>(
       () => _i898.ProfileRepository(dio: gh<_i667.DioClient>()),
+    );
+    gh.lazySingleton<_i236.AuthDomainSignInRepository>(
+      () => _i75.AuthSignInRepository(dio: gh<_i667.DioClient>()),
     );
     gh.lazySingleton<_i766.GuideDomainRepository>(
       () => _i174.GuideRepository(dio: gh<_i667.DioClient>()),
     );
+    gh.lazySingleton<_i1002.AuthDomainSignUpRepository>(
+      () => _i215.AuthSignUpRepository(
+        dio: gh<_i667.DioClient>(),
+        tokenStorage: gh<_i227.TokenStorageService>(),
+      ),
+    );
     gh.lazySingleton<_i695.TourDomainRepository>(
       () => _i778.TourRepository(dio: gh<_i667.DioClient>()),
     );
-    gh.lazySingleton<_i534.AuthDomainRepository>(
-      () => _i135.AuthRepository(dio: gh<_i667.DioClient>()),
-    );
     gh.lazySingleton<_i644.FavoriteToursDomainRepository>(
       () => _i124.FavoriteToursRepository(),
+    );
+    gh.factory<_i764.SendOtpUseCase>(
+      () => _i764.SendOtpUseCase(
+        repository: gh<_i959.AuthDomainTelegramRepository>(),
+      ),
+    );
+    gh.factory<_i749.GetOtpLinkUseCase>(
+      () => _i749.GetOtpLinkUseCase(
+        repository: gh<_i959.AuthDomainTelegramRepository>(),
+      ),
+    );
+    gh.factory<_i815.TelegramConfirmUseCase>(
+      () => _i815.TelegramConfirmUseCase(
+        repository: gh<_i959.AuthDomainTelegramRepository>(),
+      ),
     );
     gh.factory<_i620.GetIndividualTourUseCase>(
       () => _i620.GetIndividualTourUseCase(
@@ -114,9 +178,54 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i558.GetToursUseCase>(
       () => _i558.GetToursUseCase(repository: gh<_i695.TourDomainRepository>()),
     );
+    gh.factory<_i232.ConfirmBookedUseCase>(
+      () => _i232.ConfirmBookedUseCase(
+        repository: gh<_i341.PaymentDomainRepository>(),
+      ),
+    );
+    gh.factory<_i38.GetPaymentInfoUseCase>(
+      () => _i38.GetPaymentInfoUseCase(
+        repository: gh<_i341.PaymentDomainRepository>(),
+      ),
+    );
+    gh.factory<_i893.ApplayPromocodeUseCase>(
+      () => _i893.ApplayPromocodeUseCase(
+        repository: gh<_i341.PaymentDomainRepository>(),
+      ),
+    );
+    gh.factory<_i112.SignupUseCase>(
+      () => _i112.SignupUseCase(
+        repository: gh<_i1002.AuthDomainSignUpRepository>(),
+      ),
+    );
+    gh.factory<_i574.CheckNicknameUseCase>(
+      () => _i574.CheckNicknameUseCase(
+        repository: gh<_i1002.AuthDomainSignUpRepository>(),
+      ),
+    );
+    gh.factory<_i209.VerifyCodeUseCase>(
+      () => _i209.VerifyCodeUseCase(
+        repository: gh<_i1002.AuthDomainSignUpRepository>(),
+      ),
+    );
     gh.factory<_i369.GetReviewsUseCase>(
       () => _i369.GetReviewsUseCase(
         repository: gh<_i903.ReviewsDomainRepository>(),
+      ),
+    );
+    gh.factory<_i112.SignUpCubit>(
+      () => _i112.SignUpCubit(gh<_i112.SignupUseCase>()),
+    );
+    gh.factory<_i104.ConfirmBookedCubit>(
+      () => _i104.ConfirmBookedCubit(
+        confirmBookedUseCase: gh<_i232.ConfirmBookedUseCase>(),
+      ),
+    );
+    gh.factory<_i32.TelegramOtpCubit>(
+      () => _i32.TelegramOtpCubit(
+        sendOtpUseCase: gh<_i764.SendOtpUseCase>(),
+        confirmOtpUseCase: gh<_i815.TelegramConfirmUseCase>(),
+        getOtpLinkUseCase: gh<_i749.GetOtpLinkUseCase>(),
       ),
     );
     gh.factory<_i446.UpdateProfileUseCase>(
@@ -130,36 +239,39 @@ extension GetItInjectableX on _i174.GetIt {
       ),
     );
     gh.factory<_i770.SignInUsecase>(
-      () => _i770.SignInUsecase(repository: gh<_i534.AuthDomainRepository>()),
+      () => _i770.SignInUsecase(
+        repository: gh<_i236.AuthDomainSignInRepository>(),
+      ),
     );
-    gh.factory<_i764.SendOtpUseCase>(
-      () => _i764.SendOtpUseCase(repository: gh<_i534.AuthDomainRepository>()),
+    gh.factory<_i300.RefreshTokenUseCase>(
+      () => _i300.RefreshTokenUseCase(
+        repository: gh<_i236.AuthDomainSignInRepository>(),
+      ),
     );
-    gh.factory<_i112.SignupUseCase>(
-      () => _i112.SignupUseCase(repository: gh<_i534.AuthDomainRepository>()),
+    gh.factory<_i437.IsLoggedInUseCase>(
+      () => _i437.IsLoggedInUseCase(
+        repository: gh<_i236.AuthDomainSignInRepository>(),
+      ),
+    );
+    gh.factory<_i371.TelegramConfirmCubit>(
+      () => _i371.TelegramConfirmCubit(
+        telegramConfirmUseCase: gh<_i815.TelegramConfirmUseCase>(),
+      ),
     );
     gh.factory<_i227.ResetPasswordUseCase>(
       () => _i227.ResetPasswordUseCase(
-        repository: gh<_i534.AuthDomainRepository>(),
-      ),
-    );
-    gh.factory<_i437.ConfirmOtpUseCase>(
-      () =>
-          _i437.ConfirmOtpUseCase(repository: gh<_i534.AuthDomainRepository>()),
-    );
-    gh.factory<_i437.IsLoggedInUseCase>(
-      () =>
-          _i437.IsLoggedInUseCase(repository: gh<_i534.AuthDomainRepository>()),
-    );
-    gh.factory<_i396.TourCubit>(
-      () => _i396.TourCubit(
-        getTourUsecase: gh<_i558.GetToursUseCase>(),
-        getIndividualUsecase: gh<_i620.GetIndividualTourUseCase>(),
+        repository: gh<_i476.AuthDomainPasswordRepository>(),
       ),
     );
     gh.factory<_i897.ResetPasswordCubit>(
       () => _i897.ResetPasswordCubit(
         resetPasswordUseCase: gh<_i227.ResetPasswordUseCase>(),
+      ),
+    );
+    gh.factory<_i396.TourCubit>(
+      () => _i396.TourCubit(
+        getToursUseCase: gh<_i558.GetToursUseCase>(),
+        getIndividualTourUseCase: gh<_i620.GetIndividualTourUseCase>(),
       ),
     );
     gh.factory<_i112.GetGuideUseCase>(
@@ -191,20 +303,30 @@ extension GetItInjectableX on _i174.GetIt {
         repository: gh<_i644.FavoriteToursDomainRepository>(),
       ),
     );
-    gh.factory<_i726.SignInCubit>(
-      () => _i726.SignInCubit(signInUsecase: gh<_i770.SignInUsecase>()),
+    gh.factory<_i134.CheckNicknameCubit>(
+      () => _i134.CheckNicknameCubit(
+        checkNicknameUseCase: gh<_i574.CheckNicknameUseCase>(),
+      ),
     );
-    gh.factory<_i466.TelegramAuthCubit>(
-      () => _i466.TelegramAuthCubit(
-        sendOtpUseCase: gh<_i764.SendOtpUseCase>(),
-        confirmOtpUseCase: gh<_i437.ConfirmOtpUseCase>(),
+    gh.factory<_i1007.VerifyCodeCubit>(
+      () => _i1007.VerifyCodeCubit(
+        verifyCodeUseCase: gh<_i209.VerifyCodeUseCase>(),
+      ),
+    );
+    gh.factory<_i923.PaymentCubit>(
+      () => _i923.PaymentCubit(
+        getPaymentInfoUseCase: gh<_i38.GetPaymentInfoUseCase>(),
+        applayPromocodeUseCase: gh<_i893.ApplayPromocodeUseCase>(),
       ),
     );
     gh.factory<_i821.AuthCubit>(
       () => _i821.AuthCubit(isLoggedInUseCase: gh<_i437.IsLoggedInUseCase>()),
     );
-    gh.factory<_i112.SignUpCubit>(
-      () => _i112.SignUpCubit(gh<_i112.SignupUseCase>()),
+    gh.factory<_i726.SignInCubit>(
+      () => _i726.SignInCubit(
+        signInUsecase: gh<_i770.SignInUsecase>(),
+        refreshTokenUseCase: gh<_i300.RefreshTokenUseCase>(),
+      ),
     );
     gh.factory<_i675.GuideCubit>(
       () => _i675.GuideCubit(getGuideUseCase: gh<_i112.GetGuideUseCase>()),

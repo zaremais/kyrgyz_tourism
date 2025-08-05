@@ -13,15 +13,15 @@ class ReviewsCubit extends Cubit<BaseState<List<ReviewsEntity>>> {
     : _getReviewsUseCase = getReviewsUseCase,
       super(BaseState(status: StateStatus.init));
 
-  Future<void> getReviews() async {
+  Future<void> getReviews(SubmitReviewParams params) async {
     emit(BaseState(status: StateStatus.loading));
     try {
-      final result = await _getReviewsUseCase.execute(params: null);
+      final result = await _getReviewsUseCase.execute(params: params);
       emit(BaseState(status: StateStatus.success, model: result));
     } catch (e) {
       emit(
         BaseState(
-          status: StateStatus.error,
+          status: StateStatus.failure,
           errorMessage: e is Exception ? e.toString() : 'Неизвестная ошибка',
         ),
       );

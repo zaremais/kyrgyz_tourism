@@ -3,6 +3,7 @@ import 'package:kyrgyz_tourism/core/constants/api_urls.dart';
 import 'package:kyrgyz_tourism/core/network/dio_client.dart';
 import 'package:kyrgyz_tourism/modules/reviews/data/models/reviews_model.dart';
 import 'package:kyrgyz_tourism/modules/reviews/domain/repositories/reviews_domain_repository.dart';
+import 'package:kyrgyz_tourism/modules/reviews/domain/usecases/get_reviews_use_case.dart';
 
 @LazySingleton(as: ReviewsDomainRepository)
 class ReviewsRepository extends ReviewsDomainRepository {
@@ -11,7 +12,7 @@ class ReviewsRepository extends ReviewsDomainRepository {
   ReviewsRepository({required DioClient dio}) : _dio = dio;
 
   @override
-  Future<List<ReviewsModel>> getReviews() async {
+  Future<List<ReviewsModel>> getReviews(SubmitReviewParams params) async {
     try {
       final response = await _dio.get(ApiUrls.getReviews);
       if (response.statusCode == 200) {

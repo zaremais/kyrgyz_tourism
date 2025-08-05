@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/core/widgets/language_switch_widget.dart';
+import 'package:kyrgyz_tourism/modules/chatBot/data/chat_model.dart';
 
 @RoutePage()
 class ChatSupportScreen extends StatefulWidget {
@@ -13,10 +14,135 @@ class ChatSupportScreen extends StatefulWidget {
 
 class _ChatSupportScreenState extends State<ChatSupportScreen> {
   final TextEditingController _controller = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
+
+  final List<ChatModel> messages = [
+    ChatModel(
+      message: 'Здравствуйте! Чем могу помочь?',
+      isFromUser: true,
+      timestamp: DateTime.now(),
+      suggestedReplies: '',
+    ),
+  ];
+
+  void _sendMessage() {
+    final text = _controller.text.trim();
+    if (text.isEmpty) return;
+
+    setState(() {
+      messages.add(
+        ChatModel(
+          message: text,
+          isFromUser: true,
+          timestamp: DateTime.now(),
+          suggestedReplies: '',
+        ),
+      );
+      _controller.clear();
+    });
+
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+        messages.add(
+          ChatModel(
+            message: 'Спасибо за сообщение. Мы скоро ответим.',
+            isFromUser: true,
+            timestamp: DateTime.now(),
+            suggestedReplies: '',
+          ),
+        );
+      });
+
+      _scrollToBottom();
+    });
+
+    _scrollToBottom();
+  }
+
+  void _scrollToBottom() {
+    Future.delayed(const Duration(milliseconds: 100), () {
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent + 100,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
+    });
+  }
+
+  Widget _buildMessage(ChatModel message) {
+    final isUser = message.isFromUser;
+
+    return Align(
+      alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        child: Row(
+          mainAxisAlignment:
+              isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (!isUser)
+              Row(
+                children: [
+                  CircleAvatar(
+                    child: Image.network(
+                      'https://avatars.mds.yandex.net/i?id=bcd0b1c5fc34b1fc68c4de1038ea965a8aa742f1-5490830-images-thumbs&n=13',
+                      fit: BoxFit.cover,
+                      width: 40,
+                      height: 40,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Icon(Icons.person);
+                      },
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return CircularProgressIndicator(
+                          value:
+                              loadingProgress.expectedTotalBytes != null
+                                  ? loadingProgress.cumulativeBytesLoaded /
+                                      loadingProgress.expectedTotalBytes!
+                                  : null,
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+
+            if (isUser) const SizedBox(height: 8),
+            if (isUser)
+              CircleAvatar(
+                radius: 20,
+                backgroundColor: Colors.grey[300],
+                child: Icon(Icons.person, color: Colors.white),
+              ),
+            SizedBox(width: 10),
+            Flexible(
+              child: Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: isUser ? Colors.grey[300] : Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  border:
+                      isUser
+                          ? null
+                          : Border.all(color: Colors.green.shade600, width: 1),
+                ),
+                child: Text(
+                  message.message,
+                  style: TextStyle(
+                    color: isUser ? Colors.black : Colors.black87,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    final darkTheme = Theme.of(context).brightness == Brightness.dark;
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -26,7 +152,7 @@ class _ChatSupportScreenState extends State<ChatSupportScreen> {
               height: 35,
 
               decoration: BoxDecoration(
-                color: darkTheme ? AppColors.text : AppColors.white,
+                color: Colors.white,
                 boxShadow: [
                   BoxShadow(
                     blurRadius: 5,
@@ -101,161 +227,102 @@ class _ChatSupportScreenState extends State<ChatSupportScreen> {
                           children: [
                             Container(
                               decoration: BoxDecoration(
-                                color:
-                                    darkTheme
-                                        ? AppColors.text
-                                        : AppColors.white,
+                                color: Colors.white,
                                 borderRadius: BorderRadius.circular(15),
                               ),
                             ),
                             Column(
                               children: [
                                 Container(
-                                  width: double.infinity,
+                                  width: 343,
+                                  height: 50,
                                   decoration: BoxDecoration(
-                                    color:
-                                        darkTheme
-                                            ? AppColors.buttonTour
-                                            : AppColors.white,
-                                    boxShadow: [
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: AppColors.background,
+                                    boxShadow: const [
                                       BoxShadow(
-                                        blurRadius: 3,
-                                        offset: Offset(0, 1),
-                                        spreadRadius: -3,
+                                        color: Colors.black12,
+                                        blurRadius: 4,
                                       ),
                                     ],
-                                    borderRadius: BorderRadius.circular(10),
                                   ),
-                                  child: Center(
-                                    child: Text(
-                                      'Салим\nСпециалитст',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w500,
+                                  child: Column(
+                                    children: [
+                                      SizedBox(height: 5),
+                                      Text(
+                                        'Салим',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                       ),
-                                    ),
+                                      Text(
+                                        'Специалист',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
 
-                                const SizedBox(height: 24),
+                                const SizedBox(height: 8),
+
+                                const SizedBox(height: 8),
+
+                                Expanded(
+                                  child: ListView.builder(
+                                    controller: _scrollController,
+                                    reverse: false,
+                                    padding: const EdgeInsets.all(12),
+                                    itemCount: messages.length,
+                                    itemBuilder: (context, index) {
+                                      return _buildMessage(messages[index]);
+                                    },
+                                  ),
+                                ),
+
+                                Row(children: [
+                            
+                                  ],
+                                ),
+
                                 Row(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 16),
-                                      child: const CircleAvatar(
-                                        radius: 20,
-                                        backgroundImage: AssetImage(
-                                          'assets/images/ellipse1.png',
-                                        ),
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Image.asset(
+                                        'assets/icon/attach.png',
+                                        width: 24,
                                       ),
                                     ),
 
-                                    Flexible(
-                                      child: Container(
-                                        margin: EdgeInsets.all(16),
-                                        padding: const EdgeInsets.all(12),
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color: AppColors.chatMessage,
+                                    Expanded(
+                                      child: TextField(
+                                        controller: _controller,
+                                        decoration: const InputDecoration(
+                                          hintText: 'Введите сообщение...',
+                                          border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(12),
+                                            ),
                                           ),
-                                          borderRadius: BorderRadius.circular(
-                                            15,
-                                          ),
-                                        ),
-                                        child: Text(
-                                          'Здравствуйте! Как я могу Вам помочь?',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w500,
-                                            color:
-                                                darkTheme
-                                                    ? AppColors.white
-                                                    : AppColors.text,
+                                          isDense: true,
+                                          contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 12,
+                                            vertical: 10,
                                           ),
                                         ),
+                                      ),
+                                    ),
+                                    IconButton(
+                                      onPressed: _sendMessage,
+                                      icon: Image.asset(
+                                        'assets/icon/send.png',
+                                        width: 24,
                                       ),
                                     ),
                                   ],
-                                ),
-                                Spacer(),
-
-                                Container(
-                                  width: double.infinity,
-
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(15),
-                                      bottomRight: Radius.circular(15),
-                                    ),
-                                  ),
-
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 16),
-                                    child: Row(
-                                      children: [
-                                        Image.asset(
-                                          'assets/icon/attach.png',
-                                          width: 24,
-                                          color:
-                                              darkTheme
-                                                  ? AppColors.white
-                                                  : AppColors.text,
-                                        ),
-                                        const SizedBox(width: 20),
-                                        Expanded(
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                              border: Border.all(
-                                                color:
-                                                    darkTheme
-                                                        ? Colors.white
-                                                        : AppColors.text,
-                                              ),
-                                            ),
-                                            child: TextField(
-                                              controller: _controller,
-                                              decoration: InputDecoration(
-                                                hintText:
-                                                    'Введите сообщение...',
-                                                hintStyle: TextStyle(
-                                                  color:
-                                                      darkTheme
-                                                          ? AppColors.white
-                                                          : AppColors.text,
-                                                ),
-                                                contentPadding:
-                                                    const EdgeInsets.symmetric(
-                                                      horizontal: 12,
-                                                    ),
-                                                border: OutlineInputBorder(
-                                                  borderSide: BorderSide.none,
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(width: 10),
-                                        IconButton(
-                                          onPressed: () {
-                                            print(_controller.text);
-                                            _controller.clear();
-                                          },
-                                          icon: Image.asset(
-                                            'assets/icon/send.png',
-                                            width: 24,
-                                            color:
-                                                darkTheme
-                                                    ? AppColors.white
-                                                    : AppColors.text,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
                                 ),
                                 SizedBox(height: 20),
                               ],

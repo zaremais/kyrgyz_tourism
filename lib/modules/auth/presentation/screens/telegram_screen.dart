@@ -6,12 +6,15 @@ import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_sizes.dart';
 import 'package:kyrgyz_tourism/core/config/themes/theme.dart';
+import 'package:kyrgyz_tourism/core/constants/validator.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
 import 'package:kyrgyz_tourism/main.dart';
-import 'package:kyrgyz_tourism/modules/auth/domain/entities/telegram_entity.dart';
-import 'package:kyrgyz_tourism/modules/auth/domain/usecases/confirm_otp_use_case.dart';
+import 'package:kyrgyz_tourism/modules/auth/domain/entities/telegram_confirm_entity.dart';
+import 'package:kyrgyz_tourism/modules/auth/domain/entities/telegram_otp_entity.dart';
+import 'package:kyrgyz_tourism/modules/auth/domain/usecases/telegram_confirm_use_case.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/usecases/send_otp_use_case.dart';
-import 'package:kyrgyz_tourism/modules/auth/presentation/cubit/telegram_auth_cubit.dart';
+import 'package:kyrgyz_tourism/modules/auth/presentation/cubit/telegram_otp_cubit.dart';
+import 'package:kyrgyz_tourism/modules/auth/presentation/cubit/telegram_confirm_cubit.dart';
 import 'package:kyrgyz_tourism/modules/auth/presentation/widgets/auth_input_textfield.dart';
 
 @RoutePage()
@@ -25,18 +28,16 @@ class TelegramScreen extends StatefulWidget {
 class _TelegramScreenState extends State<TelegramScreen> {
   final _formKey = GlobalKey<FormState>();
   final _phoneController = TextEditingController();
-  final _chatController = TextEditingController();
   final _otpController = TextEditingController();
-  final _usernameController = TextEditingController();
-
-  final _telegramAuthCubit = di<TelegramAuthCubit>();
+  final _telegramConfirmCubit = di<TelegramConfirmCubit>();
+  final _telegramOtpCubit = di<TelegramOtpCubit>();
 
   @override
   void dispose() {
     _phoneController.dispose();
-    _chatController.dispose();
     _otpController.dispose();
-    _telegramAuthCubit.close();
+    _telegramConfirmCubit.close();
+    _telegramOtpCubit.close();
     super.dispose();
   }
 
@@ -44,209 +45,348 @@ class _TelegramScreenState extends State<TelegramScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: _telegramAuthCubit,
-      child: BlocConsumer<TelegramAuthCubit, BaseState<TelegramEntity>>(
-        listener: (context, state) {
-          if (state.status == StateStatus.success && state.isOtpConfirmed) {
-            context.router.replace(TelegramAuthStepRoute());
-          } else if (state.status == StateStatus.error) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.errorMessage ?? 'Произошла ошибка')),
-            );
-          }
-        },
-        builder: (context, state) {
-          return Scaffold(
-            backgroundColor: AppColors.background,
-            body: Center(
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 16),
-                padding: const EdgeInsets.all(AppSizes.paddingHorizontal),
-                decoration: BoxDecoration(
-                  color: AppColors.background,
-                  borderRadius: BorderRadius.circular(
-                    AppSizes.borderRadiusLarge,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.formBorder.withValues(alpha: 0.3),
-                      blurRadius: 10,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider.value(value: _telegramConfirmCubit),
+        BlocProvider.value(value: _telegramOtpCubit),
+      ],
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<TelegramConfirmCubit, BaseState<TelegramConfirmEntity>>(
+            listener: (context, state) {
+              if (state.status == StateStatus.success) {
+                context.router.replace(const TelegramChatBotRoute());
+              } else if (state.status == StateStatus.failure) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      state.errorMessage ?? 'Произошла ошибка подтверждения',
                     ),
-                  ],
-                ),
-                child: Form(
-                  key: _formKey,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Align(
-                          alignment: Alignment.topRight,
-                          child: IconButton(
-                            onPressed: () => Navigator.pop(context),
-                            icon: const Icon(Icons.clear),
+                  ),
+                );
+              }
+            },
+          ),
+          BlocListener<TelegramOtpCubit, BaseState<TelegramOtpEntity>>(
+            listener: (context, state) {
+              if (state.status == StateStatus.failure) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      state.errorMessage ?? 'Ошибка при отправке OTP',
+                    ),
+                  ),
+                );
+              }
+            },
+          ),
+        ],
+        child: BlocBuilder<TelegramOtpCubit, BaseState<TelegramOtpEntity>>(
+          builder: (otpContext, otpState) {
+            return BlocBuilder<
+              TelegramConfirmCubit,
+              BaseState<TelegramConfirmEntity>
+            >(
+              builder: (confirmContext, confirmState) {
+                return Scaffold(
+                  backgroundColor: AppColors.background,
+                  body: Center(
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 16),
+                      padding: const EdgeInsets.all(AppSizes.paddingHorizontal),
+                      decoration: BoxDecoration(
+                        color: AppColors.background,
+                        borderRadius: BorderRadius.circular(
+                          AppSizes.borderRadiusLarge,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.formBorder.withValues(alpha: 0.3),
+                            blurRadius: 10,
                           ),
-                        ),
-                        const Text('Вход', style: FontStyles.formFontSize),
-                        const SizedBox(height: AppSizes.paddingBottom),
+                        ],
+                      ),
+                      child: Form(
+                        key: _formKey,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              Align(
+                                alignment: Alignment.topRight,
+                                child: IconButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  icon: const Icon(Icons.clear),
+                                ),
+                              ),
+                              const Text(
+                                'Вход',
+                                style: FontStyles.formFontSize,
+                              ),
+                              const SizedBox(height: AppSizes.paddingBottom),
 
-                        AuthInputTextfield(
-                          hintText: "Номер телефона Telegram",
-                          controller: _phoneController,
-                          obscureText: false,
-                          validator:
-                              (value) =>
-                                  value == null || value.isEmpty
-                                      ? "Введите номер телефона"
-                                      : null,
-                        ),
-                        const SizedBox(height: AppSizes.paddingTextfildHeight),
-
-                        Row(
-                          children: [
-                            Expanded(
-                              child: AuthInputTextfield(
-                                hintText: 'Введите ОТР-код',
-                                controller: _otpController,
+                              AuthInputTextfield(
+                                hintText: "Номер телефона Telegram",
+                                controller: _phoneController,
                                 obscureText: false,
-                                validator:
-                                    (value) =>
-                                        value == null || value.isEmpty
-                                            ? "Введите код"
-                                            : null,
-                              ),
-                            ),
-                            const SizedBox(width: 5),
-                            SizedBox(
-                              width: 140,
-                              child: ElevatedButton(
-                                onPressed:
-                                    state.status == StateStatus.loading
-                                        ? null
-                                        : () async {
-                                          final phone =
-                                              _phoneController.text.trim();
-
-                                          if (phone.isNotEmpty) {
-                                            debugPrint(
-                                              'Отправка OTP на номер: $phone',
-                                            );
-                                          }
-                                          final username =
-                                              _usernameController.text.trim();
-                                          if (username.isNotEmpty) {
-                                            debugPrint(
-                                              'Отправка OTP на номер: $username',
-                                            );
-                                          }
-                                          await _telegramAuthCubit.sendOtp(
-                                            params: SendOtpParams(
-                                              chatId: chatId,
-                                              phoneNumber: phone,
-                                            ),
-                                          );
-                                        },
-
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      AppColors.backgroundtextfield,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                ),
-                                child: const Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 16),
-                                  child: Text(
-                                    'Получить код',
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                      color: Colors.black45,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: AppSizes.paddingTextfildHeight),
-
-                        TextButton(
-                          onPressed:
-                              (state.secondsRemaining ?? 0) == 0
-                                  ? () {
-                                    if (_phoneController.text.isNotEmpty) {
-                                      _telegramAuthCubit.sendOtp(
-                                        params: SendOtpParams(
-                                          phoneNumber: _phoneController.text,
-                                          chatId: chatId,
+                                keyboardType: TextInputType.phone,
+                                textInputAction: TextInputAction.next,
+                                validator: validatePhone,
+                                onChanged: (value) {
+                                  if (value.isNotEmpty) {
+                                    final formatted = formatPhoneNumber(value);
+                                    if (formatted != value) {
+                                      _phoneController.value = TextEditingValue(
+                                        text: formatted,
+                                        selection: TextSelection.collapsed(
+                                          offset: formatted.length,
                                         ),
                                       );
                                     }
                                   }
-                                  : null,
-                          child: Text(
-                            (state.secondsRemaining ?? 0) == 0
-                                ? 'Отправить код повторно?'
-                                : 'Отправить повторно через 00:${(state.secondsRemaining ?? 0).toString().padLeft(2, '0')} сек.',
-                            style: TextStyle(color: Colors.blue),
-                          ),
-                        ),
-
-                        if (state.otpCode != null && state.otpCode!.isNotEmpty)
-                          Padding(
-                            padding: const EdgeInsets.only(top: 12.0),
-                            child: Text(
-                              'OTP-код: ${state.otpCode}',
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.green,
+                                },
                               ),
-                            ),
-                          ),
-                        const SizedBox(height: AppSizes.paddingTextfildHeight),
-
-                        SizedBox(
-                          width: double.infinity,
-                          height: 50,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.grey.shade100,
-                              side: BorderSide(color: AppColors.buttonForm),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
+                              const SizedBox(
+                                height: AppSizes.paddingTextfildHeight,
                               ),
-                            ),
-                            onPressed: () async {
-                              if (_formKey.currentState!.validate()) {
-                                await _telegramAuthCubit.confirmOtp(
-                                  params: ConfirmOtpParams(
-                                    otp: _otpController.text,
-                                    phoneNumber: _phoneController.text,
-                                    username: _usernameController.text,
+
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: AuthInputTextfield(
+                                      hintText: 'Введите OTP-код',
+                                      controller: _otpController,
+                                      obscureText: false,
+                                      keyboardType: TextInputType.number,
+
+                                      textInputAction: TextInputAction.done,
+                                      validator: validateOtp,
+                                    ),
                                   ),
-                                );
-                              }
-                            },
-                            child: const Text(
-                              "Войти",
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black,
+                                  const SizedBox(width: 5),
+                                  SizedBox(
+                                    width: 140,
+                                    child: ElevatedButton(
+                                      onPressed:
+                                          otpState.status == StateStatus.loading
+                                              ? null
+                                              : () async {
+                                                final phone =
+                                                    _phoneController.text
+                                                        .trim();
+                                                if (phone.isEmpty) {
+                                                  ScaffoldMessenger.of(
+                                                    context,
+                                                  ).showSnackBar(
+                                                    const SnackBar(
+                                                      content: Text(
+                                                        'Введите номер телефона',
+                                                      ),
+                                                      backgroundColor:
+                                                          Colors.orange,
+                                                    ),
+                                                  );
+                                                  return;
+                                                }
+                                                await _telegramOtpCubit.sendOtp(
+                                                  params: SendOtpParams(
+                                                    chatId: chatId,
+                                                    phoneNumber:
+                                                        formatPhoneNumber(
+                                                          phone,
+                                                        ),
+                                                  ),
+                                                );
+                                              },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            otpState.status ==
+                                                    StateStatus.loading
+                                                ? Colors.grey
+                                                : AppColors.backgroundtextfield,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                            12,
+                                          ),
+                                        ),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 16,
+                                        ),
+                                        child:
+                                            otpState.status ==
+                                                    StateStatus.loading
+                                                ? const SizedBox(
+                                                  width: 16,
+                                                  height: 16,
+                                                  child: CircularProgressIndicator(
+                                                    strokeWidth: 2,
+                                                    valueColor:
+                                                        AlwaysStoppedAnimation<
+                                                          Color
+                                                        >(Colors.white),
+                                                  ),
+                                                )
+                                                : const Text(
+                                                  'Получить код',
+                                                  style: TextStyle(
+                                                    fontSize: 13,
+                                                    color: Colors.black45,
+                                                  ),
+                                                ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
+                              const SizedBox(
+                                height: AppSizes.paddingTextfildHeight,
+                              ),
+
+                              TextButton(
+                                onPressed:
+                                    (otpState.secondsRemaining ?? 0) == 0
+                                        ? () {
+                                          final phone =
+                                              _phoneController.text.trim();
+                                          if (phone.isEmpty) {
+                                            ScaffoldMessenger.of(
+                                              context,
+                                            ).showSnackBar(
+                                              const SnackBar(
+                                                content: Text(
+                                                  'Введите номер телефона',
+                                                ),
+                                                backgroundColor: Colors.orange,
+                                              ),
+                                            );
+                                            return;
+                                          }
+                                          _telegramOtpCubit.sendOtp(
+                                            params: SendOtpParams(
+                                              phoneNumber: formatPhoneNumber(
+                                                phone,
+                                              ),
+                                              chatId: chatId,
+                                            ),
+                                          );
+                                        }
+                                        : null,
+                                child: Text(
+                                  (otpState.secondsRemaining ?? 0) == 0
+                                      ? 'Отправить код повторно'
+                                      : 'Отправить повторно через 00:${(otpState.secondsRemaining ?? 0).toString().padLeft(2, '0')}',
+                                  style: TextStyle(
+                                    color:
+                                        (otpState.secondsRemaining ?? 0) == 0
+                                            ? Colors.blue
+                                            : Colors.grey,
+                                  ),
+                                ),
+                              ),
+
+                              if (otpState.model?.otp != null &&
+                                  otpState.model!.otp.isNotEmpty)
+                                Container(
+                                  margin: const EdgeInsets.only(top: 12.0),
+                                  padding: const EdgeInsets.all(12),
+                                  decoration: BoxDecoration(
+                                    color: Colors.green.withValues(alpha: 0.1),
+                                    borderRadius: BorderRadius.circular(8),
+                                    border: Border.all(
+                                      color: Colors.green.withValues(
+                                        alpha: 0.3,
+                                      ),
+                                    ),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.check_circle,
+                                        color: Colors.green,
+                                        size: 20,
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Expanded(
+                                        child: Text(
+                                          'OTP-код: ${otpState.model!.otp}',
+                                          style: const TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.green,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              const SizedBox(
+                                height: AppSizes.paddingTextfildHeight,
+                              ),
+
+                              SizedBox(
+                                width: double.infinity,
+                                height: 50,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                        confirmState.status ==
+                                                StateStatus.loading
+                                            ? Colors.grey.shade200
+                                            : Colors.grey.shade100,
+                                    side: BorderSide(
+                                      color: AppColors.buttonForm,
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    if (_formKey.currentState!.validate()) {
+                                      _telegramConfirmCubit.confirmOtp(
+                                        params: ConfirmOtpParams(
+                                          otp: _otpController.text.trim(),
+                                          phoneNumber:
+                                              _phoneController.text.trim(),
+                                        ),
+                                      );
+                                    }
+                                  },
+                                  child:
+                                      confirmState.status == StateStatus.loading
+                                          ? const SizedBox(
+                                            width: 20,
+                                            height: 20,
+                                            child: CircularProgressIndicator(
+                                              strokeWidth: 2,
+                                              valueColor:
+                                                  AlwaysStoppedAnimation<Color>(
+                                                    Colors.black,
+                                                  ),
+                                            ),
+                                          )
+                                          : const Text(
+                                            "Войти",
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                ),
+                              ),
+                              const SizedBox(height: 30),
+                            ],
                           ),
                         ),
-                        const SizedBox(height: 30),
-                      ],
+                      ),
                     ),
                   ),
-                ),
-              ),
-            ),
-          );
-        },
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }

@@ -26,15 +26,24 @@ class SigninButton extends StatelessWidget {
           // padding: const EdgeInsets.symmetric(vertical: 20),
         ),
 
-        onPressed: onPressed,
-        child: Text(
-          title,
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w500,
-            color: AppColors.white,
-          ),
-        ),
+        onPressed: isLoading == true ? null : onPressed,
+        child: isLoading == true
+            ? const SizedBox(
+                width: 20,
+                height: 20,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                ),
+              )
+            : Text(
+                title,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.white,
+                ),
+              ),
       ),
     );
   }

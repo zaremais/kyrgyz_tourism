@@ -39,7 +39,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 },
               ),
               SizedBox(height: 14),
-              CustomSectionButton(text: S.of(context).contacts, onTap: () {}),
+              CustomSectionButton(
+                text: S.of(context).contacts,
+                onTap: () {
+                  // context.router.replace(PaymentRoute.page());
+                },
+              ),
               SizedBox(height: 14),
               CustomSectionButton(
                 text: S.of(context).guides,

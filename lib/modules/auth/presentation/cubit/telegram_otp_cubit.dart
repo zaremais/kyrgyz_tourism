@@ -1,27 +1,30 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
+import 'package:kyrgyz_tourism/core/base/base_usecase.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
-import 'package:kyrgyz_tourism/core/network/storage_secure_storage/storage_secure_service.dart';
-import 'package:kyrgyz_tourism/modules/auth/domain/entities/telegram_entity.dart';
+import 'package:kyrgyz_tourism/modules/auth/domain/entities/telegram_otp_entity.dart';
+import 'package:kyrgyz_tourism/modules/auth/domain/usecases/get_otp_link_use_case.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/usecases/send_otp_use_case.dart';
-import 'package:kyrgyz_tourism/modules/auth/domain/usecases/confirm_otp_use_case.dart';
+import 'package:kyrgyz_tourism/modules/auth/domain/usecases/telegram_confirm_use_case.dart';
 
 @injectable
-class TelegramAuthCubit extends Cubit<BaseState<TelegramEntity>> {
+class TelegramOtpCubit extends Cubit<BaseState<TelegramOtpEntity>> {
   final SendOtpUseCase _sendOtpUseCase;
-  final ConfirmOtpUseCase _confirmOtpUseCase;
+
+  final GetOtpLinkUseCase _getOtpLinkUseCase;
   Timer? _timer;
   int _secondsRemaining = 0;
 
-  TelegramAuthCubit({
+  TelegramOtpCubit({
     required SendOtpUseCase sendOtpUseCase,
-    required ConfirmOtpUseCase confirmOtpUseCase,
+    required TelegramConfirmUseCase confirmOtpUseCase,
+    required GetOtpLinkUseCase getOtpLinkUseCase,
   }) : _sendOtpUseCase = sendOtpUseCase,
-       _confirmOtpUseCase = confirmOtpUseCase,
+
+       _getOtpLinkUseCase = getOtpLinkUseCase,
        super(BaseState(status: StateStatus.init, secondsRemaining: 0));
 
   int get secondsRemaining => _secondsRemaining;
@@ -31,57 +34,40 @@ class TelegramAuthCubit extends Cubit<BaseState<TelegramEntity>> {
     try {
       final result = await _sendOtpUseCase.execute(params: params);
 
-      log('OTP CODE: ${result.otp}');
       _startTimer();
+
       emit(
         BaseState(
           status: StateStatus.success,
           model: result,
-          otpCode: result.otp,
+          // otpCode: result.otp,
           secondsRemaining: _secondsRemaining,
-          isOtpConfirmed: false,
+          // isOtpConfirmed: false,
         ),
       );
     } catch (e) {
-      emit(BaseState(status: StateStatus.error, errorMessage: e.toString()));
+      emit(BaseState(status: StateStatus.failure, errorMessage: e.toString()));
     }
   }
 
-  Future<void> confirmOtp({required ConfirmOtpParams params}) async {
+  Future<void> getTelegramBotLink() async {
     emit(BaseState(status: StateStatus.loading));
-
-    final username = state.model?.username;
-    if (username == null || username.isEmpty) {
-      emit(
-        BaseState(
-          status: StateStatus.error,
-          errorMessage: 'Username не найден',
-        ),
-      );
-      return;
-    }
-
     try {
-      final result = await _confirmOtpUseCase.execute(params: params);
-      // await SecureStorage().saveAccessToken(result.accessToken.toString());
-      emit(
-        BaseState(
-          status: StateStatus.success,
-          model: result,
-          isOtpConfirmed: true,
-        ),
-      );
+      await _getOtpLinkUseCase.execute(params: NoParams());
+
+      emit(BaseState(status: StateStatus.success, model: state.model));
     } catch (e) {
-      emit(BaseState(status: StateStatus.error, errorMessage: e.toString()));
+      emit(BaseState(status: StateStatus.failure, errorMessage: e.toString()));
     }
   }
 
   void _startTimer() {
-    _secondsRemaining = 0;
+    const duration = 60;
+    _secondsRemaining = duration;
     _timer?.cancel();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       _secondsRemaining--;
-      if (_secondsRemaining == 0) {
+      if (_secondsRemaining <= 0) {
         timer.cancel();
         emit(BaseState(status: StateStatus.init));
       } else {

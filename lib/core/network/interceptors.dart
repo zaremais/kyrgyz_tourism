@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:kyrgyz_tourism/core/constants/api_urls.dart';
 import 'package:kyrgyz_tourism/core/network/storage_secure_storage/token_storage_service.dart';
 
 class AuthInterceptor extends Interceptor {
@@ -6,23 +7,25 @@ class AuthInterceptor extends Interceptor {
   final TokenStorageService _tokenStorage = TokenStorageService();
   bool _isRefreshing = false;
 
-  AuthInterceptor()
-    : _refreshDio = Dio(BaseOptions(baseUrl: 'http://34.18.76.114'));
+  AuthInterceptor() : _refreshDio = Dio(BaseOptions(baseUrl: ApiUrls.baseUrl));
 
   @override
   Future<void> onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    final token = await _tokenStorage.getAccessToken();
-
     options.headers.addAll({
-      'Accept': 'application/json',
+      'accept': '*/*',
       'Content-Type': 'application/json',
     });
 
-    if (token != null && token.isNotEmpty) {
-      options.headers['Authorization'] = 'Bearer $token';
+    final isPublicRoute =
+        options.path.contains('/sign-up') || options.path.contains('/sign-in');
+    if (!isPublicRoute) {
+      final token = await _tokenStorage.getAccessToken();
+      if (token != null && token.isNotEmpty) {
+        options.headers['Authorization'] = 'Bearer $token';
+      }
     }
 
     handler.next(options);
@@ -39,7 +42,6 @@ class AuthInterceptor extends Interceptor {
       try {
         final newAccessToken = await _refreshToken();
 
-        // Повтор запроса с новым токеном
         err.requestOptions.headers['Authorization'] = 'Bearer $newAccessToken';
         final response = await _refreshDio.fetch(err.requestOptions);
         handler.resolve(response);
@@ -67,7 +69,7 @@ class AuthInterceptor extends Interceptor {
     }
 
     final response = await _refreshDio.post(
-      '/v1/api/auth/refresh',
+      ApiUrls.refreshToken,
       data: {'refreshToken': refreshToken},
     );
 

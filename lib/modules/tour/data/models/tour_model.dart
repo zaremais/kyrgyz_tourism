@@ -4,12 +4,12 @@ import 'package:kyrgyz_tourism/modules/tour/domain/entities/tour_entity.dart';
 
 part 'tour_model.g.dart';
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable()
 class TourModel extends TourEntity {
   TourModel({
     required super.id,
-    required super.author,
     required super.title,
+    required super.author,
     required super.price,
     required super.tourDuration,
     required super.rating,
@@ -20,5 +20,6 @@ class TourModel extends TourEntity {
   });
 
   factory TourModel.fromJson(JSON json) => _$TourModelFromJson(json);
+
   JSON toJson() => _$TourModelToJson(this);
 }

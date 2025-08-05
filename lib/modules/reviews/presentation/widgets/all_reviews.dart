@@ -15,7 +15,7 @@ class AllReviews extends StatefulWidget {
 }
 
 class _AllReviewsState extends State<AllReviews> {
-  final _reviewsCubit = di<ReviewsCubit>()..getReviews();
+  final _reviewsCubit = di<ReviewsCubit>();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class _AllReviewsState extends State<AllReviews> {
           if (state.status == StateStatus.loading) {
             return CircularProgressIndicator();
           }
-          if (state.status == StateStatus.error) {
+          if (state.status == StateStatus.failure) {
             return Center(child: Text('Ошибка: ${state.errorMessage}'));
           }
           if (state.status == StateStatus.success) {

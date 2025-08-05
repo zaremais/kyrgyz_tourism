@@ -20,7 +20,7 @@ class AuthCubit extends Cubit<BaseState<bool>> {
 
       emit(BaseState(status: StateStatus.success, model: isLoggedIn));
     } catch (e) {
-      emit(BaseState(status: StateStatus.error));
+      emit(BaseState(status: StateStatus.failure));
     }
   }
 }

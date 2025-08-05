@@ -58,7 +58,7 @@ class _ListTourWidgetState extends State<ListTourWidget> {
                           return const CircularProgressIndicator();
                         }
 
-                        if (state.status == StateStatus.error) {
+                        if (state.status == StateStatus.failure) {
                           return const Icon(Icons.error, color: Colors.red);
                         }
 

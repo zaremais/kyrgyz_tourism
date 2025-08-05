@@ -19,7 +19,7 @@ class ResetPasswordCubit extends Cubit<BaseState<ResetPasswordResult>> {
       final result = await _resetPasswordUseCase.execute(params: params);
       emit(BaseState(status: StateStatus.success, model: result));
     } catch (e) {
-      emit(BaseState(status: StateStatus.error, errorMessage: e.toString()));
+      emit(BaseState(status: StateStatus.failure, errorMessage: e.toString()));
     }
   }
 }

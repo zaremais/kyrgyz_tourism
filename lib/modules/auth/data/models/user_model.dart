@@ -6,15 +6,7 @@ part 'user_model.g.dart';
 
 @JsonSerializable()
 class UserModel extends UserEntity {
-  UserModel({
-    super.id,
-    super.email,
-    super.userName,
-    super.phone,
-    super.code,
-    super.password,
-    super.message,
-  });
+  UserModel({required super.nickname, required super.email});
 
   factory UserModel.fromJson(JSON json) => _$UserModelFromJson(json);
   JSON toJson() => _$UserModelToJson(this);

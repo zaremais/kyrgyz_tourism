@@ -16,10 +16,12 @@ class GuideCubit extends Cubit<BaseState<List<GuideEntity>>> {
   Future<void> getGuides() async {
     emit(BaseState(status: StateStatus.loading));
     try {
-      final guides = await _getGuideUseCase.execute(params: null);
-      emit(BaseState(status: StateStatus.success, model: guides));
+      final result = await _getGuideUseCase.execute(
+        params: GuideParams(size: 10, page: 0, sort: 'id,desc'),
+      );
+      emit(BaseState(status: StateStatus.success, model: result.content));
     } catch (e) {
-      emit(BaseState(status: StateStatus.error, errorMessage: e.toString()));
+      emit(BaseState(status: StateStatus.failure, errorMessage: e.toString()));
     }
   }
 }

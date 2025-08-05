@@ -21,7 +21,83 @@ class CustomDrawer extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 100),
-        _buildListTile(context),
+        Column(
+          children: [
+            ListTile(
+              title: Center(
+                child: Text(
+                  S.of(context).aboutcompany,
+                  style: TextStyle(fontSize: AppSizes.logoFontSize),
+                ),
+              ),
+              onTap: () {
+                context.router.push(HomeRoute());
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Center(
+                child: Text(
+                  S.of(context).tours,
+                  style: TextStyle(fontSize: AppSizes.logoFontSize),
+                ),
+              ),
+              onTap: () {
+                context.router.navigate(ToursRoute());
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Center(
+                child: Text(
+                  S.of(context).contacts,
+                  style: TextStyle(fontSize: AppSizes.logoFontSize),
+                ),
+              ),
+              onTap: () {
+                context.router.push(SettingsRoute());
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Center(
+                child: Text(
+                  S.of(context).guides,
+                  style: TextStyle(fontSize: AppSizes.logoFontSize),
+                ),
+              ),
+              onTap: () {
+                context.router.push(GuideRoute());
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Center(
+                child: Text(
+                  S.of(context).login,
+                  style: TextStyle(fontSize: AppSizes.logoFontSize),
+                ),
+              ),
+              onTap: () {
+                context.router.push(AuthRoute());
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Center(
+                child: Text(
+                  S.of(context).settings,
+                  style: TextStyle(fontSize: AppSizes.logoFontSize),
+                ),
+              ),
+              onTap: () {
+                context.router.push(SettingsRoute());
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+        // _buildListTile(context),
         const SizedBox(height: 100),
         SizedBox(height: 50),
         Center(child: const LanguageSwitchWidget()),
@@ -30,81 +106,82 @@ class CustomDrawer extends StatelessWidget {
   }
 }
 
-Widget _buildListTile(BuildContext context) {
-  return Column(
-    children: [
-      ListTile(
-        title: Center(
-          child: Text(
-            S.of(context).aboutcompany,
-            style: TextStyle(fontSize: AppSizes.logoFontSize),
-          ),
-        ),
-        onTap: () {
-          context.router.push(HomeRoute());
-          Navigator.pop(context);
-        },
-      ),
-      ListTile(
-        title: Center(
-          child: Text(
-            S.of(context).tours,
-            style: TextStyle(fontSize: AppSizes.logoFontSize),
-          ),
-        ),
-        onTap: () {
-          context.router.navigate(ToursRoute());
-          Navigator.pop(context);
-        },
-      ),
-      ListTile(
-        title: Center(
-          child: Text(
-            S.of(context).contacts,
-            style: TextStyle(fontSize: AppSizes.logoFontSize),
-          ),
-        ),
-        onTap: () {
-          context.router.push(SettingsRoute());
-          Navigator.pop(context);
-        },
-      ),
-      ListTile(
-        title: Center(
-          child: Text(
-            S.of(context).guides,
-            style: TextStyle(fontSize: AppSizes.logoFontSize),
-          ),
-        ),
-        onTap: () {
-          context.router.push(GuideRoute());
-          Navigator.pop(context);
-        },
-      ),
-      ListTile(
-        title: Center(
-          child: Text(
-            S.of(context).login,
-            style: TextStyle(fontSize: AppSizes.logoFontSize),
-          ),
-        ),
-        onTap: () {
-          context.router.push(AuthRoute());
-          Navigator.pop(context);
-        },
-      ),
-      ListTile(
-        title: Center(
-          child: Text(
-            S.of(context).settings,
-            style: TextStyle(fontSize: AppSizes.logoFontSize),
-          ),
-        ),
-        onTap: () {
-          context.router.push(SettingsRoute());
-          Navigator.pop(context);
-        },
-      ),
-    ],
-  );
-}
+// Widget _buildListTile(BuildContext context) {
+//    final TourEntity tour;
+//   return Column(
+//     children: [
+//       ListTile(
+//         title: Center(
+//           child: Text(
+//             S.of(context).aboutcompany,
+//             style: TextStyle(fontSize: AppSizes.logoFontSize),
+//           ),
+//         ),
+//         onTap: () {
+//           context.router.push(HomeRoute(tour:));
+//           Navigator.pop(context);
+//         },
+//       ),
+//       ListTile(
+//         title: Center(
+//           child: Text(
+//             S.of(context).tours,
+//             style: TextStyle(fontSize: AppSizes.logoFontSize),
+//           ),
+//         ),
+//         onTap: () {
+//           context.router.navigate(ToursRoute());
+//           Navigator.pop(context);
+//         },
+//       ),
+//       ListTile(
+//         title: Center(
+//           child: Text(
+//             S.of(context).contacts,
+//             style: TextStyle(fontSize: AppSizes.logoFontSize),
+//           ),
+//         ),
+//         onTap: () {
+//           context.router.push(SettingsRoute());
+//           Navigator.pop(context);
+//         },
+//       ),
+//       ListTile(
+//         title: Center(
+//           child: Text(
+//             S.of(context).guides,
+//             style: TextStyle(fontSize: AppSizes.logoFontSize),
+//           ),
+//         ),
+//         onTap: () {
+//           context.router.push(GuideRoute());
+//           Navigator.pop(context);
+//         },
+//       ),
+//       ListTile(
+//         title: Center(
+//           child: Text(
+//             S.of(context).login,
+//             style: TextStyle(fontSize: AppSizes.logoFontSize),
+//           ),
+//         ),
+//         onTap: () {
+//           context.router.push(AuthRoute());
+//           Navigator.pop(context);
+//         },
+//       ),
+//       ListTile(
+//         title: Center(
+//           child: Text(
+//             S.of(context).settings,
+//             style: TextStyle(fontSize: AppSizes.logoFontSize),
+//           ),
+//         ),
+//         onTap: () {
+//           context.router.push(SettingsRoute());
+//           Navigator.pop(context);
+//         },
+//       ),
+//     ],
+//   );
+// }

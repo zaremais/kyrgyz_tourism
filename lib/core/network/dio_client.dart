@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:kyrgyz_tourism/core/constants/api_urls.dart';
 import 'package:kyrgyz_tourism/core/network/interceptors.dart';
 import 'package:injectable/injectable.dart';
 
@@ -10,7 +11,7 @@ class DioClient {
   DioClient()
     : _dio = Dio(
         BaseOptions(
-          baseUrl: 'http://34.18.76.114',
+          baseUrl: ApiUrls.baseUrl,
           responseType: ResponseType.json,
           connectTimeout: const Duration(seconds: 10),
           receiveTimeout: const Duration(seconds: 10),

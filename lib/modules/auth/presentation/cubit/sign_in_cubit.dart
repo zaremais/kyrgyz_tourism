@@ -3,15 +3,20 @@ import 'package:injectable/injectable.dart';
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/entities/sign_in_entity.dart';
+import 'package:kyrgyz_tourism/modules/auth/domain/usecases/refresh_token_use_case.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/usecases/sign_in_use_case.dart';
 
 @injectable
 class SignInCubit extends Cubit<BaseState<SignInEntity>> {
   final SignInUsecase _signInUsecase;
+  final RefreshTokenUseCase _refreshTokenUseCase;
 
-  SignInCubit({required SignInUsecase signInUsecase})
-    : _signInUsecase = signInUsecase,
-      super(BaseState(status: StateStatus.init));
+  SignInCubit({
+    required SignInUsecase signInUsecase,
+    required RefreshTokenUseCase refreshTokenUseCase,
+  }) : _signInUsecase = signInUsecase,
+       _refreshTokenUseCase = refreshTokenUseCase,
+       super(BaseState(status: StateStatus.init));
 
   Future<void> signin({required SignInParams params}) async {
     emit(BaseState(status: StateStatus.loading));
@@ -19,7 +24,17 @@ class SignInCubit extends Cubit<BaseState<SignInEntity>> {
       final user = await _signInUsecase.execute(params: params);
       emit(BaseState(status: StateStatus.success, model: user));
     } catch (e) {
-      emit(BaseState(status: StateStatus.error, errorMessage: e.toString()));
+      emit(BaseState(status: StateStatus.failure, errorMessage: e.toString()));
+    }
+  }
+
+  Future<void> refreshToken({required RefreshParams params}) async {
+    emit(BaseState(status: StateStatus.loading));
+    try {
+      final user = await _refreshTokenUseCase.execute(params: params);
+      emit(BaseState(status: StateStatus.success, model: user));
+    } catch (e) {
+      emit(BaseState(status: StateStatus.failure, errorMessage: e.toString()));
     }
   }
 }

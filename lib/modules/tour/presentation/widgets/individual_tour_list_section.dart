@@ -27,16 +27,16 @@ class _IndividualTourListSectionState extends State<IndividualTourListSection> {
           if (state.status == StateStatus.loading) {
             return const CircularProgressIndicator();
           }
-          if (state.status == StateStatus.error) {
-            if (state.status == StateStatus.error) {
-              return const Center(
-                child: Text(
-                  "Ошибка загрузки туров",
-                  style: TextStyle(color: Colors.red),
-                ),
-              );
-            }
+
+          if (state.status == StateStatus.failure) {
+            return const Center(
+              child: Text(
+                "Ошибка загрузки туров",
+                style: TextStyle(color: Colors.red),
+              ),
+            );
           }
+
           if (state.status == StateStatus.success) {
             final tours = state.model ?? [];
 

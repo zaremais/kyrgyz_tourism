@@ -6,15 +6,17 @@ import 'package:kyrgyz_tourism/main.dart';
 import 'package:kyrgyz_tourism/modules/tour/domain/entities/tour_entity.dart';
 import 'package:kyrgyz_tourism/modules/tour/presentation/cubit/tour_cubit.dart';
 import 'package:kyrgyz_tourism/modules/tour/presentation/widgets/list_tour_widget.dart';
+// ignore: unused_import
+import 'package:kyrgyz_tourism/modules/tour/presentation/widgets/tour_card.dart';
 
-class ToursListSection extends StatefulWidget {
-  const ToursListSection({super.key, required List<TourEntity> tours});
+class TourListSection extends StatefulWidget {
+  const TourListSection({super.key});
 
   @override
-  State<ToursListSection> createState() => _ToursListSectionState();
+  State<TourListSection> createState() => _TourListSectionState();
 }
 
-class _ToursListSectionState extends State<ToursListSection> {
+class _TourListSectionState extends State<TourListSection> {
   final _tourCubit = di<TourCubit>()..getTours();
 
   @override
@@ -24,29 +26,29 @@ class _ToursListSectionState extends State<ToursListSection> {
       child: BlocBuilder<TourCubit, BaseState<List<TourEntity>>>(
         builder: (context, state) {
           if (state.status == StateStatus.loading) {
-            return const CircularProgressIndicator();
+            return const Center(child: CircularProgressIndicator());
           }
-          if (state.status == StateStatus.error) {
-            if (state.status == StateStatus.error) {
-              return const Center(
-                child: Text(
-                  "Ошибка загрузки туров",
-                  style: TextStyle(color: Colors.red),
-                ),
-              );
-            }
+          if (state.status == StateStatus.failure) {
+            return const Center(
+              child: Text(
+                "Нет доступных туров",
+                style: TextStyle(color: Colors.red),
+              ),
+            );
           }
           if (state.status == StateStatus.success) {
             final tours = state.model ?? [];
+
+            if (tours.isEmpty) {
+              return const Center(child: Text("Нет доступных туров"));
+            }
 
             return ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: tours.length,
               itemBuilder: (context, index) {
-                final tour = tours[index];
-
-                return ListTourWidget(tour: tour);
+                return ListTourWidget(tour: tours[index]);
               },
             );
           }

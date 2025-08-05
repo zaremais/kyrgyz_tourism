@@ -264,6 +264,22 @@ class NotificationRouteArgs {
 }
 
 /// generated route for
+/// [PaymentScreen]
+class PaymentRoute extends PageRouteInfo<void> {
+  const PaymentRoute({List<PageRouteInfo>? children})
+    : super(PaymentRoute.name, initialChildren: children);
+
+  static const String name = 'PaymentRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const PaymentScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [ProfileScreen]
 class ProfileRoute extends PageRouteInfo<void> {
   const ProfileRoute({List<PageRouteInfo>? children})
@@ -347,16 +363,16 @@ class RegisterSuccessRoute extends PageRouteInfo<RegisterSuccessRouteArgs> {
   RegisterSuccessRoute({
     Key? key,
     required String email,
+    required String nickname,
     required String password,
-    required String nickaname,
     List<PageRouteInfo>? children,
   }) : super(
          RegisterSuccessRoute.name,
          args: RegisterSuccessRouteArgs(
            key: key,
            email: email,
+           nickname: nickname,
            password: password,
-           nickaname: nickaname,
          ),
          initialChildren: children,
        );
@@ -370,8 +386,8 @@ class RegisterSuccessRoute extends PageRouteInfo<RegisterSuccessRouteArgs> {
       return RegisterSuccessScreen(
         key: args.key,
         email: args.email,
+        nickname: args.nickname,
         password: args.password,
-        nickaname: args.nickaname,
       );
     },
   );
@@ -381,21 +397,21 @@ class RegisterSuccessRouteArgs {
   const RegisterSuccessRouteArgs({
     this.key,
     required this.email,
+    required this.nickname,
     required this.password,
-    required this.nickaname,
   });
 
   final Key? key;
 
   final String email;
 
-  final String password;
+  final String nickname;
 
-  final String nickaname;
+  final String password;
 
   @override
   String toString() {
-    return 'RegisterSuccessRouteArgs{key: $key, email: $email, password: $password, nickaname: $nickaname}';
+    return 'RegisterSuccessRouteArgs{key: $key, email: $email, nickname: $nickname, password: $password}';
   }
 
   @override
@@ -404,13 +420,13 @@ class RegisterSuccessRouteArgs {
     if (other is! RegisterSuccessRouteArgs) return false;
     return key == other.key &&
         email == other.email &&
-        password == other.password &&
-        nickaname == other.nickaname;
+        nickname == other.nickname &&
+        password == other.password;
   }
 
   @override
   int get hashCode =>
-      key.hashCode ^ email.hashCode ^ password.hashCode ^ nickaname.hashCode;
+      key.hashCode ^ email.hashCode ^ nickname.hashCode ^ password.hashCode;
 }
 
 /// generated route for
@@ -576,22 +592,6 @@ class SplashRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [TelegramAuthStepScreen]
-class TelegramAuthStepRoute extends PageRouteInfo<void> {
-  const TelegramAuthStepRoute({List<PageRouteInfo>? children})
-    : super(TelegramAuthStepRoute.name, initialChildren: children);
-
-  static const String name = 'TelegramAuthStepRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const TelegramAuthStepScreen();
-    },
-  );
-}
-
-/// generated route for
 /// [TelegramChatBotScreen]
 class TelegramChatBotRoute extends PageRouteInfo<void> {
   const TelegramChatBotRoute({List<PageRouteInfo>? children})
@@ -712,6 +712,22 @@ class TourDetailsRouteArgs {
 
   @override
   int get hashCode => key.hashCode ^ tour.hashCode;
+}
+
+/// generated route for
+/// [TourPaymentScreen]
+class TourPaymentRoute extends PageRouteInfo<void> {
+  const TourPaymentRoute({List<PageRouteInfo>? children})
+    : super(TourPaymentRoute.name, initialChildren: children);
+
+  static const String name = 'TourPaymentRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const TourPaymentScreen();
+    },
+  );
 }
 
 /// generated route for

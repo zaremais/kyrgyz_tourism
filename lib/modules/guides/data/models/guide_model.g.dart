@@ -8,8 +8,8 @@ part of 'guide_model.dart';
 
 GuideModel _$GuideModelFromJson(Map json) => GuideModel(
   id: (json['id'] as num).toInt(),
-  name: json['name'] as String,
-  image: json['image'] as String,
+  name: json['name'] as String?,
+  image: json['image'] as String?,
   rating: (json['rating'] as num).toDouble(),
   reviews: (json['reviews'] as num).toInt(),
   experience: (json['experience'] as num).toInt(),

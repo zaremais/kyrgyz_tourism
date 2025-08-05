@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
+import 'package:kyrgyz_tourism/core/base/base_usecase.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
 import 'package:kyrgyz_tourism/modules/profile/domain/entities/profile_entity.dart';
 import 'package:kyrgyz_tourism/modules/profile/domain/usecases/get_profile_use_case.dart';
@@ -21,10 +22,10 @@ class ProfileCubit extends Cubit<BaseState<ProfileEntity>> {
   Future<void> getProfile() async {
     emit(BaseState(status: StateStatus.loading));
     try {
-      final result = await _getProfileUseCase.execute(params: state.model);
-      emit(BaseState(status: StateStatus.success, model: result));
+      final profile = await _getProfileUseCase.execute(params: NoParams());
+      emit(BaseState(status: StateStatus.success, model: profile));
     } catch (e) {
-      emit(BaseState(status: StateStatus.error));
+      emit(BaseState(status: StateStatus.failure));
     }
   }
 
@@ -33,7 +34,7 @@ class ProfileCubit extends Cubit<BaseState<ProfileEntity>> {
     try {
       await _updateProfileUseCase.execute(params: state.model);
     } catch (e) {
-      emit(BaseState(status: StateStatus.error));
+      emit(BaseState(status: StateStatus.failure));
     }
   }
 

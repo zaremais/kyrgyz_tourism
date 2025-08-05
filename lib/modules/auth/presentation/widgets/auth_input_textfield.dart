@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_sizes.dart';
 
+typedef Validator = FormFieldValidator<String>;
+
 class AuthInputTextfield extends StatelessWidget {
   final String? hintText;
   final TextEditingController controller;
-  final String? Function(String?)? validator;
+  final Validator? validator;
   final String? label;
   final bool obscureText;
   final Widget? suffixIcon;
@@ -13,6 +15,10 @@ class AuthInputTextfield extends StatelessWidget {
   final String? labelText;
   final void Function()? onTap;
   final FocusNode? focusNode;
+  final void Function(String)? onChanged;
+  final TextInputType? keyboardType;
+  final TextInputAction? textInputAction;
+  // final void Function(String)? onFieldSubmitted;
 
   const AuthInputTextfield({
     super.key,
@@ -26,6 +32,11 @@ class AuthInputTextfield extends StatelessWidget {
     this.prefixText,
     this.labelText,
     this.onTap,
+    this.onChanged,
+    this.keyboardType,
+    this.textInputAction,
+
+    // this.onFieldSubmitted,
   });
 
   @override
@@ -43,10 +54,14 @@ class AuthInputTextfield extends StatelessWidget {
         ],
       ),
       child: TextFormField(
+        onChanged: onChanged,
         onTap: onTap,
         validator: validator,
         controller: controller,
         obscureText: obscureText,
+        keyboardType: keyboardType,
+        textInputAction: textInputAction,
+
         decoration: InputDecoration(
           suffixIcon: suffixIcon,
           prefixText: prefixText,
@@ -65,8 +80,8 @@ class AuthInputTextfield extends StatelessWidget {
             borderRadius: BorderRadius.circular(AppSizes.borderRadiusForm),
             borderSide: BorderSide(color: Colors.black12),
           ),
-          label: RichText(
-            text: TextSpan(
+          label: Text.rich(
+            TextSpan(
               text: hintText,
               style: TextStyle(
                 color: AppColors.textDescription,

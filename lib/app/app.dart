@@ -24,10 +24,13 @@ class _AppScreenState extends State<AppScreen> {
       body: BlocProvider.value(
         value: _authCubit,
         child: BlocListener<AuthCubit, BaseState<bool>>(
-          listener: (context, state) {
+          listener: (context, state) async {
             if (state.status == StateStatus.success) {
-              context.router.replaceAll([MainTabRoute()]);
-            } else if (state.status == StateStatus.error) {
+              // final user = await di<AuthRepository>().getCurrentUser();
+              context.router.replaceAll([
+                MainTabRoute(children: [ProfileRoute()]),
+              ]);
+            } else if (state.status == StateStatus.failure) {
               context.router.replaceAll([AuthRoute()]);
             }
           },

@@ -29,7 +29,9 @@ class ChatScreen extends StatelessWidget {
               ),
               SizedBox(height: 14),
               CustomSectionButton(
-                onTap: () {},
+                onTap: () {
+                  context.router.push(TourPaymentRoute());
+                },
                 text: S.of(context).completedDialogues,
               ),
               SizedBox(height: 14),

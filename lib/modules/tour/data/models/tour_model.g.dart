@@ -8,11 +8,11 @@ part of 'tour_model.dart';
 
 TourModel _$TourModelFromJson(Map json) => TourModel(
   id: (json['id'] as num).toInt(),
-  author: (json['author'] as num).toInt(),
   title: json['title'] as String,
-  price: (json['price'] as num).toDouble(),
+  author: json['author'] as String,
+  price: (json['price'] as num).toInt(),
   tourDuration: (json['tourDuration'] as num).toInt(),
-  rating: (json['rating'] as num).toDouble(),
+  rating: (json['rating'] as num).toInt(),
   placesLeft: (json['placesLeft'] as num).toInt(),
   region: json['region'] as String,
   image: json['image'] as String,
@@ -24,8 +24,8 @@ TourModel _$TourModelFromJson(Map json) => TourModel(
 
 Map<String, dynamic> _$TourModelToJson(TourModel instance) => <String, dynamic>{
   'id': instance.id,
-  'author': instance.author,
   'title': instance.title,
+  'author': instance.author,
   'price': instance.price,
   'tourDuration': instance.tourDuration,
   'rating': instance.rating,

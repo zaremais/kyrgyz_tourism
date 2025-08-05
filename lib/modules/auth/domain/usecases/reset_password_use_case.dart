@@ -2,14 +2,14 @@ import 'package:injectable/injectable.dart';
 import 'package:kyrgyz_tourism/core/base/base_usecase.dart';
 import 'package:kyrgyz_tourism/core/constants/typedefs.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/entities/reset_password_result.dart';
-import 'package:kyrgyz_tourism/modules/auth/domain/repositories/auth_domain_repository.dart';
+import 'package:kyrgyz_tourism/modules/auth/domain/repositories/auth_domain_password_repository.dart';
 
 @injectable
 class ResetPasswordUseCase
     extends BaseUsecase<ResetPasswordResult, ResetPasswordParams> {
-  final AuthDomainRepository _repository;
+  final AuthDomainPasswordRepository _repository;
 
-  ResetPasswordUseCase({required AuthDomainRepository repository})
+  ResetPasswordUseCase({required AuthDomainPasswordRepository repository})
     : _repository = repository;
 
   @override

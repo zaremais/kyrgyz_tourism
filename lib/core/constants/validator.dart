@@ -35,3 +35,61 @@ String? validateNikeName(String? value) {
   }
   return null;
 }
+
+String? validatePhone(String? value) {
+  if (value == null || value.trim().isEmpty) {
+    return 'Введите номер телефона';
+  }
+
+  final digitsOnly = value.replaceAll(RegExp(r'[^\d]'), '');
+  if (digitsOnly.length < 10) {
+    return 'Номер телефона должен содержать минимум 10 цифр';
+  }
+  return null;
+}
+
+String? validateOtp(String? value) {
+  if (value == null || value.isEmpty) return "Введите код";
+  if (value.length != 4) return "Код должен содержать 4 цифр";
+  return null;
+}
+
+String formatPhoneNumber(String phone) {
+  final digitsOnly = phone.replaceAll(RegExp(r'[^\d]'), '');
+
+  if (digitsOnly.startsWith('996')) {
+    return '+$digitsOnly';
+  } else if (digitsOnly.startsWith('0')) {
+    return '+996${digitsOnly.substring(1)}';
+  } else if (digitsOnly.length == 9) {
+    return '+996$digitsOnly';
+  }
+
+  return '+$digitsOnly';
+}
+
+  // void _handleLogin() async {
+  //   if (_formKey.currentState!.validate()) {
+  //     final phone = _formatPhoneNumber(_phoneController.text.trim());
+  //     final otp = _otpController.text.trim();
+  //     final username = _usernameController.text.trim();
+
+  //     if (phone.isEmpty || otp.isEmpty) {
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         const SnackBar(
+  //           content: Text('Пожалуйста, заполните все поля'),
+  //           backgroundColor: Colors.orange,
+  //         ),
+  //       );
+  //       return;
+  //     }
+
+  //     await _telegramConfirmCubit.confirmOtp(
+  //       params: ConfirmOtpParams(
+  //         otp: otp,
+  //         phoneNumber: phone,
+  //         username: username,
+  //       ),
+  //     );
+  //   }
+  // }

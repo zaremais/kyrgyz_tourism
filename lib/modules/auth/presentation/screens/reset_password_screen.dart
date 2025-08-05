@@ -48,7 +48,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               );
               context.router.pop();
             }
-            if (state.status == StateStatus.error) {
+            if (state.status == StateStatus.failure) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text(state.errorMessage ?? 'Ошибка')),
               );

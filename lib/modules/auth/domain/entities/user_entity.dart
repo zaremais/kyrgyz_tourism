@@ -1,19 +1,6 @@
 class UserEntity {
-  final int? id;
-  final String? email;
-  final String? userName;
-  final String? phone;
-  final String? code;
-  final String? password;
-  final String? message;
+  final String nickname;
+  final String email;
 
-  UserEntity({
-    this.id,
-    this.email,
-    this.userName,
-    this.phone,
-    this.code,
-    this.password,
-    this.message,
-  });
+  UserEntity({required this.nickname, required this.email});
 }

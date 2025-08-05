@@ -28,7 +28,7 @@ class FavoriteTourCubit extends Cubit<BaseState<List<FavoriteTourModel>>> {
       final favorites = await _getFavoriteToursUseCase.execute();
       emit(BaseState(status: StateStatus.success, model: favorites));
     } catch (e) {
-      emit(BaseState(status: StateStatus.error, model: []));
+      emit(BaseState(status: StateStatus.failure, model: []));
     }
   }
 
@@ -37,7 +37,7 @@ class FavoriteTourCubit extends Cubit<BaseState<List<FavoriteTourModel>>> {
       await _addFavoriteToursUseCase.execute(tour);
       await getFavorites();
     } catch (e) {
-      emit(BaseState(status: StateStatus.error, model: state.model));
+      emit(BaseState(status: StateStatus.failure, model: state.model));
     }
   }
 
@@ -46,7 +46,7 @@ class FavoriteTourCubit extends Cubit<BaseState<List<FavoriteTourModel>>> {
       await _deleteFavoriteTourUseCase.execute(tour);
       await getFavorites();
     } catch (e) {
-      emit(BaseState(status: StateStatus.error, model: state.model));
+      emit(BaseState(status: StateStatus.failure, model: state.model));
     }
   }
 

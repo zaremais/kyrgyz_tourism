@@ -1,7 +1,15 @@
 class SignUpEntity {
-  final String? email;
-  final String? nickname;
-  final String? password;
+  final String email;
+  final String nickaname;
+  final String password;
+  final String message;
+  final bool success;
 
-  SignUpEntity({this.email, this.nickname, this.password});
+  SignUpEntity({
+    required this.email,
+    required this.nickaname,
+    required this.password,
+    required this.message,
+    required this.success,
+  });
 }

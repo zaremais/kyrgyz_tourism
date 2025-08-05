@@ -4,14 +4,14 @@ import 'package:kyrgyz_tourism/modules/profile/domain/entities/profile_entity.da
 import 'package:kyrgyz_tourism/modules/profile/domain/repositories/profile_domain_repository.dart';
 
 @injectable
-class GetProfileUseCase extends BaseUsecase {
+class GetProfileUseCase extends BaseUsecase<ProfileEntity, NoParams> {
   final ProfileDomainRepository _repository;
 
   GetProfileUseCase({required ProfileDomainRepository repository})
     : _repository = repository;
 
   @override
-  Future<ProfileEntity> execute({required params}) {
+  Future<ProfileEntity> execute({required NoParams params}) {
     return _repository.getProfile();
   }
 }

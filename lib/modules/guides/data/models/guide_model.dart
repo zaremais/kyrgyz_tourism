@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:kyrgyz_tourism/core/constants/typedefs.dart';
 import 'package:kyrgyz_tourism/modules/guides/domain/entities/guide_entity.dart';
 
 part 'guide_model.g.dart';
@@ -15,7 +16,6 @@ class GuideModel extends GuideEntity {
     required super.description,
   });
 
-  factory GuideModel.fromJson(Map<String, dynamic> json) =>
-      _$GuideModelFromJson(json);
-  Map<String, dynamic> toJson() => _$GuideModelToJson(this);
+  factory GuideModel.fromJson(JSON json) => _$GuideModelFromJson(json);
+  JSON toJson() => _$GuideModelToJson(this);
 }
