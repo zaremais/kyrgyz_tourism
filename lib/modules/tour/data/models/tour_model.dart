@@ -17,6 +17,10 @@ class TourModel extends TourEntity {
     required super.region,
     required super.image,
     required super.departureDates,
+    required super.meetingPoint,
+    required super.difficulty,
+    required super.groupSize,
+    required super.minAge,
   });
 
   factory TourModel.fromJson(JSON json) => _$TourModelFromJson(json);

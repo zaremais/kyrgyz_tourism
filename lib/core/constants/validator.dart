@@ -1,11 +1,9 @@
-import 'package:email_validator/email_validator.dart';
-
 String? validateEmail(String? value) {
-  if (value == null || value.trim().isEmpty) {
-    return 'Почта обязательна';
+  if (value == null || value.isEmpty) {
+    return "Пожалуйста, введите email";
   }
-  if (!EmailValidator.validate(value.trim())) {
-    return 'Введите корректную почту';
+  if (!RegExp(r'^[\w-.]+@([\w-]+\.)+[\w]{2,4}$').hasMatch(value)) {
+    return 'Неверный формат';
   }
   return null;
 }
@@ -54,6 +52,25 @@ String? validateOtp(String? value) {
   return null;
 }
 
+String? validateToken(String? value) {
+  if (value == null || value.isEmpty) return "Введите токен";
+  return null;
+}
+
+String? validateNewPassword(String? value) {
+  if (value == null || value.isEmpty) return 'Введите пароль';
+  if (value.length < 8) return 'Пароль должен содержать минимум 8 символов';
+  if (!value.contains(RegExp(r'[A-Z]'))) return 'Добавьте заглавную букву';
+  return null;
+}
+
+String? validateConfirmPassword(String? value) {
+  if (value != validateNewPassword(value)) {
+    return 'Пароли не совпадают';
+  }
+  return null;
+}
+
 String formatPhoneNumber(String phone) {
   final digitsOnly = phone.replaceAll(RegExp(r'[^\d]'), '');
 
@@ -67,6 +84,17 @@ String formatPhoneNumber(String phone) {
 
   return '+$digitsOnly';
 }
+
+// bool? validateComment(bool? value) {
+//   if (value.isEmpty) return 'Введите комментарий';
+//   if (value.rating < 0.1) return 'Укажите рейтинг';
+//   return false;
+// }
+  
+ 
+
+  
+
 
   // void _handleLogin() async {
   //   if (_formKey.currentState!.validate()) {

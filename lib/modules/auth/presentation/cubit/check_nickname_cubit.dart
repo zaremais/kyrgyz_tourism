@@ -19,21 +19,19 @@ class CheckNicknameCubit extends Cubit<BaseState<bool>> {
     _subscription = _nicknameSubject
         .distinct()
         .debounceTime(const Duration(milliseconds: 500))
-        .listen(_checkNickname);
+        .listen((nickname) {
+          _checkNickname(NickNameParams(nickname: nickname));
+        });
   }
 
-  void checkNickname(String nickname) {
-    _nicknameSubject.add(nickname.trim());
+  void checkNickname(NickNameParams params) {
+    _nicknameSubject.add(params.nickname.trim());
   }
 
-  Future<void> _checkNickname(String nickname) async {
-    if (nickname.trim().length < 3) return;
-
+  Future<void> _checkNickname(NickNameParams params) async {
     emit(BaseState(status: StateStatus.loading));
     try {
-      final isTaken = await _checkNicknameUseCase.execute(
-        params: nickname.trim(),
-      );
+      final isTaken = await _checkNicknameUseCase.execute(params: params);
       emit(BaseState(status: StateStatus.success, model: isTaken));
     } catch (e) {
       emit(BaseState(status: StateStatus.failure, errorMessage: e.toString()));

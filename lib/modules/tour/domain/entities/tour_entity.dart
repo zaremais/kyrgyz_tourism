@@ -9,6 +9,10 @@ class TourEntity {
   final String region;
   final String image;
   final List<String> departureDates;
+  final String? meetingPoint;
+  final String? difficulty;
+  final int? groupSize;
+  final String? minAge;
 
   const TourEntity({
     required this.id,
@@ -21,5 +25,9 @@ class TourEntity {
     required this.region,
     required this.image,
     required this.departureDates,
+    this.meetingPoint,
+    this.difficulty,
+    this.groupSize,
+    this.minAge,
   });
 }

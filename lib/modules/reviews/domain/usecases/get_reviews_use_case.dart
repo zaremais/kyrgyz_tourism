@@ -5,33 +5,25 @@ import 'package:kyrgyz_tourism/modules/reviews/domain/entities/reviews_entity.da
 import 'package:kyrgyz_tourism/modules/reviews/domain/repositories/reviews_domain_repository.dart';
 
 @injectable
-class GetReviewsUseCase
-    extends BaseUsecase<List<ReviewsEntity>, SubmitReviewParams> {
+class GetReviewsUseCase extends BaseUsecase<List<ReviewsEntity>, ReviewParams> {
   final ReviewsDomainRepository _repository;
 
   GetReviewsUseCase({required ReviewsDomainRepository repository})
     : _repository = repository;
 
   @override
-  Future<List<ReviewsEntity>> execute({
-    required SubmitReviewParams params,
-  }) async {
+  Future<List<ReviewsEntity>> execute({required ReviewParams params}) async {
     return _repository.getReviews(params);
   }
 }
 
-class SubmitReviewParams {
-  final int tourId;
+class ReviewParams {
   final String comment;
   final double rating;
 
-  const SubmitReviewParams({
-    required this.tourId,
-    required this.comment,
-    required this.rating,
-  });
+  const ReviewParams({required this.comment, required this.rating});
 
   JSON toJson() {
-    return {'tourId': tourId, 'comment': comment, 'rating': rating};
+    return {'comment': comment, 'rating': rating};
   }
 }

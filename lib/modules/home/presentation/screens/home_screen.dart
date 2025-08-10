@@ -8,7 +8,7 @@ import 'package:kyrgyz_tourism/core/widgets/custom_main_app_bar.dart';
 import 'package:kyrgyz_tourism/modules/guides/presentation/widgets/all_guide_button.dart';
 import 'package:kyrgyz_tourism/modules/guides/presentation/widgets/guide_section.dart';
 import 'package:kyrgyz_tourism/modules/home/presentation/widgets/all_tour_button.dart';
-import 'package:kyrgyz_tourism/modules/home/presentation/widgets/contact_form.dart';
+import 'package:kyrgyz_tourism/modules/categories/presentation/widgets/contact_form.dart';
 import 'package:kyrgyz_tourism/modules/home/presentation/widgets/double_button.dart';
 import 'package:kyrgyz_tourism/modules/home/presentation/widgets/social_links_widget.dart';
 import 'package:kyrgyz_tourism/modules/reviews/presentation/widgets/all_reviews.dart';

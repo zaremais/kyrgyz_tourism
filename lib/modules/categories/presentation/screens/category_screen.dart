@@ -4,6 +4,7 @@ import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/widgets/custom_app_bar.dart';
 import 'package:kyrgyz_tourism/core/widgets/custom_section_button.dart';
 import 'package:kyrgyz_tourism/generated/l10n.dart';
+import 'package:kyrgyz_tourism/modules/categories/domain/entities/contact_entity.dart';
 
 @RoutePage()
 class CategoryScreen extends StatefulWidget {
@@ -18,7 +19,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: CustomAppBar(height: 70, onPressed: () {}),
+        appBar: CustomAppBar(
+          height: 70,
+          onPressed: () {
+            context.router.replace(GuideRoute());
+          },
+        ),
         body: Center(
           child: Column(
             children: [
@@ -42,7 +48,16 @@ class _CategoryScreenState extends State<CategoryScreen> {
               CustomSectionButton(
                 text: S.of(context).contacts,
                 onTap: () {
-                  // context.router.replace(PaymentRoute.page());
+                  context.router.replace(
+                    ContactRoute(
+                      contact: ContactEntity(
+                        fullName: '',
+                        phoneNumber: '',
+                        email: '',
+                        comment: '',
+                      ),
+                    ),
+                  );
                 },
               ),
               SizedBox(height: 14),

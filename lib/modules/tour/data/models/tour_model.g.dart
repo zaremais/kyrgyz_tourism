@@ -20,6 +20,10 @@ TourModel _$TourModelFromJson(Map json) => TourModel(
       (json['departureDates'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
+  meetingPoint: json['meetingPoint'] as String?,
+  difficulty: json['difficulty'] as String?,
+  groupSize: (json['groupSize'] as num?)?.toInt(),
+  minAge: json['minAge'] as String?,
 );
 
 Map<String, dynamic> _$TourModelToJson(TourModel instance) => <String, dynamic>{
@@ -33,4 +37,8 @@ Map<String, dynamic> _$TourModelToJson(TourModel instance) => <String, dynamic>{
   'region': instance.region,
   'image': instance.image,
   'departureDates': instance.departureDates,
+  'meetingPoint': instance.meetingPoint,
+  'difficulty': instance.difficulty,
+  'groupSize': instance.groupSize,
+  'minAge': instance.minAge,
 };

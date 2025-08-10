@@ -1,6 +1,3 @@
-import 'dart:developer';
-import 'dart:math' hide log;
-
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kyrgyz_tourism/core/constants/api_urls.dart';
@@ -30,10 +27,6 @@ class AuthSignInRepository extends AuthDomainSignInRepository {
       ),
     );
 
-    // final storage = TokenStorageService();
-    // log('ACCESS TOKEN: ${await storage.getAccessToken()}');
-    // log('REFRESH TOKEN: ${await storage.getRefreshToken()}');
-
     if (response.statusCode == 200) {
       await _tokenStorage.saveTokens(
         accessToken: response.data['accessToken'],
@@ -58,9 +51,6 @@ class AuthSignInRepository extends AuthDomainSignInRepository {
       ApiUrls.refreshToken,
       data: params.toJson(),
     );
-
-    // log('ACCESS TOKEN: ${await _tokenStorage.getAccessToken()}');
-    // log('REFRESH TOKEN: ${await _tokenStorage.getRefreshToken()}');
 
     if (response.statusCode == 200) {
       await _tokenStorage.saveTokens(

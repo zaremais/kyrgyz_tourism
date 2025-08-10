@@ -20,7 +20,7 @@ class ContactButton extends StatelessWidget {
       height: 35,
 
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
           backgroundColor: backgroundColor,

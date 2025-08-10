@@ -11,6 +11,22 @@
 part of 'route.dart';
 
 /// generated route for
+/// [AddReviewScreen]
+class AddReviewRoute extends PageRouteInfo<void> {
+  const AddReviewRoute({List<PageRouteInfo>? children})
+    : super(AddReviewRoute.name, initialChildren: children);
+
+  static const String name = 'AddReviewRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const AddReviewScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [AppScreen]
 class AppRoute extends PageRouteInfo<void> {
   const AppRoute({List<PageRouteInfo>? children})
@@ -91,19 +107,50 @@ class ChatSupportRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [ForgotPasswordScreen]
-class ForgotPasswordRoute extends PageRouteInfo<void> {
-  const ForgotPasswordRoute({List<PageRouteInfo>? children})
-    : super(ForgotPasswordRoute.name, initialChildren: children);
+/// [ContactScreen]
+class ContactRoute extends PageRouteInfo<ContactRouteArgs> {
+  ContactRoute({
+    Key? key,
+    required ContactEntity contact,
+    List<PageRouteInfo>? children,
+  }) : super(
+         ContactRoute.name,
+         args: ContactRouteArgs(key: key, contact: contact),
+         initialChildren: children,
+       );
 
-  static const String name = 'ForgotPasswordRoute';
+  static const String name = 'ContactRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const ForgotPasswordScreen();
+      final args = data.argsAs<ContactRouteArgs>();
+      return ContactScreen(key: args.key, contact: args.contact);
     },
   );
+}
+
+class ContactRouteArgs {
+  const ContactRouteArgs({this.key, required this.contact});
+
+  final Key? key;
+
+  final ContactEntity contact;
+
+  @override
+  String toString() {
+    return 'ContactRouteArgs{key: $key, contact: $contact}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! ContactRouteArgs) return false;
+    return key == other.key && contact == other.contact;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ contact.hashCode;
 }
 
 /// generated route for
@@ -261,6 +308,38 @@ class NotificationRouteArgs {
 
   @override
   int get hashCode => key.hashCode ^ message.hashCode;
+}
+
+/// generated route for
+/// [PasswordResetConfirmScreen]
+class PasswordResetConfirmRoute extends PageRouteInfo<void> {
+  const PasswordResetConfirmRoute({List<PageRouteInfo>? children})
+    : super(PasswordResetConfirmRoute.name, initialChildren: children);
+
+  static const String name = 'PasswordResetConfirmRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const PasswordResetConfirmScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [PasswordResetScreen]
+class PasswordResetRoute extends PageRouteInfo<void> {
+  const PasswordResetRoute({List<PageRouteInfo>? children})
+    : super(PasswordResetRoute.name, initialChildren: children);
+
+  static const String name = 'PasswordResetRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const PasswordResetScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -427,22 +506,6 @@ class RegisterSuccessRouteArgs {
   @override
   int get hashCode =>
       key.hashCode ^ email.hashCode ^ nickname.hashCode ^ password.hashCode;
-}
-
-/// generated route for
-/// [ResetPasswordScreen]
-class ResetPasswordRoute extends PageRouteInfo<void> {
-  const ResetPasswordRoute({List<PageRouteInfo>? children})
-    : super(ResetPasswordRoute.name, initialChildren: children);
-
-  static const String name = 'ResetPasswordRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const ResetPasswordScreen();
-    },
-  );
 }
 
 /// generated route for

@@ -8,9 +8,9 @@ part of 'telegram_confirm_model.dart';
 
 TelegramConfirmModel _$TelegramConfirmModelFromJson(Map json) =>
     TelegramConfirmModel(
-      accessToken: json['accessToken'] as String? ?? '',
-      refreshToken: json['refreshToken'] as String? ?? '',
-      chatId: (json['chatId'] as num?)?.toInt() ?? 0,
+      accessToken: json['accessToken'] as String,
+      refreshToken: json['refreshToken'] as String,
+      chatId: (json['chatId'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$TelegramConfirmModelToJson(

@@ -1,0 +1,15 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'password_reset_model.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+PasswordResetModel _$PasswordResetModelFromJson(Map json) => PasswordResetModel(
+  message: json['message'] as String,
+  url: json['url'] as String,
+);
+
+Map<String, dynamic> _$PasswordResetModelToJson(PasswordResetModel instance) =>
+    <String, dynamic>{'message': instance.message, 'url': instance.url};

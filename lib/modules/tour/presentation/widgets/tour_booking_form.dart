@@ -73,7 +73,7 @@ class _TourBookingFormState extends State<TourBookingForm> {
               CustomTextFormField(
                 controller: _phoneController,
                 label: 'Телефон',
-                hintText: '+7 (999) 123-45-67',
+                hintText: '+(996)555444333',
                 keyboardType: TextInputType.phone,
                 validator:
                     (value) =>

@@ -110,30 +110,30 @@ Widget _buildTourDetails(TourEntity tour, BuildContext context) {
         subtitle: tour.tourDuration.toString(),
         color: isDark ? Colors.white : Colors.black,
       ),
-      // TourDetailTile(
-      //   iconPath: 'assets/icon/hiking.png',
-      //   title: 'Сложность',
-      //   subtitle: tour.difficulty ?? '',
-      //   color: isDark ? Colors.white : Colors.black,
-      // ),
+      TourDetailTile(
+        iconPath: 'assets/icon/hiking.png',
+        title: 'Сложность',
+        subtitle: tour.difficulty.toString(),
+        color: isDark ? Colors.white : Colors.black,
+      ),
       TourDetailTile(
         iconPath: 'assets/icon/price.png',
         title: 'Стоимость',
         subtitle: tour.price.toString(),
         color: isDark ? Colors.white : Colors.black,
       ),
-      // TourDetailTile(
-      //   iconPath: 'assets/icon/human.png',
-      //   title: 'Возраст от',
-      //   subtitle: tour.minAge.toString(),
-      //   color: isDark ? Colors.white : Colors.black,
-      // ),
-      // TourDetailTile(
-      //   iconPath: 'assets/icon/group.png',
-      //   title: 'Группа',
-      //   subtitle: tour.maxGroupSize.toString(),
-      //   color: isDark ? Colors.white : Colors.black,
-      // ),
+      TourDetailTile(
+        iconPath: 'assets/icon/human.png',
+        title: 'Возраст от',
+        subtitle: tour.minAge.toString(),
+        color: isDark ? Colors.white : Colors.black,
+      ),
+      TourDetailTile(
+        iconPath: 'assets/icon/group.png',
+        title: 'Группа',
+        subtitle: tour.groupSize.toString(),
+        color: isDark ? Colors.white : Colors.black,
+      ),
     ],
   );
 }

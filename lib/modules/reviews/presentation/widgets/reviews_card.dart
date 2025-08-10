@@ -54,8 +54,6 @@ class ReviewsCard extends StatelessWidget {
                       ),
                     );
                   }),
-
-                  // SizedBox(width: 8),
                 ],
               ),
             ],

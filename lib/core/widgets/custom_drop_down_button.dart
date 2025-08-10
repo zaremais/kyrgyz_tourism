@@ -8,15 +8,15 @@ class CustomDropDownButton extends StatefulWidget {
 }
 
 class _CustomDropDownButtonState extends State<CustomDropDownButton> {
-  List<String> guiads = ['element1', 'element2', 'element3'];
+  List<String> guiads = [];
 
-  String selectedValue = 'element1';
+  String selectedValue = 'element';
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Container(height: 2, width: 250, color: Colors.grey),
+        Container(height: 2, width: 300, color: Colors.grey),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: DropdownButton(

@@ -7,11 +7,11 @@ part of 'sign_in_model.dart';
 // **************************************************************************
 
 SignInModel _$SignInModelFromJson(Map json) => SignInModel(
-  accessToken: json['accessToken'] as String? ?? '',
-  refreshToken: json['refreshToken'] as String? ?? '',
-  identifier: json['identifier'] as String? ?? '',
-  password: json['password'] as String? ?? '',
-  message: json['message'] as String? ?? '',
+  accessToken: json['accessToken'] as String,
+  refreshToken: json['refreshToken'] as String,
+  identifier: json['identifier'] as String?,
+  password: json['password'] as String?,
+  message: json['message'] as String?,
 );
 
 Map<String, dynamic> _$SignInModelToJson(SignInModel instance) =>

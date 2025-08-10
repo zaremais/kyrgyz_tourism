@@ -9,6 +9,7 @@ import 'package:kyrgyz_tourism/core/constants/validator.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
 import 'package:kyrgyz_tourism/main.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/entities/sign_up_entity.dart';
+import 'package:kyrgyz_tourism/modules/auth/domain/usecases/check_nickname_use_case.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/usecases/sign_up_use_case.dart';
 import 'package:kyrgyz_tourism/modules/auth/presentation/cubit/check_nickname_cubit.dart';
 import 'package:kyrgyz_tourism/modules/auth/presentation/cubit/sign_up_cubit.dart';
@@ -77,7 +78,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(color: Colors.black12),
                   ),
-                  padding: const EdgeInsets.symmetric(horizontal: 45),
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Column(
                     children: [
                       const SizedBox(height: 40),
@@ -124,7 +125,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   hintText: 'Введите логин',
                                   controller: _nicknameController,
                                   onChanged: (value) {
-                                    _nicknameCubit.checkNickname(value);
+                                    _nicknameCubit.checkNickname(
+                                      NickNameParams(
+                                        nickname:
+                                            _nicknameController.text.trim(),
+                                      ),
+                                    );
                                   },
                                   validator: validateNikeName,
                                   obscureText: false,
@@ -206,11 +212,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       state.status == StateStatus.loading,
                                   title: "Далее",
                                   onPressed: () async {
-                                    final email = _emailController.text.trim();
-                                    final password =
-                                        _passwordController.text.trim();
-                                    final nikename =
-                                        _nicknameController.text.trim();
+                                    // final email = _emailController.text.trim();
+                                    // final password =
+                                    //     _passwordController.text.trim();
+                                    // final nikename =
+                                    //     _nicknameController.text.trim();
 
                                     if (!_formKey.currentState!.validate()) {
                                       ScaffoldMessenger.of(
@@ -244,9 +250,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                                     _signupCubit.signup(
                                       SignUpParams(
-                                        email: email,
-                                        password: password,
-                                        nickaname: nikename,
+                                        email: _emailController.text.trim(),
+                                        nickaname:
+                                            _nicknameController.text.trim(),
+                                        password:
+                                            _passwordController.text.trim(),
                                       ),
                                     );
                                   },

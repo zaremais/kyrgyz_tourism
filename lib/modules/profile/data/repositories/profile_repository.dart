@@ -16,16 +16,24 @@ class ProfileRepository extends ProfileDomainRepository {
 
   @override
   Future<ProfileModel> getProfile() async {
+    // final accessToken = await _tokenStorage.getAccessToken();
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('auth_token');
-    final result = await _dio.get(
+    final response = await _dio.get(
       ApiUrls.getProfile,
-      options: Options(headers: {'Authorization': 'Bearer $token'}),
+      options: Options(
+        headers: {
+          'accept': '*/*',
+          'Content-Type': 'application/json',
+          "Authorization": "Bearer $token",
+        },
+      ),
     );
-
-    // log('ACCESS TOKEN: ${await _tokenStorage.getAccessToken()}');
-    // log('REFRESH TOKEN: ${await _tokenStorage.getRefreshToken()}');
-    return ProfileModel.fromJson(result.data);
+    if (response.statusCode == 200) {
+      return ProfileModel.fromJson(response.data);
+    } else {
+      throw Exception("Ошибка загрузки профиля");
+    }
   }
 
   @override

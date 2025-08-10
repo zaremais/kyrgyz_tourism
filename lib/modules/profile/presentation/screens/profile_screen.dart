@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
+import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/core/config/themes/theme.dart';
 import 'package:kyrgyz_tourism/core/constants/validator.dart';
@@ -50,7 +51,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Профиль'), centerTitle: true),
+      appBar: AppBar(
+        title: const Text('Профиль'),
+        centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            context.router.push(HomeRoute());
+          },
+          icon: Icon(Icons.arrow_back_ios),
+        ),
+      ),
       body: BlocProvider.value(
         value: _profileCubit,
         child: BlocBuilder<ProfileCubit, BaseState<ProfileEntity>>(
@@ -62,7 +72,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             } else if (state.status == StateStatus.success) {
               final profile = state.model!;
               return SingleChildScrollView(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(24),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

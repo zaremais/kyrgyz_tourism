@@ -1,9 +1,9 @@
 class SignInEntity {
   final String accessToken;
   final String refreshToken;
-  final String identifier;
-  final String password;
-  final String message;
+  final String? identifier;
+  final String? password;
+  final String? message;
 
   SignInEntity({
     required this.accessToken,

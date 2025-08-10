@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:kyrgyz_tourism/core/constants/api_urls.dart';
 import 'package:kyrgyz_tourism/modules/auth/data/models/telegram_otp_model.dart';
+import 'package:kyrgyz_tourism/modules/profile/data/models/profile_model.dart';
 import 'package:kyrgyz_tourism/modules/tour/data/models/tour_model.dart';
 import 'package:retrofit/retrofit.dart';
 part 'auth_api_service.g.dart';
@@ -23,9 +24,10 @@ abstract class AuthApiService {
   Future<void> signIn();
 
   @POST('/v1/api/otp/register')
-  Future<TelegramOtpModel> sendOtp(
-    // @Body() TelegramOtpModel request
-  );
+  Future<TelegramOtpModel> sendOtp();
+
+  @GET('/v1/api/profile/me')
+  Future<ProfileModel> getProfile();
 
   @GET('/v1/api/verify')
   Future<void> verifyCode();

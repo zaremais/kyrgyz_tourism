@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/core/widgets/language_switch_widget.dart';
 import 'package:kyrgyz_tourism/modules/chatBot/data/chat_model.dart';
@@ -177,7 +178,16 @@ class _ChatSupportScreenState extends State<ChatSupportScreen> {
                     style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
                   ),
                   SizedBox(width: 13),
-                  Icon(Icons.arrow_forward_ios, color: Colors.black, size: 12),
+                  IconButton(
+                    onPressed: () {
+                      context.router.push(HomeRoute());
+                    },
+                    icon: Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.black,
+                      size: 12,
+                    ),
+                  ),
                   SizedBox(width: 10),
                   Spacer(),
                   LanguageSwitchWidget(),
@@ -215,7 +225,9 @@ class _ChatSupportScreenState extends State<ChatSupportScreen> {
                             SizedBox(width: 10),
                             IconButton(
                               color: Colors.white,
-                              onPressed: () => Navigator.pop(context),
+                              onPressed: () {
+                                context.router.push(HomeRoute());
+                              },
                               icon: Icon(Icons.close),
                             ),
                           ],

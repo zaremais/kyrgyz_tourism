@@ -4,7 +4,7 @@ class ProfileEntity {
   final String? workStartDate;
   final String? lastLogin;
   final String? description;
-  final int? id;
+  final int id;
   final String? name;
   final String nickname;
   final String? email;
@@ -19,9 +19,9 @@ class ProfileEntity {
     this.lastLogin,
     this.description,
     required this.id,
-    required this.name,
+    this.name,
     required this.nickname,
-    required this.email,
+    this.email,
     required this.image,
     required this.phoneNumber,
     required this.roles,

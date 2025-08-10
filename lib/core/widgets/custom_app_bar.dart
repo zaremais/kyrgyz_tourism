@@ -4,8 +4,16 @@ import 'package:kyrgyz_tourism/core/widgets/language_switch_widget.dart';
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double height;
   final void Function()? onPressed;
+  final String? image;
+  final String? name;
 
-  const CustomAppBar({super.key, required this.height, this.onPressed});
+  const CustomAppBar({
+    super.key,
+    required this.height,
+    this.onPressed,
+    this.image,
+    this.name,
+  });
 
   @override
   Size get preferredSize => Size.fromHeight(height);
@@ -26,16 +34,19 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(5.0),
-            child: CircleAvatar(
-              backgroundImage: AssetImage('assets/images/ellipse2.png'),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(30),
+              child:
+                  image != null
+                      ? Image.network(image!, width: 60)
+                      : Icon(Icons.person),
             ),
           ),
           SizedBox(width: 10),
           Text(
-            'Захарова Анна',
-            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+            name ?? 'Без имени',
+            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
           ),
-
           IconButton(
             onPressed: onPressed,
             color: Colors.black,

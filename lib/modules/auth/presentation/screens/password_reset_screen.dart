@@ -2,51 +2,60 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
+import 'package:kyrgyz_tourism/core/config/route/route.dart';
+import 'package:kyrgyz_tourism/core/constants/validator.dart';
 import 'package:kyrgyz_tourism/core/di/service_locator.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
-import 'package:kyrgyz_tourism/modules/auth/domain/entities/reset_password_result.dart';
-import 'package:kyrgyz_tourism/modules/auth/domain/usecases/reset_password_use_case.dart';
-import 'package:kyrgyz_tourism/modules/auth/presentation/cubit/reset_password_cubit.dart';
+import 'package:kyrgyz_tourism/modules/auth/domain/usecases/password_reset_use_case.dart';
+import 'package:kyrgyz_tourism/modules/auth/presentation/cubit/password_reset_cubit.dart';
 
 @RoutePage()
-class ResetPasswordScreen extends StatefulWidget {
-  const ResetPasswordScreen({super.key});
+class PasswordResetScreen extends StatefulWidget {
+  const PasswordResetScreen({super.key});
 
   @override
-  State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
+  State<PasswordResetScreen> createState() => _PasswordResetScreenState();
 }
 
-class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+class _PasswordResetScreenState extends State<PasswordResetScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
+
+  late final PasswordResetCubit _resetPasswordCubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _resetPasswordCubit = di<PasswordResetCubit>();
+  }
 
   @override
   void dispose() {
     _emailController.dispose();
+    _resetPasswordCubit.close();
     super.dispose();
   }
-
-  final _resetPasswordCubit = di<ResetPasswordCubit>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Восстановление пароля'),
+        title: const Text('Восстановление пароля'),
         leading: IconButton(
           onPressed: () => context.router.popTop(),
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
         ),
       ),
       body: BlocProvider.value(
         value: _resetPasswordCubit,
-        child: BlocConsumer<ResetPasswordCubit, BaseState<ResetPasswordResult>>(
+        child: BlocConsumer<PasswordResetCubit, BaseState<void>>(
           listener: (context, state) {
             if (state.status == StateStatus.success) {
+              final email = _emailController.text.trim();
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.model?.message ?? "Успешно")),
+                SnackBar(content: Text('Письмо отправлено на $email')),
               );
-              context.router.pop();
+              context.router.replace(const PasswordResetConfirmRoute());
             }
             if (state.status == StateStatus.failure) {
               ScaffoldMessenger.of(context).showSnackBar(
@@ -57,7 +66,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           builder: (context, state) {
             return Center(
               child: SingleChildScrollView(
-                padding: EdgeInsets.all(24),
+                padding: const EdgeInsets.all(24),
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -67,25 +76,15 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         style: TextStyle(fontSize: 16),
                         textAlign: TextAlign.center,
                       ),
-                      SizedBox(height: 24),
+                      const SizedBox(height: 24),
                       TextFormField(
                         controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'Email',
                           border: OutlineInputBorder(),
                         ),
-                        // validator: (value) {
-                        //   if (value == null || value.isEmpty) {
-                        //     return "Пожалуйста, введите email";
-                        //   }
-                        //   if (!RegExp(
-                        //     r'^[\w-.]+@([\w-]+\.)+[\w]{2,4}$',
-                        //   ).hasMatch(value)) {
-                        //     return 'Неверный формат';
-                        //   }
-                        //   return null;
-                        // },
+                        validator: validateEmail,
                       ),
                       const SizedBox(height: 50),
                       state.status == StateStatus.loading
@@ -94,21 +93,13 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 _resetPasswordCubit.resetPassword(
-                                  params: ResetPasswordParams(
-                                    email: _emailController.text,
-                                  ),
-                                );
-                                final email = _emailController.text.trim();
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      'Письмо отправлено на $email',
-                                    ),
+                                  params: PasswordResetParams(
+                                    email: _emailController.text.trim(),
                                   ),
                                 );
                               }
                             },
-                            child: Text("Восстановить"),
+                            child: const Text("Восстановить"),
                           ),
                     ],
                   ),

@@ -12,7 +12,7 @@ ProfileModel _$ProfileModelFromJson(Map json) => ProfileModel(
   lastLogin: json['lastLogin'] as String?,
   workStartDate: json['workStartDate'] as String?,
   description: json['description'] as String?,
-  id: (json['id'] as num?)?.toInt(),
+  id: (json['id'] as num).toInt(),
   name: json['name'] as String?,
   nickname: json['nickname'] as String,
   email: json['email'] as String?,

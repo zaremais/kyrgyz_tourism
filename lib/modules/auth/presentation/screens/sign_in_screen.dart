@@ -54,16 +54,6 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    _emailFocusNode.dispose();
-    _passwordFocusNode.dispose();
-    _signinCubit.close();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final darkTheme = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
@@ -97,7 +87,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     border: Border.all(color: Theme.of(context).dividerColor),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 45),
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
                     child: Form(
                       key: _formKey,
                       child: Column(
@@ -193,7 +183,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             children: [
                               TextButton(
                                 onPressed: () {
-                                  context.router.replace(ForgotPasswordRoute());
+                                  context.router.replace(PasswordResetRoute());
                                 },
                                 child: const Text(
                                   'Забыли пароль?',
@@ -278,9 +268,9 @@ class _SignInScreenState extends State<SignInScreen> {
                                           state.status == StateStatus.loading
                                               ? null
                                               : () {
-                                                // context.router.replace(
-                                                //   // SignUpRoute(),
-                                                // );
+                                                context.router.replace(
+                                                  SignUpRoute(),
+                                                );
                                               },
                                       child: Text(
                                         'Регистрация',

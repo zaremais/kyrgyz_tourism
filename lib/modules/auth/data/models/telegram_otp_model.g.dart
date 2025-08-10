@@ -7,11 +7,11 @@ part of 'telegram_otp_model.dart';
 // **************************************************************************
 
 TelegramOtpModel _$TelegramOtpModelFromJson(Map json) => TelegramOtpModel(
-  username: json['username'] as String? ?? '',
-  rawPassword: json['rawPassword'] as String? ?? '',
-  otp: json['otp'] as String? ?? '',
-  phoneNumber: json['phoneNumber'] as String? ?? '',
-  chatId: (json['chatId'] as num?)?.toInt() ?? 0,
+  username: json['username'] as String,
+  rawPassword: json['rawPassword'] as String,
+  otp: json['otp'] as String,
+  phoneNumber: json['phoneNumber'] as String?,
+  chatId: (json['chatId'] as num?)?.toInt(),
 );
 
 Map<String, dynamic> _$TelegramOtpModelToJson(TelegramOtpModel instance) =>

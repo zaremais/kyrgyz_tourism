@@ -1,4 +1,5 @@
 import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kyrgyz_tourism/core/constants/api_urls.dart';
@@ -7,6 +8,7 @@ import 'package:kyrgyz_tourism/core/network/dio_client.dart';
 import 'package:kyrgyz_tourism/core/network/storage_secure_storage/token_storage_service.dart';
 import 'package:kyrgyz_tourism/modules/auth/data/models/sign_up_model.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/repositories/auth_domain_sign_up_repository.dart';
+import 'package:kyrgyz_tourism/modules/auth/domain/usecases/check_nickname_use_case.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/usecases/sign_up_use_case.dart';
 
 @LazySingleton(as: AuthDomainSignUpRepository)
@@ -21,9 +23,9 @@ class AuthSignUpRepository extends AuthDomainSignUpRepository {
        _tokenStorage = tokenStorage;
 
   @override
-  Future<bool> checkNickname(String nickname) async {
+  Future<bool> checkNickname(NickNameParams params) async {
     try {
-      final response = await _dio.get(ApiUrls.checkNickname(nickname));
+      final response = await _dio.get(ApiUrls.checkNickname(params.nickname));
       return response.data == true;
     } catch (e) {
       throw Exception('Ошибка проверки никнейма: $e');
@@ -69,32 +71,26 @@ class AuthSignUpRepository extends AuthDomainSignUpRepository {
     try {
       final response = await _dio.post(
         ApiUrls.signup,
+        data: params.toJson(),
         options: Options(
           headers: {'Content-Type': 'application/json', 'accept': '*/*'},
-          validateStatus: (status) => status != 409,
+          validateStatus: (status) => status! < 500,
         ),
-        data: params.toJson(),
       );
 
-      final data = response.data;
-
-      if (data is! Map<String, dynamic>) {
-        throw Exception('ОшибкаA регистрации: $data');
+      if (response.data['accessToken'] != null) {
+        await _tokenStorage.saveTokens(
+          accessToken: response.data['accessToken'],
+          refreshToken: response.data['refreshToken'],
+        );
       }
 
-      return SignUpModel.fromJson(data);
+      return SignUpModel.fromJson(response.data);
     } on DioException catch (e) {
       throw Exception('Ошибка регистрации: ${e.response?.data}');
     } catch (e) {
       throw Exception('Ошибка регистрации: ${e.toString()}');
     }
-  }
-
-  Future<Map<String, String?>> getStoredTokens() async {
-    final accessToken = await _tokenStorage.getAccessToken();
-    final refreshToken = await _tokenStorage.getRefreshToken();
-
-    return {'accessToken': accessToken, 'refreshToken': refreshToken};
   }
 
   Future<void> clearStoredTokens() async {
