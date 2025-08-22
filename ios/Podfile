@@ -1,5 +1,6 @@
 # Uncomment this line to define a global platform for your project
-platform :ios, '14.0'
+platform :ios, '13.0'
+install! 'cocoapods', :disable_input_output_paths => true
 use_frameworks! :linkage => :static
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 

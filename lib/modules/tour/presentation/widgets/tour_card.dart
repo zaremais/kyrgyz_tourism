@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kyrgyz_tourism/core/utils/data_formatter.dart';
 import 'package:kyrgyz_tourism/modules/tour/domain/entities/tour_entity.dart';
 
 class TourCard extends StatelessWidget {
@@ -9,55 +10,78 @@ class TourCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Card(
-        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        elevation: 4,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ClipRRect(
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(16),
-              ),
-              child: Image.network(
-                tour.image,
-                height: 180,
-                width: double.infinity,
-                fit: BoxFit.cover,
-                errorBuilder:
-                    (context, error, stackTrace) => const SizedBox(
-                      height: 180,
-                      child: Center(child: Icon(Icons.broken_image)),
-                    ),
-              ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(34.0),
+          child: ClipRRect(
+            borderRadius: BorderRadiusGeometry.circular(16),
+            child: Image.network(
+              tour.image.toString(),
+              fit: BoxFit.cover,
+              width: 330,
+              height: 330,
             ),
-
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+          ),
+        ),
+        const SizedBox(height: 7),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 34),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    tour.title,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                  Expanded(
+                    child: Text(
+                      tour.title.toString(),
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 4),
-                  Text('Цена: ${tour.price} KGS'),
-                  Text('Регион: ${tour.region}'),
-                  if (tour.departureDates.isNotEmpty)
-                    Text('Дата выезда: ${tour.departureDates.first}'),
+                  Row(
+                    children: [
+                      Text(
+                        tour.rating.toString(),
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
+                      Image.asset('assets/images/star.png', width: 24),
+                    ],
+                  ),
                 ],
               ),
-            ),
-          ],
+              Text(
+                '${tour.tourDuration} дня',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
+              Text(
+                '${tour.price} сом',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
+
+              Text(
+                'Дата выезда: ${DateFormatter.iso(DateTime.parse(tour.departureDates.first))}',
+
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
+
+              Text(
+                'Осталось мест: ${tour.placesLeft}',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
+            ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }

@@ -9,9 +9,7 @@ part of 'telegram_otp_model.dart';
 TelegramOtpModel _$TelegramOtpModelFromJson(Map json) => TelegramOtpModel(
   username: json['username'] as String,
   rawPassword: json['rawPassword'] as String,
-  otp: json['otp'] as String,
-  phoneNumber: json['phoneNumber'] as String?,
-  chatId: (json['chatId'] as num?)?.toInt(),
+  otp: json['otp'] as String?,
 );
 
 Map<String, dynamic> _$TelegramOtpModelToJson(TelegramOtpModel instance) =>
@@ -19,6 +17,4 @@ Map<String, dynamic> _$TelegramOtpModelToJson(TelegramOtpModel instance) =>
       'username': instance.username,
       'rawPassword': instance.rawPassword,
       'otp': instance.otp,
-      'phoneNumber': instance.phoneNumber,
-      'chatId': instance.chatId,
     };

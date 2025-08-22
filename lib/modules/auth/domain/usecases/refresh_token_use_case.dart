@@ -18,12 +18,11 @@ class RefreshTokenUseCase extends BaseUsecase<SignInEntity, RefreshParams> {
 }
 
 class RefreshParams {
-  final String accessToken;
   final String refreshToken;
 
-  RefreshParams({required this.accessToken, required this.refreshToken});
+  RefreshParams({required this.refreshToken});
 
   JSON toJson() {
-    return {'accessToken': accessToken, 'refreshToken': refreshToken};
+    return {'refreshToken': refreshToken};
   }
 }

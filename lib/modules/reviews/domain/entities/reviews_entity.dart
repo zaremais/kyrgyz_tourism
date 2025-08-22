@@ -10,6 +10,6 @@ class ReviewsEntity {
     required this.name,
     required this.rating,
     required this.comment,
-    required this.imageUrl,
+    this.imageUrl,
   });
 }

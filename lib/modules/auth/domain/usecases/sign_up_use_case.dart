@@ -4,7 +4,7 @@ import 'package:kyrgyz_tourism/core/constants/typedefs.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/entities/sign_up_entity.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/repositories/auth_domain_sign_up_repository.dart';
 
-@injectable
+@LazySingleton()
 class SignupUseCase extends BaseUsecase<SignUpEntity, SignUpParams> {
   final AuthDomainSignUpRepository _repository;
 

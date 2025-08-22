@@ -1,0 +1,1 @@
+{"routes":[{"name":null,"pathParams":[],"pageType":{"import":"package:kyrgyz_tourism/splash_screen.dart","name":"SplashScreen","isNullable":false,"isRecordType":false},"className":"SplashScreen","parameters":[],"hasWrappedRoute":false,"hasConstConstructor":true,"deferredLoading":null}],"inputPath":"lib/splash_screen.dart","inputHash":0}

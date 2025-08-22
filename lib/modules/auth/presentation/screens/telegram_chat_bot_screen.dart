@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
 import 'package:kyrgyz_tourism/modules/auth/presentation/screens/telegram_phone_screen.dart';
@@ -47,7 +48,9 @@ class TelegramChatBotScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             IconButton(
-                              onPressed: () => context.router.pop(),
+                              onPressed: () {
+                                context.router.replace(AuthRoute());
+                              },
                               icon: Icon(Icons.close, color: Colors.grey),
                             ),
                           ],

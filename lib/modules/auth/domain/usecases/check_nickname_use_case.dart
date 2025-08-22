@@ -4,22 +4,22 @@ import 'package:kyrgyz_tourism/core/constants/typedefs.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/repositories/auth_domain_sign_up_repository.dart';
 
 @injectable
-class CheckNicknameUseCase extends BaseUsecase<bool, NickNameParams> {
+class CheckNicknameUseCase extends BaseUsecase<bool, CheckNickNameParams> {
   final AuthDomainSignUpRepository _repository;
 
   CheckNicknameUseCase({required AuthDomainSignUpRepository repository})
     : _repository = repository;
 
   @override
-  Future<bool> execute({required NickNameParams params}) async {
+  Future<bool> execute({required CheckNickNameParams params}) async {
     return _repository.checkNickname(params);
   }
 }
 
-class NickNameParams {
+class CheckNickNameParams {
   final String nickname;
 
-  NickNameParams({required this.nickname});
+  CheckNickNameParams({required this.nickname});
 
   JSON toJson() {
     return {'nickname': nickname};

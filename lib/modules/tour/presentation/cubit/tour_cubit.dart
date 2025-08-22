@@ -22,10 +22,10 @@ class TourCubit extends Cubit<BaseState<List<TourEntity>>> {
     emit(BaseState(status: StateStatus.loading));
 
     try {
-      final result = await _getToursUseCase.execute(
-        params: GetToursParams(page: 1, size: 10, sort: 'averageRating,desc'),
+      final tours = await _getToursUseCase.execute(
+        params: GetToursParams(page: 0, size: 10, sort: 'averageRating,desc'),
       );
-      emit(BaseState(status: StateStatus.success, model: result));
+      emit(BaseState(status: StateStatus.success, model: tours));
     } catch (e) {
       emit(BaseState(status: StateStatus.failure, errorMessage: e.toString()));
     }

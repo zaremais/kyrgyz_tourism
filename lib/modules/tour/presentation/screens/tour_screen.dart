@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/core/config/themes/theme.dart';
+import 'package:kyrgyz_tourism/core/di/init_di.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
 import 'package:kyrgyz_tourism/core/widgets/custom_app_bar.dart';
 import 'package:kyrgyz_tourism/core/widgets/custom_drawer.dart';
 import 'package:kyrgyz_tourism/generated/l10n.dart';
-import 'package:kyrgyz_tourism/main.dart';
 import 'package:kyrgyz_tourism/modules/tour/domain/entities/tour_entity.dart';
 import 'package:kyrgyz_tourism/modules/tour/presentation/cubit/tour_cubit.dart';
 import 'package:kyrgyz_tourism/modules/tour/presentation/widgets/filter_bottom_sheet.dart';
@@ -142,7 +142,7 @@ class _ToursScreenState extends State<ToursScreen> {
                         onPressed: () {
                           setState(() {});
                           Navigator.pop(context);
-                          _tourCubit.getTours();
+                          _tourCubit.getTours;
                         },
                         child: const Text('Применить'),
                       ),
@@ -284,55 +284,3 @@ class _ToursScreenState extends State<ToursScreen> {
     );
   }
 }
-
-
-
-
-  
-
-
-
-    //  Padding(
-    //                     padding: const EdgeInsets.symmetric(horizontal: 24),
-    //                     child: GestureDetector(
-    //                       onTap: () {
-    //                         showModalBottomSheet(
-    //                           context: context,
-    //                           isScrollControlled: true,
-    //                           useRootNavigator: false,
-    //                           shape: const RoundedRectangleBorder(
-    //                             borderRadius: BorderRadius.vertical(
-    //                               top: Radius.circular(20),
-    //                             ),
-    //                           ),
-
-    //                           builder:
-    //                               (_) => FilterBottomSheet(
-    //                                 currentFilter: currentFilter.value,
-    //                                 onApply: (newFilter) {
-    //                                   currentFilter.value = newFilter;
-    //                                   Navigator.pop(context);
-
-    //                                   print('Применён фильтр: $newFilter');
-    //                                 },
-    //                               ),
-    //                         );
-    //                       },
-    //                       child: Row(
-    //                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //                         children: [
-    //                           Text(
-    //                             "Фильтрация",
-    //                             style: FontStyles.bodyMedium.copyWith(
-    //                               fontWeight: FontWeight.w500,
-    //                             ),
-    //                           ),
-    //                           const Icon(Icons.expand_more),
-    //                         ],
-    //                       ),
-    //                     ),
-    //                   ),
-    //                   const SizedBox(height: 10),
-    //                 ],
-    //               ),
-    //             ),

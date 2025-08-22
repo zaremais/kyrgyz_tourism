@@ -31,7 +31,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 300,
+      width: 340,
       height: 600,
       child: Padding(
         padding: EdgeInsets.only(
@@ -114,20 +114,19 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
               const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {
-                  widget.onApply(
-                    TourEntity(
-                      id: 1,
-                      title: '',
-                      author: '',
-                      price: 2000,
-                      tourDuration: 4,
-                      rating: 4,
-                      placesLeft: 5,
-                      region: '',
-                      image: '',
-                      departureDates: [''],
-                    ),
-                  );
+                  // widget.onApply(
+                  // FilterTourEntity(
+                  //   oneDay: oneDay,
+                  //   longTerm: longTerm,
+                  //   guideIncluded: guideIncluded,
+                  //   withAccommodation: withAccommodation,
+                  //   withFood: withFood,
+                  //   smallGroup: smallGroup,
+                  //   bigGroup: bigGroup,
+                  //   // difficulty: difficulty,
+                  //   region: selectedRegion,
+                  // ),
+                  // );
                   Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(
@@ -171,15 +170,12 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
         color: Colors.grey.shade200,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
-          BoxShadow(
-            color: Colors.black26,
-            blurRadius: 2,
-            offset: Offset(-2, -2),
-          ),
+          BoxShadow(color: Colors.black26, blurRadius: 1, offset: Offset(1, 1)),
         ],
       ),
       child: CheckboxListTile(
-        checkColor: Colors.black,
+        side: BorderSide(color: Colors.grey.shade700),
+        checkColor: Colors.grey,
         fillColor: WidgetStatePropertyAll(Colors.white),
         value: value,
         onChanged: (v) => onChanged(v!),

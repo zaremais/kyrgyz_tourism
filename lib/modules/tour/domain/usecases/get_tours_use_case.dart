@@ -14,11 +14,7 @@ class GetToursUseCase extends BaseUsecase<List<TourEntity>, GetToursParams> {
 
   @override
   Future<List<TourEntity>> execute({required GetToursParams params}) async {
-    return await _repository.getTours(
-      params.page,
-      params.size,
-      sort: params.sort,
-    );
+    return await _repository.getTours(params);
   }
 }
 

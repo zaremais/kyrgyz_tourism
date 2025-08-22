@@ -12,27 +12,27 @@ import 'package:kyrgyz_tourism/modules/auth/presentation/screens/telegram_chat_b
 
 import 'package:kyrgyz_tourism/modules/auth/presentation/screens/telegram_phone_screen.dart';
 import 'package:kyrgyz_tourism/modules/auth/presentation/screens/telegram_screen.dart';
+
 import 'package:kyrgyz_tourism/modules/categories/domain/entities/contact_entity.dart';
 import 'package:kyrgyz_tourism/modules/categories/presentation/screens/category_screen.dart';
 import 'package:kyrgyz_tourism/modules/categories/presentation/screens/contact_screen.dart';
-import 'package:kyrgyz_tourism/modules/chatBot/chat_screen.dart';
-import 'package:kyrgyz_tourism/modules/chatBot/chat_support_screen.dart';
+import 'package:kyrgyz_tourism/modules/chatBot/presentation/chat_screen.dart';
+import 'package:kyrgyz_tourism/modules/chatBot/presentation/chat_support_screen.dart';
 import 'package:kyrgyz_tourism/modules/guides/presentation/screens/guide_screen.dart';
 import 'package:kyrgyz_tourism/modules/home/presentation/screens/home_screen.dart';
 import 'package:kyrgyz_tourism/modules/home/presentation/screens/main_tab_screen.dart';
 import 'package:kyrgyz_tourism/modules/home/presentation/screens/notification_screen.dart';
 import 'package:kyrgyz_tourism/modules/home/presentation/screens/settings_screen.dart';
 import 'package:kyrgyz_tourism/modules/payment/presentation/screens/payment_screen.dart';
-import 'package:kyrgyz_tourism/modules/payment/presentation/screens/tour_payment_screen.dart';
 import 'package:kyrgyz_tourism/modules/profile/presentation/screens/profile_screen.dart';
 import 'package:kyrgyz_tourism/modules/reviews/presentation/screens/add_reviews_screen.dart';
-import 'package:kyrgyz_tourism/modules/reviews/presentation/screens/reviews_screen.dart';
 import 'package:kyrgyz_tourism/modules/tour/domain/entities/tour_entity.dart';
-
 import 'package:kyrgyz_tourism/modules/tour/presentation/screens/individual_tours_screen.dart';
 import 'package:kyrgyz_tourism/modules/tour/presentation/screens/is_booked_screen.dart';
 import 'package:kyrgyz_tourism/modules/tour/presentation/screens/region_selection_screen.dart';
+import 'package:kyrgyz_tourism/modules/tour/presentation/screens/register_tour_screen.dart';
 import 'package:kyrgyz_tourism/modules/tour/presentation/screens/tour_details_screen.dart';
+import 'package:kyrgyz_tourism/modules/tour/presentation/screens/tour_filter_screen.dart';
 import 'package:kyrgyz_tourism/modules/tour/presentation/screens/tour_screen.dart';
 import 'package:kyrgyz_tourism/splash_screen.dart';
 
@@ -56,7 +56,7 @@ class AppRouter extends RootStackRouter {
     ),
 
     AutoRoute(page: TelegramRoute.page),
-    AutoRoute(page: ReviewsRoute.page),
+    // AutoRoute(page: ReviewsRoute.page),
     AutoRoute(page: AppRoute.page),
     AutoRoute(page: SignInRoute.page),
     AutoRoute(page: RegisterSuccessRoute.page),
@@ -75,5 +75,8 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: PaymentRoute.page),
     AutoRoute(page: PasswordResetConfirmRoute.page),
     AutoRoute(page: PasswordResetRoute.page),
+    AutoRoute(page: TourFilterRoute.page),
+    AutoRoute(page: RegisterTourRoute.page),
+    AutoRoute(page: AddReviewRoute.page),
   ];
 }

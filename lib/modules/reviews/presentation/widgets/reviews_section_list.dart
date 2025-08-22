@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
+import 'package:kyrgyz_tourism/core/base/base_usecase.dart';
+import 'package:kyrgyz_tourism/core/di/init_di.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
-import 'package:kyrgyz_tourism/generated/l10n.dart';
 import 'package:kyrgyz_tourism/main.dart';
 import 'package:kyrgyz_tourism/modules/reviews/domain/entities/reviews_entity.dart';
 import 'package:kyrgyz_tourism/modules/reviews/presentation/cubit/reviews_cubit.dart';
@@ -16,7 +18,7 @@ class ReviewsSection extends StatefulWidget {
 }
 
 class _ReviewsSectionState extends State<ReviewsSection> {
-  final _reviewsCubit = di<ReviewsCubit>();
+  final _reviewsCubit = di<ReviewsCubit>()..getReviews(NoParams());
 
   @override
   Widget build(BuildContext context) {
@@ -26,29 +28,28 @@ class _ReviewsSectionState extends State<ReviewsSection> {
         builder: (context, state) {
           if (state.status == StateStatus.loading) {
             return Center(child: CircularProgressIndicator());
-          }
-          if (state.status == StateStatus.failure) {
-            return Center(child: Text(S.of(context).stateerror));
-          }
-          if (state.status == StateStatus.success) {
-            final reviews = state.model ?? [];
+          } else if (state.status == StateStatus.success &&
+              state.model != null) {
+            final guides = state.model!;
 
-            return SizedBox(
-              // margin: EdgeInsets.symmetric(vertical: 24),
-              // padding: EdgeInsets.all(16),
+            return Container(
+              padding: EdgeInsets.all(16),
               child: ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: reviews.length,
+                itemCount: guides.length,
                 itemBuilder: (context, index) {
-                  final review = reviews[index];
+                  final reviews = guides[index];
 
-                  return ReviewsCard(reviews: review);
+                  return ReviewsCard(reviews: reviews);
                 },
               ),
             );
           }
-          return Container();
+          if (state.status == StateStatus.failure) {
+            return Text('Ошибка: ${state.errorMessage}');
+          }
+          return SizedBox.shrink();
         },
       ),
     );

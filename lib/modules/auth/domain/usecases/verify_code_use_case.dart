@@ -12,7 +12,7 @@ class VerifyCodeUseCase extends BaseUsecase<bool, VerifyCodeParams> {
 
   @override
   Future<bool> execute({required VerifyCodeParams params}) async {
-    return await _repository.verifyCode(params.code);
+    return await _repository.verifyCode(params);
   }
 }
 

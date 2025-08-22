@@ -18,7 +18,6 @@ class AuthInputTextfield extends StatelessWidget {
   final void Function(String)? onChanged;
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
-  // final void Function(String)? onFieldSubmitted;
 
   const AuthInputTextfield({
     super.key,
@@ -35,8 +34,6 @@ class AuthInputTextfield extends StatelessWidget {
     this.onChanged,
     this.keyboardType,
     this.textInputAction,
-
-    // this.onFieldSubmitted,
   });
 
   @override

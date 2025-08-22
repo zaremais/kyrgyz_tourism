@@ -32,7 +32,7 @@ class _GuideScreenState extends State<GuideScreen> {
           // backgroundColor: darkTheme ? AppColors.text : AppColors.white,
           leading: IconButton(
             onPressed: () {
-              context.router.push(HomeRoute());
+              context.router.replace(HomeRoute());
             },
             icon: Icon(
               Icons.arrow_back_ios,
@@ -42,8 +42,14 @@ class _GuideScreenState extends State<GuideScreen> {
           actions: [LanguageSwitchWidget()],
         ),
         body: SingleChildScrollView(
-          child: Column(
-            children: [SizedBox(height: AppSizes.paddingLarge), GuideSection()],
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                SizedBox(height: AppSizes.paddingLarge),
+                GuideSection(),
+              ],
+            ),
           ),
         ),
       ),

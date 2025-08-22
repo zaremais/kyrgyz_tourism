@@ -11,8 +11,6 @@ class TelegramOtpModel extends TelegramOtpEntity {
     required super.username,
     required super.rawPassword,
     required super.otp,
-    required super.phoneNumber,
-    required super.chatId,
   });
 
   factory TelegramOtpModel.fromJson(JSON json) =>

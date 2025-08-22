@@ -1,0 +1,9 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+SignUpModel _$SignUpModelFromJson(Map json) =>
+    SignUpModel(email: json['email'] as String);
+
+Map<String, dynamic> _$SignUpModelToJson(SignUpModel instance) =>
+    <String, dynamic>{'email': instance.email};

@@ -35,9 +35,7 @@ class TelegramPhoneScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         IconButton(
-                          onPressed: () {
-                            context.router.pop();
-                          },
+                          onPressed: () {},
                           icon: Icon(Icons.arrow_back_ios, color: Colors.grey),
                         ),
 
@@ -49,7 +47,9 @@ class TelegramPhoneScreen extends StatelessWidget {
                           ),
                         ),
                         IconButton(
-                          onPressed: () => context.router.pop(),
+                          onPressed: () {
+                            context.router.replace(AuthRoute());
+                          },
                           icon: const Icon(Icons.close, color: Colors.grey),
                         ),
                       ],

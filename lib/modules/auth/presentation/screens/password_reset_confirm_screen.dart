@@ -5,7 +5,8 @@ import 'package:kyrgyz_tourism/core/base/base_state.dart';
 import 'package:kyrgyz_tourism/core/config/route/route.dart';
 
 import 'package:kyrgyz_tourism/core/constants/validator.dart';
-import 'package:kyrgyz_tourism/core/di/service_locator.dart';
+import 'package:kyrgyz_tourism/core/di/init_di.dart';
+
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/usecases/password_reset_confirm_use_case.dart';
 import 'package:kyrgyz_tourism/modules/auth/presentation/cubit/password_reset_confirm_cubit.dart';
@@ -114,9 +115,6 @@ class _PasswordResetConfirmScreenState
                                       token: _tokenController.text.trim(),
                                       newPassword:
                                           _newPasswordController.text.trim(),
-                                      confirmPassword:
-                                          _confirmPasswordController.text
-                                              .trim(),
                                     ),
                                   );
                                 }

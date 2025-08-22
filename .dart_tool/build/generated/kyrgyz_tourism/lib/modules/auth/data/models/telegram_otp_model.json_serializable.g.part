@@ -1,0 +1,16 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+TelegramOtpModel _$TelegramOtpModelFromJson(Map json) => TelegramOtpModel(
+  username: json['username'] as String,
+  rawPassword: json['rawPassword'] as String,
+  otp: json['otp'] as String?,
+);
+
+Map<String, dynamic> _$TelegramOtpModelToJson(TelegramOtpModel instance) =>
+    <String, dynamic>{
+      'username': instance.username,
+      'rawPassword': instance.rawPassword,
+      'otp': instance.otp,
+    };

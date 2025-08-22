@@ -1,10 +1,13 @@
-import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
+import 'package:kyrgyz_tourism/core/config/route/route.dart';
+import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
+import 'package:kyrgyz_tourism/core/di/init_di.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
-import 'package:kyrgyz_tourism/main.dart';
 import 'package:kyrgyz_tourism/modules/reviews/domain/usecases/add_reviews_use_case.dart';
 import 'package:kyrgyz_tourism/modules/reviews/presentation/cubit/reviews_cubit.dart';
 
@@ -36,7 +39,7 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
             if (state.status == StateStatus.failure) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text(state.errorMessage ?? 'Ошибка AAA'),
+                  content: Text('Ошибка: ${state.errorMessage}'),
                   backgroundColor: Colors.red,
                   duration: const Duration(seconds: 3),
                 ),
@@ -50,9 +53,9 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
             }
           },
           builder: (context, state) {
-            // if (state.status == StateStatus.loading) {
-            //   return const Center(child: CircularProgressIndicator());
-            // }
+            if (state.status == StateStatus.loading) {
+              return const Center(child: CircularProgressIndicator());
+            }
             return Padding(
               padding: const EdgeInsets.all(16),
               child: Form(
@@ -61,7 +64,10 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
                   children: [
                     TextFormField(
                       controller: _commentController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey.shade300),
+                        ),
                         labelText: 'Комментарий',
                         border: OutlineInputBorder(),
                       ),
@@ -102,6 +108,13 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
                     const SizedBox(height: 24),
 
                     ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.buttonForm,
+                        minimumSize: Size(330, 50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadiusGeometry.circular(16),
+                        ),
+                      ),
                       onPressed:
                           state.status == StateStatus.loading
                               ? null
@@ -118,7 +131,10 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
                       child:
                           state.status == StateStatus.loading
                               ? const CircularProgressIndicator()
-                              : const Text('Отправить отзыв'),
+                              : const Text(
+                                'Отправить отзыв',
+                                style: TextStyle(fontSize: 18),
+                              ),
                     ),
                   ],
                 ),
@@ -127,6 +143,14 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
           },
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _navigateToAddReview(context),
+        child: Icon(Icons.add_comment),
+      ),
     );
+  }
+
+  void _navigateToAddReview(BuildContext context) {
+    context.router.push(AddReviewRoute());
   }
 }

@@ -85,6 +85,13 @@ String formatPhoneNumber(String phone) {
   return '+$digitsOnly';
 }
 
+String? validateName(String? value) {
+  if (value == null || value.trim().isEmpty) {
+    return 'Заполните имя';
+  }
+  return null;
+}
+
 // bool? validateComment(bool? value) {
 //   if (value.isEmpty) return 'Введите комментарий';
 //   if (value.rating < 0.1) return 'Укажите рейтинг';

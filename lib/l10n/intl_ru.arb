@@ -77,5 +77,6 @@
   "savechanges": "Сохранить изменения",
   "cancel": "Отмена",
   "generalinfo": "Общая информация",
-  "authortours": "Туры автора"
+  "authortours": "Туры автора",
+  "filter": "Фильтрация"
 }

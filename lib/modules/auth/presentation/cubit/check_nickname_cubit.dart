@@ -20,15 +20,22 @@ class CheckNicknameCubit extends Cubit<BaseState<bool>> {
         .distinct()
         .debounceTime(const Duration(milliseconds: 500))
         .listen((nickname) {
-          _checkNickname(NickNameParams(nickname: nickname));
+          _checkNickname(CheckNickNameParams(nickname: nickname));
         });
   }
 
-  void checkNickname(NickNameParams params) {
+  void checkNickname(CheckNickNameParams params) {
+    final trimmed = params.nickname.trim();
+
     _nicknameSubject.add(params.nickname.trim());
+    if (trimmed.isEmpty) {
+      emit(BaseState(status: StateStatus.init));
+      return;
+    }
+    _nicknameSubject.add(trimmed);
   }
 
-  Future<void> _checkNickname(NickNameParams params) async {
+  Future<void> _checkNickname(CheckNickNameParams params) async {
     emit(BaseState(status: StateStatus.loading));
     try {
       final isTaken = await _checkNicknameUseCase.execute(params: params);

@@ -27,7 +27,7 @@ class GuideCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    guide.name ?? 'Без имени',
+                    guide.name ?? 'Гид',
                     style: const TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 18,
@@ -51,7 +51,7 @@ class GuideCard extends StatelessWidget {
                               Icons.star,
                               size: 24,
                               color:
-                                  index < guide.rating.floor()
+                                  index < guide.rating!.floor()
                                       ? AppColors.star
                                       : Colors.grey[300],
                             );
@@ -74,7 +74,7 @@ class GuideCard extends StatelessWidget {
           ),
 
           const SizedBox(height: 8),
-          Text(guide.description),
+          Text(guide.description.toString()),
         ],
       ),
     );

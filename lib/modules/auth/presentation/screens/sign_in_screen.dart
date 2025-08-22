@@ -6,8 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
 import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
+import 'package:kyrgyz_tourism/core/di/init_di.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
-import 'package:kyrgyz_tourism/main.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/entities/sign_in_entity.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/usecases/sign_in_use_case.dart';
 import 'package:kyrgyz_tourism/modules/auth/presentation/cubit/sign_in_cubit.dart';
@@ -33,8 +33,6 @@ class _SignInScreenState extends State<SignInScreen> {
   bool _rememberMe = false;
   bool _obscurePassword = true;
 
-  final _signinCubit = di<SignInCubit>();
-
   @override
   void initState() {
     super.initState();
@@ -51,6 +49,18 @@ class _SignInScreenState extends State<SignInScreen> {
   Future<void> _saveRememberMeState() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('remember_me', _rememberMe);
+  }
+
+  final _signinCubit = di<SignInCubit>();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _emailFocusNode.dispose();
+    _passwordFocusNode.dispose();
+    _signinCubit.close();
+    super.dispose();
   }
 
   @override
@@ -115,7 +125,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               ),
                               IconButton(
                                 onPressed: () {
-                                  context.router.replace(AuthRoute());
+                                  context.router.push(AuthRoute());
                                 },
                                 icon: const Icon(
                                   Icons.close,
@@ -130,6 +140,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             hintText: 'Введите почту или логин',
                             controller: _emailController,
                             obscureText: false,
+
                             // validator: validateEmail,
                             keyboardType: TextInputType.emailAddress,
                             focusNode: _emailFocusNode,

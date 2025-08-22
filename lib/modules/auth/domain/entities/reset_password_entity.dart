@@ -1,5 +1,5 @@
 class PasswordResetEntity {
-  final String message;
-  final String url;
-  PasswordResetEntity({required this.message, required this.url});
+  final String? message;
+  final String? url;
+  PasswordResetEntity({this.message, this.url});
 }

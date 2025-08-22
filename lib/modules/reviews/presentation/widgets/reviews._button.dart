@@ -1,12 +1,11 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/core/widgets/custom_button_widget.dart';
 import 'package:kyrgyz_tourism/generated/l10n.dart';
 
-class ReviewsButton extends StatelessWidget {
-  const ReviewsButton({super.key});
+class ReviewsCardButton extends StatelessWidget {
+  final void Function()? onPressed;
+  const ReviewsCardButton({super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +30,8 @@ class ReviewsButton extends StatelessWidget {
             SizedBox(height: 10),
             CustomButtonWidget(
               text: S.of(context).Leaveyourfeedback,
-              onPressed: () {
-                context.router.replace(ReviewsRoute());
-              },
+              onPressed: onPressed,
+
               backgroundColor: AppColors.star,
             ),
           ],

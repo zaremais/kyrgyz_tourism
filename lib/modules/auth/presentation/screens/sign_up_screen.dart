@@ -6,8 +6,8 @@ import 'package:kyrgyz_tourism/core/base/base_state.dart';
 import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/constants/text_password.dart';
 import 'package:kyrgyz_tourism/core/constants/validator.dart';
+import 'package:kyrgyz_tourism/core/di/init_di.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
-import 'package:kyrgyz_tourism/main.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/entities/sign_up_entity.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/usecases/check_nickname_use_case.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/usecases/sign_up_use_case.dart';
@@ -65,7 +65,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               } else if (state.status == StateStatus.failure) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text('Ошибка регистрации: ${state.errorMessage}'),
+                    content: Text('Ошибка регистрации'),
+                    backgroundColor: Colors.red,
                   ),
                 );
               }
@@ -86,7 +87,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           IconButton(
-                            onPressed: () => context.router.pop(),
+                            onPressed: () {
+                              context.router.pop();
+                            },
                             icon: const Icon(
                               Icons.arrow_back_ios,
                               color: Colors.grey,
@@ -100,7 +103,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                           ),
                           IconButton(
-                            onPressed: () => context.router.pop(),
+                            onPressed: () {
+                              context.router.pop();
+                            },
                             icon: const Icon(Icons.close, color: Colors.grey),
                           ),
                         ],
@@ -125,13 +130,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   hintText: 'Введите логин',
                                   controller: _nicknameController,
                                   onChanged: (value) {
-                                    _nicknameCubit.checkNickname(
-                                      NickNameParams(
-                                        nickname:
-                                            _nicknameController.text.trim(),
-                                      ),
-                                    );
+                                    if (value.isNotEmpty) {
+                                      _nicknameCubit.checkNickname(
+                                        CheckNickNameParams(
+                                          nickname:
+                                              _nicknameController.text.trim(),
+                                        ),
+                                      );
+                                    }
                                   },
+
                                   validator: validateNikeName,
                                   obscureText: false,
                                 ),
@@ -142,7 +150,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 >(
                                   builder: (context, state) {
                                     if (state.status == StateStatus.loading) {
-                                      return const Text('Проверка логина...');
+                                      return const Text(
+                                        'Проверка логина...',
+                                        style: TextStyle(color: Colors.grey),
+                                      );
                                     } else if (state.status ==
                                             StateStatus.success &&
                                         state.model != null) {
@@ -212,12 +223,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       state.status == StateStatus.loading,
                                   title: "Далее",
                                   onPressed: () async {
-                                    // final email = _emailController.text.trim();
-                                    // final password =
-                                    //     _passwordController.text.trim();
-                                    // final nikename =
-                                    //     _nicknameController.text.trim();
-
                                     if (!_formKey.currentState!.validate()) {
                                       ScaffoldMessenger.of(
                                         context,

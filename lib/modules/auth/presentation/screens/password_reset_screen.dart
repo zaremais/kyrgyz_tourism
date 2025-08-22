@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
 import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/constants/validator.dart';
-import 'package:kyrgyz_tourism/core/di/service_locator.dart';
+import 'package:kyrgyz_tourism/core/di/init_di.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/usecases/password_reset_use_case.dart';
 import 'package:kyrgyz_tourism/modules/auth/presentation/cubit/password_reset_cubit.dart';
@@ -42,7 +42,7 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
       appBar: AppBar(
         title: const Text('Восстановление пароля'),
         leading: IconButton(
-          onPressed: () => context.router.popTop(),
+          onPressed: () {},
           icon: const Icon(Icons.arrow_back),
         ),
       ),
@@ -84,7 +84,7 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
                           labelText: 'Email',
                           border: OutlineInputBorder(),
                         ),
-                        validator: validateEmail,
+                        // validator: validateEmail,
                       ),
                       const SizedBox(height: 50),
                       state.status == StateStatus.loading

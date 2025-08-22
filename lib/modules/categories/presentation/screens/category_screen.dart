@@ -29,7 +29,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
           child: Column(
             children: [
               SizedBox(height: 54),
-              CustomSectionButton(text: S.of(context).companies, onTap: () {}),
+              CustomSectionButton(
+                text: S.of(context).companies,
+                onTap: () {
+                  context.router.navigate(RegisterTourRoute());
+                },
+              ),
               SizedBox(height: 14),
               CustomSectionButton(
                 text: S.of(context).tours,

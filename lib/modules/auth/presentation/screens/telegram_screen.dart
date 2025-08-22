@@ -7,12 +7,12 @@ import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_sizes.dart';
 import 'package:kyrgyz_tourism/core/config/themes/theme.dart';
 import 'package:kyrgyz_tourism/core/constants/validator.dart';
+import 'package:kyrgyz_tourism/core/di/init_di.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
-import 'package:kyrgyz_tourism/main.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/entities/telegram_confirm_entity.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/entities/telegram_otp_entity.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/usecases/telegram_confirm_use_case.dart';
-import 'package:kyrgyz_tourism/modules/auth/domain/usecases/send_otp_use_case.dart';
+import 'package:kyrgyz_tourism/modules/auth/domain/usecases/register_otp_use_case.dart';
 import 'package:kyrgyz_tourism/modules/auth/presentation/cubit/telegram_otp_cubit.dart';
 import 'package:kyrgyz_tourism/modules/auth/presentation/cubit/telegram_confirm_cubit.dart';
 import 'package:kyrgyz_tourism/modules/auth/presentation/widgets/auth_input_textfield.dart';
@@ -188,7 +188,7 @@ class _TelegramScreenState extends State<TelegramScreen> {
                                                   return;
                                                 }
                                                 await _telegramOtpCubit.sendOtp(
-                                                  params: SendOtpParams(
+                                                  params: RegisterOtpParams(
                                                     chatId: chatId,
                                                     phoneNumber:
                                                         formatPhoneNumber(
@@ -263,7 +263,7 @@ class _TelegramScreenState extends State<TelegramScreen> {
                                             return;
                                           }
                                           _telegramOtpCubit.sendOtp(
-                                            params: SendOtpParams(
+                                            params: RegisterOtpParams(
                                               phoneNumber: formatPhoneNumber(
                                                 phone,
                                               ),
@@ -286,7 +286,7 @@ class _TelegramScreenState extends State<TelegramScreen> {
                               ),
 
                               if (otpState.model?.otp != null &&
-                                  otpState.model!.otp.isNotEmpty)
+                                  otpState.model!.otp!.isNotEmpty)
                                 Container(
                                   margin: const EdgeInsets.only(top: 12.0),
                                   padding: const EdgeInsets.all(12),

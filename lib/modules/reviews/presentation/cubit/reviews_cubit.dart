@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
+import 'package:kyrgyz_tourism/core/base/base_usecase.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
 import 'package:kyrgyz_tourism/modules/reviews/domain/entities/reviews_entity.dart';
 import 'package:kyrgyz_tourism/modules/reviews/domain/usecases/add_reviews_use_case.dart';
@@ -21,7 +22,7 @@ class ReviewsCubit extends Cubit<BaseState<List<ReviewsEntity>>> {
        _addReviewsUseCase = addReviewsUseCase,
        super(BaseState(status: StateStatus.init));
 
-  Future<void> getReviews(ReviewParams params) async {
+  Future<void> getReviews(NoParams params) async {
     emit(BaseState(status: StateStatus.loading));
     try {
       final result = await _getReviewsUseCase.execute(params: params);

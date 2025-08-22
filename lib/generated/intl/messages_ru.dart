@@ -62,6 +62,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Введите номер телефона",
     ),
     "featuredTours": MessageLookupByLibrary.simpleMessage("Избранные туры"),
+    "filter": MessageLookupByLibrary.simpleMessage("Фильтрация"),
     "firstandlastname": MessageLookupByLibrary.simpleMessage(
       "Введите вашу имя и фамилию",
     ),

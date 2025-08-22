@@ -1,29 +1,29 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
-import 'package:kyrgyz_tourism/core/base/base_state.dart';
-import 'package:kyrgyz_tourism/core/enums/state_status.dart';
-import 'package:kyrgyz_tourism/modules/auth/domain/usecases/is_logged_in_use_case.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:injectable/injectable.dart';
+// import 'package:kyrgyz_tourism/core/base/base_state.dart';
+// import 'package:kyrgyz_tourism/core/enums/state_status.dart';
+// import 'package:kyrgyz_tourism/modules/auth/domain/usecases/is_logged_in_use_case.dart';
 
-@injectable
-class AuthCubit extends Cubit<BaseState<bool>> {
-  final IsLoggedInUseCase _isLoggedInUseCase;
+// @injectable
+// class AuthCubit extends Cubit<BaseState<bool>> {
+//   final IsLoggedInUseCase _isLoggedInUseCase;
 
-  AuthCubit({required IsLoggedInUseCase isLoggedInUseCase})
-    : _isLoggedInUseCase = isLoggedInUseCase,
-      super(BaseState(status: StateStatus.init));
+//   AuthCubit({required IsLoggedInUseCase isLoggedInUseCase})
+//     : _isLoggedInUseCase = isLoggedInUseCase,
+//       super(BaseState(status: StateStatus.init));
 
-  Future<void> appStarted({params}) async {
-    emit(BaseState(status: StateStatus.loading));
+//   Future<void> appStarted({params}) async {
+//     emit(BaseState(status: StateStatus.loading));
 
-    try {
-      final isLoggedIn = await _isLoggedInUseCase.execute(params: params);
+//     try {
+//       final isLoggedIn = await _isLoggedInUseCase.execute(params: params);
 
-      emit(BaseState(status: StateStatus.success, model: isLoggedIn));
-    } catch (e) {
-      emit(BaseState(status: StateStatus.failure));
-    }
-  }
-}
+//       emit(BaseState(status: StateStatus.success, model: isLoggedIn));
+//     } catch (e) {
+//       emit(BaseState(status: StateStatus.failure));
+//     }
+//   }
+// }
 
 
 // import 'package:flutter_bloc/flutter_bloc.dart';

@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
+import 'package:kyrgyz_tourism/core/di/init_di.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
-import 'package:kyrgyz_tourism/main.dart';
 import 'package:kyrgyz_tourism/modules/tour/domain/entities/tour_entity.dart';
 import 'package:kyrgyz_tourism/modules/tour/presentation/cubit/tour_cubit.dart';
 import 'package:kyrgyz_tourism/modules/tour/presentation/widgets/list_tour_widget.dart';
-// ignore: unused_import
-import 'package:kyrgyz_tourism/modules/tour/presentation/widgets/tour_card.dart';
 
 class TourListSection extends StatefulWidget {
   const TourListSection({super.key});
@@ -51,6 +49,8 @@ class _TourListSectionState extends State<TourListSection> {
                 return ListTourWidget(tour: tours[index]);
               },
             );
+          } else if (state.status == StateStatus.failure) {
+            return Text('${state.errorMessage}');
           }
           return SizedBox.shrink();
         },

@@ -2,14 +2,13 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:kyrgyz_tourism/core/constants/api_urls.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kyrgyz_tourism/core/network/interceptors.dart';
 
 @injectable
 class DioClient {
-  final Dio _dio;
+  final Dio dio;
 
   DioClient()
-    : _dio = Dio(
+    : dio = Dio(
         BaseOptions(
           baseUrl: ApiUrls.baseUrl,
           responseType: ResponseType.json,
@@ -17,7 +16,7 @@ class DioClient {
           receiveTimeout: const Duration(seconds: 10),
         ),
       ) {
-    _dio.interceptors.addAll([
+    dio.interceptors.addAll([
       LogInterceptor(
         request: true,
         requestBody: true,
@@ -26,8 +25,8 @@ class DioClient {
         error: true,
         logPrint: (obj) => debugPrint(obj.toString()),
       ),
-
-      AuthInterceptor(),
+      LogInterceptor(),
+      // AuthInterceptor(di<TokenStorageService>()),
     ]);
   }
 
@@ -36,7 +35,7 @@ class DioClient {
     Map<String, dynamic>? queryParameters,
     Options? options,
   }) async {
-    return await _dio.get(
+    return await dio.get(
       url,
       queryParameters: queryParameters,
       options: options,
@@ -49,7 +48,7 @@ class DioClient {
     Map<String, dynamic>? queryParameters,
     Options? options,
   }) async {
-    return await _dio.post(
+    return await dio.post(
       url,
       data: data,
       queryParameters: queryParameters,
@@ -63,7 +62,7 @@ class DioClient {
     Map<String, dynamic>? queryParameters,
     Options? options,
   }) async {
-    return await _dio.put(
+    return await dio.put(
       url,
       data: data,
       queryParameters: queryParameters,
@@ -77,7 +76,7 @@ class DioClient {
     Map<String, dynamic>? queryParameters,
     Options? options,
   }) async {
-    return await _dio.delete(
+    return await dio.delete(
       url,
       data: data,
       queryParameters: queryParameters,

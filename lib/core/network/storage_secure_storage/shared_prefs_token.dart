@@ -1,43 +1,32 @@
-import 'package:kyrgyz_tourism/core/network/storage_secure_storage/token_storage_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SharedPrefsTokenStorage implements TokenStorageService {
-  final SharedPreferences prefs;
+class TokenStorage {
+  static const _accessTokenKey = 'accessToken';
+  static const _refreshTokenKey = 'refreshToken';
 
-  SharedPrefsTokenStorage(this.prefs);
-
-  @override
-  Future<void> saveTokens({
+  Future<void> saveTokens(
+    newAccessToken, {
     required String accessToken,
     required String refreshToken,
   }) async {
-    await prefs.setString('accessToken', accessToken);
-    await prefs.setString('refreshToken', refreshToken);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_accessTokenKey, accessToken);
+    await prefs.setString(_refreshTokenKey, refreshToken);
   }
 
-  @override
   Future<String?> getAccessToken() async {
-    return prefs.getString('accessToken');
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_accessTokenKey);
   }
 
-  @override
   Future<String?> getRefreshToken() async {
-    return prefs.getString('refreshToken');
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_refreshTokenKey);
   }
 
-  @override
   Future<void> clearTokens() async {
-    await prefs.remove('accessToken');
-    await prefs.remove('refreshToken');
-  }
-
-  @override
-  Future<void> saveAccessToken(String token) async {
-    await prefs.setString('accessToken', token);
-  }
-
-  @override
-  Future<void> saveRefreshToken(String token) async {
-    await prefs.setString('refreshToken', token);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_accessTokenKey);
+    await prefs.remove(_refreshTokenKey);
   }
 }

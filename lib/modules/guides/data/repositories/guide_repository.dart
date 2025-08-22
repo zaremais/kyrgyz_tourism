@@ -1,74 +1,23 @@
 import 'package:injectable/injectable.dart';
-import 'package:kyrgyz_tourism/core/constants/api_urls.dart';
+import 'package:kyrgyz_tourism/modules/guides/data/api_service/guide_api_service.dart';
 import 'package:kyrgyz_tourism/modules/guides/data/models/guide_model.dart';
 import 'package:kyrgyz_tourism/modules/guides/data/models/paged_response.dart';
 import 'package:kyrgyz_tourism/modules/guides/domain/repositories/guide_domain_repository.dart';
-
-import '../../../../core/network/dio_client.dart';
+import 'package:kyrgyz_tourism/modules/guides/domain/usecases/get_guide_use_case.dart';
 
 @LazySingleton(as: GuideDomainRepository)
 class GuideRepository extends GuideDomainRepository {
-  final DioClient _dio;
+  final GuideApiService _guideApi;
 
-  GuideRepository({required DioClient dio}) : _dio = dio;
+  GuideRepository({required GuideApiService guideApi}) : _guideApi = guideApi;
 
   @override
-  Future<PagedResponse<GuideModel>> getGuides(
-    int size,
-    int page,
-    String sort,
-  ) async {
-    final response = await _dio.get(
-      ApiUrls.getGuides,
-      queryParameters: {'page': page, 'size': size, 'sort': sort},
+  Future<PagedResponse<GuideModel>> getGuides(GuideParams params) async {
+    final response = await _guideApi.getGuides(
+      page: params.page,
+      size: params.size,
+      sort: params.sort,
     );
-    final data = response.data as Map<String, dynamic>;
-    return PagedResponse<GuideModel>.fromJson(
-      data,
-      (json) => GuideModel.fromJson(json),
-    );
+    return response;
   }
-
-  // @override
-  // Future<PaginatedResponse<GuideModel>> getGuides(
-  //    int page,
-  //    int size,
-  //   {required String sort}
-  // ) async {
-  //   final response = await _dio.get(
-  //     ApiUrls.getGuides,
-  //     queryParameters: {
-  //       'page': page,
-  //       'size': size,
-  //       'sort': sort,
-  //     },
-  //   );
-
-  //   return PaginatedResponse<GuideModel>.fromJson(
-  //     response.data,
-  //     (json) => GuideModel.fromJson(json),
-  //   );
-  // }
 }
-
-
-//   @override
-//   Future<PaginateGuideModel<GuideModel>> getGuides(int page,
-//   int size,
-//     String sort) async {
-    
-//       final response = await _dio.get(
-//         ApiUrls.getGuides,
-//         queryParameters: {
-//         'page': page,
-//         'size': size,
-//         'sort': sort,
-//         },
-//         options: Options(headers: {'accept': '*/*'}),
-//       );
-//     return PaginateGuideModel<GuideModel>.fromJson(
-//       response.data,
-//       (json) => GuideModel.fromJson(json));
-// }
-
-    

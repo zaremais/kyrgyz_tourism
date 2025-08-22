@@ -10,7 +10,6 @@ TelegramConfirmModel _$TelegramConfirmModelFromJson(Map json) =>
     TelegramConfirmModel(
       accessToken: json['accessToken'] as String,
       refreshToken: json['refreshToken'] as String,
-      chatId: (json['chatId'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$TelegramConfirmModelToJson(
@@ -18,5 +17,4 @@ Map<String, dynamic> _$TelegramConfirmModelToJson(
 ) => <String, dynamic>{
   'accessToken': instance.accessToken,
   'refreshToken': instance.refreshToken,
-  'chatId': instance.chatId,
 };

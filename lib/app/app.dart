@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
 import 'package:kyrgyz_tourism/core/config/route/route.dart';
+import 'package:kyrgyz_tourism/core/di/init_di.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
-import 'package:kyrgyz_tourism/main.dart';
-import 'package:kyrgyz_tourism/modules/auth/presentation/cubit/auth_cubit.dart';
+import 'package:kyrgyz_tourism/modules/auth/domain/usecases/verify_code_use_case.dart';
+import 'package:kyrgyz_tourism/modules/auth/presentation/cubit/verify_code_cubit.dart';
 
 @RoutePage()
 class AppScreen extends StatefulWidget {
@@ -16,14 +17,15 @@ class AppScreen extends StatefulWidget {
 }
 
 class _AppScreenState extends State<AppScreen> {
-  final _authCubit = di<AuthCubit>()..appStarted();
+  final _verifyCubit =
+      di<VerifyCodeCubit>()..verifyCode(VerifyCodeParams(code: '12345'));
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocProvider.value(
-        value: _authCubit,
-        child: BlocListener<AuthCubit, BaseState<bool>>(
+        value: _verifyCubit,
+        child: BlocListener<VerifyCodeCubit, BaseState<bool>>(
           listener: (context, state) async {
             if (state.status == StateStatus.success) {
               // final user = await di<AuthRepository>().getCurrentUser();

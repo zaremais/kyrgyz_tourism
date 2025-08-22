@@ -171,18 +171,46 @@ class GuideRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [HomeScreen]
-class HomeRoute extends PageRouteInfo<void> {
-  const HomeRoute({List<PageRouteInfo>? children})
-    : super(HomeRoute.name, initialChildren: children);
+class HomeRoute extends PageRouteInfo<HomeRouteArgs> {
+  HomeRoute({Key? key, List<PageRouteInfo>? children})
+    : super(
+        HomeRoute.name,
+        args: HomeRouteArgs(key: key),
+        initialChildren: children,
+      );
 
   static const String name = 'HomeRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const HomeScreen();
+      final args = data.argsAs<HomeRouteArgs>(
+        orElse: () => const HomeRouteArgs(),
+      );
+      return HomeScreen(key: args.key);
     },
   );
+}
+
+class HomeRouteArgs {
+  const HomeRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'HomeRouteArgs{key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! HomeRouteArgs) return false;
+    return key == other.key;
+  }
+
+  @override
+  int get hashCode => key.hashCode;
 }
 
 /// generated route for
@@ -509,17 +537,17 @@ class RegisterSuccessRouteArgs {
 }
 
 /// generated route for
-/// [ReviewsScreen]
-class ReviewsRoute extends PageRouteInfo<void> {
-  const ReviewsRoute({List<PageRouteInfo>? children})
-    : super(ReviewsRoute.name, initialChildren: children);
+/// [RegisterTourScreen]
+class RegisterTourRoute extends PageRouteInfo<void> {
+  const RegisterTourRoute({List<PageRouteInfo>? children})
+    : super(RegisterTourRoute.name, initialChildren: children);
 
-  static const String name = 'ReviewsRoute';
+  static const String name = 'RegisterTourRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const ReviewsScreen();
+      return const RegisterTourScreen();
     },
   );
 }
@@ -778,17 +806,17 @@ class TourDetailsRouteArgs {
 }
 
 /// generated route for
-/// [TourPaymentScreen]
-class TourPaymentRoute extends PageRouteInfo<void> {
-  const TourPaymentRoute({List<PageRouteInfo>? children})
-    : super(TourPaymentRoute.name, initialChildren: children);
+/// [TourFilterScreen]
+class TourFilterRoute extends PageRouteInfo<void> {
+  const TourFilterRoute({List<PageRouteInfo>? children})
+    : super(TourFilterRoute.name, initialChildren: children);
 
-  static const String name = 'TourPaymentRoute';
+  static const String name = 'TourFilterRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const TourPaymentScreen();
+      return const TourFilterScreen();
     },
   );
 }

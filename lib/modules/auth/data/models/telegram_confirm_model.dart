@@ -9,7 +9,6 @@ class TelegramConfirmModel extends TelegramConfirmEntity {
   TelegramConfirmModel({
     required super.accessToken,
     required super.refreshToken,
-    required super.chatId,
   });
 
   factory TelegramConfirmModel.fromJson(JSON json) =>

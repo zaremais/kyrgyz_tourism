@@ -5,11 +5,11 @@ class ProfileEntity {
   final String? lastLogin;
   final String? description;
   final int id;
-  final String? name;
+  final String name;
   final String nickname;
-  final String? email;
-  final String image;
-  final String phoneNumber;
+  final String email;
+  final String? image;
+  final String? phoneNumber;
   final List<String> roles;
 
   const ProfileEntity({
@@ -19,11 +19,11 @@ class ProfileEntity {
     this.lastLogin,
     this.description,
     required this.id,
-    this.name,
+    required this.name,
     required this.nickname,
-    this.email,
-    required this.image,
-    required this.phoneNumber,
+    required this.email,
+    this.image,
+    this.phoneNumber,
     required this.roles,
   });
 }

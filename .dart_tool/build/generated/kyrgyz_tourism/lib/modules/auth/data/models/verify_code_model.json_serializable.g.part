@@ -1,0 +1,9 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+VerifyCodeModel _$VerifyCodeModelFromJson(Map json) =>
+    VerifyCodeModel(success: json['success'] as bool?);
+
+Map<String, dynamic> _$VerifyCodeModelToJson(VerifyCodeModel instance) =>
+    <String, dynamic>{'success': instance.success};

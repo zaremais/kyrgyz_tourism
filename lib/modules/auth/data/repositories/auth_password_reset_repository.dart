@@ -1,58 +1,37 @@
-import 'dart:developer';
-
-import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kyrgyz_tourism/core/constants/api_urls.dart';
-import 'package:kyrgyz_tourism/core/network/dio_client.dart';
+import 'package:kyrgyz_tourism/modules/auth/data/api_service/auth_api_service.dart';
+import 'package:kyrgyz_tourism/modules/auth/data/models/password_reset_model.dart';
+// ignore: unused_import
+import 'package:kyrgyz_tourism/modules/auth/domain/entities/reset_password_entity.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/repositories/auth_domain_password_reset_repository.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/usecases/password_reset_confirm_use_case.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/usecases/password_reset_use_case.dart';
 
 @LazySingleton(as: AuthDomainPasswordResetdRepository)
 class AuthPasswordResetRepository extends AuthDomainPasswordResetdRepository {
-  final DioClient _dio;
+  // final DioClient _dio;
+  final AuthApiService _api;
 
-  AuthPasswordResetRepository({required DioClient dio}) : _dio = dio;
+  AuthPasswordResetRepository({
+    required AuthApiService api,
+    //  required DioClient dio,
+  }) : _api = api;
+
   @override
-  Future<void> passwordReset(PasswordResetParams params) async {
-    try {
-      final result = await _dio.post(
-        '${ApiUrls.passwordReset}?email=${params.email}',
-        options: Options(
-          headers: {'accept': '*/*', 'Content-Type': 'application/json'},
-        ),
-      );
-
-      if (result.statusCode != 202) {
-        throw Exception('Не удалось отправить письмо');
-      }
-    } catch (e) {
-      if (e is DioException) {
-        log("Dio Error: ${e.response?.data}");
-      }
-      throw Exception('Ошибка при сбросе пароля: $e');
-    }
+  Future<PasswordResetModel> passwordResetConfirm(
+    PasswordResetConfirmParams params,
+  ) async {
+    await _api.passwordResetConfirm(params);
+    throw UnimplementedError(
+      'API returns String but PasswordResetModel expected',
+    );
   }
 
   @override
-  Future<void> passwordResetConfirm(PasswordResetConfirmParams params) async {
-    try {
-      final result = await _dio.post(
-        ApiUrls.passwordConfirm,
-        data: params.toJson(),
-        options: Options(
-          headers: {'accept': '*/*', 'Content-Type': 'application/json'},
-        ),
-      );
-
-      if (result.statusCode != 200 && result.statusCode != 204) {
-        throw Exception('Не удалось сбросить пароль');
-      }
-    } catch (e) {
-      if (e is DioException) {
-        log('Ошибка от сервера: ${e.response?.data}');
-      }
-      throw Exception('Ошибка при подтверждения сброса пароля: $e');
-    }
+  Future<PasswordResetEntity> resetPassword(PasswordResetParams params) async {
+    await _api.passwordReset(params.email);
+    throw UnimplementedError(
+      'API returns String but PasswordResetModel expected',
+    );
   }
 }

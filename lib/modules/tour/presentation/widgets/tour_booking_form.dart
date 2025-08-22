@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/core/widgets/custom_text_formfield.dart';
 
@@ -54,7 +56,16 @@ class _TourBookingFormState extends State<TourBookingForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Бронирование тура'), centerTitle: true),
+      appBar: AppBar(
+        title: const Text('Бронирование тура'),
+        centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            context.router.replace(ToursRoute());
+          },
+          icon: Icon(Icons.arrow_back_ios),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Form(

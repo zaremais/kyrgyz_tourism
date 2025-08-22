@@ -17,9 +17,9 @@ class SignUpCubit extends Cubit<BaseState<SignUpEntity>> {
   Future<void> signup(SignUpParams params) async {
     emit(BaseState(status: StateStatus.loading));
     try {
-      final user = await _signupUseCase.execute(params: params);
+      await _signupUseCase.execute(params: params);
 
-      emit(BaseState(status: StateStatus.success, model: user));
+      emit(BaseState(status: StateStatus.success, model: state.model));
     } catch (e) {
       emit(BaseState(status: StateStatus.failure, errorMessage: e.toString()));
     }

@@ -4,10 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
 import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_sizes.dart';
+import 'package:kyrgyz_tourism/core/di/init_di.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
 import 'package:kyrgyz_tourism/core/utils/data_formatter.dart';
 import 'package:kyrgyz_tourism/generated/l10n.dart';
-import 'package:kyrgyz_tourism/main.dart';
 import 'package:kyrgyz_tourism/modules/tour/data/sqflite/schema.dart';
 import 'package:kyrgyz_tourism/modules/tour/presentation/widgets/booked_button.dart';
 import 'package:kyrgyz_tourism/modules/tour/domain/entities/tour_entity.dart';
@@ -38,7 +38,7 @@ class _ListTourWidgetState extends State<ListTourWidget> {
               child: Stack(
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadiusGeometry.circular(15),
+                    borderRadius: BorderRadiusGeometry.circular(16),
                     child: Image.network(
                       widget.tour.image.toString(),
                       fit: BoxFit.cover,
@@ -72,9 +72,7 @@ class _ListTourWidgetState extends State<ListTourWidget> {
                               tourId: widget.tour.id,
                             );
 
-                            context.read<FavoriteTourCubit>().toggleFavorite(
-                              favorite,
-                            );
+                            _favouriteTourCubit.toggleFavorite(favorite);
                           },
                           child: Icon(
                             isFavorite ? Icons.favorite : Icons.favorite_border,
@@ -85,11 +83,11 @@ class _ListTourWidgetState extends State<ListTourWidget> {
                     ),
                   ),
                   Positioned.fill(
-                    top: 250,
+                    top: 270,
                     child: BookedButton(
                       tour: widget.tour,
                       onPressed: () {
-                        context.router.replace(
+                        context.router.push(
                           TourDetailsRoute(tour: widget.tour),
                         );
                       },

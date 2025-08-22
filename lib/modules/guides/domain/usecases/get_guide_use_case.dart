@@ -14,8 +14,10 @@ class GetGuideUseCase
     : _repository = repository;
 
   @override
-  Future<PagedResponse<GuideEntity>> execute({required GuideParams params}) {
-    return _repository.getGuides(params.size, params.page, params.sort);
+  Future<PagedResponse<GuideEntity>> execute({
+    required GuideParams params,
+  }) async {
+    return _repository.getGuides(params);
   }
 }
 

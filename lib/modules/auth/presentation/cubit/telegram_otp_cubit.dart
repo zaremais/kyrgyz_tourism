@@ -7,32 +7,32 @@ import 'package:kyrgyz_tourism/core/base/base_usecase.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/entities/telegram_otp_entity.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/usecases/get_otp_link_use_case.dart';
-import 'package:kyrgyz_tourism/modules/auth/domain/usecases/send_otp_use_case.dart';
+import 'package:kyrgyz_tourism/modules/auth/domain/usecases/register_otp_use_case.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/usecases/telegram_confirm_use_case.dart';
 
 @injectable
 class TelegramOtpCubit extends Cubit<BaseState<TelegramOtpEntity>> {
-  final SendOtpUseCase _sendOtpUseCase;
+  final RegisterOtpUseCase _registerOtpUseCase;
 
   final GetOtpLinkUseCase _getOtpLinkUseCase;
   Timer? _timer;
   int _secondsRemaining = 0;
 
   TelegramOtpCubit({
-    required SendOtpUseCase sendOtpUseCase,
+    required RegisterOtpUseCase sendOtpUseCase,
     required TelegramConfirmUseCase confirmOtpUseCase,
     required GetOtpLinkUseCase getOtpLinkUseCase,
-  }) : _sendOtpUseCase = sendOtpUseCase,
+  }) : _registerOtpUseCase = sendOtpUseCase,
 
        _getOtpLinkUseCase = getOtpLinkUseCase,
        super(BaseState(status: StateStatus.init, secondsRemaining: 0));
 
   int get secondsRemaining => _secondsRemaining;
 
-  Future<void> sendOtp({required SendOtpParams params}) async {
+  Future<void> sendOtp({required RegisterOtpParams params}) async {
     emit(BaseState(status: StateStatus.loading));
     try {
-      final result = await _sendOtpUseCase.execute(params: params);
+      final result = await _registerOtpUseCase.execute(params: params);
 
       _startTimer();
 

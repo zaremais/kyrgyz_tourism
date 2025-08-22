@@ -58,6 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "enternickename": MessageLookupByLibrary.simpleMessage("Enter nickeName"),
     "enterphone": MessageLookupByLibrary.simpleMessage("Enter phonenumber"),
     "featuredTours": MessageLookupByLibrary.simpleMessage("Featured Tours"),
+    "filter": MessageLookupByLibrary.simpleMessage("Filtration"),
     "firstandlastname": MessageLookupByLibrary.simpleMessage(
       "Enter first and lastname",
     ),

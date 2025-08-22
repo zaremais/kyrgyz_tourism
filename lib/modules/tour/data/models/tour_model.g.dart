@@ -12,7 +12,7 @@ TourModel _$TourModelFromJson(Map json) => TourModel(
   author: json['author'] as String,
   price: (json['price'] as num).toInt(),
   tourDuration: (json['tourDuration'] as num).toInt(),
-  rating: (json['rating'] as num).toInt(),
+  rating: (json['rating'] as num?)?.toInt(),
   placesLeft: (json['placesLeft'] as num).toInt(),
   region: json['region'] as String,
   image: json['image'] as String,

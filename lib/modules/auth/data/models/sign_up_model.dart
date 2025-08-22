@@ -8,10 +8,10 @@ part 'sign_up_model.g.dart';
 class SignUpModel extends SignUpEntity {
   SignUpModel({
     required super.email,
-    required super.nickaname,
-    required super.password,
-    required super.message,
-    required super.success,
+    // required super.nickname,
+    // required super.password,
+    // required super.message,
+    // required super.success,
   });
 
   factory SignUpModel.fromJson(JSON json) => _$SignUpModelFromJson(json);

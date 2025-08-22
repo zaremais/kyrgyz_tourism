@@ -1,5 +1,7 @@
 class ApiUrls {
   static const String baseUrl = 'http://34.18.76.114';
+
+  // static const String baseUrl = 'http://34.18.76.114';
   static const String signup = '/v1/api/sign-up';
   static const String passwordReset = '/v1/api/password-reset';
   static const String passwordConfirm = '/v1/api/password-reset/confirm';
@@ -13,6 +15,7 @@ class ApiUrls {
   static const String getContact = '/v1/api/contact-requests';
   static const String createContact = '/v1/api/contact-requests';
   static const String getCurrentUser = '/v1/api/profiles/me';
+  static const String bookingTour = '/v1/api/bookings';
   static const String logout = '/v1/api/logout';
   static const String getTours = '/v1/api/tours';
   static const String getIndividualTours = '/v1/api/tours/individual';
@@ -23,6 +26,7 @@ class ApiUrls {
   static const String refreshToken = '/v1/api/refresh';
   static const String getPayment = '/v1/api/qr/mbank';
   static const String promocode = '/v1/api/promo-codes';
-  static const String isBookedTour = 'v1/api/bookings';
+  static String bookingDate(int tourId) => '/v1/api/bookings/available/$tourId';
   static const String confirmBooked = '/v1/api/bookings';
+  static const String getQrCode = '/v1/api/qr/mbank';
 }

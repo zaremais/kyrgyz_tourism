@@ -4,7 +4,7 @@ class TourEntity {
   final String author;
   final int price;
   final int tourDuration;
-  final int rating;
+  final int? rating;
   final int placesLeft;
   final String region;
   final String image;
@@ -20,7 +20,7 @@ class TourEntity {
     required this.author,
     required this.price,
     required this.tourDuration,
-    required this.rating,
+    this.rating,
     required this.placesLeft,
     required this.region,
     required this.image,

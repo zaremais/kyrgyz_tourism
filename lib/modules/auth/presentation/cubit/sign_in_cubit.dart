@@ -21,8 +21,8 @@ class SignInCubit extends Cubit<BaseState<SignInEntity>> {
   Future<void> signin({required SignInParams params}) async {
     emit(BaseState(status: StateStatus.loading));
     try {
-      final user = await _signInUsecase.execute(params: params);
-      emit(BaseState(status: StateStatus.success, model: user));
+      final result = await _signInUsecase.execute(params: params);
+      emit(BaseState(status: StateStatus.success, model: result));
     } catch (e) {
       emit(BaseState(status: StateStatus.failure, errorMessage: e.toString()));
     }
@@ -31,8 +31,8 @@ class SignInCubit extends Cubit<BaseState<SignInEntity>> {
   Future<void> refreshToken({required RefreshParams params}) async {
     emit(BaseState(status: StateStatus.loading));
     try {
-      final user = await _refreshTokenUseCase.execute(params: params);
-      emit(BaseState(status: StateStatus.success, model: user));
+      final result = await _refreshTokenUseCase.execute(params: params);
+      emit(BaseState(status: StateStatus.success, model: result));
     } catch (e) {
       emit(BaseState(status: StateStatus.failure, errorMessage: e.toString()));
     }
