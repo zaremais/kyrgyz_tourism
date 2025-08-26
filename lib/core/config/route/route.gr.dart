@@ -59,6 +59,50 @@ class AuthRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [BookingScreen]
+class BookingRoute extends PageRouteInfo<BookingRouteArgs> {
+  BookingRoute({Key? key, required int tourId, List<PageRouteInfo>? children})
+    : super(
+        BookingRoute.name,
+        args: BookingRouteArgs(key: key, tourId: tourId),
+        initialChildren: children,
+      );
+
+  static const String name = 'BookingRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<BookingRouteArgs>();
+      return BookingScreen(key: args.key, tourId: args.tourId);
+    },
+  );
+}
+
+class BookingRouteArgs {
+  const BookingRouteArgs({this.key, required this.tourId});
+
+  final Key? key;
+
+  final int tourId;
+
+  @override
+  String toString() {
+    return 'BookingRouteArgs{key: $key, tourId: $tourId}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! BookingRouteArgs) return false;
+    return key == other.key && tourId == other.tourId;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ tourId.hashCode;
+}
+
+/// generated route for
 /// [CategoryScreen]
 class CategoryRoute extends PageRouteInfo<void> {
   const CategoryRoute({List<PageRouteInfo>? children})
@@ -76,18 +120,46 @@ class CategoryRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [ChatScreen]
-class ChatRoute extends PageRouteInfo<void> {
-  const ChatRoute({List<PageRouteInfo>? children})
-    : super(ChatRoute.name, initialChildren: children);
+class ChatRoute extends PageRouteInfo<ChatRouteArgs> {
+  ChatRoute({Key? key, required TourEntity tour, List<PageRouteInfo>? children})
+    : super(
+        ChatRoute.name,
+        args: ChatRouteArgs(key: key, tour: tour),
+        initialChildren: children,
+      );
 
   static const String name = 'ChatRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const ChatScreen();
+      final args = data.argsAs<ChatRouteArgs>();
+      return ChatScreen(key: args.key, tour: args.tour);
     },
   );
+}
+
+class ChatRouteArgs {
+  const ChatRouteArgs({this.key, required this.tour});
+
+  final Key? key;
+
+  final TourEntity tour;
+
+  @override
+  String toString() {
+    return 'ChatRouteArgs{key: $key, tour: $tour}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! ChatRouteArgs) return false;
+    return key == other.key && tour == other.tour;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ tour.hashCode;
 }
 
 /// generated route for

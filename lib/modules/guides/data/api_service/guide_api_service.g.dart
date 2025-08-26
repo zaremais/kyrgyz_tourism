@@ -48,7 +48,7 @@ class _GuideApiService implements GuideApiService {
     try {
       _value = PagedResponse<GuideModel>.fromJson(
         _result.data!,
-        (json) => GuideModel.fromJson(json as Map<String, dynamic>),
+        (json) => GuideModel.fromJson(json),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);

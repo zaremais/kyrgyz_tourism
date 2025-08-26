@@ -5,7 +5,6 @@ import 'package:kyrgyz_tourism/core/base/base_state.dart';
 import 'package:kyrgyz_tourism/core/base/base_usecase.dart';
 import 'package:kyrgyz_tourism/core/di/init_di.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
-import 'package:kyrgyz_tourism/main.dart';
 import 'package:kyrgyz_tourism/modules/reviews/domain/entities/reviews_entity.dart';
 import 'package:kyrgyz_tourism/modules/reviews/presentation/cubit/reviews_cubit.dart';
 import 'package:kyrgyz_tourism/modules/reviews/presentation/widgets/reviews_card.dart';

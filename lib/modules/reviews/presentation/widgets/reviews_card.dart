@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:kyrgyz_tourism/modules/reviews/domain/entities/reviews_entity.dart';
 
 class ReviewsCard extends StatelessWidget {
@@ -69,7 +68,7 @@ class ReviewsCard extends StatelessWidget {
     );
   }
 
-  String _formatDate(DateTime date) {
-    return DateFormat('dd.MM.yyyy HH:mm').format(date);
-  }
+  // String _formatDate(DateTime date) {
+  //   return DateFormat('dd.MM.yyyy HH:mm').format(date);
+  // }
 }

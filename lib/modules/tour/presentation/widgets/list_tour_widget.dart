@@ -9,7 +9,7 @@ import 'package:kyrgyz_tourism/core/enums/state_status.dart';
 import 'package:kyrgyz_tourism/core/utils/data_formatter.dart';
 import 'package:kyrgyz_tourism/generated/l10n.dart';
 import 'package:kyrgyz_tourism/modules/tour/data/sqflite/schema.dart';
-import 'package:kyrgyz_tourism/modules/tour/presentation/widgets/booked_button.dart';
+import 'package:kyrgyz_tourism/modules/booking_tour/presentation/widgets/booked_button.dart';
 import 'package:kyrgyz_tourism/modules/tour/domain/entities/tour_entity.dart';
 import 'package:kyrgyz_tourism/modules/tour/presentation/cubit/favorite_tour_cubit.dart';
 

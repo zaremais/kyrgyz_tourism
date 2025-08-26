@@ -77,31 +77,29 @@ class _BookingTourApiService implements BookingTourApiService {
   }
 
   @override
-  Future<List<BookingDateModel>> getDateBookings(
-    BookingDateParams params,
-  ) async {
+  Future<List<BookingTourModel>> bookingDate(int tourId) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<BookingDateModel>>(
+    final _options = _setStreamType<List<BookingTourModel>>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/v1/api/bookings/available${params}',
+            '/v1/api/bookings/available-dates/${tourId}',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<BookingDateModel> _value;
+    late List<BookingTourModel> _value;
     try {
       _value =
           _result.data!
               .map(
                 (dynamic i) =>
-                    BookingDateModel.fromJson(i as Map<String, dynamic>),
+                    BookingTourModel.fromJson(i as Map<String, dynamic>),
               )
               .toList();
     } on Object catch (e, s) {

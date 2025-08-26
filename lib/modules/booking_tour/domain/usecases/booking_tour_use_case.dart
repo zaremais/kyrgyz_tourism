@@ -20,15 +20,15 @@ class BookingTourUseCase
 
 class BookingTourParams {
   final int tourId;
-  final String selectedDate;
-  final int numberOfPeople;
-  final String promoCode;
+  final String? selectedDate;
+  final int? numberOfPeople;
+  final String? promoCode;
 
   BookingTourParams({
     required this.tourId,
     required this.selectedDate,
     required this.numberOfPeople,
-    required this.promoCode,
+    this.promoCode,
   });
 
   JSON toJson() {

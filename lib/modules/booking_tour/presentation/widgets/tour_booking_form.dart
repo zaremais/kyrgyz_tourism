@@ -1,0 +1,113 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
+import 'package:kyrgyz_tourism/core/config/route/route.dart';
+import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
+import 'package:kyrgyz_tourism/core/widgets/custom_text_formfield.dart';
+
+class TourBookingForm extends StatefulWidget {
+  const TourBookingForm({super.key});
+
+  @override
+  State<TourBookingForm> createState() => _TourBookingFormState();
+}
+
+class _TourBookingFormState extends State<TourBookingForm> {
+  final _formKey = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _emailController = TextEditingController();
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _phoneController.dispose();
+    _emailController.dispose();
+    super.dispose();
+  }
+
+  void _submitForm() {
+    if (_formKey.currentState!.validate()) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Бронирование отправлено!')));
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Бронирование тура'),
+        centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            context.router.replace(ToursRoute());
+          },
+          icon: Icon(Icons.arrow_back_ios),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              CustomTextFormField(
+                controller: _nameController,
+                label: 'ФИО',
+                hintText: 'Введите ваше имя и фамилию',
+                validator:
+                    (value) =>
+                        value == null || value.isEmpty ? 'Введите ФИО' : null,
+              ),
+              const SizedBox(height: 16),
+              CustomTextFormField(
+                controller: _phoneController,
+                label: 'Телефон',
+                hintText: '+(996)555444333',
+                keyboardType: TextInputType.phone,
+                validator:
+                    (value) =>
+                        value == null || value.isEmpty
+                            ? 'Введите номер телефона'
+                            : null,
+              ),
+              const SizedBox(height: 16),
+              CustomTextFormField(
+                controller: _emailController,
+                label: 'Email',
+                hintText: 'example@mail.com',
+                keyboardType: TextInputType.emailAddress,
+                validator:
+                    (value) =>
+                        value == null || !value.contains('@')
+                            ? 'Неверный email'
+                            : null,
+              ),
+              const SizedBox(height: 16),
+
+              SizedBox(height: 50),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: _submitForm,
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    backgroundColor: AppColors.buttonGuide,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: const Text(
+                    'Забронировать',
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

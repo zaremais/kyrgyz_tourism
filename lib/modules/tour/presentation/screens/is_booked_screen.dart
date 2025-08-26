@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:kyrgyz_tourism/modules/tour/presentation/widgets/tour_booking_form.dart';
+import 'package:kyrgyz_tourism/modules/booking_tour/presentation/widgets/tour_booking_form.dart';
 
 @RoutePage()
 class IsBookedScreen extends StatelessWidget {

@@ -1,13 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
-import 'package:kyrgyz_tourism/core/di/init_di.dart';
 import 'package:kyrgyz_tourism/core/widgets/custom_button_widget.dart';
 
-import 'package:kyrgyz_tourism/modules/booking_tour/domain/usecases/booking_tour_use_case.dart';
-import 'package:kyrgyz_tourism/modules/booking_tour/presentation/cubit/booking_tour_cubit.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class TourCalendar extends StatefulWidget {
@@ -20,6 +16,7 @@ class TourCalendar extends StatefulWidget {
 class _TourCalendarState extends State<TourCalendar> {
   DateTime? _startDate;
   DateTime? _endDate;
+  DateTimeRange? selectedRange;
 
   bool _isSameDay(DateTime a, DateTime b) {
     return a.year == b.year && a.month == b.month && a.day == b.day;

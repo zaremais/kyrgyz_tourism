@@ -1,8 +1,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:kyrgyz_tourism/modules/booking_tour/data/api_service/booking_tour_api_service.dart';
-import 'package:kyrgyz_tourism/modules/booking_tour/data/models/booking_date_model.dart';
+
 import 'package:kyrgyz_tourism/modules/booking_tour/data/models/booking_tour_model.dart';
-import 'package:kyrgyz_tourism/modules/booking_tour/domain/entities/booking_date_entity.dart';
 import 'package:kyrgyz_tourism/modules/booking_tour/domain/entities/booking_tour_entity.dart';
 import 'package:kyrgyz_tourism/modules/booking_tour/domain/repositories/booking_domain_repository.dart';
 import 'package:kyrgyz_tourism/modules/booking_tour/domain/usecases/booking_date_use_case.dart';
@@ -16,8 +15,9 @@ class BookingTourRepository extends BookingDomainRepository {
     : _bookingTourApi = bookingTourApi;
 
   @override
-  Future<BookingTourEntity> bookingTour(BookingTourParams params) async {
-    return _bookingTourApi.bookingTour(params);
+  Future<BookingTourModel> bookingTour(BookingTourParams params) async {
+    final response = await _bookingTourApi.bookingTour(params);
+    return response;
   }
 
   @override
@@ -26,8 +26,7 @@ class BookingTourRepository extends BookingDomainRepository {
   }
 
   @override
-  Future<List<BookingDateModel>> bookingDate(BookingDateParams params) async {
-    final response = await _bookingTourApi.getDateBookings(params);
-    return response;
+  Future<List<BookingTourEntity>> bookingDate(BookingDateParams params) {
+    return _bookingTourApi.bookingDate(params.tourId);
   }
 }

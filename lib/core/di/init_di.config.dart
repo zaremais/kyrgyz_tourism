@@ -68,8 +68,16 @@ import '../../modules/booking_tour/data/repositories/booking_tour_repository.dar
     as _i806;
 import '../../modules/booking_tour/domain/repositories/booking_domain_repository.dart'
     as _i80;
+import '../../modules/booking_tour/domain/usecases/booking_date_use_case.dart'
+    as _i340;
 import '../../modules/booking_tour/domain/usecases/booking_tour_use_case.dart'
     as _i396;
+import '../../modules/booking_tour/domain/usecases/booking_tour_user_use_case.dart'
+    as _i280;
+import '../../modules/booking_tour/presentation/cubit/booking_cubit.dart'
+    as _i591;
+import '../../modules/booking_tour/presentation/cubit/booking_tour_cubit.dart'
+    as _i950;
 import '../../modules/categories/data/api_service/contact_api_service.dart'
     as _i355;
 import '../../modules/categories/data/repositories/contact_repository.dart'
@@ -287,9 +295,31 @@ _i174.GetIt $initGetIt(
   gh.lazySingleton<_i959.AuthDomainTelegramRepository>(
     () => _i1016.AuthTelegramRepository(api: gh<_i489.AuthApiService>()),
   );
+  gh.factory<_i340.BookingDateUseCase>(
+    () => _i340.BookingDateUseCase(
+      repository: gh<_i80.BookingDomainRepository>(),
+    ),
+  );
   gh.factory<_i396.BookingTourUseCase>(
     () => _i396.BookingTourUseCase(
       repository: gh<_i80.BookingDomainRepository>(),
+    ),
+  );
+  gh.factory<_i280.BookingTourUserUseCase>(
+    () => _i280.BookingTourUserUseCase(
+      repository: gh<_i80.BookingDomainRepository>(),
+    ),
+  );
+  gh.factory<_i950.BookingTourCubit>(
+    () => _i950.BookingTourCubit(
+      bookingTourUseCase: gh<_i396.BookingTourUseCase>(),
+      bookingDateUseCase: gh<_i340.BookingDateUseCase>(),
+    ),
+  );
+  gh.factory<_i591.BookingDateCubit>(
+    () => _i591.BookingDateCubit(
+      bookingDateUseCase: gh<_i340.BookingDateUseCase>(),
+      tourId: gh<int>(),
     ),
   );
   gh.factory<_i749.GetOtpLinkUseCase>(
