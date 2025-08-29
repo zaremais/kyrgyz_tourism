@@ -16,6 +16,7 @@ BookingTourModel _$BookingTourModelFromJson(Map json) => BookingTourModel(
   status: json['status'] as String,
   departureDateTime: DateTime.parse(json['departureDateTime'] as String),
   placesLeft: (json['placesLeft'] as num?)?.toInt(),
+  promoCode: json['promoCode'] as String?,
 );
 
 Map<String, dynamic> _$BookingTourModelToJson(BookingTourModel instance) =>
@@ -29,4 +30,5 @@ Map<String, dynamic> _$BookingTourModelToJson(BookingTourModel instance) =>
       'status': instance.status,
       'departureDateTime': instance.departureDateTime.toIso8601String(),
       'placesLeft': instance.placesLeft,
+      'promoCode': instance.promoCode,
     };

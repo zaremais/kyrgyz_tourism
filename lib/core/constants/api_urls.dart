@@ -1,7 +1,6 @@
 class ApiUrls {
   static const String baseUrl = 'http://34.18.76.114';
 
-  // static const String baseUrl = 'http://34.18.76.114';
   static const String signup = '/v1/api/sign-up';
   static const String passwordReset = '/v1/api/password-reset';
   static const String passwordConfirm = '/v1/api/password-reset/confirm';
@@ -26,7 +25,7 @@ class ApiUrls {
   static const String refreshToken = '/v1/api/refresh';
   static const String getPayment = '/v1/api/qr/mbank';
   static const String promocode = '/v1/api/promo-codes';
-  static String bookingDate(int tourId) => '/v1/api/bookings/available/$tourId';
+  static String booking(int tourId) => '/v1/api/bookings/available/$tourId';
   static const String confirmBooked = '/v1/api/bookings';
   static const String getQrCode = '/v1/api/qr/mbank';
 }

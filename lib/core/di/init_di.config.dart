@@ -74,10 +74,10 @@ import '../../modules/booking_tour/domain/usecases/booking_tour_use_case.dart'
     as _i396;
 import '../../modules/booking_tour/domain/usecases/booking_tour_user_use_case.dart'
     as _i280;
-import '../../modules/booking_tour/presentation/cubit/booking_cubit.dart'
-    as _i591;
 import '../../modules/booking_tour/presentation/cubit/booking_tour_cubit.dart'
     as _i950;
+import '../../modules/booking_tour/presentation/cubit/booking_tour_date_cubit.dart'
+    as _i340;
 import '../../modules/categories/data/api_service/contact_api_service.dart'
     as _i355;
 import '../../modules/categories/data/repositories/contact_repository.dart'
@@ -295,6 +295,11 @@ _i174.GetIt $initGetIt(
   gh.lazySingleton<_i959.AuthDomainTelegramRepository>(
     () => _i1016.AuthTelegramRepository(api: gh<_i489.AuthApiService>()),
   );
+  gh.factory<_i280.BookingTourUserUseCase>(
+    () => _i280.BookingTourUserUseCase(
+      repository: gh<_i80.BookingDomainRepository>(),
+    ),
+  );
   gh.factory<_i340.BookingDateUseCase>(
     () => _i340.BookingDateUseCase(
       repository: gh<_i80.BookingDomainRepository>(),
@@ -305,21 +310,10 @@ _i174.GetIt $initGetIt(
       repository: gh<_i80.BookingDomainRepository>(),
     ),
   );
-  gh.factory<_i280.BookingTourUserUseCase>(
-    () => _i280.BookingTourUserUseCase(
-      repository: gh<_i80.BookingDomainRepository>(),
-    ),
-  );
   gh.factory<_i950.BookingTourCubit>(
     () => _i950.BookingTourCubit(
       bookingTourUseCase: gh<_i396.BookingTourUseCase>(),
       bookingDateUseCase: gh<_i340.BookingDateUseCase>(),
-    ),
-  );
-  gh.factory<_i591.BookingDateCubit>(
-    () => _i591.BookingDateCubit(
-      bookingDateUseCase: gh<_i340.BookingDateUseCase>(),
-      tourId: gh<int>(),
     ),
   );
   gh.factory<_i749.GetOtpLinkUseCase>(
@@ -416,6 +410,7 @@ _i174.GetIt $initGetIt(
     () => _i396.TourCubit(
       getToursUseCase: gh<_i558.GetToursUseCase>(),
       getIndividualTourUseCase: gh<_i620.GetIndividualTourUseCase>(),
+      filterTourUseCase: gh<_i771.FilterTourUseCase>(),
     ),
   );
   gh.factory<_i112.GetGuideUseCase>(
@@ -440,6 +435,11 @@ _i174.GetIt $initGetIt(
   gh.factory<_i1036.GetContactUseCase>(
     () => _i1036.GetContactUseCase(
       repository: gh<_i506.ContactDomainRepository>(),
+    ),
+  );
+  gh.factory<_i340.BookingTourDateCubit>(
+    () => _i340.BookingTourDateCubit(
+      bookingDateUseCase: gh<_i340.BookingDateUseCase>(),
     ),
   );
   gh.factory<_i643.PasswordResetConfirmCubit>(

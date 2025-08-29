@@ -202,6 +202,10 @@ flutter_bloc
 2.14
 file:///Users/ismanovazarema/.pub-cache/hosted/pub.dev/flutter_bloc-9.1.1/
 file:///Users/ismanovazarema/.pub-cache/hosted/pub.dev/flutter_bloc-9.1.1/lib/
+flutter_date_range_picker
+3.1
+file:///Users/ismanovazarema/.pub-cache/hosted/pub.dev/flutter_date_range_picker-0.2.1/
+file:///Users/ismanovazarema/.pub-cache/hosted/pub.dev/flutter_date_range_picker-0.2.1/lib/
 flutter_launcher_icons
 3.0
 file:///Users/ismanovazarema/.pub-cache/hosted/pub.dev/flutter_launcher_icons-0.14.4/
@@ -546,6 +550,14 @@ string_scanner
 3.1
 file:///Users/ismanovazarema/.pub-cache/hosted/pub.dev/string_scanner-1.4.1/
 file:///Users/ismanovazarema/.pub-cache/hosted/pub.dev/string_scanner-1.4.1/lib/
+syncfusion_flutter_core
+3.7
+file:///Users/ismanovazarema/.pub-cache/hosted/pub.dev/syncfusion_flutter_core-30.2.7/
+file:///Users/ismanovazarema/.pub-cache/hosted/pub.dev/syncfusion_flutter_core-30.2.7/lib/
+syncfusion_flutter_datepicker
+3.7
+file:///Users/ismanovazarema/.pub-cache/hosted/pub.dev/syncfusion_flutter_datepicker-30.2.7/
+file:///Users/ismanovazarema/.pub-cache/hosted/pub.dev/syncfusion_flutter_datepicker-30.2.7/lib/
 synchronized
 3.8
 file:///Users/ismanovazarema/.pub-cache/hosted/pub.dev/synchronized-3.4.0/

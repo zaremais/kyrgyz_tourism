@@ -45,6 +45,7 @@ class _TelegramScreenState extends State<TelegramScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final darkTheme = Theme.of(context).brightness == Brightness.dark;
     return MultiBlocProvider(
       providers: [
         BlocProvider.value(value: _telegramConfirmCubit),
@@ -89,16 +90,17 @@ class _TelegramScreenState extends State<TelegramScreen> {
             >(
               builder: (confirmContext, confirmState) {
                 return Scaffold(
-                  backgroundColor: AppColors.background,
+                  backgroundColor: darkTheme ? Colors.black : Colors.white,
                   body: Center(
                     child: Container(
                       margin: const EdgeInsets.symmetric(horizontal: 16),
                       padding: const EdgeInsets.all(AppSizes.paddingHorizontal),
                       decoration: BoxDecoration(
-                        color: AppColors.background,
+                        color: darkTheme ? Colors.black : Colors.white,
                         borderRadius: BorderRadius.circular(
                           AppSizes.borderRadiusLarge,
                         ),
+                        border: Border.all(color: Colors.white),
                         boxShadow: [
                           BoxShadow(
                             color: AppColors.formBorder.withValues(alpha: 0.3),
@@ -198,11 +200,6 @@ class _TelegramScreenState extends State<TelegramScreen> {
                                                 );
                                               },
                                       style: ElevatedButton.styleFrom(
-                                        backgroundColor:
-                                            otpState.status ==
-                                                    StateStatus.loading
-                                                ? Colors.grey
-                                                : AppColors.backgroundtextfield,
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(
                                             12,
@@ -230,8 +227,7 @@ class _TelegramScreenState extends State<TelegramScreen> {
                                                 : const Text(
                                                   'Получить код',
                                                   style: TextStyle(
-                                                    fontSize: 13,
-                                                    color: Colors.black45,
+                                                    fontSize: 14,
                                                   ),
                                                 ),
                                       ),
@@ -329,11 +325,6 @@ class _TelegramScreenState extends State<TelegramScreen> {
                                 height: 50,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor:
-                                        confirmState.status ==
-                                                StateStatus.loading
-                                            ? Colors.grey.shade200
-                                            : Colors.grey.shade100,
                                     side: BorderSide(
                                       color: AppColors.buttonForm,
                                     ),
@@ -365,12 +356,15 @@ class _TelegramScreenState extends State<TelegramScreen> {
                                                   ),
                                             ),
                                           )
-                                          : const Text(
+                                          : Text(
                                             "Войти",
                                             style: TextStyle(
                                               fontSize: 20,
                                               fontWeight: FontWeight.w500,
-                                              color: Colors.black,
+                                              color:
+                                                  darkTheme
+                                                      ? Colors.white
+                                                      : Colors.black,
                                             ),
                                           ),
                                 ),

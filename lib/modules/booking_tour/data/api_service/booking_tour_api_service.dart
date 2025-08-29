@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:kyrgyz_tourism/core/constants/api_urls.dart';
 
 import 'package:kyrgyz_tourism/modules/booking_tour/data/models/booking_tour_model.dart';
+import 'package:kyrgyz_tourism/modules/booking_tour/domain/usecases/booking_date_use_case.dart';
 import 'package:kyrgyz_tourism/modules/booking_tour/domain/usecases/booking_tour_use_case.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
@@ -20,8 +21,10 @@ abstract class BookingTourApiService {
   Future<BookingTourModel> bookingTour(@Body() BookingTourParams params);
 
   @GET('/v1/api/bookings/user')
-  Future<List<BookingTourModel>> getUserBookings();
+  Future<List<BookingTourModel>> bookingUser();
 
   @GET('/v1/api/bookings/available-dates/{tourId}')
-  Future<List<BookingTourModel>> bookingDate(@Path('tourId') int tourId);
+  Future<List<BookingTourModel>> bookingDate(
+    @Path('tourId') BookingDateParams params,
+  );
 }

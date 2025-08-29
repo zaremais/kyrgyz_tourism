@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
-import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/core/di/init_di.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
@@ -143,14 +142,6 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _navigateToAddReview(context),
-        child: Icon(Icons.add_comment),
-      ),
     );
-  }
-
-  void _navigateToAddReview(BuildContext context) {
-    context.router.push(AddReviewRoute());
   }
 }

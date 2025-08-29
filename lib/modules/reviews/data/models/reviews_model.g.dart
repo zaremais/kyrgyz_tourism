@@ -11,7 +11,6 @@ ReviewsModel _$ReviewsModelFromJson(Map json) => ReviewsModel(
   name: json['name'] as String,
   rating: (json['rating'] as num).toDouble(),
   comment: json['comment'] as String,
-  imageUrl: json['imageUrl'] as String?,
 );
 
 Map<String, dynamic> _$ReviewsModelToJson(ReviewsModel instance) =>
@@ -20,5 +19,4 @@ Map<String, dynamic> _$ReviewsModelToJson(ReviewsModel instance) =>
       'name': instance.name,
       'rating': instance.rating,
       'comment': instance.comment,
-      'imageUrl': instance.imageUrl,
     };

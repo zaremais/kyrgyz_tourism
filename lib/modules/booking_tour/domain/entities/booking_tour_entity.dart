@@ -8,6 +8,7 @@ class BookingTourEntity {
   final String status;
   final DateTime departureDateTime;
   final int? placesLeft;
+  final String? promoCode;
 
   BookingTourEntity({
     required this.id,
@@ -18,6 +19,7 @@ class BookingTourEntity {
     required this.price,
     required this.status,
     required this.departureDateTime,
-    required this.placesLeft,
+    this.placesLeft,
+    this.promoCode,
   });
 }

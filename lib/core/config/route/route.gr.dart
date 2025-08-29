@@ -59,50 +59,6 @@ class AuthRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [BookingScreen]
-class BookingRoute extends PageRouteInfo<BookingRouteArgs> {
-  BookingRoute({Key? key, required int tourId, List<PageRouteInfo>? children})
-    : super(
-        BookingRoute.name,
-        args: BookingRouteArgs(key: key, tourId: tourId),
-        initialChildren: children,
-      );
-
-  static const String name = 'BookingRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      final args = data.argsAs<BookingRouteArgs>();
-      return BookingScreen(key: args.key, tourId: args.tourId);
-    },
-  );
-}
-
-class BookingRouteArgs {
-  const BookingRouteArgs({this.key, required this.tourId});
-
-  final Key? key;
-
-  final int tourId;
-
-  @override
-  String toString() {
-    return 'BookingRouteArgs{key: $key, tourId: $tourId}';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    if (other is! BookingRouteArgs) return false;
-    return key == other.key && tourId == other.tourId;
-  }
-
-  @override
-  int get hashCode => key.hashCode ^ tourId.hashCode;
-}
-
-/// generated route for
 /// [CategoryScreen]
 class CategoryRoute extends PageRouteInfo<void> {
   const CategoryRoute({List<PageRouteInfo>? children})

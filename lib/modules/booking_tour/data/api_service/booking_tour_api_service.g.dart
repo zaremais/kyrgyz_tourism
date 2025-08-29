@@ -48,7 +48,7 @@ class _BookingTourApiService implements BookingTourApiService {
   }
 
   @override
-  Future<List<BookingTourModel>> getUserBookings() async {
+  Future<List<BookingTourModel>> bookingUser() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -81,7 +81,7 @@ class _BookingTourApiService implements BookingTourApiService {
   }
 
   @override
-  Future<List<BookingTourModel>> bookingDate(int tourId) async {
+  Future<List<BookingTourModel>> bookingDate(BookingDateParams params) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -90,7 +90,7 @@ class _BookingTourApiService implements BookingTourApiService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/v1/api/bookings/available-dates/${tourId}',
+            '/v1/api/bookings/available-dates/${params}',
             queryParameters: queryParameters,
             data: _data,
           )

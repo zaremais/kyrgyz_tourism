@@ -11,7 +11,6 @@ class ReviewsModel extends ReviewsEntity {
     required super.name,
     required super.rating,
     required super.comment,
-    required super.imageUrl,
   });
 
   factory ReviewsModel.fromJson(JSON json) => _$ReviewsModelFromJson(json);

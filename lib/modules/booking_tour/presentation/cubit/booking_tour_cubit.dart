@@ -9,13 +9,11 @@ import 'package:kyrgyz_tourism/modules/booking_tour/domain/usecases/booking_tour
 @injectable
 class BookingTourCubit extends Cubit<BaseState<BookingTourEntity>> {
   final BookingTourUseCase _bookingTourUseCase;
-  final BookingDateUseCase _bookingDateUseCase;
 
   BookingTourCubit({
     required BookingTourUseCase bookingTourUseCase,
     required BookingDateUseCase bookingDateUseCase,
   }) : _bookingTourUseCase = bookingTourUseCase,
-       _bookingDateUseCase = bookingDateUseCase,
 
        super(BaseState(status: StateStatus.init));
 
@@ -24,16 +22,6 @@ class BookingTourCubit extends Cubit<BaseState<BookingTourEntity>> {
     try {
       await _bookingTourUseCase.execute(params: params);
 
-      emit(BaseState(status: StateStatus.success, model: state.model));
-    } catch (e) {
-      emit(BaseState(status: StateStatus.failure, errorMessage: e.toString()));
-    }
-  }
-
-  Future<void> bookingDate(BookingDateParams params) async {
-    emit(BaseState(status: StateStatus.loading));
-    try {
-      await _bookingDateUseCase.execute(params: params);
       emit(BaseState(status: StateStatus.success, model: state.model));
     } catch (e) {
       emit(BaseState(status: StateStatus.failure, errorMessage: e.toString()));

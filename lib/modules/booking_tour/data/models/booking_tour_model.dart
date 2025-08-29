@@ -16,6 +16,7 @@ class BookingTourModel extends BookingTourEntity {
     required super.status,
     required super.departureDateTime,
     required super.placesLeft,
+    required super.promoCode,
   });
 
   factory BookingTourModel.fromJson(JSON json) =>

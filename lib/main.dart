@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:kyrgyz_tourism/core/config/themes/theme_provider.dart';
 
 import 'package:kyrgyz_tourism/core/di/init_di.dart';
 import 'package:kyrgyz_tourism/core/network/storage_secure_storage/token_storage_service.dart';
@@ -10,7 +11,7 @@ import 'package:kyrgyz_tourism/firebase_options.dart';
 import 'package:kyrgyz_tourism/modules/auth/data/repositories/mosk_sign_in_repository.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/repositories/auth_domain_sign_in_repository.dart';
 import 'package:kyrgyz_tourism/modules/home/presentation/providers/locale_provider.dart';
-import 'package:kyrgyz_tourism/modules/home/presentation/providers/theme_provider.dart';
+
 import 'package:kyrgyz_tourism/modules/home/presentation/widgets/kyrgyz_tourism_widget.dart';
 import 'package:kyrgyz_tourism/modules/profile/data/repositories/profile_repository.dart';
 import 'package:kyrgyz_tourism/modules/profile/domain/repositories/profile_domain_repository.dart';

@@ -45,8 +45,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final darkTheme = Theme.of(context).brightness == Brightness.dark;
     return SafeArea(
       child: Scaffold(
+        backgroundColor: darkTheme ? Colors.black : Colors.white,
         body: MultiBlocProvider(
           providers: [
             BlocProvider.value(value: _signupCubit),
@@ -77,7 +79,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   margin: EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: Colors.black12),
+                    border: Border.all(color: Colors.white),
                   ),
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Column(

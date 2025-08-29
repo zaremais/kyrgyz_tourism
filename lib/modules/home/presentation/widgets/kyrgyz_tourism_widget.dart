@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:kyrgyz_tourism/core/config/route/route.dart';
+import 'package:kyrgyz_tourism/core/config/themes/theme_provider.dart';
 import 'package:kyrgyz_tourism/generated/l10n.dart';
 import 'package:kyrgyz_tourism/modules/home/presentation/providers/locale_provider.dart';
-import 'package:kyrgyz_tourism/modules/home/presentation/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();

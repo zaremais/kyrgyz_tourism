@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kyrgyz_tourism/core/constants/typedefs.dart';
 import 'package:kyrgyz_tourism/core/network/storage_secure_storage/token_storage_service.dart';
 import 'package:kyrgyz_tourism/modules/reviews/data/api_service/reviews_api_service.dart';
 import 'package:kyrgyz_tourism/modules/reviews/data/models/reviews_model.dart';
@@ -26,7 +25,7 @@ class ReviewsRepository extends ReviewsDomainRepository {
   }
 
   @override
-  Future<ReviewsModel> addReviews(AddReviewsParams params) async {
+  Future<void> addReviews(AddReviewsParams params) async {
     try {
       final token = await _tokenStorage.getAccessToken();
       if (token == null) {
@@ -37,9 +36,9 @@ class ReviewsRepository extends ReviewsDomainRepository {
         throw Exception('Рейтинг должен быть от 0.1 до 5');
       }
 
-      final response = await _reviewsApi.getReviews();
+      final response = await _reviewsApi.addReviews(params);
 
-      return ReviewsModel.fromJson(response.runtimeType as JSON);
+      return response;
     } on DioException catch (e) {
       throw Exception(e.toString());
     }

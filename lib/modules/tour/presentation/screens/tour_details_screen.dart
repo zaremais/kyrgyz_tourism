@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_sizes.dart';
 import 'package:kyrgyz_tourism/generated/l10n.dart';
+import 'package:kyrgyz_tourism/modules/booking_tour/presentation/widgets/booking_calendar.dart';
 import 'package:kyrgyz_tourism/modules/home/presentation/widgets/social_links_widget.dart';
 import 'package:kyrgyz_tourism/modules/tour/domain/entities/tour_entity.dart';
 import 'package:kyrgyz_tourism/modules/tour/presentation/widgets/tour_card.dart';
@@ -52,8 +53,7 @@ class _TourDetailsScreenState extends State<TourDetailsScreen> {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
-
-              // TourCalendar(),
+              BookingCalendarWidget(),
               Padding(
                 padding: EdgeInsets.only(left: AppSizes.paddingLarge),
                 child: Column(

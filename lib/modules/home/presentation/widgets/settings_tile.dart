@@ -7,6 +7,14 @@ class SettingsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(title: Text(title), trailing: action);
+    return Container(
+      margin: EdgeInsets.only(left: 25, right: 25),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.secondary,
+        borderRadius: BorderRadius.circular(12),
+      ),
+
+      child: ListTile(title: Text(title), trailing: action),
+    );
   }
 }

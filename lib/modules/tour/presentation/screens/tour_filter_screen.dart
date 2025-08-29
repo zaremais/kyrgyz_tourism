@@ -21,28 +21,28 @@ class _TourFilterScreenState extends State<TourFilterScreen> {
   String? selectedRegion;
   late final FilterTourCubit _filterTourCubit;
 
-  @override
-  void initState() {
-    super.initState();
-    _filterTourCubit = di<FilterTourCubit>();
-    _loadInitialTours();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _filterTourCubit = di<FilterTourCubit>();
+  //   _loadInitialTours();
+  // }
 
-  void _loadInitialTours() {
-    _filterTourCubit.filterTour(
-      FilterTourParams(
-        oneDay: false,
-        longTerm: false,
-        guideIncluded: false,
-        withAccommodation: false,
-        withFood: false,
-        smallGroup: false,
-        bigGroup: false,
-        difficulty: 'EASY',
-        region: '', // без фильтра
-      ),
-    );
-  }
+  // void _loadInitialTours() {
+  //   _filterTourCubit.filterTour(
+  //     FilterTourParams(
+  //       oneDay: false,
+  //       longTerm: false,
+  //       guideIncluded: false,
+  //       withAccommodation: false,
+  //       withFood: false,
+  //       smallGroup: false,
+  //       bigGroup: false,
+  //       difficulty: '',
+  //       region: '',
+  //     ),
+  //   );
+  // }
 
   void _onRegionSelected(String region) {
     setState(() {

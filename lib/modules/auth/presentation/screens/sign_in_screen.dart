@@ -67,6 +67,7 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     final darkTheme = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
+      backgroundColor: darkTheme ? Colors.black : Colors.white,
       body: BlocProvider.value(
         value: _signinCubit,
         child: BlocListener<SignInCubit, BaseState<SignInEntity>>(
@@ -239,8 +240,6 @@ class _SignInScreenState extends State<SignInScreen> {
                                                         content: Text(
                                                           'Пожалуйста, заполните все поля',
                                                         ),
-                                                        backgroundColor:
-                                                            Colors.orange,
                                                       ),
                                                     );
                                                     return;
@@ -288,10 +287,10 @@ class _SignInScreenState extends State<SignInScreen> {
                                         style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.w500,
-                                          color:
-                                              darkTheme
-                                                  ? Colors.white
-                                                  : Colors.black,
+                                          // color:
+                                          //     darkTheme
+                                          //         ? Colors.white
+                                          //         : Colors.black,
                                         ),
                                       ),
                                     ),
