@@ -5,7 +5,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
-import 'package:kyrgyz_tourism/core/di/init_di.dart';
+import 'package:kyrgyz_tourism/core/di/service_locator.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
 import 'package:kyrgyz_tourism/modules/reviews/domain/usecases/add_reviews_use_case.dart';
 import 'package:kyrgyz_tourism/modules/reviews/presentation/cubit/reviews_cubit.dart';

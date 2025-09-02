@@ -7,7 +7,7 @@ import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_sizes.dart';
 import 'package:kyrgyz_tourism/core/config/themes/theme.dart';
 import 'package:kyrgyz_tourism/core/constants/validator.dart';
-import 'package:kyrgyz_tourism/core/di/init_di.dart';
+import 'package:kyrgyz_tourism/core/di/service_locator.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/entities/telegram_confirm_entity.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/entities/telegram_otp_entity.dart';

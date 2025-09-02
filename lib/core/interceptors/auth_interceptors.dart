@@ -5,43 +5,36 @@ import 'package:kyrgyz_tourism/core/network/storage_secure_storage/token_storage
 
 @injectable
 class AuthInterceptor extends Interceptor {
-  final TokenStorageService _tokenStorage;
-  final Dio _refreshDio = Dio(BaseOptions(baseUrl: ApiUrls.baseUrl));
-
+  final Dio _refreshDio;
+  final TokenStorageService _tokenStorage = TokenStorageService();
   bool _isRefreshing = false;
 
-  AuthInterceptor(this._tokenStorage);
+  AuthInterceptor() : _refreshDio = Dio(BaseOptions(baseUrl: ApiUrls.baseUrl));
 
   @override
-  void onRequest(
+  Future<void> onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    options.headers['Content-Type'] = 'application/json';
-    options.headers['accept'] = '*/*';
-    if (_isAuthEndpoint(options.path)) {
-      final accessToken = await _tokenStorage.getAccessToken();
-      if (accessToken != null && accessToken.isNotEmpty) {
-        options.headers['Authorization'] = 'Bearer $accessToken';
-      } else {
-        throw Exception('Токен авторизации отсутствует');
+    options.headers.addAll({});
+
+    final isPublicRoute =
+        options.path.contains(ApiUrls.signup) ||
+        options.path.contains(ApiUrls.signin);
+    if (!isPublicRoute) {
+      final token = await _tokenStorage.getAccessToken();
+      if (token != null && token.isNotEmpty) {
+        options.headers['Authorization'] = 'Bearer $token';
       }
     }
 
-    super.onRequest(options, handler);
-  }
+    handler.next(options);
 
-  // bool _isProtectedEndpoint(String path) {
-  //   return path.contains('/profiles/') ||
-  //       path.contains('/protected/') ||
-  //       !_isAuthEndpoint(path);
-  // }
-
-  bool _isAuthEndpoint(String path) {
-    return path.contains('/sign-in') ||
-        path.contains('/sign-up') ||
-        path.contains('/verify') ||
-        path.contains('/refresh');
+    // bool _isAuthEndpoint(String path) {
+    //   return path.contains('/sign-in') ||
+    //       path.contains('/sign-up') ||
+    //       path.contains('/verify') ||
+    //       path.contains('/refresh');
   }
 
   @override

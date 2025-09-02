@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
 import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
-import 'package:kyrgyz_tourism/core/di/init_di.dart';
+import 'package:kyrgyz_tourism/core/di/service_locator.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/entities/sign_in_entity.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/usecases/sign_in_use_case.dart';

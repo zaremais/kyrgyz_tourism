@@ -8,7 +8,7 @@ part of 'tour_model.dart';
 
 TourModel _$TourModelFromJson(Map json) => TourModel(
   id: (json['id'] as num).toInt(),
-  title: json['title'] as String,
+  title: json['title'] as String?,
   author: json['author'] as String,
   price: (json['price'] as num).toInt(),
   tourDuration: (json['tourDuration'] as num).toInt(),

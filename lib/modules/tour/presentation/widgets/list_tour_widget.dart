@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
 import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_sizes.dart';
-import 'package:kyrgyz_tourism/core/di/init_di.dart';
+import 'package:kyrgyz_tourism/core/di/service_locator.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
 import 'package:kyrgyz_tourism/core/utils/data_formatter.dart';
 import 'package:kyrgyz_tourism/generated/l10n.dart';
@@ -61,7 +61,11 @@ class _ListTourWidgetState extends State<ListTourWidget> {
                         if (state.status == StateStatus.failure) {
                           return const Icon(Icons.error, color: Colors.red);
                         }
-
+                        // final isFavorite =
+                        //     state.model?.any(
+                        //       (t) => t.tourId == widget.tour.id,
+                        //     ) ??
+                        //     false;
                         final isFavorite = context
                             .read<FavoriteTourCubit>()
                             .isFavorite(widget.tour.id);
@@ -103,7 +107,7 @@ class _ListTourWidgetState extends State<ListTourWidget> {
               children: [
                 Expanded(
                   child: Text(
-                    widget.tour.title.toString(),
+                    widget.tour.title ?? 'Без названия',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                   ),
                 ),

@@ -26,4 +26,13 @@ abstract class TourApiService {
 
   @POST("/v1/api/tours/filter")
   Future<List<TourModel>> filterTours(@Body() FilterTourParams params);
+
+  // @GET("/v1/api/favorite-tours")
+  // Future<List<TourModel>> getFavoriteTours();
+
+  // @POST("/v1/api/favorite-tours/{tourId}")
+  // Future<void> addFavoritesTours(@Path('tourId') int tourId);
+
+  // @DELETE("/v1/api/favorite-tours/{tourId}")
+  // Future<void> deleteFavoriteTour(@Path('tourId') int tourId);
 }

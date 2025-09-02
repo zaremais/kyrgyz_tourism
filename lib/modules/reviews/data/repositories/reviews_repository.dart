@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kyrgyz_tourism/core/network/storage_secure_storage/token_storage_service.dart';
 import 'package:kyrgyz_tourism/modules/reviews/data/api_service/reviews_api_service.dart';
@@ -11,7 +10,7 @@ import 'package:kyrgyz_tourism/modules/reviews/domain/usecases/add_reviews_use_c
 class ReviewsRepository extends ReviewsDomainRepository {
   final ReviewsApiService _reviewsApi;
   final TokenStorageService _tokenStorage = TokenStorageService(
-    FlutterSecureStorage(),
+    // FlutterSecureStorage(),
   );
 
   ReviewsRepository({required ReviewsApiService reviewsApi})

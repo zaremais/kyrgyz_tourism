@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:kyrgyz_tourism/core/constants/api_urls.dart';
 import 'package:injectable/injectable.dart';
+import 'package:kyrgyz_tourism/core/interceptors/auth_interceptors.dart';
 
 @injectable
 class DioClient {
@@ -25,7 +26,8 @@ class DioClient {
         error: true,
         logPrint: (obj) => debugPrint(obj.toString()),
       ),
-      LogInterceptor(),
+      // LogInterceptor(),
+      AuthInterceptor(),
       // AuthInterceptor(di<TokenStorageService>()),
     ]);
   }

@@ -1,1 +1,0 @@
- /Users/ismanovazarema/Documents/flutter_apps/kyrgyz_tourism/.dart_tool/flutter_build/9550a1bfd9d12b6ca9be42b94eeef8b6/native_assets.json: 

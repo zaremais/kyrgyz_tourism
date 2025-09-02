@@ -14,8 +14,6 @@ class ReviewsCardButton extends StatelessWidget {
       height: 115,
 
       child: Card(
-        color: AppColors.backgroundtextfield,
-
         elevation: 3,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Column(

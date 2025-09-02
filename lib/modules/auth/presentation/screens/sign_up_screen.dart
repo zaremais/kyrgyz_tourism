@@ -6,7 +6,7 @@ import 'package:kyrgyz_tourism/core/base/base_state.dart';
 import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/constants/text_password.dart';
 import 'package:kyrgyz_tourism/core/constants/validator.dart';
-import 'package:kyrgyz_tourism/core/di/init_di.dart';
+import 'package:kyrgyz_tourism/core/di/service_locator.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/entities/sign_up_entity.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/usecases/check_nickname_use_case.dart';

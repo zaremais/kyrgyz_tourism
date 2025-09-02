@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/core/config/themes/theme.dart';
-import 'package:kyrgyz_tourism/core/di/init_di.dart';
+import 'package:kyrgyz_tourism/core/di/service_locator.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
 import 'package:kyrgyz_tourism/core/widgets/custom_app_bar.dart';
 import 'package:kyrgyz_tourism/core/widgets/custom_drawer.dart';
@@ -247,8 +247,6 @@ class _ToursScreenState extends State<ToursScreen> {
                                 onApply: (newFilter) {
                                   currentFilter.value == newFilter;
                                   Navigator.pop(context);
-
-                                  print('Применён фильтр: $newFilter');
                                 },
                               ),
                         );

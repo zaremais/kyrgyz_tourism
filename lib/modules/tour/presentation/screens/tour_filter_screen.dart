@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
-import 'package:kyrgyz_tourism/core/di/init_di.dart';
+import 'package:kyrgyz_tourism/core/di/service_locator.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
 import 'package:kyrgyz_tourism/modules/tour/domain/entities/tour_entity.dart';
 import 'package:kyrgyz_tourism/modules/tour/domain/usecases/filter_tours_use_case.dart';
@@ -14,6 +14,7 @@ class TourFilterScreen extends StatefulWidget {
   const TourFilterScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _TourFilterScreenState createState() => _TourFilterScreenState();
 }
 
@@ -112,7 +113,7 @@ class _TourFilterScreenState extends State<TourFilterScreen> {
                     itemBuilder: (context, index) {
                       final tour = tours[index];
                       return ListTile(
-                        title: Text(tour.title),
+                        title: Text(tour.title ?? 'Без названия'),
                         subtitle: Text('Регион: ${tour.region}'),
                       );
                     },

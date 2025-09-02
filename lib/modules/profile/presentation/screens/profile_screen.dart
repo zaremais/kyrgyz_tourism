@@ -6,7 +6,7 @@ import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/core/config/themes/theme.dart';
 import 'package:kyrgyz_tourism/core/constants/validator.dart';
-import 'package:kyrgyz_tourism/core/di/init_di.dart';
+import 'package:kyrgyz_tourism/core/di/service_locator.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
 import 'package:kyrgyz_tourism/core/widgets/custom_drop_down_button.dart';
 import 'package:kyrgyz_tourism/core/widgets/custom_text_formfield.dart';
@@ -24,15 +24,6 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final _profileCubit = di<ProfileCubit>()..getProfile();
-  DateTime? _selectedDate;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _profileCubit.getProfile();
-  // }
-
   void _showDeleteAvatarDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -53,20 +44,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Future<void> _pickDate() async {
-    final picked = await showDatePicker(
-      context: context,
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
-      initialDate: _selectedDate ?? DateTime(2000),
-    );
+  String? menuItem = 'e1';
 
-    if (picked != null) {
-      setState(() {
-        _selectedDate = picked;
-      });
-    }
-  }
+  final _profileCubit = di<ProfileCubit>()..getProfile();
 
   @override
   Widget build(BuildContext context) {
@@ -75,48 +55,141 @@ class _ProfileScreenState extends State<ProfileScreen> {
         title: const Text('Профиль'),
         centerTitle: true,
         leading: IconButton(
-          onPressed: () => context.router.push(HomeRoute()),
-          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            context.router.push(HomeRoute());
+          },
+          icon: Icon(Icons.arrow_back_ios),
         ),
       ),
       body: BlocProvider.value(
         value: _profileCubit,
-        child: BlocConsumer<ProfileCubit, BaseState<ProfileEntity>>(
-          listener: (context, state) {
-            if (state.status == StateStatus.failure) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.errorMessage?.toString() ?? 'Ошибка'),
-                ),
-              );
-            }
-          },
+        child: BlocBuilder<ProfileCubit, BaseState<ProfileEntity>>(
           builder: (context, state) {
             if (state.status == StateStatus.loading) {
               return const Center(child: CircularProgressIndicator());
-            }
-
-            if (state.status == StateStatus.failure) {
-              return Center(
+            } else if (state.status == StateStatus.failure) {
+              return Center(child: Text('Ошибка: ${state.errorMessage}'));
+            } else if (state.status == StateStatus.success) {
+              final profile = state.model!;
+              return SingleChildScrollView(
+                padding: const EdgeInsets.all(24),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Ошибка загрузки профиля'),
-                    const SizedBox(height: 16),
-                    ElevatedButton(
-                      onPressed: () => _profileCubit.getProfile(),
-                      child: const Text('Попробовать снова'),
+                    Text(
+                      S.of(context).manager,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        decoration: TextDecoration.underline,
+                        decorationColor: AppColors.grey,
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Text(S.of(context).guides, style: FontStyles.bodyText),
+                    SizedBox(height: 20),
+                    Text(S.of(context).users, style: FontStyles.bodyText),
+                    SizedBox(height: 20),
+                    Text(S.of(context).blacklist, style: FontStyles.bodyText),
+                    const SizedBox(height: 24),
+
+                    CustomDropDownButton(),
+                    const SizedBox(height: 24),
+                    Text(
+                      S.of(context).generalinfo,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    Text(
+                      S.of(context).authortours,
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    CustomDropDownButton(),
+                    const SizedBox(height: 30),
+                    CustomTextFormField(
+                      hintText: S.of(context).firstandlastname,
+                      label: S.of(context).fullname,
+                    ),
+                    const SizedBox(height: 24),
+
+                    _buildAvatarAndName(profile, context),
+                    const SizedBox(height: 24),
+                    Text(S.of(context).nameuser),
+                    CustomTextFormField(
+                      hintText: '@nickeName',
+                      label: "@${profile.nickname}",
+                    ),
+                    SizedBox(height: 12),
+                    Text('День рождения', style: FontStyles.bodyLarge),
+                    CustomTextFormField(
+                      hintText: '20.02.2025',
+                      label: ' ${profile.birthDate.toString()}',
+                      onTap: _pickDate,
+                    ),
+                    SizedBox(height: 12),
+                    Text(S.of(context).enteremail, style: FontStyles.bodyLarge),
+                    CustomTextFormField(
+                      label: profile.email.toString(),
+                      hintText: 'example@mail.com',
+
+                      validator: validateEmail,
+                    ),
+                    SizedBox(height: 12),
+                    Text(
+                      S.of(context).phonenumber,
+                      style: FontStyles.bodyLarge,
+                    ),
+                    SizedBox(height: 12),
+
+                    CustomTextFormField(
+                      hintText: '+996(000) 12-34-56',
+                      label: profile.phoneNumber,
+
+                      keyboardType: TextInputType.phone,
+                    ),
+
+                    Text(
+                      S.of(context).gettingstarted,
+                      style: FontStyles.bodyLarge,
+                    ),
+                    CustomTextFormField(
+                      hintText: '11.11.2025',
+                      label: profile.workStartDate.toString(),
+                    ),
+
+                    Text(S.of(context).roles, style: FontStyles.bodyLarge),
+                    CustomTextFormField(
+                      hintText: S.of(context).seniormanager,
+                      label: profile.roles.toString(),
+                    ),
+                    Text(
+                      S.of(context).lasttimeofentry,
+                      style: FontStyles.bodyLarge,
+                    ),
+                    CustomTextFormField(
+                      hintText: '20.05.2025',
+                      label: profile.lastLogin.toString(),
+                    ),
+                    SizedBox(height: 12),
+                    Text(
+                      S.of(context).guidedescription,
+                      style: FontStyles.bodyLarge,
+                    ),
+
+                    CustomTextFormField(
+                      hintText: S.of(context).guidedescription,
+                      label: profile.description.toString(),
                     ),
                   ],
                 ),
               );
             }
-
-            if (state.status == StateStatus.success && state.model != null) {
-              final profile = state.model!;
-              return _buildProfileContent(profile, context);
-            }
-
             return const SizedBox();
           },
         ),
@@ -124,264 +197,49 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget _buildProfileContent(ProfileEntity profile, BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildManagementSection(context),
-          const SizedBox(height: 24),
-
-          _buildGeneralInfoSection(profile),
-          const SizedBox(height: 24),
-
-          _buildAuthorToursSection(),
-          const SizedBox(height: 30),
-
-          _buildProfileInfoSection(profile, context),
-        ],
-      ),
+  Future<void> _pickDate() async {
+    final picked = await showDatePicker(
+      context: context,
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+      initialDate: DateTime(2000),
     );
+    if (picked != null) {
+      "${picked.day}.${picked.month}.${picked.year}";
+    }
   }
 
-  Widget _buildManagementSection(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          S.of(context).manager,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            decoration: TextDecoration.underline,
-            decorationColor: AppColors.grey,
-          ),
-        ),
-        const SizedBox(height: 20),
-        Text(S.of(context).guides, style: FontStyles.bodyText),
-        const SizedBox(height: 20),
-        Text(S.of(context).users, style: FontStyles.bodyText),
-        const SizedBox(height: 20),
-        Text(S.of(context).blacklist, style: FontStyles.bodyText),
-      ],
-    );
-  }
-
-  Widget _buildGeneralInfoSection(ProfileEntity profile) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          S.of(context).generalinfo,
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-        ),
-        const SizedBox(height: 24),
-        CustomTextFormField(
-          hintText: S.of(context).firstandlastname,
-          label: S.of(context).fullname,
-        ),
-      ],
-    );
-  }
-
-  Widget _buildAuthorToursSection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          S.of(context).authortours,
-          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-        ),
-        const CustomDropDownButton(),
-      ],
-    );
-  }
-
-  Widget _buildProfileInfoSection(ProfileEntity profile, BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildAvatarSection(profile, context),
-        const SizedBox(height: 24),
-
-        _buildProfileFields(profile),
-      ],
-    );
-  }
-
-  Widget _buildAvatarSection(ProfileEntity profile, BuildContext context) {
+  Widget _buildAvatarAndName(ProfileEntity profile, BuildContext context) {
     return Row(
       children: [
-        _buildSafeAvatar(profile.image),
+        CircleAvatar(radius: 50, backgroundImage: NetworkImage(profile.image)),
         const SizedBox(width: 20),
 
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                profile.fullName ?? 'ФИО не указано',
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              profile.fullName ?? 'ФИО не указано',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+            TextButton(
+              onPressed: () => _showLoadedAvatarDialog(context),
+              child: const Text(
+                'Загрузить новое фото',
+                style: TextStyle(color: Colors.black),
               ),
-              const SizedBox(height: 8),
-              _buildAvatarButtons(context),
-            ],
-          ),
+            ),
+            TextButton(
+              onPressed: () => _showDeleteAvatarDialog(context),
+              child: const Text(
+                'Удалить фото',
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
+          ],
         ),
       ],
     );
-  }
-
-  Widget _buildSafeAvatar(String? imageUrl) {
-    final hasValidImage = imageUrl != null && imageUrl.isNotEmpty;
-
-    return CircleAvatar(
-      radius: 40,
-      backgroundColor: Colors.grey[300],
-      backgroundImage: hasValidImage ? NetworkImage(imageUrl) : null,
-      child:
-          hasValidImage
-              ? null
-              : const Icon(Icons.person, size: 40, color: Colors.grey),
-    );
-  }
-
-  Widget _buildAvatarButtons(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        TextButton(
-          onPressed: () => _showLoadedAvatarDialog(context),
-          child: const Text(
-            'Загрузить новое фото',
-            style: TextStyle(color: Colors.black),
-          ),
-        ),
-        TextButton(
-          onPressed: () => _showDeleteAvatarDialog(context),
-          child: const Text(
-            'Удалить фото',
-            style: TextStyle(color: Colors.black),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildProfileFields(ProfileEntity profile) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildProfileField(
-          title: S.of(context).nameuser,
-          value: profile.nickname,
-          hint: '@nickeName',
-        ),
-
-        _buildDateField(
-          title: 'День рождения',
-          value: profile.birthDate?.toString(),
-          hint: '20.02.2025',
-          onTap: _pickDate,
-        ),
-
-        _buildProfileField(
-          title: S.of(context).enteremail,
-          value: profile.email,
-          hint: 'example@mail.com',
-          validator: validateEmail,
-        ),
-
-        _buildProfileField(
-          title: S.of(context).phonenumber,
-          value: profile.phoneNumber,
-          hint: '+996(000) 12-34-56',
-          keyboardType: TextInputType.phone,
-        ),
-
-        _buildProfileField(
-          title: S.of(context).gettingstarted,
-          value: profile.workStartDate?.toString(),
-          hint: '11.11.2025',
-        ),
-
-        _buildProfileField(
-          title: S.of(context).roles,
-          value: profile.roles.join(', '),
-          hint: S.of(context).seniormanager,
-        ),
-
-        _buildProfileField(
-          title: S.of(context).lasttimeofentry,
-          value: profile.lastLogin?.toString(),
-          hint: '20.05.2025',
-        ),
-
-        _buildProfileField(
-          title: S.of(context).guidedescription,
-          value: profile.description,
-          hint: S.of(context).guidedescription,
-        ),
-      ],
-    );
-  }
-
-  Widget _buildProfileField({
-    required String title,
-    required String? value,
-    required String hint,
-    TextInputType? keyboardType,
-    String? Function(String?)? validator,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(title, style: FontStyles.bodyLarge),
-        const SizedBox(height: 8),
-        CustomTextFormField(
-          hintText: hint,
-          label: value ?? '',
-          keyboardType: keyboardType,
-          validator: validator,
-        ),
-        const SizedBox(height: 16),
-      ],
-    );
-  }
-
-  Widget _buildDateField({
-    required String title,
-    required String? value,
-    required String hint,
-    required VoidCallback onTap,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(title, style: FontStyles.bodyLarge),
-        const SizedBox(height: 8),
-        CustomTextFormField(
-          hintText: hint,
-          label: '',
-
-          //  "${_selectedDate!.day}.${_selectedDate!.month}.${_selectedDate!.year}"
-          onTap: onTap,
-          // readOnly: true,
-        ),
-        const SizedBox(height: 16),
-      ],
-    );
-  }
-
-  @override
-  void dispose() {
-    _profileCubit.close();
-    super.dispose();
   }
 }

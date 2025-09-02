@@ -11,7 +11,7 @@ class UpdateProfileUseCase extends BaseUsecase<ProfileEntity, ProfileParams> {
     : _repository = repository;
 
   @override
-  Future<ProfileEntity> execute({required params}) {
+  Future<ProfileEntity> execute({required ProfileParams params}) {
     return _repository.updateProfile(params);
   }
 }

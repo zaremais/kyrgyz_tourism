@@ -11,7 +11,7 @@ class GetProfileUseCase extends BaseUsecase<ProfileEntity, NoParams> {
     : _repository = repository;
 
   @override
-  Future<ProfileEntity> execute({required NoParams params}) async {
+  Future<ProfileEntity> execute({required NoParams params}) {
     return _repository.getProfile();
   }
 }

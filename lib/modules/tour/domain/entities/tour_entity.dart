@@ -1,6 +1,6 @@
 class TourEntity {
   final int id;
-  final String title;
+  final String? title;
   final String author;
   final int price;
   final int tourDuration;
@@ -16,7 +16,7 @@ class TourEntity {
 
   const TourEntity({
     required this.id,
-    required this.title,
+    this.title,
     required this.author,
     required this.price,
     required this.tourDuration,

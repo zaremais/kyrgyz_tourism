@@ -11,7 +11,6 @@ import 'package:kyrgyz_tourism/modules/auth/presentation/screens/sign_up_screen.
 import 'package:kyrgyz_tourism/modules/auth/presentation/screens/telegram_chat_bot_screen.dart';
 import 'package:kyrgyz_tourism/modules/auth/presentation/screens/telegram_phone_screen.dart';
 import 'package:kyrgyz_tourism/modules/auth/presentation/screens/telegram_screen.dart';
-import 'package:kyrgyz_tourism/modules/booking_tour/presentation/screens/booking_screen.dart';
 import 'package:kyrgyz_tourism/modules/categories/domain/entities/contact_entity.dart';
 import 'package:kyrgyz_tourism/modules/categories/presentation/screens/category_screen.dart';
 import 'package:kyrgyz_tourism/modules/categories/presentation/screens/contact_screen.dart';

@@ -22,8 +22,8 @@ class ProfileCubit extends Cubit<BaseState<ProfileEntity>> {
   Future<void> getProfile() async {
     emit(BaseState(status: StateStatus.loading));
     try {
-      final result = await _getProfileUseCase.execute(params: NoParams());
-      emit(BaseState(status: StateStatus.success, model: result));
+      final profile = await _getProfileUseCase.execute(params: NoParams());
+      emit(BaseState(status: StateStatus.success, model: profile));
     } catch (e) {
       emit(BaseState(status: StateStatus.failure));
     }
@@ -38,7 +38,13 @@ class ProfileCubit extends Cubit<BaseState<ProfileEntity>> {
     }
   }
 
-  Future<void> saveProfile(ProfileParams updateProfile) async {
-    emit(BaseState(status: StateStatus.success));
-  }
+  // Future<void> saveProfile(ProfileParams updateProfile) async {
+  //   emit(BaseState(status: StateStatus.loading));
+  //  try {
+
+  //     emit(BaseState(status: StateStatus.success, model: ));
+  //  } catch (e) {
+
+  //  }
+  // }
 }

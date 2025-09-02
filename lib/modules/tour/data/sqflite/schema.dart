@@ -14,4 +14,6 @@ class FavoriteTourModel {
   factory FavoriteTourModel.fromJson(Map<String, dynamic> json) {
     return FavoriteTourModel(tourId: json[FavoriteToursFields.tourId] as int);
   }
+
+  static fromMap(json) {}
 }

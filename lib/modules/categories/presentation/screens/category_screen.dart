@@ -27,8 +27,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
         ),
         body: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 54),
               CustomSectionButton(
                 text: S.of(context).companies,
                 onTap: () {
