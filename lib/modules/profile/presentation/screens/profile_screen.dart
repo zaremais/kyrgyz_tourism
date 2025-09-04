@@ -52,7 +52,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Профиль'),
+        title: Text(S.of(context).profile),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
@@ -219,20 +219,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              profile.fullName ?? 'ФИО не указано',
+              profile.fullName ?? S.of(context).lastname,
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
             TextButton(
               onPressed: () => _showLoadedAvatarDialog(context),
-              child: const Text(
+              child: Text(
                 'Загрузить новое фото',
                 style: TextStyle(color: Colors.black),
               ),
             ),
             TextButton(
               onPressed: () => _showDeleteAvatarDialog(context),
-              child: const Text(
+              child: Text(
                 'Удалить фото',
                 style: TextStyle(color: Colors.black),
               ),

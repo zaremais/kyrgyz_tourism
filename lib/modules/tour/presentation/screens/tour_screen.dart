@@ -29,7 +29,12 @@ class _ToursScreenState extends State<ToursScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: CustomAppBar(height: 80, onPressed: () {}),
+        appBar: CustomAppBar(
+          height: 80,
+          onPressed: () {
+            context.router.replace(HomeRoute());
+          },
+        ),
 
         drawer: Drawer(child: Column(children: [CustomDrawer()])),
 
@@ -73,7 +78,7 @@ class _ToursScreenState extends State<ToursScreen> {
                         Column(
                           children: [
                             Text(
-                              'Фильтрация',
+                              S.of(context).filter,
                               style: FontStyles.bodyMedium.copyWith(
                                 fontWeight: FontWeight.w500,
                               ),

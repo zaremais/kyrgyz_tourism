@@ -4,13 +4,15 @@ import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/widgets/custom_app_bar.dart';
 import 'package:kyrgyz_tourism/core/widgets/custom_section_button.dart';
 import 'package:kyrgyz_tourism/generated/l10n.dart';
-import 'package:kyrgyz_tourism/modules/tour/domain/entities/tour_entity.dart';
 
 @RoutePage()
 class ChatScreen extends StatelessWidget {
-  const ChatScreen({super.key, required this.tour});
+  const ChatScreen({
+    super.key,
+    // required this.tour,
+  });
 
-  final TourEntity tour;
+  // final TourEntity tour;
 
   @override
   Widget build(BuildContext context) {

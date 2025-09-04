@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/core/di/service_locator.dart';
+import 'package:kyrgyz_tourism/generated/l10n.dart';
 import 'package:kyrgyz_tourism/modules/tour/domain/entities/tour_entity.dart';
 import 'package:kyrgyz_tourism/modules/tour/domain/usecases/filter_tours_use_case.dart';
-
 import 'package:kyrgyz_tourism/modules/tour/presentation/cubit/tour_cubit.dart';
 import 'package:kyrgyz_tourism/modules/tour/presentation/screens/region_selection_screen.dart';
 import 'package:kyrgyz_tourism/modules/tour/presentation/widgets/check_box_widget.dart';
@@ -67,8 +67,8 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
+    return Scaffold(
+      body: Container(
         margin: EdgeInsets.only(left: 30, right: 30, top: 80),
         decoration: BoxDecoration(
           border: Border.all(color: AppColors.text),
@@ -84,19 +84,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(height: 15),
-                  // TextField(
-                  //   decoration: InputDecoration(
-                  //     label: Center(child: Text('Регион')),
 
-                  //     suffixIcon: Icon(Icons.arrow_forward_ios, size: 15),
-                  //     border: OutlineInputBorder(),
-                  //   ),
-                  //   onChanged: (value) {
-                  //     setState(() {
-                  //       selectedRegion ?? 'Выбрать регион';
-                  //     });
-                  //   },
-                  // ),
                   Container(
                     width: 320,
                     height: 50,
@@ -107,12 +95,21 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: Icon(
+                              Icons.arrow_back_ios,
+                              color: Colors.black,
+                            ),
+                          ),
                           Text(
-                            selectedRegion ?? 'Выбрать регион',
+                            selectedRegion ?? S.of(context).selectedRegion,
 
                             style: TextStyle(color: Colors.black),
                           ),
-                          SizedBox(width: 50),
+                          SizedBox(width: 20),
                           Icon(Icons.arrow_forward_ios, color: Colors.black),
                         ],
                       ),
@@ -120,7 +117,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                   ),
                   const SizedBox(height: 12),
                   CheckBoxWidget(
-                    title: 'Однодневный',
+                    title: S.of(context).oneDay,
                     value: oneDay,
                     onChanged: (v) {
                       setState(() {
@@ -129,7 +126,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                     },
                   ),
                   CheckBoxWidget(
-                    title: 'Длительный',
+                    title: S.of(context).longTerm,
                     value: longTerm,
                     onChanged: (v) {
                       setState(() {
@@ -246,9 +243,9 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                                       16,
                                     ),
                                   ),
-                                  // minimumSize: const Size(140, 48),
+                                  minimumSize: const Size(140, 48),
                                 ),
-                                child: const Text('Применить'),
+                                child: Text(S.of(context).apply),
                               ),
                             );
                           },

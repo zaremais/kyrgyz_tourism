@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
+import 'package:kyrgyz_tourism/generated/l10n.dart';
 
 class ProfileAlertDialog extends StatelessWidget {
   final String title;
@@ -41,7 +42,10 @@ class ProfileAlertDialog extends StatelessWidget {
               ),
               backgroundColor: AppColors.buttonGuide,
             ),
-            child: const Text('ДА', style: TextStyle(color: AppColors.white)),
+            child: Text(
+              S.of(context).yes,
+              style: TextStyle(color: AppColors.white),
+            ),
           ),
         ),
         SizedBox(width: 20),
@@ -55,7 +59,10 @@ class ProfileAlertDialog extends StatelessWidget {
               ),
             ),
             onPressed: () => Navigator.pop(context),
-            child: Text('Нет', style: TextStyle(color: AppColors.text)),
+            child: Text(
+              S.of(context).not,
+              style: TextStyle(color: AppColors.text),
+            ),
           ),
         ),
       ],

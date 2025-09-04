@@ -668,6 +668,46 @@ class S {
   String get filter {
     return Intl.message('Filtration', name: 'filter', desc: '', args: []);
   }
+
+  /// `Выбрать регион`
+  String get selectedRegion {
+    return Intl.message(
+      'Выбрать регион',
+      name: 'selectedRegion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Однодневный`
+  String get oneDay {
+    return Intl.message('Однодневный', name: 'oneDay', desc: '', args: []);
+  }
+
+  /// `Применить`
+  String get apply {
+    return Intl.message('Применить', name: 'apply', desc: '', args: []);
+  }
+
+  /// `Длительный`
+  String get longTerm {
+    return Intl.message('Длительный', name: 'longTerm', desc: '', args: []);
+  }
+
+  /// `ФИО не указано`
+  String get lastname {
+    return Intl.message('ФИО не указано', name: 'lastname', desc: '', args: []);
+  }
+
+  /// `ДА`
+  String get yes {
+    return Intl.message('ДА', name: 'yes', desc: '', args: []);
+  }
+
+  /// `Нет`
+  String get not {
+    return Intl.message('Нет', name: 'not', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

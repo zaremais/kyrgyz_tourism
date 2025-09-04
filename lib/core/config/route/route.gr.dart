@@ -76,46 +76,18 @@ class CategoryRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [ChatScreen]
-class ChatRoute extends PageRouteInfo<ChatRouteArgs> {
-  ChatRoute({Key? key, required TourEntity tour, List<PageRouteInfo>? children})
-    : super(
-        ChatRoute.name,
-        args: ChatRouteArgs(key: key, tour: tour),
-        initialChildren: children,
-      );
+class ChatRoute extends PageRouteInfo<void> {
+  const ChatRoute({List<PageRouteInfo>? children})
+    : super(ChatRoute.name, initialChildren: children);
 
   static const String name = 'ChatRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      final args = data.argsAs<ChatRouteArgs>();
-      return ChatScreen(key: args.key, tour: args.tour);
+      return const ChatScreen();
     },
   );
-}
-
-class ChatRouteArgs {
-  const ChatRouteArgs({this.key, required this.tour});
-
-  final Key? key;
-
-  final TourEntity tour;
-
-  @override
-  String toString() {
-    return 'ChatRouteArgs{key: $key, tour: $tour}';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    if (other is! ChatRouteArgs) return false;
-    return key == other.key && tour == other.tour;
-  }
-
-  @override
-  int get hashCode => key.hashCode ^ tour.hashCode;
 }
 
 /// generated route for

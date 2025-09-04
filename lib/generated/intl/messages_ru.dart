@@ -34,6 +34,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "allTours": MessageLookupByLibrary.simpleMessage("Все туры"),
     "allguides": MessageLookupByLibrary.simpleMessage("Все гиды"),
     "alltours": MessageLookupByLibrary.simpleMessage("Все туры"),
+    "apply": MessageLookupByLibrary.simpleMessage("Применить"),
     "authortours": MessageLookupByLibrary.simpleMessage("Туры автора"),
     "bestTours": MessageLookupByLibrary.simpleMessage("Лучшие туры"),
     "besttour": MessageLookupByLibrary.simpleMessage("Лучшие туры"),
@@ -84,6 +85,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "individualtours": MessageLookupByLibrary.simpleMessage(
       "Индивидуальные туры",
     ),
+    "lastname": MessageLookupByLibrary.simpleMessage("ФИО не указано"),
     "lasttimeofentry": MessageLookupByLibrary.simpleMessage(
       "Последнее время захода",
     ),
@@ -95,6 +97,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Внимание!Вам необходимо обязательно загрузить новое фото",
     ),
     "login": MessageLookupByLibrary.simpleMessage("Вход"),
+    "longTerm": MessageLookupByLibrary.simpleMessage("Длительный"),
     "main": MessageLookupByLibrary.simpleMessage("Главная"),
     "manager": MessageLookupByLibrary.simpleMessage("Менеджеры"),
     "nameuser": MessageLookupByLibrary.simpleMessage("Имя пользователя"),
@@ -104,7 +107,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "nicknamestart": MessageLookupByLibrary.simpleMessage(
       "Никнейм должен начинаться с @",
     ),
+    "not": MessageLookupByLibrary.simpleMessage("Нет"),
     "offfice": MessageLookupByLibrary.simpleMessage("3-й этаж, офис 5"),
+    "oneDay": MessageLookupByLibrary.simpleMessage("Однодневный"),
     "oneTours": MessageLookupByLibrary.simpleMessage("Однодневные туры"),
     "phone": MessageLookupByLibrary.simpleMessage("+996 700 000 000"),
     "phonenumber": MessageLookupByLibrary.simpleMessage("Номер телефона"),
@@ -120,6 +125,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "selectdateofbirth": MessageLookupByLibrary.simpleMessage(
       "Выберите дату рождения",
     ),
+    "selectedRegion": MessageLookupByLibrary.simpleMessage("Выбрать регион"),
     "seniormanager": MessageLookupByLibrary.simpleMessage("Старший менеджер"),
     "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
     "startNewDialogue": MessageLookupByLibrary.simpleMessage(
@@ -140,6 +146,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Загрузить новое фото",
     ),
     "users": MessageLookupByLibrary.simpleMessage("Пользователи"),
+    "yes": MessageLookupByLibrary.simpleMessage("ДА"),
     "yourfullname": MessageLookupByLibrary.simpleMessage("Введите ФИО"),
   };
 }

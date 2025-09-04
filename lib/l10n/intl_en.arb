@@ -75,5 +75,12 @@
   "cancel": "Cancel",
   "generalinfo": "General information",
   "authortours": "Author's tours",
-  "filter": "Filtration"
+  "filter": "Filtration",
+  "selectedRegion": "Выбрать регион",
+  "oneDay": "Однодневный",
+  "apply": "Применить",
+  "longTerm": "Длительный",
+  "lastname": "ФИО не указано",
+  "yes": "ДА",
+  "not": "Нет"
 }

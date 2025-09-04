@@ -32,6 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "allTours": MessageLookupByLibrary.simpleMessage("All tours"),
     "allguides": MessageLookupByLibrary.simpleMessage("All guides"),
     "alltours": MessageLookupByLibrary.simpleMessage("All tours"),
+    "apply": MessageLookupByLibrary.simpleMessage("Применить"),
     "authortours": MessageLookupByLibrary.simpleMessage("Author\'s tours"),
     "bestTours": MessageLookupByLibrary.simpleMessage("Best tour"),
     "besttour": MessageLookupByLibrary.simpleMessage("Best tour"),
@@ -80,6 +81,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "guides": MessageLookupByLibrary.simpleMessage("Guides"),
     "home": MessageLookupByLibrary.simpleMessage("Home"),
     "individualtours": MessageLookupByLibrary.simpleMessage("Individual tours"),
+    "lastname": MessageLookupByLibrary.simpleMessage("ФИО не указано"),
     "lasttimeofentry": MessageLookupByLibrary.simpleMessage(
       "Last time of entry",
     ),
@@ -91,6 +93,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Attention! You must upload a new photo",
     ),
     "login": MessageLookupByLibrary.simpleMessage("Login"),
+    "longTerm": MessageLookupByLibrary.simpleMessage("Длительный"),
     "main": MessageLookupByLibrary.simpleMessage("Main"),
     "manager": MessageLookupByLibrary.simpleMessage("Managers"),
     "nameuser": MessageLookupByLibrary.simpleMessage("Name user"),
@@ -100,7 +103,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "nicknamestart": MessageLookupByLibrary.simpleMessage(
       "Nickname must start with @",
     ),
+    "not": MessageLookupByLibrary.simpleMessage("Нет"),
     "offfice": MessageLookupByLibrary.simpleMessage("3rd floor, offfice 5"),
+    "oneDay": MessageLookupByLibrary.simpleMessage("Однодневный"),
     "oneTours": MessageLookupByLibrary.simpleMessage("One day tours"),
     "phone": MessageLookupByLibrary.simpleMessage("Phone"),
     "phonenumber": MessageLookupByLibrary.simpleMessage("Phone number"),
@@ -116,6 +121,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "selectdateofbirth": MessageLookupByLibrary.simpleMessage(
       "Select date of birth",
     ),
+    "selectedRegion": MessageLookupByLibrary.simpleMessage("Выбрать регион"),
     "seniormanager": MessageLookupByLibrary.simpleMessage("Senior manager"),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "startNewDialogue": MessageLookupByLibrary.simpleMessage(
@@ -134,6 +140,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "uploadAvatar": MessageLookupByLibrary.simpleMessage("Upload avatar?"),
     "uploadnewphoto": MessageLookupByLibrary.simpleMessage("Upload new photo"),
     "users": MessageLookupByLibrary.simpleMessage("Users"),
+    "yes": MessageLookupByLibrary.simpleMessage("ДА"),
     "yourfullname": MessageLookupByLibrary.simpleMessage("Enter fullname"),
   };
 }
