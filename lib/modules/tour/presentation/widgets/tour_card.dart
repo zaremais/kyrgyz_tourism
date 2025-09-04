@@ -74,7 +74,7 @@ class _TourCardState extends State<TourCard> {
               ),
 
               Text(
-                'Дата выезда: ${DateFormatter.iso(DateTime.parse(widget.tour.departureDates.first))}',
+                'Дата выезда: ${DateFormatter.iso(DateTime.parse(widget.tour.departureDates!.first))}',
 
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),

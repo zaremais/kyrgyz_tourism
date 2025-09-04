@@ -26,9 +26,8 @@ class DioClient {
         error: true,
         logPrint: (obj) => debugPrint(obj.toString()),
       ),
-      // LogInterceptor(),
+
       AuthInterceptor(),
-      // AuthInterceptor(di<TokenStorageService>()),
     ]);
   }
 

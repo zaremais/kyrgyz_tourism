@@ -152,7 +152,6 @@ import '../../modules/tour/domain/usecases/get_individual_tour_use_case.dart'
 import '../../modules/tour/domain/usecases/get_tours_use_case.dart' as _i558;
 import '../../modules/tour/presentation/cubit/favorite_tour_cubit.dart'
     as _i889;
-import '../../modules/tour/presentation/cubit/filter_tour_cubit.dart' as _i782;
 import '../../modules/tour/presentation/cubit/tour_cubit.dart' as _i396;
 import '../interceptors/auth_interceptors.dart' as _i318;
 import '../network/dio_client.dart' as _i667;
@@ -460,10 +459,6 @@ _i174.GetIt $initGetIt(
     () => _i643.PasswordResetConfirmCubit(
       confirmUseCase: gh<_i492.PasswordResetConfirmUseCase>(),
     ),
-  );
-  gh.factory<_i782.FilterTourCubit>(
-    () =>
-        _i782.FilterTourCubit(filterTourUseCase: gh<_i771.FilterTourUseCase>()),
   );
   gh.factory<_i32.TelegramOtpCubit>(
     () => _i32.TelegramOtpCubit(

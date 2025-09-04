@@ -6,7 +6,7 @@ import 'package:kyrgyz_tourism/core/di/service_locator.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
 import 'package:kyrgyz_tourism/modules/tour/domain/entities/tour_entity.dart';
 import 'package:kyrgyz_tourism/modules/tour/domain/usecases/filter_tours_use_case.dart';
-import 'package:kyrgyz_tourism/modules/tour/presentation/cubit/filter_tour_cubit.dart';
+import 'package:kyrgyz_tourism/modules/tour/presentation/cubit/tour_cubit.dart';
 import 'package:kyrgyz_tourism/modules/tour/presentation/screens/region_selection_screen.dart';
 
 @RoutePage()
@@ -20,30 +20,30 @@ class TourFilterScreen extends StatefulWidget {
 
 class _TourFilterScreenState extends State<TourFilterScreen> {
   String? selectedRegion;
-  late final FilterTourCubit _filterTourCubit;
+  late final TourCubit _filterTourCubit;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _filterTourCubit = di<FilterTourCubit>();
-  //   _loadInitialTours();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    _filterTourCubit = di<TourCubit>();
+    _loadInitialTours();
+  }
 
-  // void _loadInitialTours() {
-  //   _filterTourCubit.filterTour(
-  //     FilterTourParams(
-  //       oneDay: false,
-  //       longTerm: false,
-  //       guideIncluded: false,
-  //       withAccommodation: false,
-  //       withFood: false,
-  //       smallGroup: false,
-  //       bigGroup: false,
-  //       difficulty: '',
-  //       region: '',
-  //     ),
-  //   );
-  // }
+  void _loadInitialTours() {
+    _filterTourCubit.filterTour(
+      FilterTourParams(
+        oneDay: false,
+        longTerm: false,
+        guideIncluded: false,
+        withAccommodation: false,
+        withFood: false,
+        smallGroup: false,
+        bigGroup: false,
+        difficulty: '',
+        region: '',
+      ),
+    );
+  }
 
   void _onRegionSelected(String region) {
     setState(() {
@@ -80,7 +80,7 @@ class _TourFilterScreenState extends State<TourFilterScreen> {
     );
   }
 
-  final _regionFilterCubit = di<FilterTourCubit>();
+  final _regionFilterCubit = di<TourCubit>();
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +96,7 @@ class _TourFilterScreenState extends State<TourFilterScreen> {
               child: Text(selectedRegion ?? 'Выбрать регион'),
             ),
             Expanded(
-              child: BlocBuilder<FilterTourCubit, BaseState<List<TourEntity>>>(
+              child: BlocBuilder<TourCubit, BaseState<List<TourEntity>>>(
                 builder: (context, state) {
                   if (state.status == StateStatus.loading) {
                     return const Center(child: CircularProgressIndicator());

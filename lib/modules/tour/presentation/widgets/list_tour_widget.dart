@@ -68,12 +68,12 @@ class _ListTourWidgetState extends State<ListTourWidget> {
                         //     false;
                         final isFavorite = context
                             .read<FavoriteTourCubit>()
-                            .isFavorite(widget.tour.id);
+                            .isFavorite(widget.tour.id ?? 0);
 
                         return InkWell(
                           onTap: () {
                             final favorite = FavoriteTourModel(
-                              tourId: widget.tour.id,
+                              tourId: widget.tour.id ?? 0,
                             );
 
                             _favouriteTourCubit.toggleFavorite(favorite);
@@ -137,7 +137,7 @@ class _ListTourWidgetState extends State<ListTourWidget> {
             ),
 
             Text(
-              'Дата выезда: ${DateFormatter.iso(DateTime.parse(widget.tour.departureDates.first))}',
+              'Дата выезда: ${DateFormatter.iso(DateTime.parse(widget.tour.departureDates!.first))}',
 
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),

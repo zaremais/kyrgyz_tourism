@@ -13,15 +13,15 @@ class RegionSelectionScreen extends StatelessWidget {
   });
 
   final List<String> availableRegions = [
-    // 'Чуй',
-    // 'Ош',
-    // 'Баткен',
-    // 'Нарын',
-    // 'Талас',
-    // 'Иссык-Куль',
-    // 'Джалал-Абад',
-    // 'Бишкек',
-    // 'Ош (город)',
+    'Чуй',
+    'Osh',
+    'Баткен',
+    'Нарын',
+    'Талас',
+    'Иссык-Куль',
+    'Джалал-Абад',
+    'Bishkek',
+    'Ош (город)',
   ];
 
   @override

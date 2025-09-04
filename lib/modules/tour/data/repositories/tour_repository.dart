@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kyrgyz_tourism/modules/tour/data/api_service/tour_api_service.dart';
 import 'package:kyrgyz_tourism/modules/tour/data/models/tour_model.dart';
@@ -30,7 +31,20 @@ class TourRepository extends TourDomainRepository {
 
   @override
   Future<List<TourModel>> filterTours(FilterTourParams params) async {
-    final response = await _tourApi.filterTours(params);
-    return response;
+    try {
+      final response = await _tourApi.filterTours(params);
+      return response;
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 404) {
+        return <TourModel>[];
+      } else {}
+      rethrow;
+    } catch (e) {
+      final message = e.toString();
+      if (message.contains('404')) {
+        return <TourModel>[];
+      }
+      throw Exception('Ошибка при фильтрации туров: $e');
+    }
   }
 }

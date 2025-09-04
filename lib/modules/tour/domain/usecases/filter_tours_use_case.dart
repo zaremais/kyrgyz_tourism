@@ -26,8 +26,8 @@ class FilterTourParams {
   final bool withFood;
   final bool smallGroup;
   final bool bigGroup;
-  final String difficulty;
-  final String region;
+  final String? difficulty;
+  final String? region;
 
   FilterTourParams({
     required this.oneDay,
@@ -37,8 +37,8 @@ class FilterTourParams {
     required this.withFood,
     required this.smallGroup,
     required this.bigGroup,
-    required this.difficulty,
-    required this.region,
+    this.difficulty,
+    this.region,
   });
 
   JSON toJson() {

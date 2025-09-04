@@ -42,7 +42,7 @@ class AppRouter extends RootStackRouter {
 
   @override
   List<AutoRoute> get routes => [
-    AutoRoute(path: '/', page: AuthRoute.page),
+    AutoRoute(path: '/', page: ToursRoute.page),
     AutoRoute(
       page: MainTabRoute.page,
       children: [
@@ -60,7 +60,7 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: SignInRoute.page),
     AutoRoute(page: RegisterSuccessRoute.page),
     AutoRoute(page: SignUpRoute.page),
-    AutoRoute(page: ToursRoute.page),
+    // AutoRoute(page: ToursRoute.page),
     AutoRoute(page: ChatSupportRoute.page),
     AutoRoute(page: IsBookedRoute.page),
     AutoRoute(page: TourDetailsRoute.page),

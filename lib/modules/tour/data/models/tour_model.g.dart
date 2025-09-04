@@ -7,18 +7,18 @@ part of 'tour_model.dart';
 // **************************************************************************
 
 TourModel _$TourModelFromJson(Map json) => TourModel(
-  id: (json['id'] as num).toInt(),
+  id: (json['id'] as num?)?.toInt(),
   title: json['title'] as String?,
-  author: json['author'] as String,
-  price: (json['price'] as num).toInt(),
-  tourDuration: (json['tourDuration'] as num).toInt(),
-  rating: (json['rating'] as num?)?.toInt(),
-  placesLeft: (json['placesLeft'] as num).toInt(),
-  region: json['region'] as String,
-  image: json['image'] as String,
+  author: json['author'] as String?,
+  price: (json['price'] as num?)?.toInt(),
+  tourDuration: (json['tourDuration'] as num?)?.toInt(),
+  rating: (json['rating'] as num?)?.toDouble(),
+  placesLeft: (json['placesLeft'] as num?)?.toInt(),
+  region: json['region'] as String?,
+  image: json['image'] as String?,
   departureDates:
-      (json['departureDates'] as List<dynamic>)
-          .map((e) => e as String)
+      (json['departureDates'] as List<dynamic>?)
+          ?.map((e) => e as String)
           .toList(),
   meetingPoint: json['meetingPoint'] as String?,
   difficulty: json['difficulty'] as String?,

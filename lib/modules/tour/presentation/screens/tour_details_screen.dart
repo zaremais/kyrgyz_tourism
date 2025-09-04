@@ -95,7 +95,7 @@ Widget _buildTourDetails(TourEntity tour, BuildContext context) {
       TourDetailTile(
         iconPath: 'assets/icon/location.png',
         title: 'Точка сбора',
-        subtitle: tour.region,
+        subtitle: tour.region ?? '',
         color: isDark ? Colors.white : Colors.black,
       ),
       TourDetailTile(
