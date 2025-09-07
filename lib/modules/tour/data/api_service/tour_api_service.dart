@@ -1,5 +1,4 @@
 import 'package:injectable/injectable.dart';
-import 'package:kyrgyz_tourism/core/constants/api_urls.dart';
 import 'package:kyrgyz_tourism/modules/tour/data/models/tour_model.dart';
 import 'package:kyrgyz_tourism/modules/tour/domain/usecases/filter_tours_use_case.dart';
 import 'package:retrofit/retrofit.dart';
@@ -7,8 +6,9 @@ import 'package:dio/dio.dart';
 
 part 'tour_api_service.g.dart';
 
-@RestApi(baseUrl: ApiUrls.baseUrl)
-@injectable
+@lazySingleton
+@RestApi()
+// @injectable
 abstract class TourApiService {
   @factoryMethod
   factory TourApiService(Dio dio, {@Named("BaseUrl") String baseUrl}) =

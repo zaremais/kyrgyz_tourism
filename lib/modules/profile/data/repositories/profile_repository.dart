@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:kyrgyz_tourism/core/network/dio_client.dart';
 import 'package:kyrgyz_tourism/core/network/storage_secure_storage/token_storage_service.dart';
 import 'package:kyrgyz_tourism/modules/auth/data/api_service/auth_api_service.dart';
+import 'package:kyrgyz_tourism/modules/profile/data/api_service/profile_api.dart';
 import 'package:kyrgyz_tourism/modules/profile/domain/entities/profile_entity.dart';
 import 'package:kyrgyz_tourism/modules/profile/domain/repositories/profile_domain_repository.dart';
 import 'package:kyrgyz_tourism/modules/profile/domain/usecases/update_profile_use_case.dart';
@@ -13,32 +14,29 @@ import 'package:kyrgyz_tourism/modules/profile/domain/usecases/update_profile_us
   // env: [Environment.dev],
 )
 class ProfileRepository extends ProfileDomainRepository {
-  // final TokenStorageService _tokenStorage = TokenStorageService();
-  // final DioClient _dio;
-  final AuthApiService _authApi;
+  final ProfileApi _profileApi;
 
   ProfileRepository({
     required AuthApiService authApi,
     required TokenStorageService tokenStorage,
     required DioClient dio,
-  }) : _authApi = authApi;
-
-  //  _dio = dio;
+    required ProfileApi profileApi,
+  }) : _profileApi = profileApi;
 
   @override
   Future<ProfileEntity> uploadProfilePhoto(File photo) async {
-    final response = await _authApi.uploadProfilePhoto(photo);
+    final response = await _profileApi.uploadProfilePhoto(photo);
     return response;
   }
 
   @override
   Future<ProfileEntity> updateProfile(ProfileParams params) async {
-    return _authApi.updateProfile(params);
+    return _profileApi.updateProfile(params);
   }
 
   @override
   Future<ProfileEntity> getProfile() async {
-    return await _authApi.getProfile();
+    return await _profileApi.getProfile();
   }
 }
 

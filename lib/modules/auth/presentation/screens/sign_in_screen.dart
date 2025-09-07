@@ -33,18 +33,18 @@ class _SignInScreenState extends State<SignInScreen> {
   bool _rememberMe = false;
   bool _obscurePassword = true;
 
-  @override
-  void initState() {
-    super.initState();
-    _loadRememberMeState();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _loadRememberMeState();
+  // }
 
-  Future<void> _loadRememberMeState() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _rememberMe = prefs.getBool('remember_me') ?? false;
-    });
-  }
+  // Future<void> _loadRememberMeState() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     _rememberMe = prefs.getBool('remember_me') ?? false;
+  //   });
+  // }
 
   Future<void> _saveRememberMeState() async {
     final prefs = await SharedPreferences.getInstance();
@@ -287,10 +287,6 @@ class _SignInScreenState extends State<SignInScreen> {
                                         style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.w500,
-                                          // color:
-                                          //     darkTheme
-                                          //         ? Colors.white
-                                          //         : Colors.black,
                                         ),
                                       ),
                                     ),

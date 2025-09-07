@@ -1,28 +1,29 @@
-// import 'dart:io';
+import 'dart:io';
 
-// import 'package:dio/dio.dart';
-// import 'package:injectable/injectable.dart';
-// import 'package:kyrgyz_tourism/core/constants/api_urls.dart';
-// import 'package:kyrgyz_tourism/modules/profile/data/models/profile_model.dart';
-// import 'package:kyrgyz_tourism/modules/profile/domain/usecases/update_profile_use_case.dart';
-// import 'package:retrofit/error_logger.dart';
-// import 'package:retrofit/http.dart';
+import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 
-// part 'profile_api.g.dart';
+import 'package:kyrgyz_tourism/modules/profile/data/models/profile_model.dart';
+import 'package:kyrgyz_tourism/modules/profile/domain/usecases/update_profile_use_case.dart';
+import 'package:retrofit/error_logger.dart';
 
-// @RestApi(baseUrl: ApiUrls.baseUrl)
-// @injectable
-// abstract class ProfileApi {
-//   @factoryMethod
-//   factory ProfileApi(Dio dio, {@Named("BaseUrl") String baseUrl}) = _ProfileApi;
+import 'package:retrofit/http.dart';
 
-//   @GET('/v1/api/profiles/me')
-//   Future<ProfileModel> getProfile();
+part 'profile_api.g.dart';
 
-//   @PUT('/v1/api/profiles/me')
-//   Future<ProfileModel> updateProfile(@Body() ProfileParams params);
+@RestApi(baseUrl: 'http://34.18.76.114')
+@injectable
+abstract class ProfileApi {
+  @factoryMethod
+  factory ProfileApi(Dio dio, {@Named("BaseUrl") String baseUrl}) = _ProfileApi;
 
-//   @PUT('/v1/api/profiles/me/photo')
-//   @MultiPart()
-//   Future<ProfileModel> uploadProfilePhoto(@Part() File photo);
-// }
+  @GET('/v1/api/profiles/me')
+  Future<ProfileModel> getProfile();
+
+  @PUT('/v1/api/profiles/me')
+  Future<ProfileModel> updateProfile(@Body() ProfileParams params);
+
+  @PUT('/v1/api/profiles/me/photo')
+  @MultiPart()
+  Future<ProfileModel> uploadProfilePhoto(@Part() File photo);
+}

@@ -5,14 +5,8 @@ import 'package:kyrgyz_tourism/core/di/service_locator.config.dart';
 final di = GetIt.instance;
 
 @InjectableInit(
-  initializerName: r'$initGetIt',
+  initializerName: 'init',
   preferRelativeImports: true,
-  asExtension: false,
+  asExtension: true,
 )
-Future<void> configureDependencies() async => $initGetIt(di);
-
-
-
-
-// flutter run --dart-define=MOCK=true
-// flutter run --dart-define=ENV=dev
+void configureDependencies() => di.init();

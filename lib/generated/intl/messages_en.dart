@@ -66,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "fullname": MessageLookupByLibrary.simpleMessage("Full name"),
     "generalinfo": MessageLookupByLibrary.simpleMessage("General information"),
     "gettingstarted": MessageLookupByLibrary.simpleMessage("Gettings started"),
+    "guide": MessageLookupByLibrary.simpleMessage("Гид"),
     "guidedescription": MessageLookupByLibrary.simpleMessage(
       "Guides description",
     ),

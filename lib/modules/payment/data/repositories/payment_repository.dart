@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kyrgyz_tourism/core/constants/api_urls.dart';
+
 import 'package:kyrgyz_tourism/core/network/dio_client.dart';
 import 'package:kyrgyz_tourism/modules/payment/data/models/payment_model.dart';
 import 'package:kyrgyz_tourism/modules/payment/domain/repositories/payment_domain_repository.dart';
@@ -15,7 +15,7 @@ class PaymentRepository extends PaymentDomainRepository {
   @override
   Future<PaymentQrModel> getPaymentQr(QrCodeParams params) async {
     final response = await _dio.get(
-      ApiUrls.getQrCode,
+      'http://34.18.76.114/v1/api/qr/mbank',
       queryParameters: params.toJson(),
       options: Options(responseType: ResponseType.bytes),
     );

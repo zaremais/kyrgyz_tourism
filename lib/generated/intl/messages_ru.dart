@@ -70,6 +70,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "fullname": MessageLookupByLibrary.simpleMessage("ФИО"),
     "generalinfo": MessageLookupByLibrary.simpleMessage("Общая информация"),
     "gettingstarted": MessageLookupByLibrary.simpleMessage("Начало работы"),
+    "guide": MessageLookupByLibrary.simpleMessage("Гид"),
     "guidedescription": MessageLookupByLibrary.simpleMessage("  Описание гида"),
     "guideexperience": MessageLookupByLibrary.simpleMessage(
       "Опыт:\${guide.experience}",

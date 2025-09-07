@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
+import 'package:kyrgyz_tourism/generated/l10n.dart';
 import 'package:kyrgyz_tourism/modules/guides/domain/entities/guide_entity.dart';
 
 class GuideCard extends StatelessWidget {
@@ -27,7 +28,7 @@ class GuideCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    guide.name ?? 'Гид',
+                    guide.name ?? S.of(context).guide,
                     style: const TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 18,

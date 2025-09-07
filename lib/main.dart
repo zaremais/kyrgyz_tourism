@@ -1,8 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:kyrgyz_tourism/core/config/environment.dart';
 import 'package:kyrgyz_tourism/core/config/themes/theme_provider.dart';
 
 import 'package:kyrgyz_tourism/core/di/service_locator.dart';
+import 'package:kyrgyz_tourism/core/utils/logger.dart';
 import 'package:kyrgyz_tourism/firebase_options.dart';
 import 'package:kyrgyz_tourism/modules/home/presentation/providers/locale_provider.dart';
 
@@ -13,7 +15,11 @@ final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await configureDependencies();
+  AppConfig.setEnvironment(Environment.dev);
+  AppLogger.info('Starting ${AppConfig.appName}', tag: 'APP');
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  configureDependencies();
+  AppLogger.info('App initialized successfully', tag: 'APP');
   // if (kDebugMode) {
   //   final di = GetIt.instance;
 
@@ -29,9 +35,6 @@ void main() async {
   //     () => MockAuthSignInRepository(tokenStorage: di()),
   //   );
   // }
-
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  // await FirebaseApi().initNotifications();
 
   runApp(
     MultiProvider(

@@ -1,12 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kyrgyz_tourism/core/constants/api_urls.dart';
-import 'package:kyrgyz_tourism/core/interceptors/auth_interceptors.dart';
+import 'package:kyrgyz_tourism/core/network/inspector.dart';
 
 @module
 abstract class NetworkModule {
   @Named('BaseUrl')
-  String get baseUrl => ApiUrls.baseUrl;
+  String get baseUrl => 'http://34.18.76.114';
 
   @lazySingleton
   Dio provideDio(

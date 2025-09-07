@@ -13,7 +13,7 @@ class SignInUsecase extends BaseUsecase<SignInEntity, SignInParams> {
 
   @override
   Future<SignInEntity> execute({required SignInParams params}) async {
-    return await _repository.signIn(params: params);
+    return await _repository.signIn(params);
   }
 }
 

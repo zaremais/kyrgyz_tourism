@@ -1,4 +1,4 @@
-enum StateStatus { init, loading, success, failure }
+enum StateStatus { init, loading, success, failure, error }
 
 enum TourFilter { best, oneDay }
 

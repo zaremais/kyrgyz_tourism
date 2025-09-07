@@ -29,7 +29,7 @@ class _GuideScreenState extends State<GuideScreen> {
             borderRadius: BorderRadius.circular(5),
           ),
           toolbarHeight: 40,
-          // backgroundColor: darkTheme ? AppColors.text : AppColors.white,
+
           leading: IconButton(
             onPressed: () {
               context.router.replace(HomeRoute());

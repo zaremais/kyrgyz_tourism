@@ -1,13 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kyrgyz_tourism/core/constants/api_urls.dart';
 import 'package:kyrgyz_tourism/modules/categories/data/models/contact_model.dart';
 import 'package:kyrgyz_tourism/modules/categories/domain/usecases/send_contact_use_case.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'contact_api_service.g.dart';
 
-@RestApi(baseUrl: ApiUrls.baseUrl)
+@RestApi(baseUrl: 'http://34.18.76.114')
 @injectable
 abstract class ContactApiService {
   @factoryMethod

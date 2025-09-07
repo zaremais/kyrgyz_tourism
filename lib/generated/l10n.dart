@@ -708,6 +708,11 @@ class S {
   String get not {
     return Intl.message('Нет', name: 'not', desc: '', args: []);
   }
+
+  /// `Гид`
+  String get guide {
+    return Intl.message('Гид', name: 'guide', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

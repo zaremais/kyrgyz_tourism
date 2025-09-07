@@ -4,6 +4,7 @@ import 'package:kyrgyz_tourism/modules/auth/data/models/sign_in_model.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/repositories/auth_domain_sign_in_repository.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/usecases/refresh_token_use_case.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/usecases/sign_in_use_case.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 @LazySingleton(as: AuthDomainSignInRepository, env: [Environment.dev])
 class MockAuthSignInRepository extends AuthDomainSignInRepository {
@@ -13,7 +14,7 @@ class MockAuthSignInRepository extends AuthDomainSignInRepository {
     : _tokenStorage = tokenStorage;
 
   @override
-  Future<SignInModel> signIn({required SignInParams params}) async {
+  Future<SignInModel> signIn(SignInParams params) async {
     await Future.delayed(Duration(seconds: 1));
 
     final mockResponse = SignInModel(
@@ -48,30 +49,12 @@ class MockAuthSignInRepository extends AuthDomainSignInRepository {
 
     return mockResponse;
   }
+
+  @override
+  Future<bool> getRememberMe() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    final rememberMe = prefs.getBool('remember_me') ?? false;
+    return rememberMe;
+  }
 }
-
-
-// @LazySingleton(as: ProfileDomainRepository)
-// class ProfileRepository extends ProfileDomainRepository {
-//   final AuthApiService _authApi;
-
-//   ProfileRepository({required AuthApiService authApi}) : _authApi = authApi;
-
-//   @override
-//   Future<ProfileModel> getProfile() async {
-//     // Всегда используем реальный API
-//     return await _authApi.getProfile();
-//   }
-
-//   @override
-//   Future<ProfileEntity> updateProfile(ProfileParams params) {
-//     // TODO: implement updateProfile
-//     throw UnimplementedError();
-//   }
-
-//   @override
-//   Future<ProfileEntity> uploadProfilePhoto(File photo) {
-//     // TODO: implement uploadProfilePhoto
-//     throw UnimplementedError();
-//   }
-// }

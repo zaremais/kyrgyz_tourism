@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
+
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/usecases/check_nickname_use_case.dart';
 import 'package:rxdart/rxdart.dart';

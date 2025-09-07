@@ -1,13 +1,12 @@
 import 'package:dio/dio.dart' hide Headers;
 import 'package:injectable/injectable.dart';
-import 'package:kyrgyz_tourism/core/constants/api_urls.dart';
 import 'package:kyrgyz_tourism/modules/reviews/data/models/reviews_model.dart';
 import 'package:kyrgyz_tourism/modules/reviews/domain/usecases/add_reviews_use_case.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'reviews_api_service.g.dart';
 
-@RestApi(baseUrl: ApiUrls.baseUrl)
+@RestApi(baseUrl: 'http://34.18.76.114')
 @injectable
 abstract class ReviewsApiService {
   @factoryMethod

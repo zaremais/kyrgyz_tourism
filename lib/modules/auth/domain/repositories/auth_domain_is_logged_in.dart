@@ -1,3 +1,3 @@
-// abstract class AuthDomainIsLoggedInRepository {
-//   Future<bool> isLoggedIn();
-// }
+abstract class AuthDomainIsLoggedInRepository {
+  Future<bool> isLoggedIn();
+}

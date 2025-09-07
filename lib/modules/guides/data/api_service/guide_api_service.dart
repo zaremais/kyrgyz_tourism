@@ -1,13 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kyrgyz_tourism/core/constants/api_urls.dart';
 import 'package:kyrgyz_tourism/modules/guides/data/models/guide_model.dart';
 import 'package:kyrgyz_tourism/modules/guides/data/models/paged_response.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'guide_api_service.g.dart';
 
-@RestApi(baseUrl: ApiUrls.baseUrl)
+@RestApi(baseUrl: 'http://34.18.76.114')
 @injectable
 abstract class GuideApiService {
   @factoryMethod
