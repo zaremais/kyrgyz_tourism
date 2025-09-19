@@ -20,7 +20,7 @@ class _GuideApiService implements GuideApiService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<PagedResponse<GuideModel>> getGuides({
+  Future<List<GuideModel>> getGuides({
     int page = 0,
     int size = 10,
     String sort = "id,desc",
@@ -33,7 +33,7 @@ class _GuideApiService implements GuideApiService {
     };
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<PagedResponse<GuideModel>>(
+    final _options = _setStreamType<List<GuideModel>>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -43,13 +43,15 @@ class _GuideApiService implements GuideApiService {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late PagedResponse<GuideModel> _value;
+    final _result = await _dio.fetch<List<dynamic>>(_options);
+    late List<GuideModel> _value;
     try {
-      _value = PagedResponse<GuideModel>.fromJson(
-        _result.data!,
-        (json) => GuideModel.fromJson(json),
-      );
+      _value =
+          _result.data!
+              .map(
+                (dynamic i) => GuideModel.fromJson(i as Map<String, dynamic>),
+              )
+              .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

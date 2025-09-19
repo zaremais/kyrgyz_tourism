@@ -6,7 +6,6 @@ import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_sizes.dart';
 import 'package:kyrgyz_tourism/core/di/service_locator.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
-import 'package:kyrgyz_tourism/core/utils/data_formatter.dart';
 import 'package:kyrgyz_tourism/generated/l10n.dart';
 import 'package:kyrgyz_tourism/modules/tour/data/sqflite/schema.dart';
 import 'package:kyrgyz_tourism/modules/booking_tour/presentation/widgets/booked_button.dart';
@@ -61,11 +60,7 @@ class _ListTourWidgetState extends State<ListTourWidget> {
                         if (state.status == StateStatus.failure) {
                           return const Icon(Icons.error, color: Colors.red);
                         }
-                        // final isFavorite =
-                        //     state.model?.any(
-                        //       (t) => t.tourId == widget.tour.id,
-                        //     ) ??
-                        //     false;
+
                         final isFavorite = context
                             .read<FavoriteTourCubit>()
                             .isFavorite(widget.tour.id ?? 0);
@@ -137,13 +132,7 @@ class _ListTourWidgetState extends State<ListTourWidget> {
             ),
 
             Text(
-              'Дата выезда: ${DateFormatter.iso(DateTime.parse(widget.tour.departureDates!.first))}',
-
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-            ),
-
-            Text(
-              'Осталось мест: ${widget.tour.placesLeft}',
+              'Осталось мест: ${widget.tour.placesLeft.toString()}',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: AppSizes.paddingLarge),

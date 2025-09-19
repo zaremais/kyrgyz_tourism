@@ -16,11 +16,11 @@ class TourDetailTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final isDark = Theme.of(context).brightness == Brightness.dark;
+  
     return ListTile(
       leading: Image.asset(
         iconPath,
-        // color: isDark ? Colors.white : Colors.black,
+      
       ),
       title: Text(title, style: FontStyles.bodyInfo),
       subtitle: Text(subtitle, style: FontStyles.bodyLarge),

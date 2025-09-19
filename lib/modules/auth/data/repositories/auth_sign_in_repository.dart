@@ -57,30 +57,6 @@ class AuthSignInRepository extends AuthDomainSignInRepository {
     return response;
   }
 
-  // @override
-  // Future<SignInModel> signIn({required SignInParams params}) async {
-  //   try {
-  //     log('SignIn params: $params');
-  //     final response = await _authApi.signIn(params);
-  //     log('SignIn response: $response');
-  //     log('Access token: ${response.accessToken}');
-  //     log('Refresh token: ${response.refreshToken}');
-
-  //     await _tokenStorage.saveTokens(
-  //       accessToken: response.accessToken,
-  //       refreshToken: response.refreshToken,
-  //     );
-  //     return response;
-  //   } on DioException catch (e) {
-  //     if (e.response?.statusCode == 403) {
-  //       throw ServerConfigurationException(
-  //         'Проблема с настройками сервера. Обратитесь к администратору',
-  //       );
-  //     }
-  //     rethrow;
-  //   }
-  // }
-
   @override
   Future<bool> getRememberMe() async {
     final prefs = await SharedPreferences.getInstance();

@@ -4,7 +4,6 @@ import 'package:kyrgyz_tourism/core/base/base_state.dart';
 
 import 'package:kyrgyz_tourism/core/di/service_locator.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
-import 'package:kyrgyz_tourism/modules/guides/data/models/paged_response.dart';
 import 'package:kyrgyz_tourism/modules/guides/domain/entities/guide_entity.dart';
 import 'package:kyrgyz_tourism/modules/guides/presentation/cubit/guide_cubit.dart';
 import 'package:kyrgyz_tourism/modules/guides/presentation/widgets/guide_card.dart';
@@ -23,13 +22,13 @@ class _GuideSectionState extends State<GuideSection> {
   Widget build(BuildContext context) {
     return BlocProvider.value(
       value: _guideCubit,
-      child: BlocBuilder<GuideCubit, BaseState<PagedResponse<GuideEntity>>>(
+      child: BlocBuilder<GuideCubit, BaseState<List<GuideEntity>>>(
         builder: (context, state) {
           if (state.status == StateStatus.loading) {
             return Center(child: CircularProgressIndicator());
           } else if (state.status == StateStatus.success &&
               state.model != null) {
-            final guides = state.model!.content;
+            final guides = state.model!;
 
             return Container(
               padding: EdgeInsets.all(16),

@@ -22,11 +22,11 @@ class ReviewsCubit extends Cubit<BaseState<List<ReviewsEntity>>> {
        _addReviewsUseCase = addReviewsUseCase,
        super(BaseState(status: StateStatus.init));
 
-  Future<void> getReviews(NoParams params) async {
+  Future<void> getReviews() async {
     emit(BaseState(status: StateStatus.loading));
     try {
-      final result = await _getReviewsUseCase.execute(params: params);
-      emit(BaseState(status: StateStatus.success, model: result));
+      final reviews = await _getReviewsUseCase.execute(params: NoParams());
+      emit(BaseState(status: StateStatus.success, model: reviews));
     } catch (e) {
       emit(BaseState(status: StateStatus.failure, errorMessage: e.toString()));
     }

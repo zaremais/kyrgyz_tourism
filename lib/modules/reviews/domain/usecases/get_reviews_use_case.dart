@@ -15,14 +15,3 @@ class GetReviewsUseCase extends BaseUsecase<List<ReviewsEntity>, NoParams> {
     return _repository.getReviews();
   }
 }
-
-// class ReviewParams {
-//   final String comment;
-//   final double rating;
-
-//   const ReviewParams({required this.comment, required this.rating});
-
-//   JSON toJson() {
-//     return {'comment': comment, 'rating': rating};
-//   }
-// }

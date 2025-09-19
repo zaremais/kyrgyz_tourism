@@ -34,9 +34,3 @@ class AuthSignUpRepository extends AuthDomainSignUpRepository {
     return response;
   }
 }
-  
-
-  // Future<bool> isLoggedIn() async {
-  //   final accessToken = await _tokenStorage.getAccessToken();
-  //   return accessToken != null && accessToken.isNotEmpty;
-  // }jjj

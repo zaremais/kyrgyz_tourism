@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kyrgyz_tourism/core/utils/data_formatter.dart';
 import 'package:kyrgyz_tourism/modules/tour/domain/entities/tour_entity.dart';
 
 class TourCard extends StatefulWidget {
@@ -73,12 +72,11 @@ class _TourCardState extends State<TourCard> {
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
 
-              Text(
-                'Дата выезда: ${DateFormatter.iso(DateTime.parse(widget.tour.departureDates!.first))}',
+              // Text(
+              //   'Дата выезда: ${DateFormatter.iso(DateTime.parse(widget.tour.departureDates.toString()))}',
 
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
-
+              //   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              // ),
               Text(
                 'Осталось мест: ${widget.tour.placesLeft}',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),

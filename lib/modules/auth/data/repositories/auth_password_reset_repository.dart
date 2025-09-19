@@ -1,7 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:kyrgyz_tourism/modules/auth/data/api_service/auth_api_service.dart';
 import 'package:kyrgyz_tourism/modules/auth/data/models/password_reset_model.dart';
-// ignore: unused_import
 import 'package:kyrgyz_tourism/modules/auth/domain/entities/reset_password_entity.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/repositories/auth_domain_password_reset_repository.dart';
 import 'package:kyrgyz_tourism/modules/auth/domain/usecases/password_reset_confirm_use_case.dart';
@@ -9,13 +8,9 @@ import 'package:kyrgyz_tourism/modules/auth/domain/usecases/password_reset_use_c
 
 @LazySingleton(as: AuthDomainPasswordResetdRepository)
 class AuthPasswordResetRepository extends AuthDomainPasswordResetdRepository {
-  // final DioClient _dio;
   final AuthApiService _api;
 
-  AuthPasswordResetRepository({
-    required AuthApiService api,
-    //  required DioClient dio,
-  }) : _api = api;
+  AuthPasswordResetRepository({required AuthApiService api}) : _api = api;
 
   @override
   Future<PasswordResetModel> passwordResetConfirm(
