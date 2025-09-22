@@ -183,7 +183,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
 
                   const SizedBox(height: 12),
                   DropdownButtonFormField<String>(
-                    value: selectedDifficulty,
+                    initialValue: selectedDifficulty,
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.grey),

@@ -1,6 +1,7 @@
 class AppSizes {
   // Отступы
   static const double paddingSmall = 12.0;
+  static const double paddingSmallHorizontal = 14.0;
   static const double paddingMedium = 16.0;
   static const double paddingHorizontal = 20.0;
   static const double paddingLarge = 24.0;

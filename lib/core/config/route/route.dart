@@ -54,9 +54,7 @@ class AppRouter extends RootStackRouter {
     ),
 
     AutoRoute(page: TelegramRoute.page),
-
     AutoRoute(page: AppRoute.page),
-    // AutoRoute(page: BookingRoute.page),
     AutoRoute(page: SignInRoute.page),
     AutoRoute(page: RegisterSuccessRoute.page),
     AutoRoute(page: SignUpRoute.page),

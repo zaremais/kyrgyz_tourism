@@ -7,12 +7,7 @@ import 'package:kyrgyz_tourism/generated/l10n.dart';
 
 @RoutePage()
 class ChatScreen extends StatelessWidget {
-  const ChatScreen({
-    super.key,
-    // required this.tour,
-  });
-
-  // final TourEntity tour;
+  const ChatScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,15 +25,18 @@ class ChatScreen extends StatelessWidget {
             children: [
               CustomSectionButton(
                 onTap: () {
-                  // context.router.replace(BookingCalendarRoute());
+                  context.router.replace(ChatSupportRoute());
                 },
+                text: S.of(context).supportChat,
+              ),
+              SizedBox(height: 14),
+              CustomSectionButton(
+                onTap: () {},
                 text: S.of(context).currentDialogues,
               ),
               SizedBox(height: 14),
               CustomSectionButton(
-                onTap: () {
-                  // context.router.replace();
-                },
+                onTap: () {},
                 text: S.of(context).completedDialogues,
               ),
               SizedBox(height: 14),
@@ -47,12 +45,6 @@ class ChatScreen extends StatelessWidget {
                 text: S.of(context).startNewDialogue,
               ),
               SizedBox(height: 14),
-              CustomSectionButton(
-                onTap: () {
-                  context.router.replace(ChatSupportRoute());
-                },
-                text: S.of(context).supportChat,
-              ),
             ],
           ),
         ),

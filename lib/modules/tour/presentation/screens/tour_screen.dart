@@ -3,14 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/core/config/themes/theme.dart';
-import 'package:kyrgyz_tourism/core/enums/state_status.dart';
 import 'package:kyrgyz_tourism/core/widgets/custom_app_bar.dart';
 import 'package:kyrgyz_tourism/core/widgets/custom_drawer.dart';
 import 'package:kyrgyz_tourism/generated/l10n.dart';
-
 import 'package:kyrgyz_tourism/modules/tour/presentation/widgets/filter_bottom_sheet.dart';
 import 'package:kyrgyz_tourism/modules/tour/presentation/widgets/tour_list_section.dart';
-
 import '../../../../core/config/themes/app_sizes.dart';
 
 @RoutePage()
@@ -22,9 +19,6 @@ class ToursScreen extends StatefulWidget {
 }
 
 class _ToursScreenState extends State<ToursScreen> {
-  final ValueNotifier<TourFilter> selectedType = ValueNotifier(TourFilter.best);
-  final ValueNotifier<Set<String>> activeFilters = ValueNotifier({});
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(

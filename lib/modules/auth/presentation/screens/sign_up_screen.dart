@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
 import 'package:kyrgyz_tourism/core/config/route/route.dart';
+import 'package:kyrgyz_tourism/core/config/themes/app_sizes.dart';
 import 'package:kyrgyz_tourism/core/constants/text_password.dart';
 import 'package:kyrgyz_tourism/core/constants/validator.dart';
 import 'package:kyrgyz_tourism/core/di/service_locator.dart';
@@ -97,6 +98,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               color: Colors.grey,
                             ),
                           ),
+                          SizedBox(width: 0),
                           const Text(
                             'Регистрация',
                             style: TextStyle(
@@ -193,7 +195,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 14),
+                            SizedBox(height: AppSizes.paddingSmallHorizontal),
                             AuthInputTextfield(
                               hintText: 'Придумайте пароль',
                               controller: _passwordController,
@@ -215,7 +217,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             const SizedBox(height: 10),
                             Text(
                               passwordHint,
-                              style: const TextStyle(fontSize: 12),
+                              style: TextStyle(fontSize: AppSizes.paddingSmall),
                             ),
                             const SizedBox(height: 30),
                             BlocBuilder<SignUpCubit, BaseState<SignUpEntity>>(
