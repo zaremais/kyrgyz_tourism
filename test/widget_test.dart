@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 // import 'package:kyrgyz_tourism/main.dart';
-import 'package:kyrgyz_tourism/modules/home/presentation/widgets/kyrgyz_tourism_widget.dart';
+import 'package:kyrgyz_tourism/features/home/presentation/widgets/kyrgyz_tourism_widget.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {

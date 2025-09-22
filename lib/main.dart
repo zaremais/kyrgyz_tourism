@@ -4,8 +4,8 @@ import 'package:kyrgyz_tourism/core/config/themes/theme_provider.dart';
 import 'package:kyrgyz_tourism/core/di/dev_dependencies.dart';
 import 'package:kyrgyz_tourism/core/di/service_locator.dart';
 import 'package:kyrgyz_tourism/firebase_options.dart';
-import 'package:kyrgyz_tourism/modules/home/presentation/providers/locale_provider.dart';
-import 'package:kyrgyz_tourism/modules/home/presentation/widgets/kyrgyz_tourism_widget.dart';
+import 'package:kyrgyz_tourism/features/home/presentation/providers/locale_provider.dart';
+import 'package:kyrgyz_tourism/features/home/presentation/widgets/kyrgyz_tourism_widget.dart';
 import 'package:provider/provider.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();

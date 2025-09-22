@@ -14,155 +14,162 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i558;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
-import '../../modules/auth/data/api_service/auth_api_service.dart' as _i489;
-import '../../modules/auth/data/repositories/auth_password_reset_repository.dart'
+import '../../features/auth/data/api_service/auth_api_service.dart' as _i489;
+import '../../features/auth/data/repositories/auth_password_reset_repository.dart'
     as _i445;
-import '../../modules/auth/data/repositories/auth_sign_in_repository.dart'
+import '../../features/auth/data/repositories/auth_sign_in_repository.dart'
     as _i75;
-import '../../modules/auth/data/repositories/auth_sign_up_repository.dart'
+import '../../features/auth/data/repositories/auth_sign_up_repository.dart'
     as _i215;
-import '../../modules/auth/data/repositories/auth_telegram_repository.dart'
+import '../../features/auth/data/repositories/auth_telegram_repository.dart'
     as _i1016;
-import '../../modules/auth/data/repositories/mosk_sign_in_repository.dart'
+import '../../features/auth/data/repositories/mosk_sign_in_repository.dart'
     as _i513;
-import '../../modules/auth/domain/repositories/auth_domain_is_logged_in.dart'
+import '../../features/auth/domain/repositories/auth_domain_is_logged_in.dart'
     as _i213;
-import '../../modules/auth/domain/repositories/auth_domain_password_reset_repository.dart'
+import '../../features/auth/domain/repositories/auth_domain_password_reset_repository.dart'
     as _i328;
-import '../../modules/auth/domain/repositories/auth_domain_sign_in_repository.dart'
+import '../../features/auth/domain/repositories/auth_domain_sign_in_repository.dart'
     as _i236;
-import '../../modules/auth/domain/repositories/auth_domain_sign_up_repository.dart'
+import '../../features/auth/domain/repositories/auth_domain_sign_up_repository.dart'
     as _i1002;
-import '../../modules/auth/domain/repositories/auth_domain_telegram_repository.dart'
+import '../../features/auth/domain/repositories/auth_domain_telegram_repository.dart'
     as _i959;
-import '../../modules/auth/domain/usecases/check_nickname_use_case.dart'
+import '../../features/auth/domain/usecases/check_nickname_use_case.dart'
     as _i574;
-import '../../modules/auth/domain/usecases/get_otp_link_use_case.dart' as _i749;
-import '../../modules/auth/domain/usecases/get_remembe_use_case.dart' as _i342;
-import '../../modules/auth/domain/usecases/is_logged_in_use_case.dart' as _i437;
-import '../../modules/auth/domain/usecases/password_reset_confirm_use_case.dart'
+import '../../features/auth/domain/usecases/get_otp_link_use_case.dart'
+    as _i749;
+import '../../features/auth/domain/usecases/get_remembe_use_case.dart' as _i342;
+import '../../features/auth/domain/usecases/is_logged_in_use_case.dart'
+    as _i437;
+import '../../features/auth/domain/usecases/password_reset_confirm_use_case.dart'
     as _i492;
-import '../../modules/auth/domain/usecases/password_reset_use_case.dart'
+import '../../features/auth/domain/usecases/password_reset_use_case.dart'
     as _i986;
-import '../../modules/auth/domain/usecases/refresh_token_use_case.dart'
+import '../../features/auth/domain/usecases/refresh_token_use_case.dart'
     as _i300;
-import '../../modules/auth/domain/usecases/register_otp_use_case.dart' as _i555;
-import '../../modules/auth/domain/usecases/sign_in_use_case.dart' as _i770;
-import '../../modules/auth/domain/usecases/sign_up_use_case.dart' as _i112;
-import '../../modules/auth/domain/usecases/telegram_confirm_use_case.dart'
+import '../../features/auth/domain/usecases/register_otp_use_case.dart'
+    as _i555;
+import '../../features/auth/domain/usecases/sign_in_use_case.dart' as _i770;
+import '../../features/auth/domain/usecases/sign_up_use_case.dart' as _i112;
+import '../../features/auth/domain/usecases/telegram_confirm_use_case.dart'
     as _i815;
-import '../../modules/auth/domain/usecases/verify_code_use_case.dart' as _i209;
-import '../../modules/auth/presentation/cubit/auth_cubit.dart' as _i821;
-import '../../modules/auth/presentation/cubit/check_nickname_cubit.dart'
+import '../../features/auth/domain/usecases/verify_code_use_case.dart' as _i209;
+import '../../features/auth/presentation/cubit/auth_cubit.dart' as _i821;
+import '../../features/auth/presentation/cubit/check_nickname_cubit.dart'
     as _i134;
-import '../../modules/auth/presentation/cubit/password_reset_confirm_cubit.dart'
+import '../../features/auth/presentation/cubit/password_reset_confirm_cubit.dart'
     as _i643;
-import '../../modules/auth/presentation/cubit/password_reset_cubit.dart'
+import '../../features/auth/presentation/cubit/password_reset_cubit.dart'
     as _i921;
-import '../../modules/auth/presentation/cubit/register_success_cubit.dart'
+import '../../features/auth/presentation/cubit/register_success_cubit.dart'
     as _i52;
-import '../../modules/auth/presentation/cubit/sign_in_cubit.dart' as _i726;
-import '../../modules/auth/presentation/cubit/sign_up_cubit.dart' as _i112;
-import '../../modules/auth/presentation/cubit/telegram_confirm_cubit.dart'
+import '../../features/auth/presentation/cubit/sign_in_cubit.dart' as _i726;
+import '../../features/auth/presentation/cubit/sign_up_cubit.dart' as _i112;
+import '../../features/auth/presentation/cubit/telegram_confirm_cubit.dart'
     as _i371;
-import '../../modules/auth/presentation/cubit/telegram_otp_cubit.dart' as _i32;
-import '../../modules/auth/presentation/cubit/verify_code_cubit.dart' as _i1007;
-import '../../modules/booking_tour/data/api_service/booking_tour_api_service.dart'
+import '../../features/auth/presentation/cubit/telegram_otp_cubit.dart' as _i32;
+import '../../features/auth/presentation/cubit/verify_code_cubit.dart'
+    as _i1007;
+import '../../features/booking_tour/data/api_service/booking_tour_api_service.dart'
     as _i755;
-import '../../modules/booking_tour/data/repositories/booking_tour_repository.dart'
+import '../../features/booking_tour/data/repositories/booking_tour_repository.dart'
     as _i806;
-import '../../modules/booking_tour/domain/repositories/booking_domain_repository.dart'
+import '../../features/booking_tour/domain/repositories/booking_domain_repository.dart'
     as _i80;
-import '../../modules/booking_tour/domain/usecases/booking_date_use_case.dart'
+import '../../features/booking_tour/domain/usecases/booking_date_use_case.dart'
     as _i340;
-import '../../modules/booking_tour/domain/usecases/booking_tour_use_case.dart'
+import '../../features/booking_tour/domain/usecases/booking_tour_use_case.dart'
     as _i396;
-import '../../modules/booking_tour/domain/usecases/booking_tour_user_use_case.dart'
+import '../../features/booking_tour/domain/usecases/booking_tour_user_use_case.dart'
     as _i280;
-import '../../modules/booking_tour/presentation/cubit/booking_tour_cubit.dart'
+import '../../features/booking_tour/presentation/cubit/booking_tour_cubit.dart'
     as _i950;
-import '../../modules/booking_tour/presentation/cubit/booking_tour_date_cubit.dart'
+import '../../features/booking_tour/presentation/cubit/booking_tour_date_cubit.dart'
     as _i340;
-import '../../modules/categories/data/api_service/contact_api_service.dart'
+import '../../features/categories/data/api_service/contact_api_service.dart'
     as _i355;
-import '../../modules/categories/data/repositories/contact_repository.dart'
+import '../../features/categories/data/repositories/contact_repository.dart'
     as _i580;
-import '../../modules/categories/domain/repositories/contact_domain_repository.dart'
+import '../../features/categories/domain/repositories/contact_domain_repository.dart'
     as _i506;
-import '../../modules/categories/domain/usecases/get_contact_use_case.dart'
+import '../../features/categories/domain/usecases/get_contact_use_case.dart'
     as _i1036;
-import '../../modules/categories/domain/usecases/send_contact_use_case.dart'
+import '../../features/categories/domain/usecases/send_contact_use_case.dart'
     as _i903;
-import '../../modules/categories/presentation/cubit/contact_cubit.dart'
+import '../../features/categories/presentation/cubit/contact_cubit.dart'
     as _i344;
-import '../../modules/guides/data/api_service/guide_api_service.dart' as _i607;
-import '../../modules/guides/data/repositories/mock_guide_repository.dart'
+import '../../features/guides/data/api_service/guide_api_service.dart' as _i607;
+import '../../features/guides/data/repositories/mock_guide_repository.dart'
     as _i624;
-import '../../modules/guides/domain/repositories/guide_domain_repository.dart'
+import '../../features/guides/domain/repositories/guide_domain_repository.dart'
     as _i766;
-import '../../modules/guides/domain/usecases/get_guide_use_case.dart' as _i112;
-import '../../modules/guides/presentation/cubit/guide_cubit.dart' as _i675;
-import '../../modules/home/presentation/cubit/bloc/language_cubit.dart'
+import '../../features/guides/domain/usecases/get_guide_use_case.dart' as _i112;
+import '../../features/guides/presentation/cubit/guide_cubit.dart' as _i675;
+import '../../features/home/presentation/cubit/bloc/language_cubit.dart'
     as _i108;
-import '../../modules/home/presentation/providers/locale_provider.dart'
+import '../../features/home/presentation/providers/locale_provider.dart'
     as _i1017;
-import '../../modules/payment/data/repositories/payment_repository.dart'
+import '../../features/payment/data/repositories/payment_repository.dart'
     as _i689;
-import '../../modules/payment/domain/repositories/payment_domain_repository.dart'
+import '../../features/payment/domain/repositories/payment_domain_repository.dart'
     as _i341;
-import '../../modules/payment/domain/usecases/get_payment_qr_code_use_case.dart'
+import '../../features/payment/domain/usecases/get_payment_qr_code_use_case.dart'
     as _i509;
-import '../../modules/payment/presentation/cubit/payment_cubit.dart' as _i923;
-import '../../modules/profile/data/api_service/profile_api.dart' as _i912;
-import '../../modules/profile/data/repositories/profile_repository.dart'
+import '../../features/payment/presentation/cubit/payment_cubit.dart' as _i923;
+import '../../features/profile/data/api_service/profile_api.dart' as _i912;
+import '../../features/profile/data/repositories/profile_repository.dart'
     as _i898;
-import '../../modules/profile/domain/repositories/profile_domain_repository.dart'
+import '../../features/profile/domain/repositories/profile_domain_repository.dart'
     as _i89;
-import '../../modules/profile/domain/usecases/get_profile_use_case.dart'
+import '../../features/profile/domain/usecases/get_profile_use_case.dart'
     as _i127;
-import '../../modules/profile/domain/usecases/update_profile_use_case.dart'
+import '../../features/profile/domain/usecases/update_profile_use_case.dart'
     as _i446;
-import '../../modules/profile/presentation/cubit/profile_cubit.dart' as _i514;
-import '../../modules/reviews/data/api_service/reviews_api_service.dart'
+import '../../features/profile/presentation/cubit/profile_cubit.dart' as _i514;
+import '../../features/reviews/data/api_service/reviews_api_service.dart'
     as _i473;
-import '../../modules/reviews/data/repositories/mock_reviews_repository.dart'
+import '../../features/reviews/data/repositories/mock_reviews_repository.dart'
     as _i790;
-import '../../modules/reviews/domain/repositories/reviews_domain_repository.dart'
+import '../../features/reviews/domain/repositories/reviews_domain_repository.dart'
     as _i903;
-import '../../modules/reviews/domain/usecases/add_reviews_use_case.dart'
+import '../../features/reviews/domain/usecases/add_reviews_use_case.dart'
     as _i659;
-import '../../modules/reviews/domain/usecases/get_reviews_use_case.dart'
+import '../../features/reviews/domain/usecases/get_reviews_use_case.dart'
     as _i369;
-import '../../modules/reviews/presentation/cubit/reviews_cubit.dart' as _i568;
-import '../../modules/tour/data/api_service/tour_api_service.dart' as _i124;
-import '../../modules/tour/data/repositories/favorite_tour_repository.dart'
+import '../../features/reviews/presentation/cubit/reviews_cubit.dart' as _i568;
+import '../../features/tour/data/api_service/tour_api_service.dart' as _i124;
+import '../../features/tour/data/repositories/favorite_tour_repository.dart'
     as _i124;
-import '../../modules/tour/data/repositories/mock_tour_repository.dart'
+import '../../features/tour/data/repositories/mock_tour_repository.dart'
     as _i325;
-import '../../modules/tour/data/repositories/tour_repository.dart' as _i778;
-import '../../modules/tour/domain/repositories/favorite_tour_domain_repository.dart'
+import '../../features/tour/data/repositories/tour_repository.dart' as _i778;
+import '../../features/tour/domain/repositories/favorite_tour_domain_repository.dart'
     as _i644;
-import '../../modules/tour/domain/repositories/favoritre_domain_repository.dart'
+import '../../features/tour/domain/repositories/favoritre_domain_repository.dart'
     as _i121;
-import '../../modules/tour/domain/repositories/tour_domain_repository.dart'
+import '../../features/tour/domain/repositories/tour_domain_repository.dart'
     as _i695;
-import '../../modules/tour/domain/usecases/add_favorite_tour_use_case.dart'
+import '../../features/tour/domain/usecases/add_favorite_tour_use_case.dart'
     as _i942;
-import '../../modules/tour/domain/usecases/add_favorite_use_case.dart' as _i132;
-import '../../modules/tour/domain/usecases/delete_favorite_tour_use_case.dart'
+import '../../features/tour/domain/usecases/add_favorite_use_case.dart'
+    as _i132;
+import '../../features/tour/domain/usecases/delete_favorite_tour_use_case.dart'
     as _i773;
-import '../../modules/tour/domain/usecases/delete_favorite_use_case.dart'
+import '../../features/tour/domain/usecases/delete_favorite_use_case.dart'
     as _i589;
-import '../../modules/tour/domain/usecases/filter_tours_use_case.dart' as _i771;
-import '../../modules/tour/domain/usecases/get_favorite_tour_use_case.dart'
+import '../../features/tour/domain/usecases/filter_tours_use_case.dart'
+    as _i771;
+import '../../features/tour/domain/usecases/get_favorite_tour_use_case.dart'
     as _i63;
-import '../../modules/tour/domain/usecases/get_favorite_use_case.dart' as _i570;
-import '../../modules/tour/domain/usecases/get_individual_tour_use_case.dart'
+import '../../features/tour/domain/usecases/get_favorite_use_case.dart'
+    as _i570;
+import '../../features/tour/domain/usecases/get_individual_tour_use_case.dart'
     as _i620;
-import '../../modules/tour/domain/usecases/get_tours_use_case.dart' as _i558;
-import '../../modules/tour/presentation/cubit/favorite_tour_cubit.dart'
+import '../../features/tour/domain/usecases/get_tours_use_case.dart' as _i558;
+import '../../features/tour/presentation/cubit/favorite_tour_cubit.dart'
     as _i889;
-import '../../modules/tour/presentation/cubit/tour_cubit.dart' as _i396;
+import '../../features/tour/presentation/cubit/tour_cubit.dart' as _i396;
 import '../network/connectivity_service.dart' as _i491;
 import '../network/dio_client.dart' as _i667;
 import '../network/inspector.dart' as _i248;

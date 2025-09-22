@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kyrgyz_tourism/modules/home/presentation/providers/locale_provider.dart';
+import 'package:kyrgyz_tourism/features/home/presentation/providers/locale_provider.dart';
 import 'package:provider/provider.dart';
 
 class LanguageSwitchWidget extends StatelessWidget {

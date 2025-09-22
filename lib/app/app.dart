@@ -5,8 +5,8 @@ import 'package:kyrgyz_tourism/core/base/base_state.dart';
 import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/di/service_locator.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
-import 'package:kyrgyz_tourism/modules/auth/domain/usecases/verify_code_use_case.dart';
-import 'package:kyrgyz_tourism/modules/auth/presentation/cubit/verify_code_cubit.dart';
+import 'package:kyrgyz_tourism/features/auth/domain/usecases/verify_code_use_case.dart';
+import 'package:kyrgyz_tourism/features/auth/presentation/cubit/verify_code_cubit.dart';
 
 @RoutePage()
 class AppScreen extends StatefulWidget {
