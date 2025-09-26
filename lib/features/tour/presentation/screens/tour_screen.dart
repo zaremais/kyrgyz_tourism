@@ -11,14 +11,9 @@ import 'package:kyrgyz_tourism/features/tour/presentation/widgets/tour_list_sect
 import '../../../../core/config/themes/app_sizes.dart';
 
 @RoutePage()
-class ToursScreen extends StatefulWidget {
+class ToursScreen extends StatelessWidget {
   const ToursScreen({super.key});
 
-  @override
-  State<ToursScreen> createState() => _ToursScreenState();
-}
-
-class _ToursScreenState extends State<ToursScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(

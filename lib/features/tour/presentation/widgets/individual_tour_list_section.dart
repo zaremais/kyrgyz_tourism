@@ -7,15 +7,9 @@ import 'package:kyrgyz_tourism/features/tour/domain/entities/tour_entity.dart';
 import 'package:kyrgyz_tourism/features/tour/presentation/cubit/tour_cubit.dart';
 import 'package:kyrgyz_tourism/features/tour/presentation/widgets/list_tour_widget.dart';
 
-class IndividualTourListSection extends StatefulWidget {
-  const IndividualTourListSection({super.key});
+class IndividualTourListSection extends StatelessWidget {
+  IndividualTourListSection({super.key});
 
-  @override
-  State<IndividualTourListSection> createState() =>
-      _IndividualTourListSectionState();
-}
-
-class _IndividualTourListSectionState extends State<IndividualTourListSection> {
   final _tourCubit = di<TourCubit>()..getIndividualTour();
 
   @override
@@ -45,7 +39,10 @@ class _IndividualTourListSectionState extends State<IndividualTourListSection> {
               shrinkWrap: true,
               itemCount: tours.length,
               itemBuilder: (context, index) {
-                return ListTourWidget(tour: tours[index]);
+                return ListTourWidget(
+                  key: ValueKey(tours[index].id),
+                  tour: tours[index],
+                );
               },
             );
           }

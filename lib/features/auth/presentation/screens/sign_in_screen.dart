@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
 import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
-import 'package:kyrgyz_tourism/core/constants/validator.dart';
 import 'package:kyrgyz_tourism/core/di/service_locator.dart';
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
 import 'package:kyrgyz_tourism/features/auth/domain/entities/sign_in_entity.dart';
@@ -130,7 +129,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             controller: _emailController,
                             obscureText: false,
 
-                            validator: validateEmail,
+                            // validator: validateEmail,
                             keyboardType: TextInputType.emailAddress,
                             focusNode: _emailFocusNode,
                             textInputAction: TextInputAction.next,
@@ -140,7 +139,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             hintText: 'Введите пароль',
                             controller: _passwordController,
                             obscureText: _obscurePassword,
-                            validator: validatePassword,
+                            // validator: validatePassword,
                             focusNode: _passwordFocusNode,
                             textInputAction: TextInputAction.done,
 

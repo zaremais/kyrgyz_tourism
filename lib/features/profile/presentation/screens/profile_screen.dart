@@ -6,14 +6,14 @@ import 'package:kyrgyz_tourism/core/config/route/route.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/core/config/themes/theme.dart';
 import 'package:kyrgyz_tourism/core/constants/validator.dart';
-import 'package:kyrgyz_tourism/core/di/service_locator.dart';
+import 'package:kyrgyz_tourism/core/di/service_locator.dart' show di;
 import 'package:kyrgyz_tourism/core/enums/state_status.dart';
 import 'package:kyrgyz_tourism/core/widgets/custom_drop_down_button.dart';
 import 'package:kyrgyz_tourism/core/widgets/custom_text_formfield.dart';
-import 'package:kyrgyz_tourism/generated/l10n.dart';
 import 'package:kyrgyz_tourism/features/profile/domain/entities/profile_entity.dart';
 import 'package:kyrgyz_tourism/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:kyrgyz_tourism/features/profile/presentation/widgets/profile_alert_dialog.dart';
+import 'package:kyrgyz_tourism/generated/l10n.dart';
 
 @RoutePage()
 class ProfileScreen extends StatefulWidget {
@@ -24,29 +24,36 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  void _showDeleteAvatarDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder:
-          (_) => ProfileAlertDialog(
-            text: S.of(context).loadavatar,
-            title: S.of(context).deleteavatar,
-          ),
-    );
+  late final ProfileCubit _profileCubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _profileCubit = di<ProfileCubit>()..getProfile();
   }
 
-  void _showLoadedAvatarDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder:
-          (_) =>
-              ProfileAlertDialog(text: '', title: S.of(context).uploadAvatar),
-    );
+  @override
+  void dispose() {
+    _profileCubit.close();
+    super.dispose();
   }
 
-  String? menuItem = 'e1';
-
-  final _profileCubit = di<ProfileCubit>()..getProfile();
+  Future<void> _pickDate() async {
+    try {
+      final picked = await showDatePicker(
+        context: context,
+        firstDate: DateTime(1900),
+        lastDate: DateTime.now(),
+        initialDate: DateTime(2000),
+      );
+      if (picked != null && mounted) {
+        setState(() {});
+      }
+    } catch (e) {
+      // Обработка ошибок
+      debugPrint('Date picker error: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,10 +62,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         title: Text(S.of(context).profile),
         centerTitle: true,
         leading: IconButton(
-          onPressed: () {
-            context.router.push(HomeRoute());
-          },
-          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () => context.router.push(HomeRoute()),
+          icon: const Icon(Icons.arrow_back_ios),
         ),
       ),
       body: BlocProvider.value(
@@ -196,50 +201,54 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
+}
 
-  Future<void> _pickDate() async {
-    final picked = await showDatePicker(
-      context: context,
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
-      initialDate: DateTime(2000),
-    );
-    if (picked != null) {
-      "${picked.day}.${picked.month}.${picked.year}";
-    }
-  }
-
-  Widget _buildAvatarAndName(ProfileEntity profile, BuildContext context) {
-    return Row(
-      children: [
-        CircleAvatar(radius: 50, backgroundImage: NetworkImage(profile.image)),
-        const SizedBox(width: 20),
-
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              profile.fullName ?? S.of(context).lastname,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            TextButton(
-              onPressed: () => _showLoadedAvatarDialog(context),
-              child: Text(
-                'Загрузить новое фото',
-                style: TextStyle(color: Colors.black),
-              ),
-            ),
-            TextButton(
-              onPressed: () => _showDeleteAvatarDialog(context),
-              child: Text(
-                'Удалить фото',
-                style: TextStyle(color: Colors.black),
-              ),
-            ),
-          ],
+void _showDeleteAvatarDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder:
+        (_) => ProfileAlertDialog(
+          text: S.of(context).loadavatar,
+          title: S.of(context).deleteavatar,
         ),
-      ],
-    );
-  }
+  );
+}
+
+void _showLoadedAvatarDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder:
+        (_) => ProfileAlertDialog(text: '', title: S.of(context).uploadAvatar),
+  );
+}
+
+Widget _buildAvatarAndName(ProfileEntity profile, BuildContext context) {
+  return Row(
+    children: [
+      CircleAvatar(radius: 50, backgroundImage: NetworkImage(profile.image)),
+      const SizedBox(width: 20),
+
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            profile.fullName ?? S.of(context).lastname,
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 8),
+          TextButton(
+            onPressed: () => _showLoadedAvatarDialog(context),
+            child: Text(
+              'Загрузить новое фото',
+              style: TextStyle(color: Colors.black),
+            ),
+          ),
+          TextButton(
+            onPressed: () => _showDeleteAvatarDialog(context),
+            child: Text('Удалить фото', style: TextStyle(color: Colors.black)),
+          ),
+        ],
+      ),
+    ],
+  );
 }

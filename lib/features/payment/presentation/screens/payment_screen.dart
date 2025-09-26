@@ -12,17 +12,9 @@ import 'package:kyrgyz_tourism/features/payment/domain/usecases/get_payment_qr_c
 import 'package:kyrgyz_tourism/features/payment/presentation/cubit/payment_cubit.dart';
 
 @RoutePage()
-class PaymentScreen extends StatefulWidget {
+class PaymentScreen extends StatelessWidget {
   const PaymentScreen({super.key});
 
-  @override
-  State<PaymentScreen> createState() => _PaymentScreenState();
-}
-
-final _paymentCubit =
-    di<PaymentCubit>()..loadPaymentQr(QrCodeParams(amount: 0));
-
-class _PaymentScreenState extends State<PaymentScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -42,6 +34,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
     );
   }
 }
+
+final _paymentCubit =
+    di<PaymentCubit>()..loadPaymentQr(QrCodeParams(amount: 0));
 
 class _PaymentViewWidget extends StatelessWidget {
   const _PaymentViewWidget();

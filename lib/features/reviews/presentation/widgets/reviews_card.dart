@@ -17,14 +17,6 @@ class ReviewsCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                // CircleAvatar(
-                //   radius: 24,
-                //   backgroundImage:
-                //       reviews.imageUrl != null
-                //           ? NetworkImage(reviews.imageUrl!)
-                //           : AssetImage('assets/images/ellipse1.png')
-                //               as ImageProvider,
-                // ),
                 SizedBox(width: 12),
                 Expanded(
                   child: Column(

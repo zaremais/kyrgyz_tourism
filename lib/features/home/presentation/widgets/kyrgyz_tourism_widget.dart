@@ -8,15 +8,11 @@ import 'package:provider/provider.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
-class KyrgyzTourism extends StatefulWidget {
-  const KyrgyzTourism({super.key});
+class KyrgyzTourism extends StatelessWidget {
+  KyrgyzTourism({super.key});
 
-  @override
-  State<KyrgyzTourism> createState() => _KyrgyzTourismState();
-}
-
-class _KyrgyzTourismState extends State<KyrgyzTourism> {
   final _appRouter = AppRouter();
+
   @override
   Widget build(BuildContext context) {
     final localePovider = Provider.of<LocaleProvider>(context);

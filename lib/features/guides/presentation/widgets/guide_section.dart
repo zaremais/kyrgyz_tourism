@@ -8,14 +8,9 @@ import 'package:kyrgyz_tourism/features/guides/domain/entities/guide_entity.dart
 import 'package:kyrgyz_tourism/features/guides/presentation/cubit/guide_cubit.dart';
 import 'package:kyrgyz_tourism/features/guides/presentation/widgets/guide_card.dart';
 
-class GuideSection extends StatefulWidget {
-  const GuideSection({super.key});
+class GuideSection extends StatelessWidget {
+  GuideSection({super.key});
 
-  @override
-  State<GuideSection> createState() => _GuideSectionState();
-}
-
-class _GuideSectionState extends State<GuideSection> {
   final _guideCubit = di<GuideCubit>()..getGuides();
 
   @override
@@ -38,8 +33,7 @@ class _GuideSectionState extends State<GuideSection> {
                 itemCount: guides.length,
                 itemBuilder: (context, index) {
                   final guide = guides[index];
-
-                  return GuideCard(guide: guide);
+                  return GuideCard(key: ValueKey(guide.id), guide: guide);
                 },
               ),
             );

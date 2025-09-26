@@ -5,14 +5,9 @@ import 'package:kyrgyz_tourism/core/config/themes/app_colors.dart';
 import 'package:kyrgyz_tourism/core/config/themes/app_sizes.dart';
 import 'package:kyrgyz_tourism/generated/l10n.dart';
 
-class AllTourButton extends StatefulWidget {
+class AllTourButton extends StatelessWidget {
   const AllTourButton({super.key});
 
-  @override
-  State<AllTourButton> createState() => _AllTourButtonState();
-}
-
-class _AllTourButtonState extends State<AllTourButton> {
   @override
   Widget build(BuildContext context) {
     return Center(

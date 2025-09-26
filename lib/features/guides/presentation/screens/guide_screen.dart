@@ -7,14 +7,9 @@ import 'package:kyrgyz_tourism/core/widgets/language_switch_widget.dart';
 import 'package:kyrgyz_tourism/features/guides/presentation/widgets/guide_section.dart';
 
 @RoutePage()
-class GuideScreen extends StatefulWidget {
+class GuideScreen extends StatelessWidget {
   const GuideScreen({super.key});
 
-  @override
-  State<GuideScreen> createState() => _GuideScreenState();
-}
-
-class _GuideScreenState extends State<GuideScreen> {
   @override
   Widget build(BuildContext context) {
     final darkTheme = Theme.of(context).brightness == Brightness.dark;

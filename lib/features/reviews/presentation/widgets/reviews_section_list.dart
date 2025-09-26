@@ -8,48 +8,48 @@ import 'package:kyrgyz_tourism/features/reviews/domain/entities/reviews_entity.d
 import 'package:kyrgyz_tourism/features/reviews/presentation/cubit/reviews_cubit.dart';
 import 'package:kyrgyz_tourism/features/reviews/presentation/widgets/reviews_card.dart';
 
-class ReviewsSection extends StatefulWidget {
+class ReviewsSection extends StatelessWidget {
   const ReviewsSection({super.key});
 
   @override
-  State<ReviewsSection> createState() => _ReviewsSectionState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => di<ReviewsCubit>()..getReviews(),
+      child: const ReviewsContent(),
+    );
+  }
 }
 
-class _ReviewsSectionState extends State<ReviewsSection> {
-  final _reviewsCubit = di<ReviewsCubit>()..getReviews();
+class ReviewsContent extends StatelessWidget {
+  const ReviewsContent({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: _reviewsCubit,
-      child: BlocBuilder<ReviewsCubit, BaseState<List<ReviewsEntity>>>(
-        builder: (context, state) {
-          if (state.status == StateStatus.loading) {
-            return Center(child: CircularProgressIndicator());
-          } else if (state.status == StateStatus.success &&
-              state.model != null) {
-            final guides = state.model!;
+    return BlocBuilder<ReviewsCubit, BaseState<List<ReviewsEntity>>>(
+      builder: (context, state) {
+        if (state.status == StateStatus.loading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state.status == StateStatus.success && state.model != null) {
+          final reviews = state.model!;
 
-            return Container(
-              padding: EdgeInsets.all(16),
-              child: ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: guides.length,
-                itemBuilder: (context, index) {
-                  final reviews = guides[index];
-
-                  return ReviewsCard(reviews: reviews);
-                },
-              ),
-            );
-          }
-          if (state.status == StateStatus.failure) {
-            return Text('Ошибка: ${state.errorMessage}');
-          }
-          return SizedBox.shrink();
-        },
-      ),
+          return Container(
+            padding: const EdgeInsets.all(16),
+            child: ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: reviews.length,
+              itemBuilder: (context, index) {
+                final review = reviews[index];
+                return ReviewsCard(key: ValueKey(review.id), reviews: review);
+              },
+            ),
+          );
+        }
+        if (state.status == StateStatus.failure) {
+          return Text('Ошибка: ${state.errorMessage}');
+        }
+        return const SizedBox.shrink();
+      },
     );
   }
 }

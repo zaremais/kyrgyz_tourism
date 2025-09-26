@@ -289,7 +289,13 @@ class _ChatSupportScreenState extends State<ChatSupportScreen> {
                                     padding: const EdgeInsets.all(12),
                                     itemCount: messages.length,
                                     itemBuilder: (context, index) {
-                                      return _buildMessage(messages[index]);
+                                      final message = messages[index];
+                                      return KeyedSubtree(
+                                        key: ValueKey(
+                                          message.timestamp.toIso8601String(),
+                                        ),
+                                        child: _buildMessage(message),
+                                      );
                                     },
                                   ),
                                 ),

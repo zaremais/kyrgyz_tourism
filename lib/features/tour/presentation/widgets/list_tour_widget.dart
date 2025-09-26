@@ -12,16 +12,11 @@ import 'package:kyrgyz_tourism/features/booking_tour/presentation/widgets/booked
 import 'package:kyrgyz_tourism/features/tour/domain/entities/tour_entity.dart';
 import 'package:kyrgyz_tourism/features/tour/presentation/cubit/favorite_tour_cubit.dart';
 
-class ListTourWidget extends StatefulWidget {
-  const ListTourWidget({super.key, required this.tour});
+class ListTourWidget extends StatelessWidget {
+  ListTourWidget({super.key, required this.tour});
 
   final TourEntity tour;
 
-  @override
-  State<ListTourWidget> createState() => _ListTourWidgetState();
-}
-
-class _ListTourWidgetState extends State<ListTourWidget> {
   final _favouriteTourCubit = di<FavoriteTourCubit>()..getFavorites();
 
   @override
@@ -39,7 +34,7 @@ class _ListTourWidgetState extends State<ListTourWidget> {
                   ClipRRect(
                     borderRadius: BorderRadiusGeometry.circular(16),
                     child: Image.network(
-                      widget.tour.image.toString(),
+                      tour.image.toString(),
                       fit: BoxFit.cover,
                       width: 330,
                       height: 330,
@@ -63,12 +58,12 @@ class _ListTourWidgetState extends State<ListTourWidget> {
 
                         final isFavorite = context
                             .read<FavoriteTourCubit>()
-                            .isFavorite(widget.tour.id ?? 0);
+                            .isFavorite(tour.id ?? 0);
 
                         return InkWell(
                           onTap: () {
                             final favorite = FavoriteTourModel(
-                              tourId: widget.tour.id ?? 0,
+                              tourId: tour.id ?? 0,
                             );
 
                             _favouriteTourCubit.toggleFavorite(favorite);
@@ -84,11 +79,9 @@ class _ListTourWidgetState extends State<ListTourWidget> {
                   Positioned.fill(
                     top: 270,
                     child: BookedButton(
-                      tour: widget.tour,
+                      tour: tour,
                       onPressed: () {
-                        context.router.push(
-                          TourDetailsRoute(tour: widget.tour),
-                        );
+                        context.router.push(TourDetailsRoute(tour: tour));
                       },
                       text: S.of(context).booked,
                     ),
@@ -102,14 +95,14 @@ class _ListTourWidgetState extends State<ListTourWidget> {
               children: [
                 Expanded(
                   child: Text(
-                    widget.tour.title ?? 'Без названия',
+                    tour.title ?? 'Без названия',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                   ),
                 ),
                 Row(
                   children: [
                     Text(
-                      widget.tour.rating.toString(),
+                      tour.rating.toString(),
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
@@ -123,16 +116,16 @@ class _ListTourWidgetState extends State<ListTourWidget> {
               ],
             ),
             Text(
-              '${widget.tour.tourDuration} дня',
+              '${tour.tourDuration} дня',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
             Text(
-              '${widget.tour.price} сом',
+              '${tour.price} сом',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
 
             Text(
-              'Осталось мест: ${widget.tour.placesLeft.toString()}',
+              'Осталось мест: ${tour.placesLeft.toString()}',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: AppSizes.paddingLarge),

@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:kyrgyz_tourism/core/utils/data_formatter.dart';
 import 'package:kyrgyz_tourism/features/tour/domain/entities/tour_entity.dart';
 
-class TourCard extends StatefulWidget {
+class TourCard extends StatelessWidget {
   final TourEntity tour;
   final VoidCallback? onTap;
 
   const TourCard({super.key, required this.tour, this.onTap});
 
-  @override
-  State<TourCard> createState() => _TourCardState();
-}
-
-class _TourCardState extends State<TourCard> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,7 +18,7 @@ class _TourCardState extends State<TourCard> {
           child: ClipRRect(
             borderRadius: BorderRadiusGeometry.circular(16),
             child: Image.network(
-              widget.tour.image.toString(),
+              tour.image.toString(),
               fit: BoxFit.cover,
               width: 330,
               height: 330,
@@ -40,7 +36,7 @@ class _TourCardState extends State<TourCard> {
                 children: [
                   Expanded(
                     child: Text(
-                      widget.tour.title ?? 'Без названия',
+                      tour.title ?? 'Без названия',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
@@ -50,7 +46,7 @@ class _TourCardState extends State<TourCard> {
                   Row(
                     children: [
                       Text(
-                        widget.tour.rating.toString(),
+                        tour.rating.toString(),
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
@@ -64,21 +60,20 @@ class _TourCardState extends State<TourCard> {
                 ],
               ),
               Text(
-                '${widget.tour.tourDuration} дня',
+                '${tour.tourDuration} дня',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
               Text(
-                '${widget.tour.price} сом',
+                '${tour.price} сом',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
 
-              // Text(
-              //   'Дата выезда: ${DateFormatter.iso(DateTime.parse(widget.tour.departureDates.toString()))}',
-
-              //   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              // ),
               Text(
-                'Осталось мест: ${widget.tour.placesLeft}',
+                'Дата выезда: ${_formatDepartureDate(tour.departureDates)}',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
+              Text(
+                'Осталось мест: ${tour.placesLeft}',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
             ],
@@ -86,5 +81,19 @@ class _TourCardState extends State<TourCard> {
         ),
       ],
     );
+  }
+
+  String _formatDepartureDate(dynamic departureDates) {
+    try {
+      if (departureDates == null) return 'Не указана';
+
+      final dateString = departureDates.toString();
+      if (dateString.isEmpty) return 'Не указана';
+
+      final date = DateTime.parse(dateString);
+      return DateFormatter.iso(date);
+    } catch (e) {
+      return 'Некорректная дата';
+    }
   }
 }

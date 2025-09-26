@@ -7,14 +7,9 @@ import 'package:kyrgyz_tourism/generated/l10n.dart';
 import 'package:kyrgyz_tourism/features/categories/domain/entities/contact_entity.dart';
 
 @RoutePage()
-class CategoryScreen extends StatefulWidget {
+class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
 
-  @override
-  State<CategoryScreen> createState() => _CategoryScreenState();
-}
-
-class _CategoryScreenState extends State<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(

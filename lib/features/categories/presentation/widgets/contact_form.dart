@@ -18,18 +18,17 @@ import '../../../../core/config/themes/app_sizes.dart';
 
 import '../../../home/presentation/widgets/painter_line_widget.dart';
 
-class ContactForm extends StatefulWidget {
-  const ContactForm({super.key});
+class ContactForm extends StatelessWidget {
+  ContactForm({super.key});
 
-  @override
-  State<ContactForm> createState() => _ContactFormWidgetState();
-}
-
-class _ContactFormWidgetState extends State<ContactForm> {
   final _formKey = GlobalKey<FormState>();
+
   final _nameController = TextEditingController();
+
   final _phoneController = TextEditingController();
+
   final _emailController = TextEditingController();
+
   final _commentController = TextEditingController(text: "Свяжитесь со мной");
 
   final _contactCubit = di<ContactCubit>();

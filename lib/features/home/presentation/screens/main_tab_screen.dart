@@ -9,15 +9,10 @@ import 'package:kyrgyz_tourism/core/widgets/custom_bottom_navigation_bar.dart';
 import 'package:kyrgyz_tourism/features/auth/presentation/cubit/verify_code_cubit.dart';
 
 @RoutePage()
-class MainTabScreen extends StatefulWidget {
+class MainTabScreen extends StatelessWidget {
   final int initialIndex;
-  const MainTabScreen({super.key, this.initialIndex = 0});
+  MainTabScreen({super.key, this.initialIndex = 0});
 
-  @override
-  State<MainTabScreen> createState() => _MainTabScreenState();
-}
-
-class _MainTabScreenState extends State<MainTabScreen> {
   final _verifyCubit = di<VerifyCodeCubit>();
 
   @override
@@ -31,7 +26,7 @@ class _MainTabScreenState extends State<MainTabScreen> {
           return BlocListener<VerifyCodeCubit, BaseState<bool>>(
             listener: (context, state) {
               if (state.status == StateStatus.success) {
-                tabsRouter.setActiveIndex(widget.initialIndex);
+                tabsRouter.setActiveIndex(initialIndex);
               } else if (state.status == StateStatus.failure) {
                 tabsRouter.setActiveIndex(1);
               }
