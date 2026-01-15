@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:kyrgyz_tourism/core/config/environment.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kyrgyz_tourism/core/network/inspector.dart';
+
+import 'package:kyrgyz_tourism/core/config/environment.dart';
+import 'package:kyrgyz_tourism/core/network/interceptor.dart';
+
 
 @injectable
 class DioClient {

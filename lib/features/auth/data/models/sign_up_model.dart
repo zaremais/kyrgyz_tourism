@@ -6,13 +6,7 @@ part 'sign_up_model.g.dart';
 
 @JsonSerializable()
 class SignUpModel extends SignUpEntity {
-  SignUpModel({
-    required super.email,
-    // required super.nickname,
-    // required super.password,
-    // required super.message,
-    // required super.success,
-  });
+  SignUpModel({required super.email, required super.nickname});
 
   factory SignUpModel.fromJson(JSON json) => _$SignUpModelFromJson(json);
   JSON toJson() => _$SignUpModelToJson(this);

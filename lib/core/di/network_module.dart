@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kyrgyz_tourism/core/network/inspector.dart';
+import 'package:kyrgyz_tourism/core/network/interceptor.dart';
 
 @module
 abstract class NetworkModule {

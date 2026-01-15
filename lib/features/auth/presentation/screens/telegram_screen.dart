@@ -166,7 +166,7 @@ class _TelegramScreenState extends State<TelegramScreen> {
                                   ),
                                   const SizedBox(width: 5),
                                   SizedBox(
-                                    width: 140,
+                                    width: 130,
                                     child: ElevatedButton(
                                       onPressed:
                                           otpState.status == StateStatus.loading
@@ -200,6 +200,7 @@ class _TelegramScreenState extends State<TelegramScreen> {
                                                 );
                                               },
                                       style: ElevatedButton.styleFrom(
+                                        foregroundColor: Colors.green,
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(
                                             12,
@@ -208,7 +209,7 @@ class _TelegramScreenState extends State<TelegramScreen> {
                                       ),
                                       child: Padding(
                                         padding: const EdgeInsets.symmetric(
-                                          vertical: 16,
+                                          vertical: 8,
                                         ),
                                         child:
                                             otpState.status ==

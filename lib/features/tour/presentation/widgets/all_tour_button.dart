@@ -42,9 +42,11 @@ class AllTourButton extends StatelessWidget {
                 size: 24,
                 color: AppColors.white,
               ),
+             
             ],
           ),
         ),
+        
       ),
     );
   }

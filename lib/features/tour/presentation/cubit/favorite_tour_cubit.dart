@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kyrgyz_tourism/core/base/base_state.dart';
+import 'package:kyrgyz_tourism/core/base/base_usecase.dart';
 import 'package:kyrgyz_tourism/features/tour/data/sqflite/schema.dart';
 import 'package:kyrgyz_tourism/features/tour/domain/usecases/add_favorite_tour_use_case.dart';
 import 'package:kyrgyz_tourism/features/tour/domain/usecases/delete_favorite_tour_use_case.dart';
@@ -25,7 +26,7 @@ class FavoriteTourCubit extends Cubit<BaseState<List<FavoriteTourModel>>> {
   Future<void> getFavorites() async {
     emit(BaseState(status: StateStatus.loading));
     try {
-      final favorites = await _getFavoriteToursUseCase.execute();
+      final favorites = await _getFavoriteToursUseCase.execute(params: NoParams());
       emit(BaseState(status: StateStatus.success, model: favorites));
     } catch (e) {
       emit(BaseState(status: StateStatus.failure, model: []));

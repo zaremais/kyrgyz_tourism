@@ -37,8 +37,10 @@ class TourRepository extends TourDomainRepository {
     } on DioException catch (e) {
       if (e.response?.statusCode == 404) {
         return <TourModel>[];
-      } else {}
-      rethrow;
+      } else {
+        rethrow;
+        }
+      
     } catch (e) {
       final message = e.toString();
       if (message.contains('404')) {
