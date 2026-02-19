@@ -50,7 +50,7 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDONh-0ZtsyMO3P8_G2d0TOvbOru7Is-UA',
+    apiKey: '',
     appId: '1:805142488875:android:bc3406394b614240a8476e',
     messagingSenderId: '805142488875',
     projectId: 'kyrgyz-tourism-96275',
@@ -58,7 +58,7 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCj1O3RIt-3YPeociWE47pf1ts7cyj297I',
+    apiKey: '',
     appId: '1:805142488875:ios:61dbb7caf58bad68a8476e',
     messagingSenderId: '805142488875',
     projectId: 'kyrgyz-tourism-96275',
